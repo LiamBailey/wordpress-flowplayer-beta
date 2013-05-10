@@ -52,7 +52,7 @@ if ( !class_exists( 'Flowplayer5' ) ) :
 			 * For more information: 
 			 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 			 */
-			add_action( 'init', array( $this, 'action_method_name' ) );
+			add_action( 'init', array( $this, 'add_custom_post_type' ) );
 			add_filter( 'TODO', array( $this, 'filter_method_name' ) );
 
 		} // end constructor
@@ -220,7 +220,7 @@ if ( !class_exists( 'Flowplayer5' ) ) :
 		 *		  Action Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
 		 *
 		 */
-		function action_method_name() {
+		function add_custom_post_type() {
 
 				$labels = array( 
 				'name' => _x( 'Flowplayer Videos', 'flowplayer_video' ),
