@@ -223,24 +223,24 @@ if ( !class_exists( 'Flowplayer5' ) ) :
 		function add_custom_post_type() {
 
 				$labels = array( 
-				'name' => _x( 'Flowplayer Videos', 'flowplayer_video' ),
-				'singular_name' => _x( 'Flowplayer video', 'flowplayer_video' ),
+				'name' => _x( 'Videos', 'flowplayer_video' ),
+				'singular_name' => _x( 'Video', 'flowplayer_video' ),
 				'add_new' => _x( 'Add New', 'flowplayer_video' ),
-				'add_new_item' => _x( 'Add New Flowplayer video', 'flowplayer_video' ),
-				'edit_item' => _x( 'Edit Flowplayer video', 'flowplayer_video' ),
-				'new_item' => _x( 'New Flowplayer video', 'flowplayer_video' ),
-				'view_item' => _x( 'View Flowplayer video', 'flowplayer_video' ),
-				'search_items' => _x( 'Search Flowplayer Videos', 'flowplayer_video' ),
-				'not_found' => _x( 'No flowplayer videos found', 'flowplayer_video' ),
-				'not_found_in_trash' => _x( 'No flowplayer videos found in Trash', 'flowplayer_video' ),
-				'parent_item_colon' => _x( 'Parent Flowplayer video:', 'flowplayer_video' ),
-				'menu_name' => _x( 'Flowplayer Videos', 'flowplayer_video' ),
+				'add_new_item' => _x( 'Add New Video', 'flowplayer_video' ),
+				'edit_item' => _x( 'Edit Video', 'flowplayer_video' ),
+				'new_item' => _x( 'New Video', 'flowplayer_video' ),
+				'view_item' => _x( 'View Video', 'flowplayer_video' ),
+				'search_items' => _x( 'Search Videos', 'flowplayer_video' ),
+				'not_found' => _x( 'No Videos found', 'flowplayer_video' ),
+				'not_found_in_trash' => _x( 'No Videos found in Trash', 'flowplayer_video' ),
+				'parent_item_colon' => _x( 'Parent Video:', 'flowplayer_video' ),
+				'menu_name' => _x( 'Videos', 'flowplayer_video' ),
 			);
 
 			$args = array( 
 				'labels' => $labels,
 				'hierarchical' => false,
-				'description' => 'Flowplayer videos',
+				'description' => 'Videos',
 				'supports' => array( 'title', 'thumbnail', 'custom-fields', 'revisions', 'page-attributes' ),
 				
 				'public' => true,
