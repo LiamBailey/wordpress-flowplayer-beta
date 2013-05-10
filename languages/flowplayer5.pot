@@ -1,0 +1,162 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Flowplayer5 for WordPress\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-03-10 08:14+0100\n"
+"PO-Revision-Date: 2013-03-10 08:14+0100\n"
+"Last-Translator: Ulrich Pogson <grapplerulrich@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;esc_attr_e;esc_attr__\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/admin.php:8
+msgid "Select skin"
+msgstr ""
+
+#: includes/admin.php:23
+msgid "Video attributes"
+msgstr ""
+
+#: includes/admin.php:23
+msgid "(Info)"
+msgstr ""
+
+#: includes/admin.php:27
+msgid "Autoplay?"
+msgstr ""
+
+#: includes/admin.php:31
+msgid "Loop?"
+msgstr ""
+
+#: includes/admin.php:39
+msgid "Splash image"
+msgstr ""
+
+#: includes/admin.php:39
+msgid "(optional)"
+msgstr ""
+
+#: includes/admin.php:42 includes/admin.php:54 includes/admin.php:143
+msgid "Media Library"
+msgstr ""
+
+#: includes/admin.php:48
+msgid ""
+"URLs for videos, at least one is needed. You need a video format supported "
+"by your web browser, otherwise the preview below does not work."
+msgstr ""
+
+#: includes/admin.php:49
+msgid "About video formats"
+msgstr ""
+
+#: includes/admin.php:52
+msgid "webm"
+msgstr ""
+
+#: includes/admin.php:57
+msgid "mp4"
+msgstr ""
+
+#: includes/admin.php:61
+msgid "ogg"
+msgstr ""
+
+#: includes/admin.php:71
+msgid ""
+"Maximum dimensions for the player are determined from the provided video "
+"files. You can change this size below. Fixing the player size disables "
+"scaling for different screen sizes."
+msgstr ""
+
+#: includes/admin.php:74
+msgid "Max width"
+msgstr ""
+
+#: includes/admin.php:78
+msgid "Use video's aspect ratio"
+msgstr ""
+
+#: includes/admin.php:82
+msgid "Max height"
+msgstr ""
+
+#: includes/admin.php:86
+msgid "Use fixed player size"
+msgstr ""
+
+#: includes/admin.php:94
+msgid "You can include subtitles by supplying an URL to a WEBVTT file"
+msgstr ""
+
+#: includes/admin.php:99
+msgid "WEBVTT URL: "
+msgstr ""
+
+#: includes/admin.php:106
+msgid "Send to Editor &raquo;"
+msgstr ""
+
+#: includes/admin.php:130
+msgid "Commercial version"
+msgstr ""
+
+#: includes/admin.php:131
+#, php-format
+msgid ""
+"Commercial version removes the Flowplayer logo and allows you to use your "
+"own logo image. You can obtain and purchase a license key at <a%s>flowplayer."
+"org</a>."
+msgstr ""
+
+#: includes/admin.php:137
+msgid "License key"
+msgstr ""
+
+#: includes/admin.php:141
+msgid "Logo URL"
+msgstr ""
+
+#: includes/admin.php:147
+msgid "Show logo also in the origin site"
+msgstr ""
+
+#: includes/admin.php:151
+#, php-format
+msgid ""
+"Uncheck this and the logo is only shown in <a%s>virally embedded players</a>"
+msgstr ""
+
+#: includes/admin.php:160
+msgid "Tracking"
+msgstr ""
+
+#: includes/admin.php:161
+msgid ""
+"You can track video traffic using Google Analytics (GA). Specify your GA "
+"account ID here."
+msgstr ""
+
+#: includes/admin.php:165
+msgid "GA account"
+msgstr ""
+
+#: includes/admin.php:287
+msgid "Use as logo"
+msgstr ""
+
+#: includes/admin.php:290
+msgid "Use as splash"
+msgstr ""
+
+#: includes/admin.php:293
+msgid "Use with Flowplayer"
+msgstr ""
