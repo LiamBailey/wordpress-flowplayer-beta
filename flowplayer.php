@@ -223,7 +223,7 @@ if ( !class_exists( 'Flowplayer5' ) ) :
 		function add_custom_post_type() {
 
 				$labels = array( 
-				'name' => _x( 'Videos', 'flowplayer_video' ),
+				'name' => _x( 'All Videos', 'flowplayer_video' ),
 				'singular_name' => _x( 'Video', 'flowplayer_video' ),
 				'add_new' => _x( 'Add New', 'flowplayer_video' ),
 				'add_new_item' => _x( 'Add New Video', 'flowplayer_video' ),
