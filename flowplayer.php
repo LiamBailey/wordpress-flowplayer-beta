@@ -203,7 +203,6 @@ if ( !class_exists( 'Flowplayer5' ) ) :
 		/**
 		 * Registers and enqueues plugin-specific scripts.
 		 */
-		if ( ! function_exists('add_flowplayer_videos') ) {
 
 		// Register Custom Post Type
 		function add_flowplayer_videos() {
@@ -247,7 +246,6 @@ if ( !class_exists( 'Flowplayer5' ) ) :
 			);
 
 			register_post_type( 'video', $args );
-		}
 		}
 
 		/**
