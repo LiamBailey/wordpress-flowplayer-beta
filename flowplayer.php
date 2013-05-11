@@ -281,7 +281,7 @@ class Flowplayer5 {
      * @since	1.0.0
      */
     public function display_plugin_admin_page() {
-        include_once('includes/admin.php');
+        include_once('includes/register-settings.php');
 		include_once('includes/shortcode.php');
     }
     
