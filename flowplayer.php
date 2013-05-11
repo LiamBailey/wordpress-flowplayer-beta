@@ -315,7 +315,7 @@ class Flowplayer5 {
 			'label'               => __( 'video', 'flowplayer5' ),
 			'description'         => __( 'Flowplayer videos', 'flowplayer5' ),
 			'labels'              => $labels,
-			'supports'            => array( 'title', 'thumbnail', 'custom-fields', ),
+			'supports'            => array( 'title', 'thumbnail', ),
 			'hierarchical'        => false,
 			'public'              => true,
 			'show_ui'             => true,
