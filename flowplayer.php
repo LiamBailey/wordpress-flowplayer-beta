@@ -1,11 +1,12 @@
 <?php
 /*
 Plugin Name: Flowplayer 5 for Wordpress - beta 2
+Plugin URI: http://wordpress.org/extend/plugins/flowplayer5/
 Description: A Flowplayer plugin for showing videos in WordPress. Integrates Flowplayer 5. Supports all three default Flowplayer skins, subtitles, tracking with Google Analytics, splash images. You can use your own watermark logo if you own a Commercial Flowplayer license. Without a license this plugin uses the Free version that includes a Flowplayer watermark. Visit the <a href="/wp-admin/options-general.php?page=fp5_options">configuration page</a> and set your Google Analytics ID and Flowplayer license key.
 Version: 0.5
 Author: Flowplayer ltd. Anssi Piirainen
 Author URI: http://flowplayer.org/
-Plugin URI: http://wordpress.org/extend/plugins/flowplayer5/
+License:
 Text Domain: flowplayer5
 */
 
@@ -52,7 +53,7 @@ if ( !class_exists( 'Flowplayer5' ) ) :
 			 * For more information: 
 			 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 			 */
-			add_action( 'init', array( $this, 'add_custom_post_type' ) );
+			add_action( 'init', array( $this, 'add_flowplayer_videos' ) );
 			add_filter( 'TODO', array( $this, 'filter_method_name' ) );
 
 		} // end constructor
@@ -202,64 +203,51 @@ if ( !class_exists( 'Flowplayer5' ) ) :
 		/**
 		 * Registers and enqueues plugin-specific scripts.
 		 */
-		public function register_plugin_scripts() {
+		if ( ! function_exists('add_flowplayer_videos') ) {
 
-			wp_enqueue_script( 'flowplayer5-player' );
-
-		} // end register_plugin_scripts
-
-		/*--------------------------------------------*
-		 * Core Functions
-		 *---------------------------------------------*/
-		
-		/**
-		 * NOTE:  Actions are points in the execution of a page or process
-		 *        lifecycle that WordPress fires.
-		 *
-		 *		  WordPress Actions: http://codex.wordpress.org/Plugin_API#Actions
-		 *		  Action Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-		 *
-		 */
-		function add_custom_post_type() {
-
-				$labels = array( 
-				'name' => _x( 'All Videos', 'flowplayer_video' ),
-				'singular_name' => _x( 'Video', 'flowplayer_video' ),
-				'add_new' => _x( 'Add New', 'flowplayer_video' ),
-				'add_new_item' => _x( 'Add New Video', 'flowplayer_video' ),
-				'edit_item' => _x( 'Edit Video', 'flowplayer_video' ),
-				'new_item' => _x( 'New Video', 'flowplayer_video' ),
-				'view_item' => _x( 'View Video', 'flowplayer_video' ),
-				'search_items' => _x( 'Search Videos', 'flowplayer_video' ),
-				'not_found' => _x( 'No Videos found', 'flowplayer_video' ),
-				'not_found_in_trash' => _x( 'No Videos found in Trash', 'flowplayer_video' ),
-				'parent_item_colon' => _x( 'Parent Video:', 'flowplayer_video' ),
-				'menu_name' => _x( 'Videos', 'flowplayer_video' ),
+		// Register Custom Post Type
+		function add_flowplayer_videos() {
+			$labels = array(
+				'name'                => _x( 'Videos', 'Post Type General Name', 'flowplayer5' ),
+				'singular_name'       => _x( 'Video', 'Post Type Singular Name', 'flowplayer5' ),
+				'menu_name'           => __( 'Video', 'flowplayer5' ),
+				'parent_item_colon'   => __( 'Parent Video', 'flowplayer5' ),
+				'all_items'           => __( 'All Videos', 'flowplayer5' ),
+				'view_item'           => __( 'View Video', 'flowplayer5' ),
+				'add_new_item'        => __( 'Add New Video', 'flowplayer5' ),
+				'add_new'             => __( 'New Video', 'flowplayer5' ),
+				'edit_item'           => __( 'Edit Video', 'flowplayer5' ),
+				'update_item'         => __( 'Update Video', 'flowplayer5' ),
+				'search_items'        => __( 'Search videos', 'flowplayer5' ),
+				'not_found'           => __( 'No videos found', 'flowplayer5' ),
+				'not_found_in_trash'  => __( 'No videos found in Trash', 'flowplayer5' ),
 			);
 
-			$args = array( 
-				'labels' => $labels,
-				'hierarchical' => false,
-				'description' => 'Videos',
-				'supports' => array( 'title', 'thumbnail', 'custom-fields', 'revisions', 'page-attributes' ),
-				
-				'public' => true,
-				'show_ui' => true,
-				'show_in_menu' => true,
-				'menu_position' => 10,
-				
-				'show_in_nav_menus' => true,
-				'publicly_queryable' => true,
+			$args = array(
+				'label'               => __( 'video', 'flowplayer5' ),
+				'description'         => __( 'Flowplayer videos', 'flowplayer5' ),
+				'labels'              => $labels,
+				'supports'            => array( 'title', 'thumbnail', 'custom-fields', ),
+				'taxonomies'          => array( 'category', 'post_tag' ),
+				'hierarchical'        => false,
+				'public'              => true,
+				'show_ui'             => true,
+				'show_in_menu'        => true,
+				'show_in_nav_menus'   => true,
+				'show_in_admin_bar'   => true,
+				'menu_position'       => 15,
+				'menu_icon'           => 'http://flowplayer.org/favicon.ico',
+				'can_export'          => true,
+				'has_archive'         => false,
 				'exclude_from_search' => true,
-				'has_archive' => false,
-				'query_var' => true,
-				'can_export' => true,
-				'rewrite' => true,
-				'capability_type' => 'post'
+				'publicly_queryable'  => true,
+				'query_var'           => 'video',
+				'rewrite'             => false,
+				'capability_type'     => 'page',
 			);
 
-			register_post_type( 'flowplayer_video', $args );
-		} // end action_method_name
+			register_post_type( 'video', $args );
+		}
 
 		/**
 		 * NOTE:  Filters are points of execution in which WordPress modifies data
