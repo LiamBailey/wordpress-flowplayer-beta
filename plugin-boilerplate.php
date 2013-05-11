@@ -13,6 +13,9 @@ Copyright 2013 TODO (email@domain.com)
 
 */
 
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
 /*
  * The following constant is used to define a constant for this plugin to make it
  * easier to provide cache-busting functionality on loading stylesheets
@@ -27,7 +30,7 @@ if( ! defined( 'FP5_PLUGIN_VERSION' ) )
 
 // Flowplayer version
 if( ! defined( 'FP5_FLOWPLAYER_VERSION' ) )
-	define( 'FP5_FLOWPLAYER_VERSION', '5.3.2' );
+	define( 'FP5_FLOWPLAYER_VERSION', '5.4.1' );
 
 // Plugin Folder URL
 if( ! defined( 'FP5_PLUGIN_URL' ) )
@@ -53,6 +56,7 @@ if( ! defined( 'FP5_PLUGIN_FILE' ) )
  * @package	Flowplayer5
  * @version	1.0.0
  */
+if ( !class_exists( 'Flowplayer5' ) ) :
 class Flowplayer5 {
     
     /**
@@ -104,8 +108,8 @@ class Flowplayer5 {
         add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
 
         // Register site stylesheets and JavaScript
-        add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_styles' ) );
-        add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
+        //add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_styles' ) );
+        //add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
         
         // Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.
         register_activation_hook(__FILE__, array( $this, 'activate' ) );
@@ -123,7 +127,7 @@ class Flowplayer5 {
          * For more information:
          * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
          */
-        add_action( 'init', array( $this, 'add_custom_post_type' ) );
+        add_action( 'init', array( $this, 'add_fp5_videos' ) );
         add_filter(' TODO', array( $this, 'filter_method_name' ) );
         
     }
@@ -183,6 +187,11 @@ class Flowplayer5 {
             $screen = get_current_screen();
             if ( $screen->id == $this->plugin_screen_slug ) {
                 wp_enqueue_style( 'flowplayer5-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), FP5_PLUGIN_VERSION );
+				if( $fp5_cdn == 'true' ) {
+					wp_enqueue_style( 'fp5_skins' , 'http://releases.flowplayer.org/' . FP5_FLOWPLAYER_VERSION . '/skin/' . $skin . '.css' );
+				} else {
+					wp_enqueue_style( 'fp5_skins' , plugins_url( '/assets/skin/' . $skin . '.css', dirname(__FILE__) ) );
+				}
             }
             
         }
@@ -211,6 +220,12 @@ class Flowplayer5 {
             $screen = get_current_screen();
             if ( $screen->id == $this->plugin_screen_slug ) {
                 wp_enqueue_script( 'flowplayer5-admin-script', plugins_url('assets/js/admin.js', __FILE__), array( 'jquery' ), FP5_PLUGIN_VERSION );
+
+				if( $fp5_cdn == 'true' ) {
+					wp_enqueue_script( 'fp5_embedder', 'http://releases.flowplayer.org/' . FP5_FLOWPLAYER_VERSION . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array('jquery'), null, false);
+				} else {
+					wp_enqueue_script('fp5_embedder', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', dirname(__FILE__) ), array('jquery'), null, false);
+				}
             }
             
         }
@@ -249,11 +264,12 @@ class Flowplayer5 {
          * Change 'Menu Text' to the text for menu item for the plugin settings page 
          * Change 'plugin-name' to the name of your plugin
          */
-        $this->plugin_screen_slug = add_plugins_page(
-        	__('Page Title', 'plugin-name-locale'), 
-        	__('Menu Text', 'plugin-name-locale'), 
-        	__('read', 'plugin-name-locale'), 
-        	__('plugin-name', 'plugin-name-locale'), 
+        $this->plugin_screen_slug = add_submenu_page(
+			'edit.php?post_type=video',
+        	__('Page Title', 'flowplayer5'), 
+        	__('Menu Text', 'flowplayer5'), 
+        	'read',
+        	'flowplayer5',
         	array( $this, 'display_plugin_admin_page' )
         );
         
@@ -265,7 +281,8 @@ class Flowplayer5 {
      * @since	1.0.0
      */
     public function display_plugin_admin_page() {
-        include_once('views/admin.php');
+        include_once('includes/admin.php');
+		include_once('includes/shortcode.php');
     }
     
     /*
@@ -277,8 +294,46 @@ class Flowplayer5 {
      *
      * @since	1.0.0
      */
-    public function action_method_name() {
-        // TODO:	Define your action method here
+    public function add_fp5_videos() {
+		$labels = array(
+			'name'                => _x( 'Videos', 'Post Type General Name', 'flowplayer5' ),
+			'singular_name'       => _x( 'Video', 'Post Type Singular Name', 'flowplayer5' ),
+			'menu_name'           => __( 'Video', 'flowplayer5' ),
+			'parent_item_colon'   => __( 'Parent Video', 'flowplayer5' ),
+			'all_items'           => __( 'All Videos', 'flowplayer5' ),
+			'view_item'           => __( 'View Video', 'flowplayer5' ),
+			'add_new_item'        => __( 'Add New Video', 'flowplayer5' ),
+			'add_new'             => __( 'New Video', 'flowplayer5' ),
+			'edit_item'           => __( 'Edit Video', 'flowplayer5' ),
+			'update_item'         => __( 'Update Video', 'flowplayer5' ),
+			'search_items'        => __( 'Search videos', 'flowplayer5' ),
+			'not_found'           => __( 'No videos found', 'flowplayer5' ),
+			'not_found_in_trash'  => __( 'No videos found in Trash', 'flowplayer5' ),
+		);
+
+		$args = array(
+			'label'               => __( 'video', 'flowplayer5' ),
+			'description'         => __( 'Flowplayer videos', 'flowplayer5' ),
+			'labels'              => $labels,
+			'supports'            => array( 'title', 'thumbnail', 'custom-fields', ),
+			'hierarchical'        => false,
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => true,
+			'show_in_nav_menus'   => true,
+			'show_in_admin_bar'   => true,
+			'menu_position'       => 15,
+			'menu_icon'           => 'http://flowplayer.org/favicon.ico',
+			'can_export'          => true,
+			'has_archive'         => false,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => true,
+			'query_var'           => 'video',
+			'rewrite'             => false,
+			'capability_type'     => 'page',
+		);
+
+		register_post_type( 'video', $args );
     }
     
     /*
