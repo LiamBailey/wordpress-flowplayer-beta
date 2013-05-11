@@ -266,10 +266,10 @@ class Flowplayer5 {
          */
         $this->plugin_screen_slug = add_submenu_page(
 			'edit.php?post_type=video',
-        	__('Page Title', 'flowplayer5'), 
-        	__('Menu Text', 'flowplayer5'), 
+        	__('Flowplayer Settings', 'flowplayer5'), 
+        	__('Settings', 'flowplayer5'), 
         	'read',
-        	'flowplayer5',
+        	'settings',
         	array( $this, 'display_plugin_admin_page' )
         );
         
