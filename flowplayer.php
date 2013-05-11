@@ -352,4 +352,4 @@ class Flowplayer5 {
 }
 
 // TODO:	Update the instantiation call of your plugin to the name given at the class definition
-PluginName::get_instance();
+Flowplayer5::get_instance();
