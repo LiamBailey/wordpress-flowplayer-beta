@@ -56,7 +56,7 @@ if( ! defined( 'FP5_PLUGIN_FILE' ) )
  * @package	Flowplayer5
  * @version	1.0.0
  */
-if ( !class_exists( 'Flowplayer5' ) ) :
+//if ( !class_exists( 'Flowplayer5' ) ) :
 class Flowplayer5 {
     
     /**
