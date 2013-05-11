@@ -248,6 +248,7 @@ if ( !class_exists( 'Flowplayer5' ) ) :
 
 			register_post_type( 'video', $args );
 		}
+		}
 
 		/**
 		 * NOTE:  Filters are points of execution in which WordPress modifies data
