@@ -206,7 +206,7 @@ class Flowplayer5 {
 				if( $fp5_cdn == 'true' ) {
 					wp_enqueue_style( 'fp5_skins' , 'http://releases.flowplayer.org/' . FP5_FLOWPLAYER_VERSION . '/skin/' . $skin . '.css' );
 				} else {
-					wp_enqueue_style( 'fp5_skins' , plugin_dir_url( '/assets/skin/' . $skin . '.css', ) );
+					wp_enqueue_style( 'fp5_skins' , plugin_dir_url( '/assets/skin/' . $skin . '.css' ) );
 				}
 			}
 			
