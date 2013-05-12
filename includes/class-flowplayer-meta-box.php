@@ -53,7 +53,7 @@ class fp5_meta_box {
 			__( 'Add Flowplayer', self::LANG ),
 			array( &$this, 'render_meta_box_content' ),
 			'video',
-			'advanced',
+			'normal',
 			'default'
 		);
 	}
