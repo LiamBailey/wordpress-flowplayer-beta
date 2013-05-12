@@ -40,8 +40,7 @@ class fp5_meta_box {
 
 	const LANG = 'some_textdomain';
 
-	public function __construct()
-	{
+	public function __construct() {
 		add_action( 'add_meta_boxes', array( &$this, 'add_fp5_meta_box' ) );
 	}
 
