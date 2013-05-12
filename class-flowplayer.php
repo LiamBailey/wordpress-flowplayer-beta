@@ -202,11 +202,11 @@ class Flowplayer5 {
 
 			$screen = get_current_screen();
 			if ( $screen->id == $this->plugin_screen_slug ) {
-				wp_enqueue_style( 'flowplayer5-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), FP5_PLUGIN_VERSION );
+				wp_enqueue_style( 'flowplayer5-admin-styles', plugin_dir_url( 'assets/css/admin.css' ), FP5_PLUGIN_VERSION );
 				if( $fp5_cdn == 'true' ) {
 					wp_enqueue_style( 'fp5_skins' , 'http://releases.flowplayer.org/' . FP5_FLOWPLAYER_VERSION . '/skin/' . $skin . '.css' );
 				} else {
-					wp_enqueue_style( 'fp5_skins' , plugins_url( '/assets/skin/' . $skin . '.css', dirname(__FILE__) ) );
+					wp_enqueue_style( 'fp5_skins' , plugin_dir_url( '/assets/skin/' . $skin . '.css', ) );
 				}
 			}
 			
