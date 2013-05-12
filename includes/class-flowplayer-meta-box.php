@@ -54,7 +54,7 @@ class fp5_meta_box {
 			,array( &$this, 'render_meta_box_content' )
 			,'video' 
 			,'advanced'
-			,'default'
+			,'core'
 		);
 	}
 
