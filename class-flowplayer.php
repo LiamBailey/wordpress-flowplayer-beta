@@ -298,7 +298,6 @@ class Flowplayer5 {
 	public function display_plugin_admin_page() {
 		include_once('includes/admin.php');
 		include_once('includes/shortcode.php');
-		include_once('includes/class-flowplayer-meta-box.php');
 	}
 
 	/*

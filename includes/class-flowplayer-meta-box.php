@@ -41,7 +41,7 @@ class fp5_meta_box {
 	const LANG = 'some_textdomain';
 
 	public function __construct() {
-		add_action( 'add_meta_boxes', 'add_fp5_meta_box' );
+		add_action( 'add_meta_boxes', array( &$this, 'add_fp5_meta_box' ) );
 	}
 
 	/**
@@ -51,7 +51,7 @@ class fp5_meta_box {
 		add_meta_box( 
 			 'flowplayer5',
 			__( 'Add Flowplayer', self::LANG ),
-			'render_meta_box_content',
+			array( &$this, 'render_meta_box_content', )
 			'video' ,
 			'advanced',
 			'default'
