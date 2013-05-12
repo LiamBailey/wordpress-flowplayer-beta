@@ -52,8 +52,6 @@ if( ! defined( 'FP5_PLUGIN_DIR' ) )
 if( ! defined( 'FP5_PLUGIN_FILE' ) )
 	define( 'FP5_PLUGIN_FILE', __FILE__ );
 
-}
-
 /**
  * TODO: 
  *
