@@ -7,10 +7,11 @@ Version: 0.5
 Author: Flowplayer ltd. Anssi Piirainen
 Author URI: http://flowplayer.org/
 Text Domain: flowplayer5
+Domain Path: /lang/
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-Copyright 2013 Flowplayer Ltd (email@domain.com)
+Copyright 2013 Flowplayer Ltd
 */
 
 /**
@@ -145,7 +146,7 @@ class Flowplayer5 {
 		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
-		add_filter(' TODO', array( $this, 'filter_method_name' ) );
+		add_filter(' upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
 		
 	}
 
@@ -361,8 +362,9 @@ class Flowplayer5 {
 	 *
 	 * @since       1.0.0
 	 */
-	public function filter_method_name() {
-		// TODO:    Define your filter method here
+	public function flowplayer_custom_mimes( $mimes ){
+		$mimes['webm'] = 'video/webm';
+	return $mimes;
 	}
 
 }

@@ -1,0 +1,16 @@
+<!-- global options -->
+<script>
+flowplayer.conf = {
+	engine: "flash",
+	swf: "/media/swf/flowplayer.swf",
+	analytics: 'UA-27182341-1',
+	splash: true,
+	logo = 'http://mydomain.com/logo.png';
+	embed: {
+		library: "//mydomain.com/js/flowplayer.min.js",
+		script: "//mydomain.com/js/embed.min.js",
+		skin: "//mydomain.com/css/minimalist.css",
+		swf: "//mydomain.com/swf/flowplayer.swf"
+	}
+};
+</script>
