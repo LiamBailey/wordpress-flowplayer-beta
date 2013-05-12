@@ -63,7 +63,6 @@ class fp5_meta_box {
 	 * Render Meta Box content
 	 */
 	public function render_meta_box_content() {
-		echo
 		'<div class="options" xmlns="http://www.w3.org/1999/html">
 		<div class="optgroup">
 			<label for="fp5_selectSkin">'
