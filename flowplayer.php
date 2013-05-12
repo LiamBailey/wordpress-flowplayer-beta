@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once( plugin_dir_path( __FILE__ ) . 'class-flowplayer.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'includes\class-flowplayer-meta-box.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer-meta-box.php' );
 
 // TODO:    Update the instantiation call of your plugin to the name given at the class definition
 Flowplayer5::get_instance();
