@@ -202,7 +202,7 @@ class Flowplayer5 {
 
 			$screen = get_current_screen();
 			if ( $screen->id == $this->plugin_screen_slug ) {
-				wp_enqueue_style( 'flowplayer5-admin-styles', plugin_dir_url( 'assets/css/admin.css' ), FP5_PLUGIN_VERSION );
+				wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), $this->version );
 				if( $fp5_cdn == 'true' ) {
 					wp_enqueue_style( 'fp5_skins' , 'http://releases.flowplayer.org/' . FP5_FLOWPLAYER_VERSION . '/skin/' . $skin . '.css' );
 				} else {
@@ -235,7 +235,7 @@ class Flowplayer5 {
 
 			$screen = get_current_screen();
 			if ( $screen->id == $this->plugin_screen_slug ) {
-				wp_enqueue_script( 'flowplayer5-admin-script', plugins_url('assets/js/admin.js', __FILE__), array( 'jquery' ), FP5_PLUGIN_VERSION );
+				wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), $this->version );
 				if( $fp5_cdn == 'true' ) {
 					wp_enqueue_script( 'fp5_embedder', 'http://releases.flowplayer.org/' . FP5_FLOWPLAYER_VERSION . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array('jquery'), null, false);
 				} else {
@@ -253,7 +253,7 @@ class Flowplayer5 {
 	 * @since    1.0.0
 	 */
 	public function register_plugin_styles() {
-		wp_enqueue_style( 'plugin-name-plugin-styles', plugins_url( 'css/display.css', __FILE__ ), PLUGIN_NAME_VERSION );
+		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'css/public.css', __FILE__ ), $this->version );
 	}
 
 	/**
@@ -262,7 +262,7 @@ class Flowplayer5 {
 	 * @since    1.0.0
 	 */
 	public function register_plugin_scripts() {
-		wp_enqueue_script( 'plugin-name-plugin-script', plugins_url( 'js/display.js', __FILE__ ), array( 'jquery' ), PLUGIN_NAME_VERSION );
+		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'js/public.js', __FILE__ ), array( 'jquery' ), $this->version );
 	}
 
 	/**
