@@ -76,8 +76,8 @@ class fp5_shortcode {
 			wp_enqueue_style( $this->plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $this->player_version . '/skin/' . $skin . '.css' );
 			wp_enqueue_script( $this->plugin_slug . '-script', 'http://releases.flowplayer.org/' . $this->player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
 		} else {
-			wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/skin/' . $skin . '.css', __FILE__ ), $this->player_version );
-			wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $this->version, false );
+			//wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/skin/' . $skin . '.css', __FILE__ ), $this->player_version );
+			//wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $this->version, false );
 		}
 
 		//get the splash image or featured image
@@ -124,7 +124,7 @@ class fp5_shortcode {
 		// Code
 		if (isset($id)) {
 
-			/*'<script>';
+			'<script>';
 			if ($key != '' && $logoInOrigin) {
 				$out .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
 			}
@@ -141,7 +141,7 @@ class fp5_shortcode {
 
 			'<script>
 
-			</script>';*/
+			</script>';
 		}
 	}
 }
