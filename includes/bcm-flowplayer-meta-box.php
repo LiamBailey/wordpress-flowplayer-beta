@@ -17,9 +17,6 @@
  *
  * FlowPlayer5Video post type
  */
-function call_fp5_meta_box() {
-	return new fp5_meta_box();
-}
 
 if ( is_admin() ):
 	add_action( 'load-post.php', 'call_fp5_meta_box' );
