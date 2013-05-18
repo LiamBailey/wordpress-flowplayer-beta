@@ -83,24 +83,27 @@ $player_version = '5.4.1';
         }
     }*/
 
-    // Code
+//shortcode processing
+    $ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
+    $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
+    $splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
+    $class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
+    $data_key = ( $key != '' ? ' "' . $key . '"' : '');
+    $data_logo = ( $key != '' && $logo != '' ? ' "' . $logo . '"' : '' );
+    $data_analytics = ( $analytics != '' ? ' "' . $analytics . '"' : '' );
+    $data_ratio = ( $ratio != 0 ? '"' . $ratio . '"' : '' );
+    $attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
+    ( ( $loop == 'true' ) ? $loop : '' );
+    //( ( $preload == 'true' ) ? $preload : '' );
 
+
+    // shortCode output
+$return = '';
    $return.=     '<script>';
         if ($key != '' && $logoInOrigin) {
-            $out .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
+            $return .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
         }
-        $return.='</script>';
-        $ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
-        $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
-        $splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
-        $class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
-        $data_key = ( $key != '' ? ' "' . $key . '"' : '');
-        $data_logo = ( $key != '' && $logo != '' ? ' "' . $logo . '"' : '' );
-        $data_analytics = ( $analytics != '' ? ' "' . $analytics . '"' : '' );
-        $data_ratio = ( $ratio != 0 ? '"' . $ratio . '"' : '' );
-        $attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
-        ( ( $loop == 'true' ) ? $loop : '' );
-        //( ( $preload == 'true' ) ? $preload : '' );
+    $return.='</script>';
     $return.=    '<div style=' . $fixedStyle . $splash_style . ' class=' . $class . ' data-key=' . $data_key . ' data-logo=' . $data_logo . ' data-analytics=' . $data_analytics . ' data-ratio=' . $data_ratio . '>';
     $return.=     '<video' . $attributes . '>';
         $mp4 != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
@@ -113,6 +116,7 @@ $player_version = '5.4.1';
 
     $return.=     '<script>	</script>';
 
+    return $return;
     }
 
 // register shortcode
