@@ -162,7 +162,7 @@ class Flowplayer5 {
 
 		// set the options for the shortcode - pulled from the display-settings.php
 		$options = get_option('fp5_options');
-		$cdn = $options['cdn']
+		$cdn = $options['cdn'];
 
 		$screen = get_current_screen();
 		if ( $screen->id == $this->plugin_screen_hook_suffix ) {
