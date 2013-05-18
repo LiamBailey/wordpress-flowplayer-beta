@@ -124,7 +124,7 @@ class fp5_shortcode {
 		// Code
 		if (isset($id)) {
 
-			'<script>';
+			/*'<script>';
 			if ($key != '' && $logoInOrigin) {
 				$out .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
 			}
@@ -141,7 +141,7 @@ class fp5_shortcode {
 
 			'<script>
 
-			</script>';
+			</script>';*/
 		}
 	}
 }
