@@ -10,6 +10,9 @@ if (!defined('ABSPATH'))
 // Add Shortcode
 function add_fp5_shortcode($atts) {
 
+    //post_id
+    $id = $atts['id'];
+
     // get the meta from the post type
     $autoplay = get_post_meta($id, 'fp5[autoplay]', true);
     $loop = get_post_meta($id, 'fp5[loop]', true);
@@ -39,9 +42,6 @@ function add_fp5_shortcode($atts) {
         wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $this->version, false );
     }
 
-    //post_id
-    $id = $atts['id'];
-    
     //get the splash image or featured image
     $splash = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
 
