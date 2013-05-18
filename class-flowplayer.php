@@ -1,93 +1,107 @@
 <?php
 /**
- * The WordPress Plugin Boilerplate.
+ * Flowplayer 5 for Wordpress
  *
- * A foundation off of which to build well-documented WordPress plugins that also follow
- * WordPress coding standards and PHP best practices.
+ * @package   Flowplayer 5 for Wordpress
+ * @author    Your Name <email@example.com>
+ * @license   GPL-2.0+
+ * @link      http://example.com
+ * @copyright 2013 Flowplayer Ltd
+ */
+
+/**
+ * Plugin class.
  *
- * Use PHPDoc tags if you wish to be able to document the code using a documentation
- * generator.
+ * TODO: Rename this class to a proper name for your plugin.
  *
- * @package PluginName
+ * @package Flowplayer5
  * @author  Your Name <email@example.com>
- * @license GPL-2.0+
- * @link    TODO
- * @version 1.0.0
- */
-
-/**
- * If this file is attempted to be accessed directly, we'll exit.
- *
- * The following check provides a level of security from other files
- * that request data directly.
- */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-/*
- * The following constant is used to define a constant for this plugin to make it
- * easier to provide cache-busting functionality on loading stylesheets
- * and JavaScript.
- *
- * After you've defined these constants, do a find/replace on the constants
- * used throughout the rest of this file.
- */
-// Plugin version
-if( ! defined( 'FP5_PLUGIN_VERSION' ) )
-	define( 'FP5_PLUGIN_VERSION', '0.5' );
-
-// Flowplayer version
-if( ! defined( 'FP5_FLOWPLAYER_VERSION' ) )
-	define( 'FP5_FLOWPLAYER_VERSION', '5.4.1' );
-
-// Plugin Folder URL
-if( ! defined( 'FP5_PLUGIN_URL' ) )
-	define( 'FP5_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-
-// Plugin Folder Path
-if( ! defined( 'FP5_PLUGIN_DIR' ) )
-	define( 'FP5_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-
-// Plugin Root File
-if( ! defined( 'FP5_PLUGIN_FILE' ) )
-	define( 'FP5_PLUGIN_FILE', __FILE__ );
-
-/**
- * TODO: 
- *
- * Rename this class to a proper name for your plugin. Give a proper description of
- * the plugin, it's purpose, and any dependencies it has.
- *
- * Use PHPDoc tags if you wish to be able to document the code using a documentation
- * generator.
- *
- * @package    Flowplayer5
- * @version    1.0.0
  */
 class Flowplayer5 {
 
 	/**
-	 * Refers to a single instance of this class. 
+	 * Plugin version, used for cache-busting of style and script file references.
 	 *
-	 * @var    object
+	 * @since   1.0.0
+	 *
+	 * @var     string
+	 */
+	protected $version = '1.0.0-beta';
+
+	/**
+	 * Player version, used for cache-busting of style and script file references.
+	 *
+	 * @since   1.0.0
+	 *
+	 * @var     string
+	 */
+	protected $player_version = '5.4.1';
+
+	/**
+	 * Unique identifier for your plugin.
+	 *
+	 * Use this value (not the variable name) as the text domain when internationalizing strings of text. It should
+	 * match the Text Domain file header in the main plugin file.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @var      string
+	 */
+	protected $plugin_slug = 'flowplayer5';
+
+	/**
+	 * Instance of this class.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @var      object
 	 */
 	protected static $instance = null;
 
-	/** 
-	 * Refers to the slug of the plugin screen.
-	 *
-	 * @var    string
-	 */
-	protected $plugin_screen_slug = null;
-	
 	/**
-	 * Creates or returns an instance of this class.
+	 * Slug of the plugin screen.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @var      string
+	 */
+	protected $plugin_screen_hook_suffix = null;
+
+	/**
+	 * Initialize the plugin by setting localization, filters, and administration functions.
 	 *
 	 * @since     1.0.0
-	 * @return    PluginName    A single instance of this class.
 	 */
-	public function get_instance() {
+	private function __construct() {
+
+		// Load plugin text domain
+		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+
+		// Add the options page and menu item.
+		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+
+		// Load admin style sheet and JavaScript.
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+
+		// Load public-facing style sheet and JavaScript.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
+		// Define custom functionality. Read more about actions and filters: http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
+		add_action( 'init', array( $this, 'add_fp5_videos' ) );
+		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
+
+	}
+
+	/**
+	 * Return an instance of this class.
+	 *
+	 * @since     1.0.0
+	 *
+	 * @return    object    A single instance of this class.
+	 */
+	public static function get_instance() {
 
 		// If the single instance hasn't been set, set it now.
 		if ( null == self::$instance ) {
@@ -95,212 +109,152 @@ class Flowplayer5 {
 		}
 
 		return self::$instance;
-
-	}
-
-	/**
-	 * Initializes the plugin by setting localization, filters, and administration functions.
-	 *
-	 * @since    1.0.0
-	 */
-	private function __construct() {
-
-		// Load plugin text domain
-		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-
-		/*
-		 * Add the options page and menu item.
-		 * Uncomment the following line to enable the Settings Page for the plugin:
-		 */
-		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
-
-		/*
-		 * Register admin styles and scripts
-		 * If the Settings page has been activated using the above hook, the scripts and styles
-		 * will only be loaded on the settings page. If not, they will be loaded for all
-		 * admin pages. 
-		 */
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
-		
-
-		// Register site stylesheets and JavaScript
-		//add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_styles' ) );
-		//add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
-
-		// Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.
-		register_activation_hook( __FILE__, array( $this, 'activate' ) );
-		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
-
-		/*
-		 * TODO:
-		 * 
-		 * Define the custom functionality for your plugin. The first parameter of the
-		 * add_action/add_filter calls are the hooks into which your code should fire.
-		 *
-		 * The second parameter is the function name located within this class. See the stubs
-		 * later in the file.
-		 *
-		 * For more information:
-		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		 */
-		add_action( 'init', array( $this, 'add_fp5_videos' ) );
-		add_filter(' upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
 	}
 
 	/**
 	 * Fired when the plugin is activated.
 	 *
-	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog
+	 * @since    1.0.0
+	 *
+	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
 	 */
-	public function activate( $network_wide ) {
-		// TODO:    Define activation functionality here
+	public static function activate( $network_wide ) {
+		// TODO: Define activation functionality here
 	}
 
 	/**
 	 * Fired when the plugin is deactivated.
 	 *
-	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog
 	 * @since    1.0.0
+	 *
+	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Deactivate" action, false if WPMU is disabled or plugin is deactivated on an individual blog.
 	 */
-	public function deactivate( $network_wide ) {
-		// TODO:    Define deactivation functionality here
+	public static function deactivate( $network_wide ) {
+		// TODO: Define deactivation functionality here
 	}
 
 	/**
-	 * Loads the plugin text domain for translation
+	 * Load the plugin text domain for translation.
+	 *
+	 * @since    1.0.0
 	 */
 	public function load_plugin_textdomain() {
 
-		// TODO: replace "plugin-name-locale" with a unique value for your plugin
-		$domain = 'flowplayer5';
+		$domain = $this->plugin_slug;
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 		load_textdomain( $domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo' );
 		load_plugin_textdomain( $domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
-		
 	}
 
 	/**
-	 * Registers and enqueues admin-specific styles.
+	 * Register and enqueue admin-specific style sheet.
 	 *
-	 * @since    1.0.0
+	 * @since     1.0.0
+	 *
+	 * @return    null    Return early if no settings page is registered.
 	 */
-	public function register_admin_styles() {
+	public function enqueue_admin_styles() {
 
-		/*
-		 * Check if the plugin has registered a settings page
-		 * and if it has, make sure only to enqueue the scripts on the relevant screens
-		 */
-
-		if ( isset( $this->plugin_screen_slug ) ) {
-
-			/*
-			 * Check if current screen is the admin page for this plugin
-			 * Don't enqueue stylesheet or JavaScript if it's not
-			 */
-
-			$screen = get_current_screen();
-			if ( $screen->id == $this->plugin_screen_slug ) {
-				wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), $this->version );
-				if( $fp5_cdn == 'true' ) {
-					wp_enqueue_style( 'fp5_skins' , 'http://releases.flowplayer.org/' . FP5_FLOWPLAYER_VERSION . '/skin/' . $skin . '.css' );
-				} else {
-					wp_enqueue_style( 'fp5_skins' , plugin_dir_url( '/assets/skin/' . $skin . '.css' ) );
-				}
-			}
-			
+		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
+			return;
 		}
-		
-	}
 
-	/**
-	 * Registers and enqueues admin-specific JavaScript.
-	 *
-	 * @since    1.0.0
-	 */
-	public function register_admin_scripts() {
+		// set the options for the shortcode - pulled from the display-settings.php
+		$options = get_option('fp5_options');
+		$key = $options['key'];
+		$cdn = $options['cdn'];
 
-		/*
-		 * Check if the plugin has registered a settings page
-		 * and if it has, make sure only to enqueue the scripts on the relevant screens
-		 */
-
-		if ( isset( $this->plugin_screen_slug ) ) {
-			
-			/*
-			 * Check if current screen is the admin page for this plugin
-			 * Don't enqueue stylesheet or JavaScript if it's not
-			 */
-
-			$screen = get_current_screen();
-			if ( $screen->id == $this->plugin_screen_slug ) {
-				wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), $this->version );
-				if( $fp5_cdn == 'true' ) {
-					wp_enqueue_script( 'fp5_embedder', 'http://releases.flowplayer.org/' . FP5_FLOWPLAYER_VERSION . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array('jquery'), null, false);
-				} else {
-					wp_enqueue_script('fp5_embedder', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', dirname(__FILE__) ), array('jquery'), null, false);
-				}
+		$screen = get_current_screen();
+		if ( $screen->id == $this->plugin_screen_hook_suffix ) {
+			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), $this->version );
+			if( $cdn == 'true' ) {
+				wp_enqueue_style( $this->plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
+			} else {
+				wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/skin/all-skins.css', __FILE__ ), $this->player_version );
 			}
-			
 		}
-		
+
 	}
 
 	/**
-	 * Registers and enqueues public-facing stylesheets.
+	 * Register and enqueue admin-specific JavaScript.
+	 *
+	 * @since     1.0.0
+	 *
+	 * @return    null    Return early if no settings page is registered.
+	 */
+	public function enqueue_admin_scripts() {
+
+		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+		if ( $screen->id == $this->plugin_screen_hook_suffix ) {
+			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), $this->version );
+			if( $cdn == 'true' ) {
+				wp_enqueue_script( $this->plugin_slug . '-script', 'http://releases.flowplayer.org/' . $this->player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
+			} else {
+				wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $this->version, false );
+			}
+		}
+
+	}
+
+	/**
+	 * Register and enqueue public-facing style sheet.
 	 *
 	 * @since    1.0.0
 	 */
-	public function register_plugin_styles() {
+	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'css/public.css', __FILE__ ), $this->version );
 	}
 
 	/**
-	 * Registers and enqueues public-facing JavaScript.
+	 * Register and enqueues public-facing JavaScript files.
 	 *
 	 * @since    1.0.0
 	 */
-	public function register_plugin_scripts() {
+	public function enqueue_scripts() {
 		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'js/public.js', __FILE__ ), array( 'jquery' ), $this->version );
 	}
 
 	/**
-	 * Registers the administration menu for this plugin into the WordPress Dashboard menu.
+	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
 	 * @since    1.0.0
 	 */
 	public function add_plugin_admin_menu() {
-		
+
 		/*
 		 * TODO:
 		 *
 		 * Change 'Page Title' to the title of your plugin admin page
-		 * Change 'Menu Text' to the text for menu item for the plugin settings page 
+		 * Change 'Menu Text' to the text for menu item for the plugin settings page
 		 * Change 'plugin-name' to the name of your plugin
 		 */
-		$this->plugin_screen_slug = add_submenu_page(
+		$this->plugin_screen_hook_suffix = add_submenu_page(
 			'edit.php?post_type=video',
-			__('Flowplayer Settings', 'plugin-name-locale'), 
-			__('Settings', 'plugin-name-locale'), 
-			'read', 
-			'settings',
+			__( 'Flowplayer Settings', $this->plugin_slug ),
+			__( 'Settings', $this->plugin_slug ),
+			'read',
+			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
 		);
-		
+
 	}
 
 	/**
-	 * Renders the options page for this plugin.
+	 * Render the settings page for this plugin.
 	 *
 	 * @since    1.0.0
 	 */
 	public function display_plugin_admin_page() {
-		include_once('includes/admin.php');
-		include_once('includes/shortcode.php');
+		include_once( 'views/admin.php' );
 	}
 
-	/*
+	/**
 	 * NOTE:  Actions are points in the execution of a page or process
 	 *        lifecycle that WordPress fires.
 	 *
@@ -351,18 +305,18 @@ class Flowplayer5 {
 		register_post_type( 'video', $args );
 	}
 
-	/*
+	/**
 	 * NOTE:  Filters are points of execution in which WordPress modifies data
 	 *        before saving it or sending it to the browser.
 	 *
 	 *        WordPress Filters: http://codex.wordpress.org/Plugin_API#Filters
 	 *        Filter Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
 	 *
-	 * @since       1.0.0
+	 * @since    1.0.0
 	 */
 	public function flowplayer_custom_mimes( $mimes ){
-		$mimes['webm'] = 'video/webm';
-	return $mimes;
+			$mimes['webm'] = 'video/webm';
+		return $mimes;
 	}
 
 }
