@@ -16,13 +16,15 @@
  * Calls the class on the post edit screen
  *
  * FlowPlayer5Video post type
- */
+
+function call_fp5_meta_box() {
+	return new fp5_meta_box();
+}
 
 if ( is_admin() ):
 	add_action( 'load-post.php', 'call_fp5_meta_box' );
-endif;
 
-/*  add meta box actions to setup meta box */
+  add meta box actions to setup meta box */
 add_action('add_meta_boxes','fp5_add_video_details');
 add_action('save_post','fp5_save_video_details');
 
@@ -55,7 +57,7 @@ function fp5_Video_details($post) {
 
 
 
-    wp_nonce_field('HansenWP_jobs','HansenWP_jobs_nonce'); ?>
+    wp_nonce_field('fp5_Video_N','fp5_Video_nonce'); ?>
 
     <div class="options" xmlns="http://www.w3.org/1999/html">
 			<div class="optgroup">
@@ -172,8 +174,8 @@ function fp5_Video_details($post) {
 /* saves the cta custom meta content */
 function fp5_save_video_details($post_id) {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-    if (!isset($_POST['HansenWP_jobs_nonce'])) return;
-    if (!wp_verify_nonce($_POST['HansenWP_jobs_nonce'],'HansenWP_jobs')) return;
+    if (!isset($_POST['fp5_Video_nonce'])) return;
+    if (!wp_verify_nonce($_POST['fp5_Video_nonce'],'fp5_Video_N')) return;
 
     if (!current_user_can('edit_post',$post_id)) return;
 
