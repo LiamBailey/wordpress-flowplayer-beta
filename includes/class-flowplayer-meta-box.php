@@ -26,6 +26,8 @@ if ( is_admin() )
  */
 class fp5_meta_box {
 
+	protected $plugin_slug = 'flowplayer5';
+
 	public function __construct() {
 		add_action( 'add_meta_boxes', array( &$this, 'add_fp5_meta_box' ) );
 	}
@@ -36,7 +38,7 @@ class fp5_meta_box {
 	public function add_fp5_meta_box() {
 		add_meta_box( 
 			 'flowplayer5',
-			__( 'Add Flowplayer', get_plugin_slug() ),
+			__( 'Add Flowplayer', $this->plugin_slug ),
 			array( &$this, 'render_meta_box_content' ),
 			'video',
 			'normal',
