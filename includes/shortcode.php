@@ -30,6 +30,7 @@ function add_fp5_shortcode($atts) {
     $ratio = get_post_meta($id,'fp5_ratio',true);
     $fixed = get_post_meta($id,'fp5_fixed',true);
 
+
 	// set the options for the shortcode - pulled from the display-settings.php
 	$options = get_option('fp5_options');
 	$key = $options['key'];
@@ -51,9 +52,9 @@ function add_fp5_shortcode($atts) {
     $id = $atts['id'];
     
     //get the splash image or featured image
-   /*
+   if(!isset($splash)):
    $splash = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
-   */
+   endif;
 
     // find and assign the video attachments
     $args = array(
