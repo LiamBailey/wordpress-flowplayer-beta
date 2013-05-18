@@ -74,8 +74,8 @@ function add_fp5_shortcode($atts) {
 		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/' . $skin . '.css' );
 		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
 	} else {
-		wp_enqueue_style( plugin_slug .'-skins', plugins_url( '/assets/skin/' . $skin . '.css', __FILE__ ), player_version );
-		wp_enqueue_script( plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), version, false );
+		wp_enqueue_style( $plugin_slug .'-skins', plugins_url( '/assets/skin/' . $skin . '.css', __FILE__ ), $player_version );
+		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $version, false );
 	}
 
 	//get the splash image or featured image
@@ -92,7 +92,7 @@ function add_fp5_shortcode($atts) {
 
 			$filelink = the_attachment_link($attachment->ID, false);
 			$filetype = wp_check_filetype($filelink);
-			switch ($filetype) {
+			switch ( $filetype ) {
 				case 'mp4':
 					$mp4 = $filelink;
 					break;
