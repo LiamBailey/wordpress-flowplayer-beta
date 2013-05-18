@@ -36,7 +36,7 @@ class fp5_meta_box {
 	public function add_fp5_meta_box() {
 		add_meta_box( 
 			 'flowplayer5',
-			__( 'Add Flowplayer', $this->plugin_slug ),
+			__( 'Add Flowplayer', get_plugin_slug() ),
 			array( &$this, 'render_meta_box_content' ),
 			'video',
 			'normal',
