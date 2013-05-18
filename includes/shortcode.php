@@ -247,7 +247,7 @@ function add_meta_to_fp5_video($vid_post_id, $old_shortcode_atts){
     }  // end foreach $old_shortcode
     
     //check for missing post meta
-    $fp5_ratio = get_post_meta($id, 'fp5[ratio]', true
+    $fp5_ratio = get_post_meta($vid_post_id, 'fp5[ratio]', true
     if(!isset($fp5_ratio)){
         add_post_meta($vid_post_id, 'fp5[ratio]', '', $unique);
     }
