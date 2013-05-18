@@ -1,18 +1,15 @@
 <?php
 /**
- * The WordPress Plugin Boilerplate.
+ * Represents the view for the administration dashboard.
  *
- * A foundation off of which to build well-documented WordPress plugins that also follow
- * WordPress coding standards and PHP best practices.
+ * This includes the header, options, and other information that should provide
+ * The User Interface to the end user.
  *
- * Use PHPDoc tags if you wish to be able to document the code using a documentation
- * generator.
- *
- * @package PluginName
- * @author  Your Name <email@example.com>
- * @license GPL-2.0+
- * @link    TODO
- * @version 1.0.0
+ * @package   PluginName
+ * @author    Your Name <email@example.com>
+ * @license   GPL-2.0+
+ * @link      http://example.com
+ * @copyright 2013 Your Name or Company Name
  */
 
 /**
@@ -38,8 +35,6 @@ if ( is_admin() )
  */
 class fp5_meta_box {
 
-	const LANG = 'some_textdomain';
-
 	public function __construct() {
 		add_action( 'add_meta_boxes', array( &$this, 'add_fp5_meta_box' ) );
 	}
@@ -50,7 +45,7 @@ class fp5_meta_box {
 	public function add_fp5_meta_box() {
 		add_meta_box( 
 			 'flowplayer5',
-			__( 'Add Flowplayer', self::LANG ),
+			__( 'Add Flowplayer', $this->plugin_slug ),
 			array( &$this, 'render_meta_box_content' ),
 			'video',
 			'normal',
