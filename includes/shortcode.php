@@ -84,8 +84,8 @@ $player_version = '5.4.1';
     }*/
 
     // Code
-
-        '<script>';
+$return ='';
+   $return.=     '<script>';
         if ($key != '' && $logoInOrigin) {
             $out .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
         }
@@ -101,18 +101,18 @@ $player_version = '5.4.1';
         $attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
         ( ( $loop == 'true' ) ? $loop : '' );
         //( ( $preload == 'true' ) ? $preload : '' );
-        '<div style=' . $fixedStyle . $splash_style . ' class=' . $class . ' data-key=' . $data_key . ' data-logo=' . $data_logo . ' data-analytics=' . $data_analytics . ' data-ratio=' . $data_ratio . '>';
-        '<video' . $attributes . '>';
+    $return.=    '<div style=' . $fixedStyle . $splash_style . ' class=' . $class . ' data-key=' . $data_key . ' data-logo=' . $data_logo . ' data-analytics=' . $data_analytics . ' data-ratio=' . $data_ratio . '>';
+    $return.=     '<video' . $attributes . '>';
         $mp4 != '' ? '<source type="video/mp4" src="' . $mp4 . '"/>' : '';
         $webm != '' ? '<source type="video/webm" src="' . $webm . '"/>' : '';
         $ogg != '' ? '<source type="video/ogg" src="' . $ogg . '"/>' : '';
         $subtitles != '' ? '<track src="' . $subtitles . '"/>' : '';
-        '</video>';
-        '</div>';
+    $return.=    '</video>';
+    $return.=     '</div>';
 
-        '<script>
+    $return.=     '<script>	</script>';
 
-	</script>';
+    return $return;
 
     }
 

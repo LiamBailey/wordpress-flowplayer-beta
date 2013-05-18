@@ -56,7 +56,6 @@ function fp5_Video_details($post) {
 
 
 
-
     wp_nonce_field('fp5_Video_N','fp5_Video_nonce'); ?>
 
     <div class="options" xmlns="http://www.w3.org/1999/html">
@@ -107,15 +106,15 @@ function fp5_Video_details($post) {
                 </div>
                 <div class="option wide">
                     <label for="fp5_mp4"><?php _e('mp4')?></label>
-                    <input class="mediaUrl" type="text" name="fp5_mp4" id="fp5_mp4" />
+                    <input class="mediaUrl" value="<? echo $fp5_mp4; ?>" type="text" name="fp5_mp4" id="fp5_mp4" />
                 </div>
                 <div id="fp5_videos" class="option wide">
                     <label for="fp5_webm"><?php _e('webm')?></label>
-                    <input class="mediaUrl" type="text" name="fp5_webm" id="fp5_webm" />
+                    <input class="mediaUrl" value="<? echo $fp5_webm; ?>" type="text" name="fp5_webm" id="fp5_webm" />
                 </div>
                 <div class="option wide">
                     <label for="fp5_ogg"><?php _e('ogg')?></label>
-                    <input class="mediaUrl" type="text" name="fp5_ogg" id="fp5_ogg" />
+                    <input class="mediaUrl" value="<? echo $fp5_ogg; ?>" type="text" name="fp5_ogg" id="fp5_ogg" />
                 </div>
                 <input id="fp5_chooseMedia" type="button" value="<?php _e('Media Library'); ?>" />
             </div>
