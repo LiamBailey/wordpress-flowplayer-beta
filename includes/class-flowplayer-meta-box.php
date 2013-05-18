@@ -13,15 +13,6 @@
  */
 
 /**
- * If this file is attempted to be accessed directly, we'll exit.
- *
- * The following check provides a level of security from other files
- * that request data directly.
- */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-/**
  * Calls the class on the post edit screen
  */
 function call_fp5_meta_box() {
