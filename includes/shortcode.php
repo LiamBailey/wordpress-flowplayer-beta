@@ -84,12 +84,12 @@ $player_version = '5.4.1';
     }*/
 
     // Code
-$return ='';
+
    $return.=     '<script>';
         if ($key != '' && $logoInOrigin) {
             $out .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
         }
-        '</script>';
+        $return.='</script>';
         $ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
         $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
         $splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
@@ -103,16 +103,15 @@ $return ='';
         //( ( $preload == 'true' ) ? $preload : '' );
     $return.=    '<div style=' . $fixedStyle . $splash_style . ' class=' . $class . ' data-key=' . $data_key . ' data-logo=' . $data_logo . ' data-analytics=' . $data_analytics . ' data-ratio=' . $data_ratio . '>';
     $return.=     '<video' . $attributes . '>';
-        $mp4 != '' ? '<source type="video/mp4" src="' . $mp4 . '"/>' : '';
-        $webm != '' ? '<source type="video/webm" src="' . $webm . '"/>' : '';
-        $ogg != '' ? '<source type="video/ogg" src="' . $ogg . '"/>' : '';
-        $subtitles != '' ? '<track src="' . $subtitles . '"/>' : '';
+        $mp4 != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
+        $webm != '' ? $return.='<source type="video/webm" src="' . $webm . '"/>' : '';
+        $ogg != '' ? $return.='<source type="video/ogg" src="' . $ogg . '"/>' : '';
+        $subtitles != '' ? $return.='<track src="' . $subtitles . '"/>' : '';
+
     $return.=    '</video>';
     $return.=     '</div>';
 
     $return.=     '<script>	</script>';
-
-    return $return;
 
     }
 
