@@ -10,14 +10,34 @@ if (!defined('ABSPATH'))
 // Add Shortcode
 function add_fp5_shortcode($atts) {
 
-    // Register ahortcode stylesheets and JavaScript
-    if ($fp5_cdn == 'true') {
-        wp_enqueue_style('fp5_skins', 'http://releases.flowplayer.org/' . FP5_FLOWPLAYER_VERSION . '/skin/' . $skin . '.css');
-        wp_enqueue_script('fp5_embedder', 'http://releases.flowplayer.org/' . FP5_FLOWPLAYER_VERSION . '/' . ($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array('jquery'), null, false);
-    } else {
-        wp_enqueue_style('fp5_skins', plugins_url('/assets/skin/' . $skin . '.css', dirname(__FILE__)));
-        wp_enqueue_script('fp5_embedder', plugins_url('/assets/flowplayer/' . ($key != '' ? "commercial/" : "") . 'flowplayer.min.js', dirname(__FILE__)), array('jquery'), null, false);
-    }
+//post_id
+	$id = $atts['id'];
+
+	// get the meta from the post type
+	$autoplay = get_post_meta($id, 'fp5[autoplay]', true);
+	$loop = get_post_meta($id, 'fp5[loop]', true);
+	$autoplay = get_post_meta($id, 'fp5[autoplay]', true);
+	$width = get_post_meta($id, 'fp5[width]', true);
+	$height = get_post_meta($id, 'fp5[height]', true);
+	$fixed = get_post_meta($id, 'fp5[fixed]', true);
+	$subtitles = get_post_meta($id, 'fp5[subtitles]', true);
+
+	// set the options for the shortcode - pulled from the display-settings.php
+	$options = get_option('fp5_options');
+	$key = $options['key'];
+	$logo = $options['logo'];
+	$analytics = $options['ga_accountId'];
+	$logoInOrigin = $options['logoInOrigin'];
+	$cdn = $options['cdn'];
+
+	// Register ahortcode stylesheets and JavaScript
+	if ($cdn == 'true') {
+		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/' . $skin . '.css' );
+		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
+	} else {
+		wp_enqueue_style( $plugin_slug .'-skins', plugins_url( '/assets/skin/' . $skin . '.css', __FILE__ ), $player_version );
+		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $version, false );
+	}
 
     if(isset($atts['id'])){
 
@@ -51,29 +71,6 @@ function add_fp5_shortcode($atts) {
             }
         }
     }
-
-
-    // get the meta from the post type
-    $autoplay = get_post_meta($id, 'fp5[autoplay]', true);
-    $loop = get_post_meta($id, 'fp5[loop]', true);
-    $width = get_post_meta($id, 'fp5[width]', true);
-    $height = get_post_meta($id, 'fp5[height]', true);
-    $fp5_ratio = get_post_meta($id, 'fp5[ratio]', true);
-    $fixed = get_post_meta($id, 'fp5[fixed]', true);
-    $subtitles = get_post_meta($id, 'fp5[subtitles]', true);
-    
-    //$skin = get_post_meta($id, 'fp5_selectSkin', true); ??  @todo ask about this meta-value
-
-
-
-    // set the options for the shortcode - pulled from the display-settings.php
-    $options = get_option('fp5_options');
-    $key = $options['key'];
-    $logo = $options['logo'];
-    $analytics = $options['ga_accountId'];
-    $logoInOrigin = $options['logoInOrigin'];
-    $flowplayer_cdn = $options['flowplayer_cdn'];
-    
 
     // Code
     if (isset($id)) {
