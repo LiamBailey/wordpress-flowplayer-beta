@@ -42,6 +42,7 @@ $player_version = '5.4.1';
 	$cdn = $options['cdn'];
 
 	// Register ahortcode stylesheets and JavaScript
+	function load_flowplayer5_script() {
 	if ($cdn == 'true') {
 		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/' . $skin . '.css' );
 		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
@@ -49,6 +50,8 @@ $player_version = '5.4.1';
 		wp_enqueue_style( $plugin_slug .'-skins', plugins_url( '/assets/skin/' . $skin . '.css', __FILE__ ), $player_version );
 		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $version, false );
 	}
+	}
+	add_action('wp_enqueue_scripts', 'load_flowplayer5_script');
 
     //video_custompost_id
     $id = $atts['id'];
