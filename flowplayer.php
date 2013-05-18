@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 // TODO: replace `class-plugin-name.php` with the name of the actual plugin's class file
 require_once( plugin_dir_path( __FILE__ ) . 'class-flowplayer.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer-meta-box.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/bcm-flowplayer-meta-box.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer-settings.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode.php' );
 

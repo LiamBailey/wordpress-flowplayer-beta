@@ -299,7 +299,7 @@ class Flowplayer5 {
 		);
 
 		$args = array(
-			'label'               => __( 'video', 'flowplayer5' ),
+			'label'               => __( 'Video', 'flowplayer5' ),
 			'description'         => __( 'Flowplayer videos', 'flowplayer5' ),
 			'labels'              => $labels,
 			'supports'            => array( 'title', 'thumbnail', ),
@@ -320,7 +320,7 @@ class Flowplayer5 {
 			'capability_type'     => 'page',
 		);
 
-		register_post_type( 'video', $args );
+		register_post_type( 'FlowPlayer5Video', $args );
 	}
 
 	/**

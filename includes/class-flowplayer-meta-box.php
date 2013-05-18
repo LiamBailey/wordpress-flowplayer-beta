@@ -21,7 +21,7 @@ function call_fp5_meta_box() {
 if ( is_admin() )
 	add_action( 'load-post.php', 'call_fp5_meta_box' );
 
-/** 
+/**
  * The Class
  */
 class fp5_meta_box {
@@ -36,7 +36,7 @@ class fp5_meta_box {
 	 * Adds the meta box container
 	 */
 	public function add_fp5_meta_box() {
-		add_meta_box( 
+		add_meta_box(
 			 'flowplayer5',
 			__( 'Add Flowplayer', $this->plugin_slug ),
 			array( &$this, 'render_meta_box_content' ),

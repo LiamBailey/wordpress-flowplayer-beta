@@ -10,17 +10,25 @@ if (!defined('ABSPATH'))
 // Add Shortcode
 function add_fp5_shortcode($atts) {
 
+
+
 //post_id
 	$id = $atts['id'];
 
 	// get the meta from the post type
-	$autoplay = get_post_meta($id, 'fp5[autoplay]', true);
-	$loop = get_post_meta($id, 'fp5[loop]', true);
-	$autoplay = get_post_meta($id, 'fp5[autoplay]', true);
-	$width = get_post_meta($id, 'fp5[width]', true);
-	$height = get_post_meta($id, 'fp5[height]', true);
-	$fixed = get_post_meta($id, 'fp5[fixed]', true);
-	$subtitles = get_post_meta($id, 'fp5[subtitles]', true);
+
+	$loop = get_post_meta($id, 'fp5_loop', true);
+	$autoplay = get_post_meta($id, 'fp5_autoplay', true);
+	$subtitles = get_post_meta($id, 'fp5_subtitles', true);
+    $skin = get_post_meta($id,'fp5_selectSkin',true);
+    $splash = get_post_meta($id,'fp5_splash',true);
+    $mp4 = get_post_meta($id,'fp5_mp4',true);
+    $webm = get_post_meta($id,'fp5_webm',true);
+    $ogg = get_post_meta($id,'fp5_ogg',true);
+    $width = get_post_meta($id,'fp5_width',true);
+    $height = get_post_meta($id,'fp5_height',true);
+    $ratio = get_post_meta($id,'fp5_ratio',true);
+    $fixed = get_post_meta($id,'fp5_fixed',true);
 
 	// set the options for the shortcode - pulled from the display-settings.php
 	$options = get_option('fp5_options');
@@ -39,20 +47,20 @@ function add_fp5_shortcode($atts) {
 		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $version, false );
 	}
 
-    if(isset($atts['id'])){
-
     //video_custompost_id
     $id = $atts['id'];
     
     //get the splash image or featured image
-    $splash = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
+   /*
+   $splash = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
+   */
 
     // find and assign the video attachments
     $args = array(
         'post_type' => 'attachment',
         'post_parent' => $id
     );
-    $attachments = new WP_Query($args);
+   /* $attachments = new WP_Query($args);
     if ($attachments) {
         foreach ($attachments as $attachment) {
 
@@ -70,17 +78,17 @@ function add_fp5_shortcode($atts) {
                     break;
             }
         }
-    }
+    }*/
 
     // Code
-    if (isset($id)) {
+
         '<script>';
         if ($key != '' && $logoInOrigin) {
             $out .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
         }
         '</script>';
         $ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
-        $fixed_style = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
+        $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
         $splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
         $class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
         $data_key = ( $key != '' ? ' "' . $key . '"' : '');
@@ -89,7 +97,7 @@ function add_fp5_shortcode($atts) {
         $data_ratio = ( $ratio != 0 ? '"' . $ratio . '"' : '' );
         $attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
         ( ( $loop == 'true' ) ? $loop : '' );
-        ( ( $preload == 'true' ) ? $preload : '' );
+        //( ( $preload == 'true' ) ? $preload : '' );
         '<div style=' . $fixedStyle . $splash_style . ' class=' . $class . ' data-key=' . $data_key . ' data-logo=' . $data_logo . ' data-analytics=' . $data_analytics . ' data-ratio=' . $data_ratio . '>';
         '<video' . $attributes . '>';
         $mp4 != '' ? '<source type="video/mp4" src="' . $mp4 . '"/>' : '';
@@ -103,10 +111,20 @@ function add_fp5_shortcode($atts) {
 
 	</script>';
 
-
     }
 
-    } else{   /*  run the conversion script on the post on the fly.  
+// register shortcode
+add_shortcode('flowplayer', 'add_fp5_shortcode');
+
+
+// this needs to be completed... now standalone used to be included in the register shortcode script
+function convert_video_shortcode($shortcode_array){/*  run the conversion script on the post on the fly.
+
+    [flowplayer splash="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.jpg"
+    webm="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.webm"
+   mp4="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.mp4"
+ogg="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.ogv"
+width="1920" height="1080" skin="minimalist"]
     
     This may need to be turned into a class and activated on the settings page via a "run conversion" button.
 
@@ -152,10 +170,7 @@ function add_fp5_shortcode($atts) {
         
 
     }
-}
 
-// register shortcode
-add_shortcode('flowplayer', 'add_fp5_shortcode');
 
 
 /***
@@ -210,7 +225,12 @@ return $namearray;
 
 // add meta to the new video post
 function add_meta_to_fp5_video($vid_post_id, $old_shortcode_atts){
+
+    // @todo account for video not being hosted on the site.
+    // @todo account for the featured image not being hosting on site.
+
     $unique = true;
+
     // run through shortcode and add meta
     foreach($old_shortcode_atts as $key=>$value){
         
@@ -220,11 +240,13 @@ function add_meta_to_fp5_video($vid_post_id, $old_shortcode_atts){
     
     // add the splash image as the featured image for post
         if($key = 'splash'){
-        
+
+
             // get file data
             $wp_filetype = wp_check_filetype(basename($value), null );
         
             $wp_upload_dir = wp_upload_dir();
+
             $attachment = array(
                 'guid' => $wp_upload_dir['url'] . '/' . basename( $value ), 
                 'post_mime_type' => $wp_filetype['type'],
