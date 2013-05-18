@@ -10,7 +10,9 @@ if (!defined('ABSPATH'))
 // Add Shortcode
 function add_fp5_shortcode($atts) {
 
-
+$version = '1.0.0-beta';
+$plugin_slug = 'flowplayer5';
+$player_version = '5.4.1';
 
 //post_id
 	$id = $atts['id'];
