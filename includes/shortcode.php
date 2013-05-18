@@ -27,6 +27,27 @@ class fp5_shortcode {
 	 */
 	protected $version = '1.0.0-beta';
 
+	/**
+	 * Player version, used for cache-busting of style and script file references.
+	 *
+	 * @since   1.0.0
+	 *
+	 * @var     string
+	 */
+	protected $player_version = '5.4.1';
+
+	/**
+	 * Unique identifier for your plugin.
+	 *
+	 * Use this value (not the variable name) as the text domain when internationalizing strings of text. It should
+	 * match the Text Domain file header in the main plugin file.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @var      string
+	 */
+	protected $plugin_slug = 'flowplayer5';
+
 	// Add Shortcode
 	public function add_fp5_shortcode($atts) {
 
@@ -39,7 +60,6 @@ class fp5_shortcode {
 		$autoplay = get_post_meta($id, 'fp5[autoplay]', true);
 		$width = get_post_meta($id, 'fp5[width]', true);
 		$height = get_post_meta($id, 'fp5[height]', true);
-		$fp5_ratio = get_post_meta($id, 'fp5[ratio]', true);
 		$fixed = get_post_meta($id, 'fp5[fixed]', true);
 		$subtitles = get_post_meta($id, 'fp5[subtitles]', true);
 
@@ -88,24 +108,28 @@ class fp5_shortcode {
 			}
 		}
 
+		// set values for markup
+		$ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
+		$fixed_style = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
+		$splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
+		$class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
+		$data_key = ( $key != '' ? ' "' . $key . '"' : '');
+		$data_logo = ( $key != '' && $logo != '' ? ' "' . $logo . '"' : '' );
+		$data_analytics = ( $analytics != '' ? ' "' . $analytics . '"' : '' );
+		$data_ratio = ( $ratio != 0 ? '"' . $ratio . '"' : '' );
+		$attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
+		( ( $loop == 'true' ) ? $loop : '' );
+		( ( $preload == 'true' ) ? $preload : '' );
+
 		// Code
 		if (isset($id)) {
+
 			'<script>';
 			if ($key != '' && $logoInOrigin) {
 				$out .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
 			}
 			'</script>';
-			$ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
-			$fixed_style = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
-			$splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
-			$class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
-			$data_key = ( $key != '' ? ' "' . $key . '"' : '');
-			$data_logo = ( $key != '' && $logo != '' ? ' "' . $logo . '"' : '' );
-			$data_analytics = ( $analytics != '' ? ' "' . $analytics . '"' : '' );
-			$data_ratio = ( $ratio != 0 ? '"' . $ratio . '"' : '' );
-			$attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
-			( ( $loop == 'true' ) ? $loop : '' );
-			( ( $preload == 'true' ) ? $preload : '' );
+
 			'<div style=' . $fixedStyle . $splash_style . ' class=' . $class . ' data-key=' . $data_key . ' data-logo=' . $data_logo . ' data-analytics=' . $data_analytics . ' data-ratio=' . $data_ratio . '>';
 			'<video' . $attributes . '>';
 			$mp4 != '' ? '<source type="video/mp4" src="' . $mp4 . '"/>' : '';
@@ -117,7 +141,7 @@ class fp5_shortcode {
 
 			'<script>
 
-		</script>';
+			</script>';
 		}
 	}
 }
