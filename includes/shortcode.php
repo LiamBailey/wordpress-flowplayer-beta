@@ -14,6 +14,12 @@ $version = '1.0.0-beta';
 $plugin_slug = 'flowplayer5';
 $player_version = '5.4.1';
 
+    // find and assign the video attachments
+    $args = array(
+        'post_type' => 'attachment',
+        'post_parent' => $id
+    );
+
 //post_id
 	$id = $atts['id'];
 
@@ -43,13 +49,8 @@ $player_version = '5.4.1';
 
 	// Register ahortcode stylesheets and JavaScript
 	function load_flowplayer5_script() {
-	if ($cdn == 'true') {
-		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/' . $skin . '.css' );
-		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
-	} else {
 		wp_enqueue_style( $plugin_slug .'-skins', plugins_url( '/assets/skin/' . $skin . '.css', __FILE__ ), $player_version );
 		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $version, false );
-	}
 	}
 	add_action('wp_enqueue_scripts', 'load_flowplayer5_script');
 
@@ -61,11 +62,7 @@ $player_version = '5.4.1';
    $splash = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
    endif;
 
-    // find and assign the video attachments
-    $args = array(
-        'post_type' => 'attachment',
-        'post_parent' => $id
-    );
+
    /* $attachments = new WP_Query($args);
     if ($attachments) {
         foreach ($attachments as $attachment) {
