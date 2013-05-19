@@ -14,14 +14,8 @@ $version = '1.0.0-beta';
 $plugin_slug = 'flowplayer5';
 $player_version = '5.4.1';
 
-    // find and assign the video attachments
-    $args = array(
-        'post_type' => 'attachment',
-        'post_parent' => $id
-    );
-
-    //video_custompost_id
-    $id = $atts['id'];
+//post_id
+	$id = $atts['id'];
 
 	// get the meta from the post type
 
@@ -48,20 +42,27 @@ $player_version = '5.4.1';
 	$cdn = $options['cdn'];
 
 	// Register ahortcode stylesheets and JavaScript
-	function load_flowplayer5_script() {
+	if ($cdn == 'true') {
+		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/' . $skin . '.css' );
+		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
+	} else {
 		wp_enqueue_style( $plugin_slug .'-skins', plugins_url( '/assets/skin/' . $skin . '.css', __FILE__ ), $player_version );
 		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $version, false );
 	}
-	add_action('wp_enqueue_scripts', 'load_flowplayer5_script');
 
-
+    //video_custompost_id
+    $id = $atts['id'];
     
     //get the splash image or featured image
    if(!isset($splash)):
    $splash = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
    endif;
 
-
+    // find and assign the video attachments
+    $args = array(
+        'post_type' => 'attachment',
+        'post_parent' => $id
+    );
    /* $attachments = new WP_Query($args);
     if ($attachments) {
         foreach ($attachments as $attachment) {
@@ -82,24 +83,27 @@ $player_version = '5.4.1';
         }
     }*/
 
-    // Code
+//shortcode processing
+    $ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
+    $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
+    $splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
+    $class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
+    $data_key = ( $key != '' ? ' "' . $key . '"' : '');
+    $data_logo = ( $key != '' && $logo != '' ? ' "' . $logo . '"' : '' );
+    $data_analytics = ( $analytics != '' ? ' "' . $analytics . '"' : '' );
+    $data_ratio = ( $ratio != 0 ? '"' . $ratio . '"' : '' );
+    $attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
+    ( ( $loop == 'true' ) ? $loop : '' );
+    //( ( $preload == 'true' ) ? $preload : '' );
 
+
+    // shortCode output
+$return = '';
    $return.=     '<script>';
         if ($key != '' && $logoInOrigin) {
-            $out .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
+            $return .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
         }
-        $return.='</script>';
-        $ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
-        $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
-        $splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
-        $class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
-        $data_key = ( $key != '' ? ' "' . $key . '"' : '');
-        $data_logo = ( $key != '' && $logo != '' ? ' "' . $logo . '"' : '' );
-        $data_analytics = ( $analytics != '' ? ' "' . $analytics . '"' : '' );
-        $data_ratio = ( $ratio != 0 ? '"' . $ratio . '"' : '' );
-        $attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
-        ( ( $loop == 'true' ) ? $loop : '' );
-        //( ( $preload == 'true' ) ? $preload : '' );
+    $return.='</script>';
     $return.=    '<div style=' . $fixedStyle . $splash_style . ' class=' . $class . ' data-key=' . $data_key . ' data-logo=' . $data_logo . ' data-analytics=' . $data_analytics . ' data-ratio=' . $data_ratio . '>';
     $return.=     '<video' . $attributes . '>';
         $mp4 != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
@@ -112,6 +116,7 @@ $player_version = '5.4.1';
 
     $return.=     '<script>	</script>';
 
+    return $return;
     }
 
 // register shortcode
@@ -282,5 +287,4 @@ function generate_new_shortcode($vid_post_id){
     $shortcode = '[flowplayer id="'.$vid_post_id.'"]';
     return $shortcode;
 }
-
 
