@@ -20,8 +20,8 @@ $player_version = '5.4.1';
         'post_parent' => $id
     );
 
-//post_id
-	$id = $atts['id'];
+    //video_custompost_id
+    $id = $atts['id'];
 
 	// get the meta from the post type
 
@@ -54,8 +54,7 @@ $player_version = '5.4.1';
 	}
 	add_action('wp_enqueue_scripts', 'load_flowplayer5_script');
 
-    //video_custompost_id
-    $id = $atts['id'];
+
     
     //get the splash image or featured image
    if(!isset($splash)):
