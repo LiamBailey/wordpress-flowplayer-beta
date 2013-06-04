@@ -71,9 +71,9 @@ function fp5_Video_details($post) {
                     <option class="fp5[skin]" id="fp5_playfulSel" value="playful"><?php _e('Playful' ) ?></option>
                 </select>
 				<div class="option">
-                    <img id="fp5_minimalist" src="<?php print(FP5_PLUGIN_URL.'assets/img/minimalist.png')  ?>" />
-                    <img id="fp5_functional" src="<?php print(FP5_PLUGIN_URL.'assets/img/functional.png')  ?>" />
-                    <img id="fp5_playful" src="<?php print(FP5_PLUGIN_URL.'assets/img/playful.png')  ?>" />
+                    <img id="fp5_minimalist" src="<?php plugins_url( '/assets/img/minimalist.png', dirname(__FILE__) ) ?>" />
+                    <img id="fp5_functional" src="<?php plugins_url( '/assets/img/functional.png', dirname(__FILE__) ) ?>" />
+                    <img id="fp5_playful" src="<?php plugins_url( '/assets/img/playful.png', dirname(__FILE__) ) ?>" />
                 </div>
 			</div>
 			<div class="optgroup separated">
@@ -164,6 +164,14 @@ function fp5_Video_details($post) {
                     <input class="mediaUrl" type="text" name="fp5[subtitles]" id="fp5_subtitles" />
                 </div>
             </div>
+			<?php
+			echo '<div id="tgm-new-media-settings">';
+				echo '<p>' . __( 'Click on the button below to open up the media modal and watch your customizations come to life!', 'tgm-nmp' ) . '</p>';
+				echo '<p><strong>' . __( 'Please note that none of this will save when you update the page. This is just for demonstration purposes only!', 'tgm-nmp' ) . '</strong></p>';
+				echo '<p><a href="#" class="tgm-open-media button button-primary" title="' . esc_attr__( 'Click Here to Open the Media Manager', 'tgm-nmp' ) . '">' . __( 'Click Here to Open the Media Manager', 'tgm-nmp' ) . '</a></p>';
+				echo '<p><label for="tgm-new-media-image">' . __( 'Our Image Goes Here!', 'tgm-nmp' ) . '</label> <input type="text" id="tgm-new-media-image" size="70" value="" /></p>';
+			echo '</div>';
+			?>
 
 		</div> <?php
 

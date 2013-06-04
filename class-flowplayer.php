@@ -217,6 +217,7 @@ class Flowplayer5 {
 				wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $this->version, false );
 			}
 		//}
+		wp_enqueue_media();
 
 	}
 
