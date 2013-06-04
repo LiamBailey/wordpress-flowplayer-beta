@@ -184,7 +184,7 @@ class Flowplayer5 {
 			if( $cdn == 'true' ) {
 				wp_enqueue_style( $this->plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
 			} else {
-				wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/skin/all-skins.css', __FILE__ ), $this->player_version );
+				wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
 			}
 		//}
 
@@ -209,14 +209,14 @@ class Flowplayer5 {
 		$cdn = $options['cdn'];
 
 		$screen = get_current_screen();
-		if ( $screen->id == $this->plugin_screen_hook_suffix ) {
+		//if ( $screen->id == $this->plugin_screen_hook_suffix ) {
 			//wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( '/assets/js/admin.js', __FILE__ ), array( 'jquery' ), $this->version );
 			if( $cdn == 'true' ) {
 				wp_enqueue_script( $this->plugin_slug . '-script', 'http://releases.flowplayer.org/' . $this->player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
 			} else {
 				wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $this->version, false );
 			}
-		}
+		//}
 
 	}
 
