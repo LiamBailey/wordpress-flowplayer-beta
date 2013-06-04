@@ -32,7 +32,7 @@ add_action('save_post','fp5_save_video_details');
 function fp5_add_video_details() {
 	add_meta_box(
 		 'FP5_Video_Details',
-		__( 'Video Details', $this->plugin_slug ),
+		__( 'Video Details', 'flowplayer5' ),
 		'fp5_Video_details',
 		'FlowPlayer5Video',
 		'normal',
