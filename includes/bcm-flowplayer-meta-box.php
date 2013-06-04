@@ -91,16 +91,6 @@ function fp5_Video_details($post) {
                 </div>
             </div>
 
-			<div class="optgroup">
-                <div class="option wide">
-                    <label for="fp5_splash">
-                        <a href="http://flowplayer.org/docs/index.html#splash" target="_blank"><?php _e('Splash image')?></a><br/><?php _e('(optional)')?>
-                    </label>
-                    <input class="mediaUrl" type="text" name="fp5_splash" id="fp5_splash" />
-                    <input id="fp5_chooseSplash" type="button" value="<?php _e('Media Library'); ?>" />
-                </div>
-            </div>
-
 			<div class="optgroup separated">
                 <div class="head" for="fp5_videos">
                     <?php _e('URLs for videos, at least one is needed. You need a video format supported by your web browser, otherwise the preview below does not work.')?>
@@ -169,10 +159,8 @@ function fp5_Video_details($post) {
             </div>
 			<?php
 			echo '<div id="tgm-new-media-settings">';
-				echo '<p>' . __( 'Click on the button below to open up the media modal and watch your customizations come to life!', 'tgm-nmp' ) . '</p>';
-				echo '<p><strong>' . __( 'Please note that none of this will save when you update the page. This is just for demonstration purposes only!', 'tgm-nmp' ) . '</strong></p>';
-				echo '<p><a href="#" class="tgm-open-media button button-primary" title="' . esc_attr__( 'Click Here to Open the Media Manager', 'tgm-nmp' ) . '">' . __( 'Click Here to Open the Media Manager', 'tgm-nmp' ) . '</a></p>';
-				echo '<p><label for="tgm-new-media-image">' . __( 'Our Image Goes Here!', 'tgm-nmp' ) . '</label> <input type="text" id="tgm-new-media-image" size="70" value="" /></p>';
+				echo '<p><a href="#" class="tgm-open-media button button-primary" title="' . esc_attr__( 'Add mp4 video', 'flowplayer5' ) . '">' . __( 'Add mp4 video', 'flowplayer5' ) . '</a></p>';
+				echo '<p><label for="tgm-new-media-image">' . __( 'mp4 video', 'flowplayer5' ) . '</label> <input type="text" id="tgm-new-media-image" size="70" value="" /></p>';
 			echo '</div>';
 			?>
 

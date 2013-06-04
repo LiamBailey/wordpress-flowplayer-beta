@@ -221,8 +221,8 @@ class Flowplayer5 {
 		wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->version, false );
 		wp_localize_script( $this->plugin_slug . '-media', 'tgm_nmp_media',
 			array(
-				'title'     => __( 'Upload or Choose Your Custom Image File', 'tgm-nmp' ), // This will be used as the default title
-				'button'    => __( 'Insert Image into Input Field', 'tgm-nmp' )            // This will be used as the default button text
+				'title'     => __( 'Upload or choose mp4 video file', 'flowplayer5' ), // This will be used as the default title
+				'button'    => __( 'Insert mp4 video', 'flowplayer5' )            // This will be used as the default button text
 			)
 		);
 		wp_enqueue_media();

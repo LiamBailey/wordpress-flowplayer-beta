@@ -75,7 +75,7 @@ jQuery(document).ready(function($){
              * images only.
              */
             library: {
-                type: 'image'
+                type: 'video/mp4'
             },
 
             /**
