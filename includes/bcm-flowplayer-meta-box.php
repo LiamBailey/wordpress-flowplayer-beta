@@ -126,6 +126,9 @@ function fp5_Video_details($post) {
                     <div id="preview" class="preview"><?php _e( 'Preview' ) ?>
                         <div class="flowplayer">
                             <video id="fp5_videoPreview" width="320" height="240" controls="controls">
+							<source type="video/mp4" src="<? echo $fp5_mp4; ?>"/>
+							<source type="video/webm" src="<? echo $fp5_webm; ?>"/>
+							<source type="video/ogg" src="<? echo $fp5_ogg; ?>"/>
                             </video>
                         </div>
                     </div>
