@@ -1,8 +1,8 @@
 #adminmenu .menu-icon-flowplayer5video div.wp-menu-image {
-background-position: 0px -33px;
+background-position: 0 -43px;
 }
 #adminmenu .menu-icon-flowplayer5video:hover div.wp-menu-image {
-background-position: 0px 0px;
+background-position: 0 0;
 }
 .menu-icon-flowplayer5video div.wp-menu-image {
 background-image: url(../img/28x28-sprite.png);
