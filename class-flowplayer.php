@@ -217,9 +217,15 @@ class Flowplayer5 {
 				wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $this->version, false );
 			}
 		//}
-		wp_enqueue_media();
-		wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->version, false );
 
+		wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->version, false );
+		wp_localize_script( $this->plugin_slug . '-media', $this->plugin_slug . '-media',
+			array(
+				'title'     => __( 'Upload or Choose Your Custom Image File', 'tgm-nmp' ), // This will be used as the default title
+				'button'    => __( 'Insert Image into Input Field', 'tgm-nmp' )            // This will be used as the default button text
+			)
+		);
+		wp_enqueue_media();
 	}
 
 	/**
