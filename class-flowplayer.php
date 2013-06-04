@@ -179,14 +179,14 @@ class Flowplayer5 {
 		$cdn = $options['cdn'];
 
 		$screen = get_current_screen();
-		if ( $screen->id == $this->plugin_screen_hook_suffix ) {
+		//if ( $screen->id == $this->plugin_screen_hook_suffix ) {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( '/assets/css/admin.css', __FILE__ ), $this->version );
 			if( $cdn == 'true' ) {
 				wp_enqueue_style( $this->plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
 			} else {
 				wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/skin/all-skins.css', __FILE__ ), $this->player_version );
 			}
-		}
+		//}
 
 	}
 
@@ -310,7 +310,6 @@ class Flowplayer5 {
 			'show_in_nav_menus'   => true,
 			'show_in_admin_bar'   => true,
 			'menu_position'       => 15,
-			'menu_icon'           => '<br>',
 			'can_export'          => true,
 			'has_archive'         => false,
 			'exclude_from_search' => true,
