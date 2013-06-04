@@ -45,8 +45,8 @@ class wctest{
 		<h2>Settings</h2>
 		<form method="post" action="options.php">
 			<?php
-					// This prints out all hidden setting fields
-			settings_fields('test_option_group');	
+			// This prints out all hidden setting fields
+			settings_fields('test_option_group');
 			do_settings_sections('test-setting-admin');
 		?>
 			<?php submit_button(); ?>

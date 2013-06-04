@@ -1,3 +1,14 @@
+#adminmenu .menu-icon-flowplayer5video div.wp-menu-image {
+background-position: 0px -33px;
+}
+#adminmenu .menu-icon-flowplayer5video:hover div.wp-menu-image {
+background-position: 0px 0px;
+}
+.menu-icon-flowplayer5video div.wp-menu-image {
+background-image: url(../img/28x28-sprite.png);
+}
+
+/*
 .options {
     margin-left: 10px;
 }
@@ -44,7 +55,7 @@
 
 /*.details {*/
     /*margin-left: 45px;*/
-/*}*/
+/*}
 
 .details label {
     min-width: 50px;
@@ -63,7 +74,7 @@
     height: 240px;
     background-color: #ddd;
     margin-left: 50px;
-    /*margin-top: -15px;*/
+    margin-top: -15px;
 }
 
 #fp5_sendToEditor {
@@ -76,4 +87,4 @@
     height: 1px;
     margin: 0 0 -1px;
     clear: both;
-}
+}*/
