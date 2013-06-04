@@ -218,6 +218,7 @@ class Flowplayer5 {
 			}
 		//}
 		wp_enqueue_media();
+		wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->version, false );
 
 	}
 
