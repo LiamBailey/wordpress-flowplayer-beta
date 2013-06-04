@@ -8,7 +8,7 @@ background-position: 0 0;
 background-image: url(../img/28x28-sprite.png);
 }
 
-/*
+
 .options {
     margin-left: 10px;
 }
@@ -53,9 +53,9 @@ background-image: url(../img/28x28-sprite.png);
     display: inline-block;
 }
 
-/*.details {*/
-    /*margin-left: 45px;*/
-/*}
+/*.details {
+    margin-left: 45px;
+}*/
 
 .details label {
     min-width: 50px;
@@ -87,4 +87,4 @@ background-image: url(../img/28x28-sprite.png);
     height: 1px;
     margin: 0 0 -1px;
     clear: both;
-}*/
+}

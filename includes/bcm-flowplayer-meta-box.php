@@ -122,17 +122,17 @@ function fp5_Video_details($post) {
             </div>
 
 			<div class="optgroup">
-                <div class="option">
-                    <div id="preview" class="preview"><?php _e( 'Preview' ) ?>
-                        <div class="flowplayer">
-                            <video id="fp5_videoPreview" width="320" height="240" controls="controls">
-							<source type="video/mp4" src="<? echo $fp5_mp4; ?>"/>
-							<source type="video/webm" src="<? echo $fp5_webm; ?>"/>
-							<source type="video/ogg" src="<? echo $fp5_ogg; ?>"/>
-                            </video>
-                        </div>
-                    </div>
-                </div>
+				<div class="option">
+					<div id="preview" class="preview"><?php _e( 'Preview' ) ?>
+						<div class="flowplayer">
+							<video id="fp5_videoPreview" width="320" height="240" controls="controls">
+								<source type="video/mp4" src="<? echo $fp5_mp4; ?>"/>
+								<source type="video/webm" src="<? echo $fp5_webm; ?>"/>
+								<source type="video/ogg" src="<? echo $fp5_ogg; ?>"/>
+							</video>
+						</div>
+					</div>
+				</div>
                 <div class="details separated">
                     <label for="fp5_width"><?php _e('Maximum dimensions for the player are determined from the provided video files. You can change this size below. Fixing the player size disables scaling for different screen sizes.')?></label>
                     <div class="wide"></div>
