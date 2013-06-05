@@ -99,7 +99,7 @@ function fp5_Video_details($post) {
 				<div class="option wide">
 					<?php
 					echo '<div id="tgm-new-media-settings">';
-						echo '<p><label for="tgm-new-media-image">' . __( 'mp4 video', 'flowplayer5' ) . '</label> <input class="mediaUrl" type="text" id="tgm-new-media-image" size="70" value="'$fp5_mp4;'" name="fp5_mp4" id="fp5_mp4" /> <a href="#" class="tgm-open-media button button-primary" title="' . esc_attr__( 'Add mp4 video', 'flowplayer5' ) . '">' . __( 'Add mp4 video', 'flowplayer5' ) . '</a></p>';
+						echo '<p><label for="tgm-new-media-image">' . __( 'mp4 video', 'flowplayer5' ) . '</label> <input class="mediaUrl" type="text" id="tgm-new-media-image" size="70" value="' . $fp5_mp4 . '" name="fp5_mp4" id="fp5_mp4" /> <a href="#" class="tgm-open-media button button-primary" title="' . esc_attr__( 'Add mp4 video', 'flowplayer5' ) . '">' . __( 'Add mp4 video', 'flowplayer5' ) . '</a></p>';
 					echo '</div>';
 					?>
 					<label for="fp5_mp4"><?php _e('mp4')?></label>
