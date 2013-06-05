@@ -1,7 +1,9 @@
 #adminmenu .menu-icon-flowplayer5video div.wp-menu-image {
-background-position: 0 -43px;
+background-position: 0 -27px;
 }
-#adminmenu .menu-icon-flowplayer5video:hover div.wp-menu-image {
+#adminmenu .menu-icon-flowplayer5video:hover div.wp-menu-image,
+#adminmenu .menu-icon-flowplayer5video.wp-has-current-submenu div.wp-menu-image,
+#adminmenu .menu-icon-flowplayer5video.current div.wp-menu-image {
 background-position: 0 0;
 }
 .menu-icon-flowplayer5video div.wp-menu-image {
