@@ -67,18 +67,7 @@ function fp5_register_settings() {
 					'id' => 'currency',
 					'name' => __('Currency', 'edd'),
 					'desc' => __('Choose your currency. Note that some payment gateways have currency restrictions.', 'edd'),
-					'type' => 'select',
-					'options' => fp5_get_currencies()
-				),
-				'currency_position' => array(
-					'id' => 'currency_position',
-					'name' => __('Currency Position', 'edd'),
-					'desc' => __('Choose the location of the currency sign.', 'edd'),
-					'type' => 'select',
-					'options' => array(
-						'before' => __('Before - $10', 'edd'),
-						'after' => __('After - 10$', 'edd')
-					)
+					'type' => 'multicheck',
 				),
 				'thousands_separator' => array(
 					'id' => 'thousands_separator',
@@ -92,7 +81,7 @@ function fp5_register_settings() {
 					'id' => 'api_settings',
 					'name' => '<strong>' . __('API Settings', 'edd') . '</strong>',
 					'desc' => '',
-					'type' => 'header'
+					'type' => 'radio'
 				),
 				'api_allow_user_keys' => array(
 					'id' => 'api_allow_user_keys',
