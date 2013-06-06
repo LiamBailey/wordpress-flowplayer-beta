@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 global $fp5_options;
 
-//$fp5_options = fp5_get_settings();
+$fp5_options = fp5_get_settings();
 
 // TODO: replace `class-plugin-name.php` with the name of the actual plugin's class file
 require_once( plugin_dir_path( __FILE__ ) . 'class-flowplayer.php' );
