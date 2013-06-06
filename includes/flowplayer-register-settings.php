@@ -104,7 +104,7 @@ function fp5_register_settings() {
 		'fp5_settings_meta_box'
 	);
 
-	foreach ( $fp5_settings['general'] as $option ) {
+	foreach ( $fp5_settings['meta-box'] as $option ) {
 		add_settings_field(
 			'fp5_settings_meta_box[' . $option['id'] . ']',
 			$option['name'],
@@ -115,7 +115,7 @@ function fp5_register_settings() {
 				'id' => $option['id'],
 				'desc' => $option['desc'],
 				'name' => $option['name'],
-				'section' => 'general',
+				'section' => 'meta-box',
 				'size' => isset( $option['size'] ) ? $option['size'] : null,
 				'options' => isset( $option['options'] ) ? $option['options'] : '',
 				'std' => isset( $option['std'] ) ? $option['std'] : ''
