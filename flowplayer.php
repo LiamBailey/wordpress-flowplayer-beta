@@ -32,10 +32,10 @@ require_once( plugin_dir_path( __FILE__ ) . 'class-flowplayer.php' );
 //require_once( plugin_dir_path( __FILE__ ) . 'includes/bcm-flowplayer-meta-box.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/flowplayer-meta-box.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/flowplayer-register-settings.php' );
-$fp5_options = fp5_get_settings();
-
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer-settings.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode.php' );
+
+$fp5_options = fp5_get_settings();
 
 // Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.
 // TODO: replace PluginName with the name of the plugin defined in `class-plugin-name.php`

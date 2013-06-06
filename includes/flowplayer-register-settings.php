@@ -553,7 +553,7 @@ function fp5_settings_sanitize( $input ) {
  * @return array Merged array of all the EDD settings
  */
 function fp5_get_settings() {
-	$general_settings = is_array( get_option( 'fp5_settings_meta_box' ) )    ? get_option( 'fp5_settings_meta_box' )  : array();
+	$fp5_settings_meta_box = is_array( get_option( 'fp5_settings_meta_box' ) ) ? get_option( 'fp5_settings_meta_box' )  : array();
 
-	return array_merge( $general_settings, $gateway_settings, $email_settings, $style_settings, $tax_settings, $ext_settings, $misc_settings );
+	return array_merge( $fp5_settings_meta_box );
 }
