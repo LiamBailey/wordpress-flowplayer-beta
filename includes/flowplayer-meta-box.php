@@ -49,9 +49,6 @@ function fp5_Video_details($post) {
 
 	wp_nonce_field('fp5_Video_N','fp5_Video_nonce');
 
-	function fp5_meta_box_options() {
-		global $fp5_options;
-
 		ob_start();
 		?>
 		<div class="wrap">
@@ -66,7 +63,6 @@ function fp5_Video_details($post) {
 		</div><!-- .wrap -->
 		<?php
 		echo ob_get_clean();
-	}
 
 }
 
