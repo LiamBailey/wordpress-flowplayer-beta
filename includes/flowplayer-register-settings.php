@@ -68,6 +68,14 @@ function fp5_register_settings() {
 					'name' => __('Currency', 'edd'),
 					'desc' => __('Choose your currency. Note that some payment gateways have currency restrictions.', 'edd'),
 					'type' => 'multicheck',
+					'options' => apply_filters('edd_accepted_payment_icons', array(
+							'mastercard' => 'Mastercard',
+							'visa' => 'Visa',
+							'americanexpress' => 'American Express',
+							'discover' => 'Discover',
+							'paypal' => 'PayPal'
+						)
+					)
 				),
 				'thousands_separator' => array(
 					'id' => 'thousands_separator',
@@ -81,7 +89,12 @@ function fp5_register_settings() {
 					'id' => 'api_settings',
 					'name' => '<strong>' . __('API Settings', 'edd') . '</strong>',
 					'desc' => '',
-					'type' => 'radio'
+					'type' => 'radio',
+					'std' => 'no',
+					'options' => array(
+						'yes' => __('Yes, I will enter prices inclusive of tax', 'edd'),
+						'no'  => __('No, I will enter prices exclusive of tax', 'edd')
+					)
 				),
 				'api_allow_user_keys' => array(
 					'id' => 'api_allow_user_keys',
@@ -96,13 +109,6 @@ function fp5_register_settings() {
 	if ( false == get_option( 'fp5_settings_meta_box' ) ) {
 		add_option( 'fp5_settings_meta_box' );
 	}
-
-	add_settings_section(
-		'fp5_settings_meta_box',
-		__( 'General Settings', 'edd' ),
-		'__return_false',
-		'fp5_settings_meta_box'
-	);
 
 	foreach ( $fp5_settings['meta-box'] as $option ) {
 		add_settings_field(
