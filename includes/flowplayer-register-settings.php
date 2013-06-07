@@ -38,10 +38,40 @@ function fp5_register_settings() {
 		/** General Settings */
 		'meta-box' => apply_filters('fp5_settings_meta_box',
 			array(
-				'test_mode' => array(
-					'id' => 'test_mode',
-					'name' => __('Test Mode', 'edd'),
-					'desc' => __('While in test mode no live transactions are processed. To fully use test mode, you must have a sandbox (test) account for the payment gateway you are testing.', 'edd'),
+				'video_options' => array(
+					'id' => 'video_options',
+					'name' => '<strong>' . __('Video Settings', 'edd') . '</strong>',
+					'desc' => __('Configure the video options', 'edd'),
+					'type' => 'header'
+				),
+				'select_skin' => array(
+					'id' => 'select_skin',
+					'name' => __('Select skin', 'edd'),
+					'desc' => __('This is the checkout page where buyers will complete their purchases. The [download_checkout] short code must be on this page.', 'edd'),
+					'type' => 'select',
+					'std' => '1',
+					'options' => array(
+						'1' => __('Minimalist', 'edd'),
+						'2' => __('Functional', 'edd'),
+						'3'  => __('Playful', 'edd')
+					)
+				),
+				'video_attributes' => array(
+					'id' => 'video_options',
+					'name' => '<strong>' . __('Video Attributes', 'edd') . '</strong>',
+					'desc' => __('Configure the video attributes', 'edd'),
+					'type' => 'header'
+				),
+				'autoplay' => array(
+					'id' => 'autoplay',
+					'name' => __('Autoplay', 'edd'),
+					'desc' => __('Check the box is enable autoplay.', 'edd'),
+					'type' => 'checkbox'
+				),
+				'loop' => array(
+					'id' => 'loop',
+					'name' => __('Loop', 'edd'),
+					'desc' => __('Check the box is enable video loop.', 'edd'),
 					'type' => 'checkbox'
 				),
 				'purchase_page' => array(
@@ -49,7 +79,11 @@ function fp5_register_settings() {
 					'name' => __('Checkout Page', 'edd'),
 					'desc' => __('This is the checkout page where buyers will complete their purchases. The [download_checkout] short code must be on this page.', 'edd'),
 					'type' => 'select',
-					'options' => $pages_options
+					'std' => 'no',
+					'options' => array(
+						'yes' => __('Including tax', 'edd'),
+						'no'  => __('Excluding tax', 'edd')
+					)
 				),
 				'failure_page' => array(
 					'id' => 'failure_page',
