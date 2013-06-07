@@ -74,6 +74,18 @@ function fp5_register_settings() {
 					'desc' => __('Check the box is enable video loop.', 'edd'),
 					'type' => 'checkbox'
 				),
+				'splash' => array(
+					'id' => 'splash',
+					'name' => '<strong>' . __('Splash Image', 'edd') . '</strong>',
+					'desc' => __('Configure the video attributes', 'edd'),
+					'type' => 'header'
+				),
+				'splash_image' => array(
+					'id' => 'splash_image',
+					'name' => __( 'Splash Image', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
+				),
 				'video_files' => array(
 					'id' => 'video_files',
 					'name' => '<strong>' . __('Add Videos', 'edd') . '</strong>',
@@ -83,6 +95,64 @@ function fp5_register_settings() {
 				'mp4' => array(
 					'id' => 'mp4',
 					'name' => __( 'mp4 format', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
+				),
+				'webm' => array(
+					'id' => 'webm',
+					'name' => __( 'webm format', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
+				),
+				'ogg' => array(
+					'id' => 'ogg',
+					'name' => __( 'ogg format', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
+				),
+				'video_dimentions' => array(
+					'id' => 'video_dimentions',
+					'name' => '<strong>' . __('Video Dimentions', 'edd') . '</strong>',
+					'desc' => __('Configure the video dimensions', 'edd'),
+					'type' => 'header'
+				),
+				'max_width' => array(
+					'id' => 'max_width',
+					'name' => __('Max Width', 'edd'),
+					'desc' => __('The symbol (usually , or .) to separate thousands', 'edd'),
+					'type' => 'text',
+					'size' => 'small',
+					'std' => ''
+				),
+				'max_height' => array(
+					'id' => 'max_height',
+					'name' => __('Max Height', 'edd'),
+					'desc' => __('The symbol (usually , or .) to separate thousands', 'edd'),
+					'type' => 'text',
+					'size' => 'small',
+					'std' => ''
+				),
+				'aspect_ratio' => array(
+					'id' => 'aspect_ratio',
+					'name' => __('Use videos aspect ratio', 'edd'),
+					'desc' => __('Check the box is enable autoplay.', 'edd'),
+					'type' => 'checkbox'
+				),
+				'fixed_width' => array(
+					'id' => 'fixed_width',
+					'name' => __('Fixed video', 'edd'),
+					'desc' => __('Check the box is enable autoplay.', 'edd'),
+					'type' => 'checkbox'
+				),
+				'subtitles' => array(
+					'id' => 'subtitles',
+					'name' => '<strong>' . __('Subtitles', 'edd') . '</strong>',
+					'desc' => __('Configure the video attributes', 'edd'),
+					'type' => 'header'
+				),
+				'subtitles_file' => array(
+					'id' => 'subtitles_file',
+					'name' => __( 'Subtitles', 'edd'),
 					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
 					'type' => 'upload',
 				),
@@ -96,18 +166,6 @@ function fp5_register_settings() {
 						'yes' => __('Including tax', 'edd'),
 						'no'  => __('Excluding tax', 'edd')
 					)
-				),
-				'failure_page' => array(
-					'id' => 'failure_page',
-					'name' => __('Failed Transaction Page', 'edd'),
-					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
-					'type' => 'upload',
-				),
-				'currency_settings' => array(
-					'id' => 'currency_settings',
-					'name' => '<strong>' . __('Currency Settings', 'edd') . '</strong>',
-					'desc' => __('Configure the currency options', 'edd'),
-					'type' => 'header'
 				),
 				'currency' => array(
 					'id' => 'currency',
@@ -123,14 +181,6 @@ function fp5_register_settings() {
 						)
 					)
 				),
-				'thousands_separator' => array(
-					'id' => 'thousands_separator',
-					'name' => __('Thousands Separator', 'edd'),
-					'desc' => __('The symbol (usually , or .) to separate thousands', 'edd'),
-					'type' => 'text',
-					'size' => 'small',
-					'std' => ','
-				),
 				'api_settings' => array(
 					'id' => 'api_settings',
 					'name' => '<strong>' . __('API Settings', 'edd') . '</strong>',
@@ -141,12 +191,6 @@ function fp5_register_settings() {
 						'yes' => __('Yes, I will enter prices inclusive of tax', 'edd'),
 						'no'  => __('No, I will enter prices exclusive of tax', 'edd')
 					)
-				),
-				'api_allow_user_keys' => array(
-					'id' => 'api_allow_user_keys',
-					'name' => __('Allow User Keys', 'edd'),
-					'desc' => __('Check this box to allow all users to generate API keys. Users with the \'manage_shop_settings\' capability are always allowed to generate keys.', 'edd'),
-					'type' => 'checkbox'
 				)
 			)
 		)
