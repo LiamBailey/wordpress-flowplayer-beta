@@ -97,6 +97,7 @@ function fp5_register_settings() {
 					'name' => __( 'mp4 format', 'edd'),
 					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
 					'type' => 'upload',
+					'size' => 'large',
 				),
 				'webm' => array(
 					'id' => 'webm',
@@ -122,7 +123,6 @@ function fp5_register_settings() {
 					'desc' => __('The symbol (usually , or .) to separate thousands', 'edd'),
 					'type' => 'text',
 					'size' => 'small',
-					'std' => ''
 				),
 				'max_height' => array(
 					'id' => 'max_height',
@@ -130,7 +130,6 @@ function fp5_register_settings() {
 					'desc' => __('The symbol (usually , or .) to separate thousands', 'edd'),
 					'type' => 'text',
 					'size' => 'small',
-					'std' => ''
 				),
 				'aspect_ratio' => array(
 					'id' => 'aspect_ratio',
@@ -155,17 +154,6 @@ function fp5_register_settings() {
 					'name' => __( 'Subtitles', 'edd'),
 					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
 					'type' => 'upload',
-				),
-				'purchase_page' => array(
-					'id' => 'purchase_page',
-					'name' => __('Checkout Page', 'edd'),
-					'desc' => __('This is the checkout page where buyers will complete their purchases. The [download_checkout] short code must be on this page.', 'edd'),
-					'type' => 'select',
-					'std' => 'no',
-					'options' => array(
-						'yes' => __('Including tax', 'edd'),
-						'no'  => __('Excluding tax', 'edd')
-					)
 				),
 				'currency' => array(
 					'id' => 'currency',
