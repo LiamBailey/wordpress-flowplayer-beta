@@ -110,6 +110,13 @@ function fp5_register_settings() {
 		add_option( 'fp5_settings_meta_box' );
 	}
 
+	add_settings_section(
+		'fp5_settings_meta_box',
+		__( 'General Settings', 'edd' ),
+		'__return_false',
+		'fp5_settings_meta_box'
+	);
+
 	foreach ( $fp5_settings['meta-box'] as $option ) {
 		add_settings_field(
 			'fp5_settings_meta_box[' . $option['id'] . ']',
