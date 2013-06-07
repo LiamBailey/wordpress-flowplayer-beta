@@ -57,7 +57,7 @@ function fp5_register_settings() {
 					)
 				),
 				'video_attributes' => array(
-					'id' => 'video_options',
+					'id' => 'video_attributes',
 					'name' => '<strong>' . __('Video Attributes', 'edd') . '</strong>',
 					'desc' => __('Configure the video attributes', 'edd'),
 					'type' => 'header'
@@ -73,6 +73,18 @@ function fp5_register_settings() {
 					'name' => __('Loop', 'edd'),
 					'desc' => __('Check the box is enable video loop.', 'edd'),
 					'type' => 'checkbox'
+				),
+				'video_files' => array(
+					'id' => 'video_files',
+					'name' => '<strong>' . __('Add Videos', 'edd') . '</strong>',
+					'desc' => __('URLs for videos, at least one is needed. You need a video format supported by your web browser, otherwise the preview below does not work. About video formats.', 'edd'),
+					'type' => 'header'
+				),
+				'mp4' => array(
+					'id' => 'mp4',
+					'name' => __( 'mp4 format', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
 				),
 				'purchase_page' => array(
 					'id' => 'purchase_page',
