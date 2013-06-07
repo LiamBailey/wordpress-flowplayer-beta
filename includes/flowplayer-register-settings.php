@@ -548,28 +548,27 @@ function fp5_color_callback( $args ) {
 }
 
 /**
- * Shop States Callback
+ * Color picker Callback
  *
- * Renders states drop down based on the currently selected country
+ * Renders color picker fields.
  *
  * @since 1.6
  * @param array $args Arguments passed by the setting
  * @global $fp5_options Array of all the EDD Options
  * @return void
  */
-function fp5_shop_states_callback($args) {
+function fp5_preview_callback( $args ) {
 	global $fp5_options;
 
-	$html = '<select id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"/>';
+	if ( isset( $fp5_options[ $args['id'] ] ) )
+		$value = $fp5_options[ $args['id'] ];
+	else
+		$value = isset( $args['std'] ) ? $args['std'] : '';
 
-	$states = fp5_get_shop_states();
+	$default = isset( $args['std'] ) ? $args['std'] : '';
 
-	foreach ( $states as $option => $name ) :
-		$selected = isset( $fp5_options[ $args['id'] ] ) ? selected( $option, $fp5_options[$args['id']], false ) : '';
-		$html .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
-	endforeach;
-
-	$html .= '</select>';
+	$size = isset( $args['size'] ) && !is_null($args['size']) ? $args['size'] : 'regular';
+	$html = '<input type="text" class="edd-color-picker" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" value="' . esc_attr( $value ) . '" data-default-color="' . esc_attr( $default ) . '" />';
 	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 
 	echo $html;
