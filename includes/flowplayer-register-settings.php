@@ -633,7 +633,8 @@ function fp5_settings_sanitize( $input ) {
 	add_settings_error( 'edd-notices', '', __('Settings Updated', 'edd'), 'updated' );
 	return $input;
 }
-
+add_action('add_meta_boxes','fp5_add_video_details');
+add_action('save_post','fp5_save_video_details');
 /**
  * Get Settings
  *
