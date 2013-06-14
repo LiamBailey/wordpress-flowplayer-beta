@@ -86,7 +86,7 @@ class fp5_metabox {
 			$html .= __( 'Select skin', $this->plugin_slug );
 		$html .= '</label>';
 
-		$html .= '<select id="fp5-select-skin" name="fp5-select-skin" class="option">';
+		$html .= '<select id="fp5-select-skin" name="fp5-select-skin[fp5-select-skin]" class="option">';
 			$html .= '<option class="fp5[skin]" id="fp5-minimalist" value="minimalist"' . selected( $fp5_stored_meta['fp5-select-skin'], 'minimalist' ) . '>Minimalist</option>';
 			$html .= '<option class="fp5[skin]" id="fp5-functional" value="functional"' . selected( $fp5_stored_meta['fp5-select-skin'], 'functional' ) . '>Functional</option>';
 			$html .= '<option class="fp5[skin]" id="fp5-playful" value="playful"' . selected( $fp5_stored_meta['fp5-select-skin'], 'playful' ) . '>Playful</option>';
