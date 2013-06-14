@@ -80,12 +80,11 @@ class fp5_metabox {
 	public function display_fp5_video_meta_box( $post ) {
 
 		wp_nonce_field( plugin_basename( __FILE__ ), 'fp5-nonce' );
+		$fp5_stored_meta = get_post_meta( $post->ID );
 
 		$html = '<label for="fp5-select-skin">';
 			$html .= __( 'Select skin', $this->plugin_slug );
 		$html .= '</label>';
-
-		$fp5_stored_meta = get_post_meta( $post->ID );
 
 		$html .= '<select id="fp5-select-skin" name="fp5-select-skin" class="option">';
 			$html .= '<option class="fp5[skin]" id="fp5-minimalist" value="minimalist"' . selected( $fp5_stored_meta['fp5-select-skin'], 'minimalist', false ) . '>Minimalist</option>';
