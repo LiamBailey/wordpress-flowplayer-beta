@@ -36,7 +36,7 @@ require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer-meta-box.
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer-settings.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode.php' );
 
-$fp5_options = fp5_get_settings();
+//$fp5_options = fp5_get_settings();
 
 // Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.
 // TODO: replace PluginName with the name of the plugin defined in `class-plugin-name.php`
