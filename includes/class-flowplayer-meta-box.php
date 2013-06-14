@@ -88,9 +88,9 @@ class fp5_metabox {
 		$fp5_stored_meta = get_post_meta( $post->ID );
 
 		$html .= '<select id="fp5-select-skin" name="fp5-select-skin" class="option">';
-			$html .= '<option class="fp5[skin]" id="fp5-minimalist" value="minimalist"' . selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ) . '>Minimalist</option>';
-			$html .= '<option class="fp5[skin]" id="fp5-functional" value="functional"' . selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ) . '>Functional</option>';
-			$html .= '<option class="fp5[skin]" id="fp5-playful" value="playful"' . selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ) . '>Playful</option>';
+			$html .= '<option class="fp5[skin]" id="fp5-minimalist" value="minimalist"' . selected( $fp5_stored_meta['fp5-select-skin'], 'minimalist', false ) . '>Minimalist</option>';
+			$html .= '<option class="fp5[skin]" id="fp5-functional" value="functional"' . selected( $fp5_stored_meta['fp5-select-skin'], 'functional', false ) . '>Functional</option>';
+			$html .= '<option class="fp5[skin]" id="fp5-playful" value="playful"' . selected( $fp5_stored_meta['fp5-select-skin'], 'playful', false ) . '>Playful</option>';
 		$html .= '</select>';
 
 		echo $html;
