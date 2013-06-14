@@ -45,3 +45,4 @@ register_deactivation_hook( __FILE__, array( 'PluginName', 'deactivate' ) );
 
 // TODO: replace PluginName with the name of the plugin defined in `class-plugin-name.php`
 Flowplayer5::get_instance();
+$fp5_metabox = new fp5_metabox();
