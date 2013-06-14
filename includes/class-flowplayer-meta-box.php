@@ -12,155 +12,130 @@
  * @copyright 2013 Your Name or Company Name
  */
 
-/**
- * Calls the class on the post edit screen
- */
-function call_fp5_meta_box() {
-	return new fp5_meta_box();
-}
-if ( is_admin() )
-	add_action( 'load-post.php', 'call_fp5_meta_box' );
+class fp5_metabox {
 
-/**
- * The Class
- */
-class fp5_meta_box {
+	/**
+	 * Plugin version, used for cache-busting of style and script file references.
+	 *
+	 * @since   0.1.0
+	 *
+	 * @var     string
+	 */
+	private $version;
 
-	protected $plugin_slug = 'flowplayer5';
+	/**
+	 * Unique identifier for the plugin. This value is also used as the text domain
+	 * when internationalizing strings of text.
+	 *
+	 * @since    0.1.0
+	 *
+	 * @var      string
+	 */
+	private $plugin_slug;
 
+	/**
+	 * Initializes the plugin by setting localization, filters, and administration functions.
+	 *
+	 * @since     0.1.0
+	 */
 	public function __construct() {
-		add_action( 'add_meta_boxes', array( &$this, 'add_fp5_meta_box' ) );
+
+		$this->version = '0.1.0';
+		$this->plugin_slug = 'fp5';
+
+		// Setup the meta box responsible for displaying the short URL
+		add_action( 'add_meta_boxes', array( $this, 'add_fp5_video_meta_box' ) );
+
+		// Setup the function responsible for generating and saving the short URL
+		add_action( 'save_post', array( $this, 'save_fp5_video_details' ) );
+
 	}
 
 	/**
-	 * Adds the meta box container
+	 * Registers the meta box for displaying the 'Post Short URL' in the post editor.
+	 *
+	 * @version    0.1.0
+	 * @since      0.1.0
 	 */
-	public function add_fp5_meta_box() {
+	public function add_fp5_video_meta_box() {
+
 		add_meta_box(
-			 'flowplayer5',
-			__( 'Add Flowplayer', $this->plugin_slug ),
-			array( &$this, 'render_meta_box_content' ),
-			'video',
+			'fp5_video_details',
+			__( 'Video Details', $this->plugin_slug ),
+			array( $this, 'display_fp5_video_meta_box' ),
+			'FlowPlayer5Video',
 			'normal',
 			'default'
-		);
+		 );
+
+	}
+
+	/**
+	 * Displays the meta box for displaying the 'Post Short URL' or a default
+	 * message if one does not exist.
+	 *
+	 * @version    0.1.0
+	 * @since      0.1.0
+	 */
+	public function display_fp5_video_meta_box( $post ) {
+
+		wp_nonce_field( plugin_basename( __FILE__ ), 'fp5-nonce' );
+
+		$html = '<label for="fp5-select-skin">';
+			$html .= __( 'Select skin', $this->plugin_slug );
+		$html .= '</label>';
+
+		$fp5_stored_meta = get_post_meta( $post->ID );
+
+		$html .= '<select id="fp5-select-skin" name="fp5-select-skin" class="option">';
+			$html .= '<option class="fp5[skin]" id="fp5-minimalist" value="minimalist" ' . selected( $fp5_stored_meta['fp5-select-skin'], 'minimalist' ); . '>Minimalist</option>';
+			$html .= '<option class="fp5[skin]" id="fp5-functional" value="functional"' . selected( $fp5_stored_meta['fp5-select-skin'], 'functional' ); . '>Functional</option>';
+			$html .= '<option class="fp5[skin]" id="fp5-playful" value="playful" ' . selected( $fp5_stored_meta['fp5-select-skin'], 'playful' ); . '>Playful</option>';
+		$html .= '</select>';
+
+		echo $html;
+
+	}
+
+	/**
+	 * When the post is saved or updated, generates a short URL to the existing post.
+	 *
+	 * @param    int     $post_id    The ID of the post being save
+	 * @version  0.1.0
+	 * @since    0.1.0
+	 */
+	public function save_fp5_video_details( $post_id ) {
+
+		if ( $this->user_can_save( $post_id, 'fp5-nonce' ) ) {
+
+			// Checks for input and saves if needed
+			if( isset( $_POST[ 'meta-select' ] ) ) {
+				update_post_meta( $post_id, 'fp5-select-skin', $_POST[ 'fp5-select-skin' ] );
+			};
+
+		}
+
 	}
 
 
 	/**
-	 * Render Meta Box content
+	 * Determines whether or not the current user has the ability to save meta data associated with this post.
+	 *
+	 * @param    int     $post_id    The ID of the post being save
+	 * @param    string  $nonce      The nonce identifier associated with the value being saved
+	 * @return   bool                Whether or not the user has the ability to save this post.
+	 * @version  0.1.0
+	 * @since    0.1.0
 	 */
-	public function render_meta_box_content() {
-	?>
-		<div class="options" xmlns="http://www.w3.org/1999/html">
-			<div class="optgroup">
-				<label for="fp5_selectSkin">
-					<?php _e('Select skin')?>
-				</label>
-				<select id="fp5_selectSkin" class="option">
-					<option class="fp5[skin]" id="fp5_minimalistSel" value="minimalist" selected="selected"><?php _e('Minimalist' ) ?></option>
-					<option class="fp5[skin]" id="fp5_functionalSel" value="functional"><?php _e('Functional' ) ?></option>
-					<option class="fp5[skin]" id="fp5_playfulSel" value="playful"><?php _e('Playful' ) ?></option>
-				</select>
-				<div class="option">
-					<img id="fp5_minimalist" src="<?php print(FP5_PLUGIN_URL.'assets/img/minimalist.png')  ?>" />
-					<img id="fp5_functional" src="<?php print(FP5_PLUGIN_URL.'assets/img/functional.png')  ?>" />
-					<img id="fp5_playful" src="<?php print(FP5_PLUGIN_URL.'assets/img/playful.png')  ?>" />
-				</div>
-			</div>
-			<div class="optgroup separated">
-				<label for="fp5_videoAttributes">
-					<?php _e('Video attributes')?> <a href="http://flowplayer.org/docs/index.html#video-attributes" target="_blank"><?php _e('(Info)')?></a>
-				</label>
-				<div class="wide"></div>
-				<div id="fp5_videoAttributes" class="option">
-					<label for="fp5_autoplay"><?php _e('Autoplay?')?></label>
-					<input type="checkbox" name="fp5[autoplay]" id="fp5_autoplay" value="true" />
-				</div>
-				<div class="option">
-					<label for="fp5_loop"><?php _e('Loop?')?></label>
-					<input type="checkbox" name="fp5[loop]" id="fp5_loop" value="true" />
-				</div>
-			</div>
+	private function user_can_save( $post_id, $nonce ) {
 
-			<div class="optgroup">
-				<div class="option wide">
-					<label for="fp5_splash">
-						<a href="http://flowplayer.org/docs/index.html#splash" target="_blank"><?php _e('Splash image')?></a><br/><?php _e('(optional)')?>
-					</label>
-					<input class="mediaUrl" type="text" name="fp5[splash]" id="fp5_splash" />
-					<input id="fp5_chooseSplash" type="button" value="<?php _e('Media Library'); ?>" />
-				</div>
-			</div>
+		$is_autosave = wp_is_post_autosave( $post_id );
+		$is_revision = wp_is_post_revision( $post_id );
+		$is_valid_nonce = ( isset( $_POST[ $nonce ] ) && wp_verify_nonce( $_POST[ $nonce ], plugin_basename( __FILE__ ) ) ) ? true : false;
 
-			<div class="optgroup separated">
-				<div class="head" for="fp5_videos">
-					<?php _e('URLs for videos, at least one is needed. You need a video format supported by your web browser, otherwise the preview below does not work.')?>
-					<a href="http://flowplayer.org/docs/#video-formats" target="_blank"><?php _e('About video formats')?></a>.
-				</div>
-				<div class="option wide">
-					<label for="fp5_mp4"><?php _e('mp4')?></label>
-					<input class="mediaUrl" type="text" name="fp5[mp4]" id="fp5_mp4" />
-				</div>
-				<div id="fp5_videos" class="option wide">
-					<label for="fp5_webm"><?php _e('webm')?></label>
-					<input class="mediaUrl" type="text" name="fp5[webm]" id="fp5_webm" />
-				</div>
-				<div class="option wide">
-					<label for="fp5_ogg"><?php _e('ogg')?></label>
-					<input class="mediaUrl" type="text" name="fp5[ogg]" id="fp5_ogg" />
-				</div>
-					<input id="fp5_chooseMedia" type="button" value="<?php _e('Media Library'); ?>" />
-			</div>
+		// Return true if the user is able to save; otherwise, false.
+		return ! ( $is_autosave || $is_revision) && $is_valid_nonce;
 
-			<div class="optgroup">
-				<div class="option">
-					<div id="preview" class="preview"><?php _e( 'Preview' ) ?>
-						<div class="flowplayer">
-							<video id="fp5_videoPreview" width="320" height="240" controls="controls">
-							</video>
-						</div>
-					</div>
-				</div>
-				<div class="details separated">
-					<label for="fp5_width"><?php _e('Maximum dimensions for the player are determined from the provided video files. You can change this size below. Fixing the player size disables scaling for different screen sizes.')?></label>
-					<div class="wide"></div>
-					<div class="option">
-						<label for="fp5_width"><?php _e('Max width')?></label>
-						<input class="small" type="text" id="fp5_width" name="fp5[width]" />
-					</div>
-					<div class="option">
-						<label class="checkbox" for="fp5_ratio"><?php _e('Use video\'s aspect ratio')?></label>
-						<input class="checkbox" type="checkbox" id="fp5_ratio" name="fp5[ratio]" value="true" checked="checked"/>
-					</div>
-					<div class="option">
-						<label for="fp5_height"><?php _e('Max height')?></label>
-						<input class="small" type="text" id="fp5_height" name="fp5[height]" readonly="true"/>
-					</div>
-					<div class="option">
-						<label class="checkbox" for="fp5_fixed"><?php _e('Use fixed player size') ?></label>
-						<input class="checkbox" type="checkbox" id="fp5_fixed" name="fp5[fixed]" value="true" />
-					</div>
-				</div>
-			</div>
-
-			<div class="optgroup separated">
-				<label class="head" for="fp5_subtitles">
-					<?php _e('You can include subtitles by supplying an URL to a WEBVTT file')?>
-					<a href="http://flowplayer.org/docs/subtitles.html" target="_blank"> <?php _e( 'Visit the subtitles documentation' ) ?></a>.
-				</label>
-				<div class="option wide">
-					<label class="head" for="fp5_subtitles">
-						<?php _e('WEBVTT URL')?>
-					</label>
-					<input class="mediaUrl" type="text" name="fp5[subtitles]" id="fp5_subtitles" />
-				</div>
-			</div>
-
-			<div class="option wide">
-				<input class="button-primary" id="fp5_sendToEditor" type="button" value="<?php _e('Send to Editor &raquo;'); ?>" />
-			</div>
-		</div>
-	<?php
 	}
+
 }
