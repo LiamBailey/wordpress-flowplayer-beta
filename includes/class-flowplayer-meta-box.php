@@ -135,7 +135,7 @@ class fp5_metabox {
 		</p>
 
 		<p>
-			<div id="preview" class="preview"><?php _e( 'Preview' ) ?>
+			<div id="fp5-preview" class="preview"><?php _e( 'Preview' ) ?>
 				<div class=" functional">
 					<video id="fp5_videoPreview" width="320" height="240">
 						<source type="video/mp4" src="<? echo $fp5_stored_meta['tgm-new-media-image']; ?>"/>
