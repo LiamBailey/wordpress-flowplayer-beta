@@ -23,7 +23,7 @@ global $post;
 	$autoplay  = get_post_meta( $id, 'autoplay', true );
 	$subtitles = get_post_meta( $id, 'webvtt', true );
 	$skin      = get_post_meta( $id, 'fp5-select-skin', true );
-	//$splash    = ""
+	$splash    = ""
 	$mp4       = get_post_meta( $id, 'tgm-new-media-image', true );
 	$webm      = get_post_meta( $id, 'webm-video', true );
 	$ogg       = get_post_meta( $id, 'ogg-video', true) ;
