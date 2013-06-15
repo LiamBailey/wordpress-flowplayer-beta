@@ -99,11 +99,11 @@ class fp5_metabox {
 		<p>
 			<span class="example-row-title"><?php _e('Video attributes')?></span>
 			<div class="example-row-content">
-				<label for="meta-checkbox">
+				<label for="fp5-autoplay">
 					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="yes" <?php checked( $fp5_stored_meta['autoplay'][0], 'yes' ); ?> />
 					<?php _e('Autoplay?')?>
 				</label>
-				<label for="meta-checkbox-two">
+				<label for="fp5-loop">
 					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="yes" <?php checked( $fp5_stored_meta['loop'][0], 'yes' ); ?> />
 					<?php _e('Loop?')?>
 				</label>
