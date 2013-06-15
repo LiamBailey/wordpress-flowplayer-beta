@@ -89,9 +89,9 @@ class fp5_metabox {
 		</label>
 
 		<select id="fp5-select-skin" name="fp5-select-skin">
-			<option id="fp5-minimalist" value="minimalist"<?php selected( $fp5_stored_meta['fp5-select-skin'], 'minimalist' ); ?>>Minimalist</option>
-			<option id="fp5-functional" value="functional"<?php selected( $fp5_stored_meta['fp5-select-skin'], 'functional' ); ?>>Functional</option>
-			<option id="fp5-playful" value="playful"<?php selected( $fp5_stored_meta['fp5-select-skin'], 'playful' ); ?>>Playful</option>
+			<option id="fp5-minimalist" value="minimalist"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
+			<option id="fp5-functional" value="functional"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
+			<option id="fp5-playful" value="playful"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
 		</select>
 
 	<?php
