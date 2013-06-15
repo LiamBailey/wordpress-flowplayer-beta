@@ -84,15 +84,31 @@ class fp5_metabox {
 		$fp5_select_skin = get_post_meta($post->ID,'_fp5_select_skin',true);
 		?>
 
-		<label for="fp5-select-skin">
-			<?php _e( 'Select skin', $this->plugin_slug ); ?>
-		</label>
+		<p>
+			<label for="fp5-select-skin">
+				<?php _e( 'Select skin', $this->plugin_slug ); ?>
+			</label>
 
-		<select id="fp5-select-skin" name="fp5-select-skin">
-			<option id="fp5-minimalist" value="minimalist"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
-			<option id="fp5-functional" value="functional"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
-			<option id="fp5-playful" value="playful"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
-		</select>
+			<select id="fp5-select-skin" name="fp5-select-skin">
+				<option id="fp5-minimalist" value="minimalist"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
+				<option id="fp5-functional" value="functional"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
+				<option id="fp5-playful" value="playful"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
+			</select>
+		</p>
+
+		<p>
+			<span class="example-row-title"><?php _e('Video attributes')?></span>
+			<div class="example-row-content">
+				<label for="meta-checkbox">
+					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="yes" <?php checked( $fp5_stored_meta['autoplay'][0], 'yes' ); ?> />
+					<?php _e('Autoplay?')?>
+				</label>
+				<label for="meta-checkbox-two">
+					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="yes" <?php checked( $fp5_stored_meta['loop'][0], 'yes' ); ?> />
+					<?php _e('Loop?')?>
+				</label>
+			</div>
+		</p>
 
 	<?php
 	}
@@ -112,6 +128,20 @@ class fp5_metabox {
 			if( isset( $_POST[ 'fp5-select-skin' ] ) ) {
 				update_post_meta( $post_id, 'fp5-select-skin', $_POST[ 'fp5-select-skin' ] );
 			};
+
+			// Checks for input and saves
+			if( isset( $_POST[ 'autoplay' ] ) ) {
+				update_post_meta( $post_id, 'autoplay', 'yes' );
+			} else {
+				update_post_meta( $post_id, 'autoplay', '' );
+			}
+			 
+			// Checks for input and saves
+			if( isset( $_POST[ 'loop' ] ) ) {
+				update_post_meta( $post_id, 'loop', 'yes' );
+			} else {
+				update_post_meta( $post_id, 'loop', '' );
+			}
 
 		}
 
