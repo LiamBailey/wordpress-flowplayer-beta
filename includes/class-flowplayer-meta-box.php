@@ -119,7 +119,13 @@ class fp5_metabox {
 		<p>
 			<label for="webm-video"><?php _e( 'webm video', $this->plugin_slug )?></label>
 			<input class="mediaUrl" type="text" id="webm-video" size="70" value="<?php echo $fp5_stored_meta['webm-video'][0]; ?>" name="webm-video" />
-			<a href="#" class="fp5-open-media button button-primary" title="<?php _e( 'Add webm video', $this->plugin_slug )?>"><?php _e( 'Add webm video', $this->plugin_slug )?></a>
+			<a href="#fp5-add-webm" class="fp5-add-webm button button-primary" title="<?php _e( 'Add webm video', $this->plugin_slug )?>"><?php _e( 'Add webm video', $this->plugin_slug )?></a>
+		</p>
+
+		<p>
+			<label for="ogg-video"><?php _e( 'ogg video', $this->plugin_slug )?></label>
+			<input class="mediaUrl" type="text" id="ogg-video" size="70" value="<?php echo $fp5_stored_meta['ogg-video'][0]; ?>" name="ogg-video" />
+			<a href="#" class="fp5-open-media button button-primary" title="<?php _e( 'Add ogg video', $this->plugin_slug )?>"><?php _e( 'Add ogg video', $this->plugin_slug )?></a>
 		</p>
 
 	<?php
@@ -163,7 +169,12 @@ class fp5_metabox {
 			// Checks for input and saves if needed
 			if( isset( $_POST[ 'webm-video' ] ) ) {
 				update_post_meta( $post_id, 'webm-video', $_POST[ 'webm-video' ] );
-		}
+			}
+
+			// Checks for input and saves if needed
+			if( isset( $_POST[ 'ogg-video' ] ) ) {
+				update_post_meta( $post_id, 'ogg-video', $_POST[ 'ogg-video' ] );
+			}
 
 		}
 

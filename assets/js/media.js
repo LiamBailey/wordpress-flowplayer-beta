@@ -122,3 +122,45 @@ jQuery(document).ready(function($){
         fp5_media_frame.open();
     });
 });
+
+/*
+ * Attaches the image uploader to the input field
+ */
+jQuery(document).ready(function($){
+ 
+    // Instantiates the variable that holds the media library frame.
+    var fp5_webm_frame;
+ 
+    // Runs when the image button is clicked.
+    $('#fp5-add-webm').click(function(e){
+ 
+        // Prevents the default action from occuring.
+        e.preventDefault();
+ 
+        // If the frame already exists, re-open it.
+        if ( fp5_webm_frame ) {
+            fp5_webm_frame.open();
+            return;
+        }
+ 
+        // Sets up the media library frame
+        fp5_webm_frame = wp.media.frames.fp5_webm_frame = wp.media({
+            title: tgm_nmp_media.title,
+            button: { text:  tgm_nmp_media.button },
+            library: { type: 'video/webm' }
+        });
+ 
+        // Runs when an image is selected.
+        fp5_webm_frame.on('select', function(){
+ 
+            // Grabs the attachment selection and creates a JSON representation of the model.
+            var media_attachment = fp5_webm_frame.state().get('selection').first().toJSON();
+ 
+            // Sends the attachment URL to our custom image input field.
+            $('#webm-video').val(media_attachment.url);
+        });
+ 
+        // Opens the media library frame.
+        fp5_webm_frame.open();
+    });
+});
