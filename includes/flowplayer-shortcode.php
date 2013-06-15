@@ -50,9 +50,6 @@ $player_version = '5.4.1';
 		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', dirname(__FILE__) ), array( 'jquery' ), $version, false );
 	}
 
-    //video_custompost_id
-    $id = $atts['id'];
-    
     //get the splash image or featured image
    if(!isset($splash)):
    $splash = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
