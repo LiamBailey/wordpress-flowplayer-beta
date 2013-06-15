@@ -85,7 +85,7 @@ class fp5_metabox {
 		?>
 
 		<label for="fp5-select-skin">
-			<?php __( 'Select skin', $this->plugin_slug ); ?>
+			<?php _e( 'Select skin', $this->plugin_slug ); ?>
 		</label>
 
 		<select id="fp5-select-skin" name="fp5_select_skin">
