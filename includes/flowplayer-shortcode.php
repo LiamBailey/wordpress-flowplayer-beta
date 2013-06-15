@@ -31,7 +31,38 @@ $player_version = '5.4.1';
 	$height    = get_post_meta( $id, 'max-height', true );
 	$ratio     = get_post_meta( $id, 'aspect-ratio', true );
 	$fixed     = get_post_meta( $id, 'fixed-width', true );
-
+	
+	// Checks and displays the retrieved value
+	if( !empty( $loop ) ) {
+		echo $loop;
+	}
+	if( !empty( $autoplay ) ) {
+		echo $autoplay;
+	}
+	if( !empty( $subtitles ) ) {
+		echo $subtitles;
+	}
+	if( !empty( $mp4 ) ) {
+		echo $mp4;
+	}
+	if( !empty( $webm ) ) {
+		echo $webm;
+	}
+	if( !empty( $ogg ) ) {
+		echo $ogg;
+	}
+	if( !empty( $width ) ) {
+		echo $width;
+	}
+	if( !empty( $height ) ) {
+		echo $height;
+	}
+	if( !empty( $ratio ) ) {
+		echo $ratio;
+	}
+	if( !empty( $fixed ) ) {
+		echo $fixed;
+	}
 
 	// set the options for the shortcode - pulled from the display-settings.php
 	$options = get_option('fp5_options');
