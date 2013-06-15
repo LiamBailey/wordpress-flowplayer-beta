@@ -268,7 +268,7 @@ jQuery(document).ready(function($){
 });
 
 jQuery(document).ready(function () {
-    $(".video-url").blur(function () {
+    $(".mediaUrl").blur(function () {
         $('#video video').remove();
         $('#video').append('<video width="320" height="240">' +
             '<source type="video/mp4" src="' + $('#mp4').val() + '"/>' +
