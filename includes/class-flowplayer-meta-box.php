@@ -134,15 +134,17 @@ class fp5_metabox {
 			<a href="#" class="fp5-add-webvtt button button-primary" title="<?php _e( 'Add webvtt file', $this->plugin_slug )?>"><?php _e( 'Add webvtt file', $this->plugin_slug )?></a>
 		</p>
 
-		<div id="preview" class="preview"><?php _e( 'Preview' ) ?>
-			<div class=" functional">
-				<video id="fp5_videoPreview" width="320" height="240">
-					<source type="video/mp4" src="<? echo $fp5_stored_meta['tgm-new-media-image']; ?>"/>
-					<source type="video/webm" src="<? echo $fp5_stored_meta['webm-video']; ?>"/>
-					<source type="video/ogg" src="<? echo $fp5_stored_meta['ogg-video']; ?>"/>
-				</video>
+		<p>
+			<div id="preview" class="preview"><?php _e( 'Preview' ) ?>
+				<div class=" functional">
+					<video id="fp5_videoPreview" width="320" height="240">
+						<source type="video/mp4" src="<? echo $fp5_stored_meta['tgm-new-media-image']; ?>"/>
+						<source type="video/webm" src="<? echo $fp5_stored_meta['webm-video']; ?>"/>
+						<source type="video/ogg" src="<? echo $fp5_stored_meta['ogg-video']; ?>"/>
+					</video>
+				</div>
 			</div>
-		</div>
+		</p>
 
 		<p>
 			<label for="max-width" class="example-row-title"><?php _e('Max width')?></label>
