@@ -101,14 +101,18 @@ class fp5_metabox {
 			<div class="example-row-content">
 				<label for="fp5-autoplay">
 					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="yes" <?php checked( $fp5_stored_meta['autoplay'][0], 'yes' ); ?> />
-					<?php _e('Autoplay?')?>
+					<?php _e( 'Autoplay?' )?>
 				</label>
 				<label for="fp5-loop">
 					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="yes" <?php checked( $fp5_stored_meta['loop'][0], 'yes' ); ?> />
-					<?php _e('Loop?')?>
+					<?php _e( 'Loop?' )?>
 				</label>
 			</div>
 		</p>
+
+		<p>
+			<label for="tgm-new-media-image"><?php _e( 'mp4 video', $this->plugin_slug )?></label> <input class="mediaUrl" type="text" id="tgm-new-media-image" size="70" value="' . $fp5_mp4 . '" name="fp5_mp4" id="fp5_mp4" /> <a href="#" class="tgm-open-media button button-primary" title="' . esc_attr__( 'Add mp4 video', 'flowplayer5' ) . '"><?php _e( 'Add mp4 video', $this->plugin_slug )?></a>
+		</p>';
 
 	<?php
 	}
