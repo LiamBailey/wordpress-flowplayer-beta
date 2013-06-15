@@ -80,22 +80,21 @@ class fp5_metabox {
 	public function display_fp5_video_meta_box( $post ) {
 
 		wp_nonce_field( plugin_basename( __FILE__ ), 'fp5-nonce' );
-
-		$html = '<label for="fp5-select-skin">';
-			$html .= __( 'Select skin', $this->plugin_slug );
-		$html .= '</label>';
-
 		$fp5_stored_meta = get_post_meta( $post->ID );
 		$fp5_select_skin = get_post_meta($post->ID,'_fp5_select_skin',true);
+		?>
 
-		$html .= '<select id="fp5-select-skin" name="fp5_select_skin">';
-			$html .= '<option id="fp5-minimalist" value="minimalist"' . selected( 'minimalist', $fp5_select_skin, false ) . '>Minimalist</option>';
-			$html .= '<option id="fp5-functional" value="functional"' . selected( 'functional', $fp5_select_skin, false ) . '>Functional</option>';
-			$html .= '<option id="fp5-playful" value="playful"' . selected( 'playful', $fp5_select_skin, false ) . '>Playful</option>';
-		$html .= '</select>';
+		<label for="fp5-select-skin">
+			<?php __( 'Select skin', $this->plugin_slug ); ?>
+		</label>
 
-		echo $html;
+		<select id="fp5-select-skin" name="fp5_select_skin">
+			<option id="fp5-minimalist" value="minimalist"<?php selected( 'minimalist', $fp5_select_skin, false ); ?>>Minimalist</option>
+			<option id="fp5-functional" value="functional"<?php selected( 'functional', $fp5_select_skin, false ); ?>>Functional</option>
+			<option id="fp5-playful" value="playful"<?php selected( 'playful', $fp5_select_skin, false ); ?>>Playful</option>
+		</select>
 
+	<?php
 	}
 
 	/**
