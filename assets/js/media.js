@@ -177,7 +177,7 @@ jQuery(document).ready(function($){
     var fp5_ogg_frame;
     
     // Bind to our click event in order to open up the new media experience.
-    $(document.body).on('click.tgmOpenMediaManager', '.fp5-open-media', function(e){
+    $(document.body).on('click.tgmOpenMediaManager', '.fp5-add-ogg', function(e){
         // Prevent the default action from occuring.
         e.preventDefault();
 

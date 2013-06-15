@@ -119,13 +119,32 @@ class fp5_metabox {
 		<p>
 			<label for="webm-video"><?php _e( 'webm video', $this->plugin_slug )?></label>
 			<input class="mediaUrl" type="text" id="webm-video" size="70" value="<?php echo $fp5_stored_meta['webm-video'][0]; ?>" name="webm-video" />
-			<a href="#fp5-add-webm" class="fp5-add-webm button button-primary" title="<?php _e( 'Add webm video', $this->plugin_slug )?>"><?php _e( 'Add webm video', $this->plugin_slug )?></a>
+			<a href="#" class="fp5-add-webm button button-primary" title="<?php _e( 'Add webm video', $this->plugin_slug )?>"><?php _e( 'Add webm video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
 			<label for="ogg-video"><?php _e( 'ogg video', $this->plugin_slug )?></label>
 			<input class="mediaUrl" type="text" id="ogg-video" size="70" value="<?php echo $fp5_stored_meta['ogg-video'][0]; ?>" name="ogg-video" />
-			<a href="#" class="fp5-open-media button button-primary" title="<?php _e( 'Add ogg video', $this->plugin_slug )?>"><?php _e( 'Add ogg video', $this->plugin_slug )?></a>
+			<a href="#" class="fp5-add-ogg button button-primary" title="<?php _e( 'Add ogg video', $this->plugin_slug )?>"><?php _e( 'Add ogg video', $this->plugin_slug )?></a>
+		</p>
+
+		<div id="preview" class="preview"><?php _e( 'Preview' ) ?>
+			<div class="flowplayer functional">
+				<video id="fp5_videoPreview" width="320" height="240">
+					<source type="video/mp4" src="<? echo $fp5_stored_meta['tgm-new-media-image']; ?>"/>
+					<source type="video/webm" src="<? echo $fp5_stored_meta['webm-video']; ?>"/>
+					<source type="video/ogg" src="<? echo $fp5_stored_meta['ogg-video']; ?>"/>
+				</video>
+			</div>
+		</div>
+
+		<p>
+			<label for="max-width" class="example-row-title"><?php _e('Max width')?></label>
+			<input type="text" name="max-width" id="max-width" value="<?php echo $fp5_stored_meta['max-width'][0]; ?>" />
+			<label for="aspect-ratio">
+				<input type="checkbox" name="aspect-ratio" id="fp5-autoplay" value="yes" <?php checked( $fp5_stored_meta['aspect-ratio'][0], 'yes' ); ?> />
+				<?php _e('Use video\'s aspect ratio')?>
+			</label>
 		</p>
 
 	<?php
@@ -153,7 +172,7 @@ class fp5_metabox {
 			} else {
 				update_post_meta( $post_id, 'autoplay', '' );
 			}
-			 
+
 			// Checks for input and saves
 			if( isset( $_POST[ 'loop' ] ) ) {
 				update_post_meta( $post_id, 'loop', 'yes' );
@@ -174,6 +193,18 @@ class fp5_metabox {
 			// Checks for input and saves if needed
 			if( isset( $_POST[ 'ogg-video' ] ) ) {
 				update_post_meta( $post_id, 'ogg-video', $_POST[ 'ogg-video' ] );
+			}
+
+			// Checks for input and saves if needed
+			if( isset( $_POST[ 'max-width' ] ) ) {
+				update_post_meta( $post_id, 'max-width', $_POST[ 'max-width' ] );
+			}
+
+			// Checks for input and saves
+			if( isset( $_POST[ 'aspect-ratio' ] ) ) {
+				update_post_meta( $post_id, 'aspect-ratio', 'yes' );
+			} else {
+				update_post_meta( $post_id, 'aspect-ratio', '' );
 			}
 
 		}
