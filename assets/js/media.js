@@ -269,7 +269,7 @@ jQuery(document).ready(function($){
 
 jQuery(document).ready(function ($) {
     $('#video video').remove();
-    $('#video').append('<video controls width="320" height="240">' +
+    $('#video').append('<video controls>' +
         '<source type="video/mp4" src="' + $('#tgm-new-media-image').val() + '"/>' +
         '<source type="video/webm" src="' + $('#webm-video').val() + '"/>' +
         '<source type="video/webm" src="' + $('#ogg-video').val() + '"/>' +
@@ -277,7 +277,7 @@ jQuery(document).ready(function ($) {
         '</video>');
     $(".mediaUrl").blur(function () {
         $('#video video').remove();
-        $('#video').append('<video controls width="320" height="240">' +
+        $('#video').append('<video controls>' +
             '<source type="video/mp4" src="' + $('#tgm-new-media-image').val() + '"/>' +
             '<source type="video/webm" src="' + $('#webm-video').val() + '"/>' +
             '<source type="video/webm" src="' + $('#ogg-video').val() + '"/>' +
