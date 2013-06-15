@@ -114,7 +114,13 @@ class fp5_metabox {
 			<label for="tgm-new-media-image"><?php _e( 'mp4 video', $this->plugin_slug )?></label>
 			<input class="mediaUrl" type="text" id="tgm-new-media-image" size="70" value="<?php echo $fp5_stored_meta['tgm-new-media-image'][0]; ?>" name="tgm-new-media-image" />
 			<a href="#" class="tgm-open-media button button-primary" title="<?php _e( 'Add mp4 video', $this->plugin_slug )?>"><?php _e( 'Add mp4 video', $this->plugin_slug )?></a>
-		</p>';
+		</p>
+
+		<p>
+			<label for="tgm-new-media-image"><?php _e( 'webm video', $this->plugin_slug )?></label>
+			<input class="mediaUrl" type="text" id="tgm-new-media-image" size="70" value="<?php echo $fp5_stored_meta['tgm-new-media-image'][0]; ?>" name="tgm-new-media-image" />
+			<a href="#" class="fp5-open-media button button-primary" title="<?php _e( 'Add webm video', $this->plugin_slug )?>"><?php _e( 'Add webm video', $this->plugin_slug )?></a>
+		</p>
 
 	<?php
 	}
