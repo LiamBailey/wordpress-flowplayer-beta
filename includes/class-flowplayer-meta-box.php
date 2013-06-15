@@ -165,6 +165,8 @@ class fp5_metabox {
 				update_post_meta( $post_id, 'webm-video', $_POST[ 'webm-video' ] );
 		}
 
+		}
+
 	}
 
 
