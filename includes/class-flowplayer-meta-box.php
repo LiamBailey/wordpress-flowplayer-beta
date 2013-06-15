@@ -117,8 +117,8 @@ class fp5_metabox {
 		</p>
 
 		<p>
-			<label for="tgm-new-media-image"><?php _e( 'webm video', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="tgm-new-media-image" size="70" value="<?php echo $fp5_stored_meta['tgm-new-media-image'][0]; ?>" name="tgm-new-media-image" />
+			<label for="webm-video"><?php _e( 'webm video', $this->plugin_slug )?></label>
+			<input class="mediaUrl" type="text" id="webm-video" size="70" value="<?php echo $fp5_stored_meta['webm-video'][0]; ?>" name="webm-video" />
 			<a href="#" class="fp5-open-media button button-primary" title="<?php _e( 'Add webm video', $this->plugin_slug )?>"><?php _e( 'Add webm video', $this->plugin_slug )?></a>
 		</p>
 
@@ -160,6 +160,9 @@ class fp5_metabox {
 				update_post_meta( $post_id, 'tgm-new-media-image', $_POST[ 'tgm-new-media-image' ] );
 			}
 
+			// Checks for input and saves if needed
+			if( isset( $_POST[ 'webm-video' ] ) ) {
+				update_post_meta( $post_id, 'webm-video', $_POST[ 'webm-video' ] );
 		}
 
 	}
