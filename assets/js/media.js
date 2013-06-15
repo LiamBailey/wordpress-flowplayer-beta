@@ -266,3 +266,15 @@ jQuery(document).ready(function($){
         fp5_webvtt_frame.open();
     });
 });
+
+jQuery(document).ready(function () {
+    $(".video-url").blur(function () {
+        $('#video video').remove();
+        $('#video').append('<video width="320" height="240">' +
+            '<source type="video/mp4" src="' + $('#mp4').val() + '"/>' +
+            '<source type="video/webm" src="' + $('#webm').val() + '"/>' +
+            '<source type="video/webm" src="' + $('#ogg').val() + '"/>' +
+            '<track kind="subtitles" srclang="en" label="English" src="' + $('#vtt').val() + '"/>' +
+            '</video>');
+    });
+});
