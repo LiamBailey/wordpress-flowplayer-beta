@@ -15,7 +15,7 @@ $plugin_slug = 'flowplayer5';
 $player_version = '5.4.1';
 
 //post_id
-	$id = get_the_ID();
+	$id = $post->ID;
 
 	// get the meta from the post type
 
