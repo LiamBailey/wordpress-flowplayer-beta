@@ -164,3 +164,50 @@ jQuery(document).ready(function($){
         fp5_webm_frame.open();
     });
 });
+
+jQuery(document).ready(function($){
+    // Prepare the variable that holds our custom media manager.
+    var fp5_ogg_frame;
+    
+    // Bind to our click event in order to open up the new media experience.
+    $(document.body).on('click.tgmOpenMediaManager', '.fp5-open-media', function(e){
+        // Prevent the default action from occuring.
+        e.preventDefault();
+
+        // If the frame already exists, re-open it.
+        if ( fp5_ogg_frame ) {
+            fp5_ogg_frame.open();
+            return;
+        }
+
+        fp5_ogg_frame = wp.media.frames.fp5_ogg_frame = wp.media({
+
+            className: 'media-frame tgm-media-frame',
+
+            frame: 'select',
+
+            multiple: false,
+
+            title: tgm_nmp_media.title,
+
+            library: {
+                type: 'video/ogg'
+            },
+
+            button: {
+                text:  tgm_nmp_media.button
+            }
+        });
+
+        fp5_ogg_frame.on('select', function(){
+            // Grab our attachment selection and construct a JSON representation of the model.
+            var media_attachment = fp5_ogg_frame.state().get('selection').first().toJSON();
+
+            // Send the attachment URL to our custom input field via jQuery.
+            $('#ogg-video').val(media_attachment.url);
+        });
+
+        // Now that everything has been set, let's open up the frame.
+        fp5_ogg_frame.open();
+    });
+});
