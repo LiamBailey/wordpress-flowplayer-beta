@@ -123,48 +123,55 @@ jQuery(document).ready(function($){
     });
 });
 
-/*
- * Attaches the image uploader to the input field
- */
+// webm add
 jQuery(document).ready(function($){
- 
-    // Instantiates the variable that holds the media library frame.
+    // Prepare the variable that holds our custom media manager.
     var fp5_webm_frame;
- 
-    // Runs when the image button is clicked.
-    $('#fp5-add-webm').click(function(e){
- 
-        // Prevents the default action from occuring.
+    
+    // Bind to our click event in order to open up the new media experience.
+    $(document.body).on('click.tgmOpenMediaManager', '.fp5-open-media', function(e){
+        // Prevent the default action from occuring.
         e.preventDefault();
- 
+
         // If the frame already exists, re-open it.
         if ( fp5_webm_frame ) {
             fp5_webm_frame.open();
             return;
         }
- 
-        // Sets up the media library frame
+
         fp5_webm_frame = wp.media.frames.fp5_webm_frame = wp.media({
+
+            className: 'media-frame fp5-media-frame',
+
+            frame: 'select',
+
+            multiple: false,
+
             title: tgm_nmp_media.title,
-            button: { text:  tgm_nmp_media.button },
-            library: { type: 'video/webm' }
+
+            library: {
+                type: 'video/webm'
+            },
+
+            button: {
+                text:  tgm_nmp_media.button
+            }
         });
- 
-        // Runs when an image is selected.
+
         fp5_webm_frame.on('select', function(){
- 
-            // Grabs the attachment selection and creates a JSON representation of the model.
+            // Grab our attachment selection and construct a JSON representation of the model.
             var media_attachment = fp5_webm_frame.state().get('selection').first().toJSON();
- 
-            // Sends the attachment URL to our custom image input field.
+
+            // Send the attachment URL to our custom input field via jQuery.
             $('#webm-video').val(media_attachment.url);
         });
- 
-        // Opens the media library frame.
+
+        // Now that everything has been set, let's open up the frame.
         fp5_webm_frame.open();
     });
 });
 
+// ogg video add
 jQuery(document).ready(function($){
     // Prepare the variable that holds our custom media manager.
     var fp5_ogg_frame;
@@ -182,7 +189,7 @@ jQuery(document).ready(function($){
 
         fp5_ogg_frame = wp.media.frames.fp5_ogg_frame = wp.media({
 
-            className: 'media-frame tgm-media-frame',
+            className: 'media-frame fp5-media-frame',
 
             frame: 'select',
 
