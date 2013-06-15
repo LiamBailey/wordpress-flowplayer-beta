@@ -218,3 +218,51 @@ jQuery(document).ready(function($){
         fp5_ogg_frame.open();
     });
 });
+
+// vtt file add
+jQuery(document).ready(function($){
+    // Prepare the variable that holds our custom media manager.
+    var fp5_webvtt_frame;
+    
+    // Bind to our click event in order to open up the new media experience.
+    $(document.body).on('click.tgmOpenMediaManager', '.fp5-add-webvtt', function(e){
+        // Prevent the default action from occuring.
+        e.preventDefault();
+
+        // If the frame already exists, re-open it.
+        if ( fp5_webvtt_frame ) {
+            fp5_webvtt_frame.open();
+            return;
+        }
+
+        fp5_webvtt_frame = wp.media.frames.fp5_webvtt_frame = wp.media({
+
+            className: 'media-frame fp5-media-frame',
+
+            frame: 'select',
+
+            multiple: false,
+
+            title: tgm_nmp_media.title,
+
+            library: {
+                type: 'text/vtt'
+            },
+
+            button: {
+                text:  tgm_nmp_media.button
+            }
+        });
+
+        fp5_webvtt_frame.on('select', function(){
+            // Grab our attachment selection and construct a JSON representation of the model.
+            var media_attachment = fp5_webvtt_frame.state().get('selection').first().toJSON();
+
+            // Send the attachment URL to our custom input field via jQuery.
+            $('#webvtt').val(media_attachment.url);
+        });
+
+        // Now that everything has been set, let's open up the frame.
+        fp5_webvtt_frame.open();
+    });
+});
