@@ -34,7 +34,7 @@ $player_version = '5.4.1';
 	
 	// Checks and displays the retrieved value
 	if( !empty( $loop ) ) {
-		echo $loop;
+		return $loop;
 	}
 	if( !empty( $autoplay ) ) {
 		echo $autoplay;
