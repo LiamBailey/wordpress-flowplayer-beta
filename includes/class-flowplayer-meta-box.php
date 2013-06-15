@@ -88,10 +88,10 @@ class fp5_metabox {
 			<?php _e( 'Select skin', $this->plugin_slug ); ?>
 		</label>
 
-		<select id="fp5-select-skin" name="fp5_select_skin">
-			<option id="fp5-minimalist" value="minimalist"<?php selected( 'minimalist', $fp5_select_skin, false ); ?>>Minimalist</option>
-			<option id="fp5-functional" value="functional"<?php selected( 'functional', $fp5_select_skin, false ); ?>>Functional</option>
-			<option id="fp5-playful" value="playful"<?php selected( 'playful', $fp5_select_skin, false ); ?>>Playful</option>
+		<select id="fp5-select-skin" name="fp5-select-skin">
+			<option id="fp5-minimalist" value="minimalist"<?php selected( $fp5_stored_meta['fp5-select-skin'], 'minimalist' ); ?>>Minimalist</option>
+			<option id="fp5-functional" value="functional"<?php selected( $fp5_stored_meta['fp5-select-skin'], 'functional' ); ?>>Functional</option>
+			<option id="fp5-playful" value="playful"<?php selected( $fp5_stored_meta['fp5-select-skin'], 'playful' ); ?>>Playful</option>
 		</select>
 
 	<?php
@@ -109,8 +109,8 @@ class fp5_metabox {
 		if ( $this->user_can_save( $post_id, 'fp5-nonce' ) ) {
 
 			// Checks for input and saves if needed
-			if( isset( $_POST[ 'fp5_select_skin' ] ) ) {
-				update_post_meta( $post_id, '_fp5_select_skin', $_POST[ 'fp5_select_skin' ] );
+			if( isset( $_POST[ 'fp5-select-skin' ] ) ) {
+				update_post_meta( $post_id, 'fp5-select-skin', $_POST[ 'fp5-select-skin' ] );
 			};
 
 		}
