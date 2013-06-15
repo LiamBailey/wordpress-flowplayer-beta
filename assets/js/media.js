@@ -271,10 +271,10 @@ jQuery(document).ready(function ($) {
     $(".mediaUrl").blur(function () {
         $('#video video').remove();
         $('#video').append('<video width="320" height="240">' +
-            '<source type="video/mp4" src="' + $('#mp4').val() + '"/>' +
-            '<source type="video/webm" src="' + $('#webm').val() + '"/>' +
-            '<source type="video/webm" src="' + $('#ogg').val() + '"/>' +
-            '<track kind="subtitles" srclang="en" label="English" src="' + $('#vtt').val() + '"/>' +
+            '<source type="video/mp4" src="' + $('#mp4-video').val() + '"/>' +
+            '<source type="video/webm" src="' + $('#webm-video').val() + '"/>' +
+            '<source type="video/webm" src="' + $('#ogg-video').val() + '"/>' +
+            '<track kind="subtitles" srclang="en" label="English" src="' + $('#webvtt').val() + '"/>' +
             '</video>');
     });
 });
