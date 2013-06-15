@@ -129,7 +129,7 @@ jQuery(document).ready(function($){
     var fp5_webm_frame;
     
     // Bind to our click event in order to open up the new media experience.
-    $(document.body).on('click.tgmOpenMediaManager', '.fp5-open-media', function(e){
+    $(document.body).on('click.tgmOpenMediaManager', '.fp5-add-webm', function(e){
         // Prevent the default action from occuring.
         e.preventDefault();
 
