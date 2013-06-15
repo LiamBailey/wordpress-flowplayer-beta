@@ -82,7 +82,7 @@ $player_version = '5.4.1';
 
 //shortcode processing
     $ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
-    $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
+    $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px');
     $splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
     $class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
     $data_key = ( $key != '' ? ' "' . $key . '"' : '');
