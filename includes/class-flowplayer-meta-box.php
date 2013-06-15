@@ -111,7 +111,7 @@ class fp5_metabox {
 		</p>
 
 		<p>
-			<label for="tgm-new-media-image"><?php _e( 'mp4 video', $this->plugin_slug )?></label> <input class="mediaUrl" type="text" id="tgm-new-media-image" size="70" value="' . $fp5_mp4 . '" name="fp5_mp4" id="fp5_mp4" /> <a href="#" class="tgm-open-media button button-primary" title="' . esc_attr__( 'Add mp4 video', 'flowplayer5' ) . '"><?php _e( 'Add mp4 video', $this->plugin_slug )?></a>
+			<label for="tgm-new-media-image"><?php _e( 'mp4 video', $this->plugin_slug )?></label> <input class="mediaUrl" type="text" id="tgm-new-media-image" size="70" value="<?php echo $fp5_stored_meta['mp4'][0]; ?>" name="fp5_mp4" id="fp5_mp4" /> <a href="#" class="tgm-open-media button button-primary" title="<?php _e( 'Add mp4 video', $this->plugin_slug )?>"><?php _e( 'Add mp4 video', $this->plugin_slug )?></a>
 		</p>';
 
 	<?php
@@ -145,6 +145,11 @@ class fp5_metabox {
 				update_post_meta( $post_id, 'loop', 'yes' );
 			} else {
 				update_post_meta( $post_id, 'loop', '' );
+			}
+
+			// Checks for input and saves if needed
+			if( isset( $_POST[ 'mp4' ] ) ) {
+				update_post_meta( $post_id, 'mp4', $_POST[ 'mp4' ] );
 			}
 
 		}
