@@ -128,8 +128,14 @@ class fp5_metabox {
 			<a href="#" class="fp5-add-ogg button button-primary" title="<?php _e( 'Add ogg video', $this->plugin_slug )?>"><?php _e( 'Add ogg video', $this->plugin_slug )?></a>
 		</p>
 
+		<p>
+			<label for="webvtt"><?php _e( 'webvtt file', $this->plugin_slug )?></label>
+			<input class="mediaUrl" type="text" id="webvtt" size="70" value="<?php echo $fp5_stored_meta['webvtt'][0]; ?>" name="webvtt" />
+			<a href="#" class="fp5-add-webvtt button button-primary" title="<?php _e( 'Add webvtt file', $this->plugin_slug )?>"><?php _e( 'Add webvtt file', $this->plugin_slug )?></a>
+		</p>
+
 		<div id="preview" class="preview"><?php _e( 'Preview' ) ?>
-			<div class="flowplayer functional">
+			<div class=" functional">
 				<video id="fp5_videoPreview" width="320" height="240">
 					<source type="video/mp4" src="<? echo $fp5_stored_meta['tgm-new-media-image']; ?>"/>
 					<source type="video/webm" src="<? echo $fp5_stored_meta['webm-video']; ?>"/>
@@ -142,8 +148,14 @@ class fp5_metabox {
 			<label for="max-width" class="example-row-title"><?php _e('Max width')?></label>
 			<input type="text" name="max-width" id="max-width" value="<?php echo $fp5_stored_meta['max-width'][0]; ?>" />
 			<label for="aspect-ratio">
-				<input type="checkbox" name="aspect-ratio" id="fp5-autoplay" value="yes" <?php checked( $fp5_stored_meta['aspect-ratio'][0], 'yes' ); ?> />
+				<input type="checkbox" name="aspect-ratio" id="aspect-ratio" value="yes" <?php checked( $fp5_stored_meta['aspect-ratio'][0], 'yes' ); ?> />
 				<?php _e('Use video\'s aspect ratio')?>
+			</label>
+			<label for="max-height" class="example-row-title"><?php _e('Max height')?></label>
+			<input type="text" name="max-height" id="max-height" value="<?php echo $fp5_stored_meta['max-height'][0]; ?>" />
+			<label for="fixed-width">
+				<input type="checkbox" name="fixed-width" id="fixed-width" value="yes" <?php checked( $fp5_stored_meta['fixed-width'][0], 'yes' ); ?> />
+				<?php _e('Use fixed player size') ?>
 			</label>
 		</p>
 
@@ -196,6 +208,11 @@ class fp5_metabox {
 			}
 
 			// Checks for input and saves if needed
+			if( isset( $_POST[ 'webvtt' ] ) ) {
+				update_post_meta( $post_id, 'webvtt', $_POST[ 'webvtt' ] );
+			}
+
+			// Checks for input and saves if needed
 			if( isset( $_POST[ 'max-width' ] ) ) {
 				update_post_meta( $post_id, 'max-width', $_POST[ 'max-width' ] );
 			}
@@ -205,6 +222,18 @@ class fp5_metabox {
 				update_post_meta( $post_id, 'aspect-ratio', 'yes' );
 			} else {
 				update_post_meta( $post_id, 'aspect-ratio', '' );
+			}
+
+			// Checks for input and saves if needed
+			if( isset( $_POST[ 'max-height' ] ) ) {
+				update_post_meta( $post_id, 'max-height', $_POST[ 'max-height' ] );
+			}
+
+			// Checks for input and saves
+			if( isset( $_POST[ 'fixed-width' ] ) ) {
+				update_post_meta( $post_id, 'fixed-width', 'yes' );
+			} else {
+				update_post_meta( $post_id, 'fixed-width', '' );
 			}
 
 		}
