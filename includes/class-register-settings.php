@@ -50,7 +50,7 @@ function edd_register_settings() {
 					'id' => 'key',
 					'name' => __('License Key', 'edd'),
 					'desc' => __('Specify your License Key here.', 'edd'),
-					'type' => 'license_key',
+					'type' => 'text',
 					'size' => 'small',
 				),
 				'splash_image' => array(
@@ -450,38 +450,6 @@ function edd_upload_callback($args) {
 	$html .= '<label for="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 
 	echo $html;
-}
-
-/**
- * Registers the license field callback for Software Licensing
- *
- * @since 1.5
- * @param array $args Arguments passed by the setting
- * @global $edd_options Array of all the EDD Options
- * @return void
- */
-if ( ! function_exists( 'edd_license_key_callback' ) ) {
-	function edd_license_key_callback( $args ) {
-		global $edd_options;
-
-		if ( isset( $edd_options[ $args['id'] ] ) )
-			$value = $edd_options[ $args['id'] ];
-		else
-			$value = isset( $args['std'] ) ? $args['std'] : '';
-
-		$size = isset( $args['size'] ) && !is_null($args['size']) ? $args['size'] : 'regular';
-
-		$html = '<input type="text" class="' . $args['size'] . '-text" id="edd_settings_' . $args['section'] . '[' . $args['id'] . ']" name="edd_settings_' . $args['section'] . '[' . $args['id'] . ']" value="' . esc_attr( $value ) . '"/>';
-
-		if ( 'valid' == get_option( $args['options']['is_valid_license_option'] ) ) {
-			$html .= wp_nonce_field( $args['id'] . '_nonce', $args['id'] . '_nonce', false );
-			$html .= '<input type="submit" class="button-secondary" name="' . $args['id'] . '_deactivate" value="' . __( 'Deactivate License',  'edd' ) . '"/>';
-		}
-
-		$html .= '<label for="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
-
-		echo $html;
-	}
 }
 
 /**
