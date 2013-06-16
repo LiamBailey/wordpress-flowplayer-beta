@@ -34,7 +34,7 @@ class wctest{
 	}
 
 	public function add_plugin_page(){
-	add_submenu_page( 'edit.php?post_type=flowplayer5video', 'Settings', 'Settings', 'edit_posts', 'flowplayer5', 'create_admin_page' );
+		add_submenu_page( 'edit.php?post_type=flowplayer5video', 'Settings', 'Settings', 'edit_posts', 'flowplayer5', array($this, 'create_admin_page') );
 	}
 
 	public function create_admin_page(){
