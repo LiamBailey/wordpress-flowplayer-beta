@@ -244,12 +244,10 @@ function edd_register_settings() {
  * @return void
  */
 function edd_header_callback( $args ) {
-	global $edd_options;
 
 	$html = '<h4 id="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"/> '  . $args['name'] . '</h4>';
-	$html .= '<span id="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</span>';
-
 	echo $html;
+	echo '<p class="description">' . $args['desc'] . '</p>'
 }
 
 /**
