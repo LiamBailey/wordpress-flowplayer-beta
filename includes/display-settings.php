@@ -22,8 +22,8 @@
 		// This prints out all hidden setting fields
 		settings_fields( 'edd_settings_general' );
 		do_settings_sections( 'edd_settings_general' );
+		submit_button();
 		?>
-		<?php submit_button(); ?>
 	</form>
 
 </div>
