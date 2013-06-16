@@ -245,8 +245,6 @@ function edd_register_settings() {
  */
 function edd_header_callback( $args ) {
 
-	$html = '<h4 id="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"/> '  . $args['name'] . '</h4>';
-	echo $html;
 	echo '<p class="description">' . $args['desc'] . '</p>'
 }
 
