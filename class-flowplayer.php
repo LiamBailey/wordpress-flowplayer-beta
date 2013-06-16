@@ -92,7 +92,7 @@ class Flowplayer5 {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
 		// Add the options page and menu item.
-		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+		//add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
