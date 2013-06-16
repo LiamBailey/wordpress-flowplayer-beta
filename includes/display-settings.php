@@ -20,8 +20,7 @@
 	<form method="post" action="options.php">
 		<?php
 		// This prints out all hidden setting fields
-		settings_fields('test_option_group');
-		do_settings_sections('test-setting-admin');
+		do_settings_sections( 'edd_settings_general' );
 		?>
 		<?php submit_button(); ?>
 	</form>
