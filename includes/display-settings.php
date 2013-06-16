@@ -17,7 +17,7 @@
 	<?php screen_icon(); ?>
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
-	<form method="post" action="edit.php?post_type=flowplayer5video&page=flowplayer5">
+	<form method="post" action="options.php">
 		<?php
 		// This prints out all hidden setting fields
 		do_settings_sections( 'edd_settings_general' );
