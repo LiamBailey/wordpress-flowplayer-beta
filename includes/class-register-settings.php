@@ -40,55 +40,153 @@ function edd_register_settings() {
 		/** General Settings */
 		'general' => apply_filters('edd_settings_general',
 			array(
-				'test_mode' => array(
-					'id' => 'test_mode',
-					'name' => __('Test Mode', 'edd'),
-					'desc' => __('While in test mode no live transactions are processed. To fully use test mode, you must have a sandbox (test) account for the payment gateway you are testing.', 'edd'),
+				'logo_origin' => array(
+					'id' => 'logo_origin',
+					'name' => __('Show Logo on this site', 'edd'),
+					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'edd'),
 					'type' => 'checkbox'
 				),
-				'currency_settings' => array(
-					'id' => 'currency_settings',
-					'name' => '<strong>' . __('Currency Settings', 'edd') . '</strong>',
-					'desc' => __('Configure the currency options', 'edd'),
+				'video_options' => array(
+					'id' => 'video_options',
+					'name' => '<strong>' . __('Video Settings', 'edd') . '</strong>',
+					'desc' => __('Configure the video options', 'edd'),
 					'type' => 'header'
 				),
-				'currency_position' => array(
-					'id' => 'currency_position',
-					'name' => __('Currency Position', 'edd'),
-					'desc' => __('Choose the location of the currency sign.', 'edd'),
+				'select_skin' => array(
+					'id' => 'select_skin',
+					'name' => __('Select skin', 'edd'),
+					'desc' => __('This is the checkout page where buyers will complete their purchases. The [download_checkout] short code must be on this page.', 'edd'),
 					'type' => 'select',
+					'std' => '1',
 					'options' => array(
-						'before' => __('Before - $10', 'edd'),
-						'after' => __('After - 10$', 'edd')
+						'1' => __('Minimalist', 'edd'),
+						'2' => __('Functional', 'edd'),
+						'3'  => __('Playful', 'edd')
 					)
 				),
-				'thousands_separator' => array(
-					'id' => 'thousands_separator',
-					'name' => __('Thousands Separator', 'edd'),
+				'video_attributes' => array(
+					'id' => 'video_attributes',
+					'name' => '<strong>' . __('Video Attributes', 'edd') . '</strong>',
+					'desc' => __('Configure the video attributes', 'edd'),
+					'type' => 'header'
+				),
+				'autoplay' => array(
+					'id' => 'autoplay',
+					'name' => __('Autoplay', 'edd'),
+					'desc' => __('Check the box is enable autoplay.', 'edd'),
+					'type' => 'checkbox'
+				),
+				'loop' => array(
+					'id' => 'loop',
+					'name' => __('Loop', 'edd'),
+					'desc' => __('Check the box is enable video loop.', 'edd'),
+					'type' => 'checkbox'
+				),
+				'splash' => array(
+					'id' => 'splash',
+					'name' => '<strong>' . __('Splash Image', 'edd') . '</strong>',
+					'desc' => __('Configure the video attributes', 'edd'),
+					'type' => 'header'
+				),
+				'splash_image' => array(
+					'id' => 'splash_image',
+					'name' => __( 'Splash Image', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
+				),
+				'video_files' => array(
+					'id' => 'video_files',
+					'name' => '<strong>' . __('Add Videos', 'edd') . '</strong>',
+					'desc' => __('URLs for videos, at least one is needed. You need a video format supported by your web browser, otherwise the preview below does not work. About video formats.', 'edd'),
+					'type' => 'header'
+				),
+				'mp4' => array(
+					'id' => 'mp4',
+					'name' => __( 'mp4 format', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
+					'size' => 'large',
+				),
+				'webm' => array(
+					'id' => 'webm',
+					'name' => __( 'webm format', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
+				),
+				'ogg' => array(
+					'id' => 'ogg',
+					'name' => __( 'ogg format', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
+				),
+				'video_dimentions' => array(
+					'id' => 'video_dimentions',
+					'name' => '<strong>' . __('Video Dimentions', 'edd') . '</strong>',
+					'desc' => __('Configure the video dimensions', 'edd'),
+					'type' => 'header'
+				),
+				'max_width' => array(
+					'id' => 'max_width',
+					'name' => __('Max Width', 'edd'),
 					'desc' => __('The symbol (usually , or .) to separate thousands', 'edd'),
 					'type' => 'text',
 					'size' => 'small',
-					'std' => ','
 				),
-				'decimal_separator' => array(
-					'id' => 'decimal_separator',
-					'name' => __('Decimal Separator', 'edd'),
-					'desc' => __('The symbol (usually , or .) to separate decimal points', 'edd'),
+				'max_height' => array(
+					'id' => 'max_height',
+					'name' => __('Max Height', 'edd'),
+					'desc' => __('The symbol (usually , or .) to separate thousands', 'edd'),
 					'type' => 'text',
 					'size' => 'small',
-					'std' => '.'
+				),
+				'aspect_ratio' => array(
+					'id' => 'aspect_ratio',
+					'name' => __('Use videos aspect ratio', 'edd'),
+					'desc' => __('Check the box is enable autoplay.', 'edd'),
+					'type' => 'checkbox'
+				),
+				'fixed_width' => array(
+					'id' => 'fixed_width',
+					'name' => __('Fixed video', 'edd'),
+					'desc' => __('Check the box is enable autoplay.', 'edd'),
+					'type' => 'checkbox'
+				),
+				'subtitles' => array(
+					'id' => 'subtitles',
+					'name' => '<strong>' . __('Subtitles', 'edd') . '</strong>',
+					'desc' => __('Configure the video attributes', 'edd'),
+					'type' => 'header'
+				),
+				'subtitles_file' => array(
+					'id' => 'subtitles_file',
+					'name' => __( 'Subtitles', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
+				),
+				'currency' => array(
+					'id' => 'currency',
+					'name' => __('Currency', 'edd'),
+					'desc' => __('Choose your currency. Note that some payment gateways have currency restrictions.', 'edd'),
+					'type' => 'multicheck',
+					'options' => apply_filters('edd_accepted_payment_icons', array(
+							'mastercard' => 'Mastercard',
+							'visa' => 'Visa',
+							'americanexpress' => 'American Express',
+							'discover' => 'Discover',
+							'paypal' => 'PayPal'
+						)
+					)
 				),
 				'api_settings' => array(
 					'id' => 'api_settings',
 					'name' => '<strong>' . __('API Settings', 'edd') . '</strong>',
 					'desc' => '',
-					'type' => 'header'
-				),
-				'api_allow_user_keys' => array(
-					'id' => 'api_allow_user_keys',
-					'name' => __('Allow User Keys', 'edd'),
-					'desc' => __('Check this box to allow all users to generate API keys. Users with the \'manage_shop_settings\' capability are always allowed to generate keys.', 'edd'),
-					'type' => 'checkbox'
+					'type' => 'radio',
+					'std' => 'no',
+					'options' => array(
+						'yes' => __('Yes, I will enter prices inclusive of tax', 'edd'),
+						'no'  => __('No, I will enter prices exclusive of tax', 'edd')
+					)
 				)
 			)
 		)
