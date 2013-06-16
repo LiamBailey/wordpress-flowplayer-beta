@@ -48,7 +48,7 @@ function edd_register_settings() {
 				),
 				'commercial_version' => array(
 					'id' => 'commercial_version',
-					'name' => '<strong>' . __('Commercial Version', 'edd') . '</strong>',
+					'name' => __('Commercial Version', 'edd'),
 					'desc' => __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'edd'),
 					'type' => 'header'
 				),
@@ -246,9 +246,8 @@ function edd_register_settings() {
 function edd_header_callback( $args ) {
 	global $edd_options;
 
-	$checked = isset($edd_options[$args['id']]) ? checked(1, $edd_options[$args['id']], false) : '';
 	$html = '<h4 id="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"/> '  . $args['name'] . '</h4>';
-	$html .= '<span for="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</span>';
+	$html .= '<span id="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</span>';
 
 	echo $html;
 }
