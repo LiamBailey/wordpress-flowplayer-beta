@@ -28,13 +28,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 class wctest{
 	public function __construct(){
 		if(is_admin()){
-		add_action('admin_menu', array($this, 'add_plugin_page'));
 		add_action('admin_init', array($this, 'page_init'));
-	}
-	}
-
-	public function add_plugin_page(){
-		add_submenu_page( 'edit.php?post_type=flowplayer5video', 'Settings', 'Settings', 'edit_posts', 'flowplayer5', array($this, 'create_admin_page') );
+		}
 	}
 
 	public function create_admin_page(){
