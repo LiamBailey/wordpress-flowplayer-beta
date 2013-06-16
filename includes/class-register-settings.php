@@ -89,62 +89,6 @@ function edd_register_settings() {
 					'name' => __('CDN Hosted files', 'edd'),
 					'desc' => __('Uncheck this to load the files from this site', 'edd'),
 					'type' => 'checkbox'
-				),
-				'autoplay' => array(
-					'id' => 'autoplay',
-					'name' => __('Autoplay', 'edd'),
-					'desc' => __('Check the box is enable autoplay.', 'edd'),
-					'type' => 'checkbox'
-				),
-				'loop' => array(
-					'id' => 'loop',
-					'name' => __('Loop', 'edd'),
-					'desc' => __('Check the box is enable video loop.', 'edd'),
-					'type' => 'checkbox'
-				),
-				'splash' => array(
-					'id' => 'splash',
-					'name' => '<strong>' . __('Splash Image', 'edd') . '</strong>',
-					'desc' => __('Configure the video attributes', 'edd'),
-					'type' => 'header'
-				),
-				'video_files' => array(
-					'id' => 'video_files',
-					'name' => '<strong>' . __('Add Videos', 'edd') . '</strong>',
-					'desc' => __('URLs for videos, at least one is needed. You need a video format supported by your web browser, otherwise the preview below does not work. About video formats.', 'edd'),
-					'type' => 'header'
-				),
-				'mp4' => array(
-					'id' => 'mp4',
-					'name' => __( 'mp4 format', 'edd'),
-					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
-					'type' => 'upload',
-					'size' => 'large',
-				),
-				'currency' => array(
-					'id' => 'currency',
-					'name' => __('Currency', 'edd'),
-					'desc' => __('Choose your currency. Note that some payment gateways have currency restrictions.', 'edd'),
-					'type' => 'multicheck',
-					'options' => apply_filters('edd_accepted_payment_icons', array(
-							'mastercard' => 'Mastercard',
-							'visa' => 'Visa',
-							'americanexpress' => 'American Express',
-							'discover' => 'Discover',
-							'paypal' => 'PayPal'
-						)
-					)
-				),
-				'api_settings' => array(
-					'id' => 'api_settings',
-					'name' => '<strong>' . __('API Settings', 'edd') . '</strong>',
-					'desc' => '',
-					'type' => 'radio',
-					'std' => 'no',
-					'options' => array(
-						'yes' => __('Yes, I will enter prices inclusive of tax', 'edd'),
-						'no'  => __('No, I will enter prices exclusive of tax', 'edd')
-					)
 				)
 			)
 		)
