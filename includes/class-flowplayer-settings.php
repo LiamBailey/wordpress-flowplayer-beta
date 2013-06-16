@@ -34,9 +34,7 @@ class wctest{
 	}
 
 	public function add_plugin_page(){
-	// This page will be under "Settings"
-	add_options_page('Settings Admin', 'Settings', 'manage_options', 'test-setting-admin', array($this, 'create_admin_page'));
-	add_submenu_page('edit.php?post_type=flowplayer5video', 'Settings', 'Settings', 'edit_posts', basename(__FILE__), 'service_settings');
+	add_submenu_page('edit.php?post_type=flowplayer5video', 'Settings', 'Settings', 'edit_posts', basename(__FILE__), 'create_admin_page');
 	}
 
 	public function create_admin_page(){
@@ -58,7 +56,7 @@ class wctest{
 
 	public function page_init(){
 	register_setting('test_option_group', 'array_key', array($this, 'check_ID'));
-		
+
 		add_settings_section(
 		'setting_section_id',
 		'Setting',
