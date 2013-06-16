@@ -68,15 +68,27 @@ function edd_register_settings() {
 				'video_tracking' => array(
 					'id' => 'video_tracking',
 					'name' => '<strong>' . __('Video Tracking', 'edd') . '</strong>',
-					'desc' => __('Configure the video attribYou can track video traffic using Google Analytics (GA). Visit flowplayer.org for more info.utes', 'edd'),
+					'desc' => __('Configure the video attribYou can track video traffic using Google Analytics (GA). Visit flowplayer.org for more info', 'edd'),
 					'type' => 'header'
 				),
 				'ga_accountId' => array(
 					'id' => 'ga_accountId',
-					'name' => __('GA account ID', 'edd'),
+					'name' => __('Goofle Analytics account ID', 'edd'),
 					'desc' => __('Specify your GA account ID here.', 'edd'),
 					'type' => 'text',
 					'size' => 'small',
+				),
+				'cdn_options' => array(
+					'id' => 'cdn_options',
+					'name' => '<strong>' . __('CDN Options', 'edd') . '</strong>',
+					'desc' => __('If you want to use a self-hosted copy of Flowplayer instead of the CDN hosted version uncheck Use CDN hosted version? Using the CDN hosted version is preferable in most situations.', 'edd'),
+					'type' => 'header'
+				),
+				'cdn_option' => array(
+					'id' => 'cdn_option',
+					'name' => __('CDN Hosted files', 'edd'),
+					'desc' => __('Uncheck this to load the files from this site', 'edd'),
+					'type' => 'checkbox'
 				),
 				'autoplay' => array(
 					'id' => 'autoplay',
@@ -108,62 +120,6 @@ function edd_register_settings() {
 					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
 					'type' => 'upload',
 					'size' => 'large',
-				),
-				'webm' => array(
-					'id' => 'webm',
-					'name' => __( 'webm format', 'edd'),
-					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
-					'type' => 'upload',
-				),
-				'ogg' => array(
-					'id' => 'ogg',
-					'name' => __( 'ogg format', 'edd'),
-					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
-					'type' => 'upload',
-				),
-				'video_dimentions' => array(
-					'id' => 'video_dimentions',
-					'name' => '<strong>' . __('Video Dimentions', 'edd') . '</strong>',
-					'desc' => __('Configure the video dimensions', 'edd'),
-					'type' => 'header'
-				),
-				'max_width' => array(
-					'id' => 'max_width',
-					'name' => __('Max Width', 'edd'),
-					'desc' => __('The symbol (usually , or .) to separate thousands', 'edd'),
-					'type' => 'text',
-					'size' => 'small',
-				),
-				'max_height' => array(
-					'id' => 'max_height',
-					'name' => __('Max Height', 'edd'),
-					'desc' => __('The symbol (usually , or .) to separate thousands', 'edd'),
-					'type' => 'text',
-					'size' => 'small',
-				),
-				'aspect_ratio' => array(
-					'id' => 'aspect_ratio',
-					'name' => __('Use videos aspect ratio', 'edd'),
-					'desc' => __('Check the box is enable autoplay.', 'edd'),
-					'type' => 'checkbox'
-				),
-				'fixed_width' => array(
-					'id' => 'fixed_width',
-					'name' => __('Fixed video', 'edd'),
-					'desc' => __('Check the box is enable autoplay.', 'edd'),
-					'type' => 'checkbox'
-				),
-				'subtitles' => array(
-					'id' => 'subtitles',
-					'name' => '<strong>' . __('Subtitles', 'edd') . '</strong>',
-					'desc' => __('Configure the video attributes', 'edd'),
-					'type' => 'header'
-				),
-				'subtitles_file' => array(
-					'id' => 'subtitles_file',
-					'name' => __( 'Subtitles', 'edd'),
-					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
-					'type' => 'upload',
 				),
 				'currency' => array(
 					'id' => 'currency',
