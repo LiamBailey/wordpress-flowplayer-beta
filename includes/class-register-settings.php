@@ -40,29 +40,30 @@ function edd_register_settings() {
 		/** General Settings */
 		'general' => apply_filters('edd_settings_general',
 			array(
-				'logo_origin' => array(
-					'id' => 'logo_origin',
-					'name' => __('Show Logo on this site', 'edd'),
-					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'edd'),
-					'type' => 'checkbox'
-				),
 				'commercial_version' => array(
 					'id' => 'commercial_version',
 					'name' => '<h4>' . __('Commercial Version', 'edd') . '</h4>',
 					'desc' => __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'edd'),
 					'type' => 'header'
 				),
-				'select_skin' => array(
-					'id' => 'select_skin',
-					'name' => __('Select skin', 'edd'),
-					'desc' => __('This is the checkout page where buyers will complete their purchases. The [download_checkout] short code must be on this page.', 'edd'),
-					'type' => 'select',
-					'std' => '1',
-					'options' => array(
-						'1' => __('Minimalist', 'edd'),
-						'2' => __('Functional', 'edd'),
-						'3'  => __('Playful', 'edd')
-					)
+				'key' => array(
+					'id' => 'key',
+					'name' => __('License Key', 'edd'),
+					'desc' => __('Specify your License Key here.', 'edd'),
+					'type' => 'license',
+					'size' => 'small',
+				),
+				'splash_image' => array(
+					'id' => 'splash_image',
+					'name' => __( 'Splash Image', 'edd'),
+					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
+					'type' => 'upload',
+				),
+				'logo_origin' => array(
+					'id' => 'logo_origin',
+					'name' => __('Show Logo on this site', 'edd'),
+					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'edd'),
+					'type' => 'checkbox'
 				),
 				'video_tracking' => array(
 					'id' => 'video_tracking',
@@ -94,12 +95,6 @@ function edd_register_settings() {
 					'name' => '<strong>' . __('Splash Image', 'edd') . '</strong>',
 					'desc' => __('Configure the video attributes', 'edd'),
 					'type' => 'header'
-				),
-				'splash_image' => array(
-					'id' => 'splash_image',
-					'name' => __( 'Splash Image', 'edd'),
-					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
-					'type' => 'upload',
 				),
 				'video_files' => array(
 					'id' => 'video_files',
