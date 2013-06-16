@@ -269,12 +269,6 @@ jQuery(document).ready(function($){
 
 jQuery(document).ready(function ($) {
     $('#video video').remove();
-    $('#video').append('<video controls>' +
-        '<source type="video/mp4" src="' + $('#tgm-new-media-image').val() + '"/>' +
-        '<source type="video/webm" src="' + $('#webm-video').val() + '"/>' +
-        '<source type="video/webm" src="' + $('#ogg-video').val() + '"/>' +
-        '<track kind="subtitles" srclang="en" label="English" src="' + $('#webvtt').val() + '"/>' +
-        '</video>');
     $(".mediaUrl").blur(function () {
         $('#video video').remove();
         $('#video').append('<video controls>' +

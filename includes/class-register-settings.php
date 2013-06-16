@@ -25,12 +25,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-	if(is_admin()){
-	add_action( 'admin_init', 'edd_register_settings' );
-	}
+if(is_admin()){
+add_action( 'admin_init', 'edd_register_settings' );
+}
 
 
 function edd_register_settings() {
+
+	// Setup some default option sets
+	$pages = get_pages();
+	$pages_options = array( 0 => '' ); // Blank option
+	if ( $pages ) {
+		foreach ( $pages as $page ) {
+			$pages_options[ $page->ID ] = $page->post_title;
+		}
+	}
 
 /**
 	 * 'Whitelisted' EDD settings, filters are provided for each settings
