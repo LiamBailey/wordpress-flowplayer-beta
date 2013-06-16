@@ -64,11 +64,18 @@ function edd_register_settings() {
 						'3'  => __('Playful', 'edd')
 					)
 				),
-				'video_attributes' => array(
-					'id' => 'video_attributes',
-					'name' => '<strong>' . __('Video Attributes', 'edd') . '</strong>',
-					'desc' => __('Configure the video attributes', 'edd'),
+				'video_tracking' => array(
+					'id' => 'video_tracking',
+					'name' => '<strong>' . __('Video Tracking', 'edd') . '</strong>',
+					'desc' => __('Configure the video attribYou can track video traffic using Google Analytics (GA). Visit flowplayer.org for more info.utes', 'edd'),
 					'type' => 'header'
+				),
+				'ga_accountId' => array(
+					'id' => 'ga_accountId',
+					'name' => __('GA account ID', 'edd'),
+					'desc' => __('Specify your GA account ID here.', 'edd'),
+					'type' => 'text',
+					'size' => 'small',
 				),
 				'autoplay' => array(
 					'id' => 'autoplay',
@@ -237,7 +244,13 @@ function edd_register_settings() {
  * @return void
  */
 function edd_header_callback( $args ) {
-	echo '';
+	global $edd_options;
+
+	$checked = isset($edd_options[$args['id']]) ? checked(1, $edd_options[$args['id']], false) : '';
+	$html = '<h4 id="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"/> '  . $args['name'] . '</h4>';
+	$html .= '<span for="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</span>';
+
+	echo $html;
 }
 
 /**
