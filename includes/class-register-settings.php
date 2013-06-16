@@ -48,7 +48,7 @@ function edd_register_settings() {
 				),
 				'commercial_version' => array(
 					'id' => 'commercial_version',
-					'name' => __('Commercial Version', 'edd'),
+					'name' => '<h4>' . __('Commercial Version', 'edd') . '</h4>',
 					'desc' => __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'edd'),
 					'type' => 'header'
 				),
@@ -244,8 +244,7 @@ function edd_register_settings() {
  * @return void
  */
 function edd_header_callback( $args ) {
-
-	echo '<p class="description">' . $args['desc'] . '</p>'
+	echo '<p class="description">' . $args['desc'] . '</p>';
 }
 
 /**
