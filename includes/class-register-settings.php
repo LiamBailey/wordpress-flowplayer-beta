@@ -46,10 +46,10 @@ function edd_register_settings() {
 					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'edd'),
 					'type' => 'checkbox'
 				),
-				'video_options' => array(
-					'id' => 'video_options',
-					'name' => '<strong>' . __('Video Settings', 'edd') . '</strong>',
-					'desc' => __('Configure the video options', 'edd'),
+				'commercial_version' => array(
+					'id' => 'commercial_version',
+					'name' => '<strong>' . __('Commercial Version', 'edd') . '</strong>',
+					'desc' => __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'edd'),
 					'type' => 'header'
 				),
 				'select_skin' => array(
