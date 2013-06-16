@@ -25,11 +25,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if(is_admin()){
-add_action( 'admin_init', 'edd_register_settings' );
-}
-
-
 function edd_register_settings() {
 
 	// Setup some default option sets
@@ -134,9 +129,11 @@ function edd_register_settings() {
 	}
 
 	// Creates our settings in the options table
-	register_setting( 'edd_settings_general',    'edd_settings_general',    'edd_settings_sanitize' );
+	register_setting( 'edd_settings_general', 'edd_settings_general', 'edd_settings_sanitize' );
 
 }
+
+add_action( 'admin_init', 'edd_register_settings' );
 
 /**
  * Header Callback
@@ -355,7 +352,7 @@ function edd_upload_callback($args) {
 	$size = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 
 	$html = '<input type="text" class="' . $args['size'] . '-text edd_upload_field" id="edd_settings_' . $args['section'] . '[' . $args['id'] . ']" name="edd_settings_' . $args['section'] . '[' . $args['id'] . ']" value="' . esc_attr( $value ) . '"/>';
-	$html .= '<span>&nbsp;<input type="button" class="edd_settings_upload_button button-secondary" value="' . __( 'Upload File', 'edd' ) . '"/></span>';
+	$html .= '<span>&nbsp;<input type="button" class="edd_settings_upload_button button-secondary" value="' . __( 'Upload Logo', 'edd' ) . '"/></span>';
 	$html .= '<label for="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 
 	echo $html;
@@ -385,7 +382,7 @@ function edd_settings_sanitize( $input ) {
  * @return array Merged array of all the EDD settings
  */
 function edd_get_settings() {
-	$general_settings = is_array( get_option( 'edd_settings_general' ) )    ? get_option( 'edd_settings_general' )  : array();
+	$general_settings = is_array( get_option( 'edd_settings_general' ) ) ? get_option( 'edd_settings_general' )  : array();
 
 	return array_merge( $general_settings );
 }
