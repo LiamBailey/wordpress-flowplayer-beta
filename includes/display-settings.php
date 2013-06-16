@@ -1,12 +1,29 @@
-<div id="fp5_global" class="wrap">
-	<div id="flowplayer5-icon" style="background: url('http://flowplayer.org/favicon.ico') no-repeat;" class="icon32"></br></div>
-	<h2><?php _e('Flowplayer5 options') ?></h2>
-		<form method="post" action="options.php"> 
-			<?php @settings_fields('flowplayer5-group'); ?>
-			<?php @do_settings_fields('flowplayer5-group'); ?>
+<?php
+/**
+ * Represents the view for the administration dashboard.
+ *
+ * This includes the header, options, and other information that should provide
+ * The User Interface to the end user.
+ *
+ * @package   PluginName
+ * @author    Your Name <email@example.com>
+ * @license   GPL-2.0+
+ * @link      http://example.com
+ * @copyright 2013 Your Name or Company Name
+ */
+?>
+<div class="wrap">
 
-			<?php do_settings_sections('flowplayer5'); ?>
+	<?php screen_icon(); ?>
+	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
-			<?php @submit_button(); ?>
-		</form>
+	<form method="post" action="options.php">
+		<?php
+		// This prints out all hidden setting fields
+		settings_fields('test_option_group');
+		do_settings_sections('test-setting-admin');
+		?>
+		<?php submit_button(); ?>
+	</form>
+
 </div>

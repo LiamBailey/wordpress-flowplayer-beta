@@ -29,24 +29,7 @@ class wctest{
 	public function __construct(){
 		if(is_admin()){
 		add_action('admin_init', array($this, 'page_init'));
-		}
 	}
-
-	public function create_admin_page(){
-		?>
-	<div class="wrap">
-		<?php screen_icon(); ?>
-		<h2>Settings</h2>
-		<form method="post" action="options.php">
-			<?php
-			// This prints out all hidden setting fields
-			settings_fields('test_option_group');
-			do_settings_sections('test-setting-admin');
-		?>
-			<?php submit_button(); ?>
-		</form>
-	</div>
-	<?php
 	}
 
 	public function page_init(){

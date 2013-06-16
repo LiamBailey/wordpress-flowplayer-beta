@@ -277,7 +277,7 @@ class Flowplayer5 {
 	 * @since    1.0.0
 	 */
 	public function display_plugin_admin_page() {
-		include_once( 'includes/class-flowplayer-settings.php' );
+		include_once( 'includes/display-settings.php' );
 	}
 
 	/**
