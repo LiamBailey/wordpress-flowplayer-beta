@@ -50,7 +50,7 @@ function edd_register_settings() {
 					'id' => 'key',
 					'name' => __('License Key', 'edd'),
 					'desc' => __('Specify your License Key here.', 'edd'),
-					'type' => 'license',
+					'type' => 'license_key',
 					'size' => 'small',
 				),
 				'splash_image' => array(
