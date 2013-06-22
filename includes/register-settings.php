@@ -155,17 +155,3 @@ function fp5_settings_sanitize( $input ) {
 	add_settings_error( 'fp5-notices', '', __('Settings Updated', 'fp5'), 'updated' );
 	return $input;
 }
-
-/**
- * Get Settings
- *
- * Retrieves all plugin settings and returns them as a combined array.
- *
- * @since 1.0
- * @return array Merged array of all the fp5 settings
- */
-function fp5_get_settings() {
-	$general_settings = get_option( 'fp5_settings_general' );
-
-	return $general_settings;
-}
