@@ -13,56 +13,25 @@ function add_fp5_shortcode($atts) {
 $version = '1.0.0-beta';
 $plugin_slug = 'flowplayer5';
 $player_version = '5.4.1';
-global $post;
+
 //post_id
 	$id = $atts['id'];
 
 	// get the meta from the post type
 
-	$loop      = get_post_meta( $id, 'loop', true );
-	$autoplay  = get_post_meta( $id, 'autoplay', true );
-	$subtitles = get_post_meta( $id, 'webvtt', true );
-	$skin      = get_post_meta( $id, 'fp5-select-skin', true );
-	$splash    = '';
-	$mp4       = get_post_meta( $id, 'tgm-new-media-image', true );
-	$webm      = get_post_meta( $id, 'webm-video', true );
-	$ogg       = get_post_meta( $id, 'ogg-video', true) ;
-	$width     = get_post_meta( $id, 'max-width', true );
-	$height    = get_post_meta( $id, 'max-height', true );
-	$ratio     = get_post_meta( $id, 'aspect-ratio', true );
-	$fixed     = get_post_meta( $id, 'fixed-width', true );
-	
-	// Checks and displays the retrieved value
-	if( !empty( $loop ) ) {
-		return $loop;
-	}
-	if( !empty( $autoplay ) ) {
-		echo $autoplay;
-	}
-	if( !empty( $subtitles ) ) {
-		echo $subtitles;
-	}
-	if( !empty( $mp4 ) ) {
-		echo $mp4;
-	}
-	if( !empty( $webm ) ) {
-		echo $webm;
-	}
-	if( !empty( $ogg ) ) {
-		echo $ogg;
-	}
-	if( !empty( $width ) ) {
-		echo $width;
-	}
-	if( !empty( $height ) ) {
-		echo $height;
-	}
-	if( !empty( $ratio ) ) {
-		echo $ratio;
-	}
-	if( !empty( $fixed ) ) {
-		echo $fixed;
-	}
+	$loop = get_post_meta($id, 'fp5_loop', true);
+	$autoplay = get_post_meta($id, 'fp5_autoplay', true);
+	$subtitles = get_post_meta($id, 'fp5_subtitles', true);
+	$skin = get_post_meta($id,'fp5_selectSkin',true);
+	$splash = get_post_meta($id,'fp5_splash',true);
+	$mp4 = get_post_meta($id,'fp5_mp4',true);
+	$webm = get_post_meta($id,'fp5_webm',true);
+	$ogg = get_post_meta($id,'fp5_ogg',true);
+	$width = get_post_meta($id,'fp5_width',true);
+	$height = get_post_meta($id,'fp5_height',true);
+	$ratio = get_post_meta($id,'fp5_ratio',true);
+	$fixed = get_post_meta($id,'fp5_fixed',true);
+
 
 	// set the options for the shortcode - pulled from the display-settings.php
 	$options = get_option('fp5_options');
@@ -77,10 +46,13 @@ global $post;
 		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/' . $skin . '.css' );
 		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
 	} else {
-		//wp_enqueue_style( $plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/' . $skin . '.css', dirname(__FILE__) ), $player_version );
-		//wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', dirname(__FILE__) ), array( 'jquery' ), $version, false );
+		wp_enqueue_style( $plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/' . $skin . '.css', dirname(__FILE__) ), $player_version );
+		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', dirname(__FILE__) ), array( 'jquery' ), $version, false );
 	}
 
+    //video_custompost_id
+    $id = $atts['id'];
+    
     //get the splash image or featured image
    if(!isset($splash)):
    $splash = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
@@ -113,14 +85,13 @@ global $post;
 
 //shortcode processing
     $ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
-    $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px;height:' . $height . 'px; ' : 'max-width:' . $width . 'px');
+    $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? '"width:' . $width . 'px;height:' . $height . 'px;" ' : '"max-width:' . $width . 'px"');
     $splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
-    //$class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
-    $class = 'flowplayer';
-    $data_key = ( $key != '' ? $key : '');
-    $data_logo = ( $key != '' && $logo != '' ?  $logo : '' );
-    $data_analytics = ( $analytics != '' ?  $analytics  : '' );
-    $data_ratio = ( $ratio != 0 ? $ratio : '' );
+    $class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
+    $data_key = ( $key != '' ? ' "' . $key . '"' : '');
+    $data_logo = ( $key != '' && $logo != '' ? ' "' . $logo . '"' : '' );
+    $data_analytics = ( $analytics != '' ? ' "' . $analytics . '"' : '' );
+    $data_ratio = ( $ratio != 0 ? '"' . $ratio . '"' : '' );
     $attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
     ( ( $loop == 'true' ) ? $loop : '' );
     //( ( $preload == 'true' ) ? $preload : '' );
@@ -133,7 +104,7 @@ $return = '';
             $return .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
         }
     $return.='</script>';
-    $return.=    '<div style="' . $fixedStyle . $splash_style . '" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
+    $return.=    '<div style=' . $fixedStyle . $splash_style . ' class=' . $class . ' data-key=' . $data_key . ' data-logo=' . $data_logo . ' data-analytics=' . $data_analytics . ' data-ratio=' . $data_ratio . '>';
     $return.=     '<video' . $attributes . '>';
         $mp4 != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
         $webm != '' ? $return.='<source type="video/webm" src="' . $webm . '"/>' : '';

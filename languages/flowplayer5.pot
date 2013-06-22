@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flowplayer5 for WordPress\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-10 08:14+0100\n"
-"PO-Revision-Date: 2013-03-10 08:14+0100\n"
+"POT-Creation-Date: 2013-06-22 19:47+0100\n"
+"PO-Revision-Date: 2013-06-22 19:47+0100\n"
 "Last-Translator: Ulrich Pogson <grapplerulrich@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,100 +16,195 @@ msgstr ""
 "X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/admin.php:8
+#: class-flowplayer.php:224
+msgid "Upload or choose a splash image"
+msgstr ""
+
+#: class-flowplayer.php:225
+msgid "Insert Splash Image"
+msgstr ""
+
+#: class-flowplayer.php:230
+msgid "Upload or choose a mp4 video file"
+msgstr ""
+
+#: class-flowplayer.php:231
+msgid "Insert mp4 Video"
+msgstr ""
+
+#: class-flowplayer.php:236
+msgid "Upload or choose a webm video file"
+msgstr ""
+
+#: class-flowplayer.php:237
+msgid "Insert webm Video"
+msgstr ""
+
+#: class-flowplayer.php:242
+msgid "Upload or choose a ogg video file"
+msgstr ""
+
+#: class-flowplayer.php:243
+msgid "Insert ogg Video"
+msgstr ""
+
+#: class-flowplayer.php:248
+msgid "Upload or choose a webvtt file"
+msgstr ""
+
+#: class-flowplayer.php:249
+msgid "Insert webvtt"
+msgstr ""
+
+#: class-flowplayer.php:254
+msgid "Upload or choose a logo"
+msgstr ""
+
+#: class-flowplayer.php:255
+msgid "Insert Logo"
+msgstr ""
+
+#: class-flowplayer.php:295
+msgid "Flowplayer Settings"
+msgstr ""
+
+#: class-flowplayer.php:296
+msgid "Settings"
+msgstr ""
+
+#: class-flowplayer.php:324
+msgid "Videos"
+msgstr ""
+
+#: class-flowplayer.php:325 class-flowplayer.php:326 class-flowplayer.php:340
+msgid "Video"
+msgstr ""
+
+#: class-flowplayer.php:327
+msgid "Parent Video"
+msgstr ""
+
+#: class-flowplayer.php:328
+msgid "All Videos"
+msgstr ""
+
+#: class-flowplayer.php:329
+msgid "View Video"
+msgstr ""
+
+#: class-flowplayer.php:330
+msgid "Add New Video"
+msgstr ""
+
+#: class-flowplayer.php:331
+msgid "New Video"
+msgstr ""
+
+#: class-flowplayer.php:332
+msgid "Edit Video"
+msgstr ""
+
+#: class-flowplayer.php:333
+msgid "Update Video"
+msgstr ""
+
+#: class-flowplayer.php:334
+msgid "Search videos"
+msgstr ""
+
+#: class-flowplayer.php:335
+msgid "No videos found"
+msgstr ""
+
+#: class-flowplayer.php:336
+msgid "No videos found in Trash"
+msgstr ""
+
+#: class-flowplayer.php:341
+msgid "Flowplayer videos"
+msgstr ""
+
+#: includes/class-flowplayer-meta-box.php:64
+msgid "Video Details"
+msgstr ""
+
+#: includes/class-flowplayer-meta-box.php:89
 msgid "Select skin"
 msgstr ""
 
-#: includes/admin.php:23
+#: includes/class-flowplayer-meta-box.php:100
 msgid "Video attributes"
 msgstr ""
 
-#: includes/admin.php:23
-msgid "(Info)"
-msgstr ""
-
-#: includes/admin.php:27
+#: includes/class-flowplayer-meta-box.php:104
 msgid "Autoplay?"
 msgstr ""
 
-#: includes/admin.php:31
+#: includes/class-flowplayer-meta-box.php:108
 msgid "Loop?"
 msgstr ""
 
-#: includes/admin.php:39
-msgid "Splash image"
+#: includes/class-flowplayer-meta-box.php:114
+msgid "Splash Image"
 msgstr ""
 
-#: includes/admin.php:39
-msgid "(optional)"
+#: includes/class-flowplayer-meta-box.php:116
+msgid "Add splash image"
 msgstr ""
 
-#: includes/admin.php:42 includes/admin.php:54 includes/admin.php:143
-msgid "Media Library"
+#: includes/class-flowplayer-meta-box.php:120
+msgid "mp4 video"
 msgstr ""
 
-#: includes/admin.php:48
-msgid ""
-"URLs for videos, at least one is needed. You need a video format supported "
-"by your web browser, otherwise the preview below does not work."
+#: includes/class-flowplayer-meta-box.php:122
+msgid "Add mp4 video"
 msgstr ""
 
-#: includes/admin.php:49
-msgid "About video formats"
+#: includes/class-flowplayer-meta-box.php:126
+msgid "webm video"
 msgstr ""
 
-#: includes/admin.php:52
-msgid "webm"
+#: includes/class-flowplayer-meta-box.php:128
+msgid "Add webm video"
 msgstr ""
 
-#: includes/admin.php:57
-msgid "mp4"
+#: includes/class-flowplayer-meta-box.php:132
+msgid "ogg video"
 msgstr ""
 
-#: includes/admin.php:61
-msgid "ogg"
+#: includes/class-flowplayer-meta-box.php:134
+msgid "Add ogg video"
 msgstr ""
 
-#: includes/admin.php:71
-msgid ""
-"Maximum dimensions for the player are determined from the provided video "
-"files. You can change this size below. Fixing the player size disables "
-"scaling for different screen sizes."
+#: includes/class-flowplayer-meta-box.php:138
+msgid "webvtt file"
 msgstr ""
 
-#: includes/admin.php:74
+#: includes/class-flowplayer-meta-box.php:140
+msgid "Add webvtt file"
+msgstr ""
+
+#: includes/class-flowplayer-meta-box.php:144
+msgid "Preview"
+msgstr ""
+
+#: includes/class-flowplayer-meta-box.php:150
 msgid "Max width"
 msgstr ""
 
-#: includes/admin.php:78
+#: includes/class-flowplayer-meta-box.php:154
 msgid "Use video's aspect ratio"
 msgstr ""
 
-#: includes/admin.php:82
+#: includes/class-flowplayer-meta-box.php:156
 msgid "Max height"
 msgstr ""
 
-#: includes/admin.php:86
+#: includes/class-flowplayer-meta-box.php:160
 msgid "Use fixed player size"
 msgstr ""
 
-#: includes/admin.php:94
-msgid "You can include subtitles by supplying an URL to a WEBVTT file"
-msgstr ""
-
-#: includes/admin.php:99
-msgid "WEBVTT URL: "
-msgstr ""
-
-#: includes/admin.php:106
-msgid "Send to Editor &raquo;"
-msgstr ""
-
-#: includes/admin.php:130
-msgid "Commercial version"
-msgstr ""
-
-#: includes/admin.php:131
+#: includes/register-settings.old.php:57
 #, php-format
 msgid ""
 "Commercial version removes the Flowplayer logo and allows you to use your "
@@ -117,46 +212,96 @@ msgid ""
 "org</a>."
 msgstr ""
 
-#: includes/admin.php:137
-msgid "License key"
+#: includes/register-settings.old.php:91
+msgid "Add Logo"
 msgstr ""
 
-#: includes/admin.php:141
-msgid "Logo URL"
+#: includes/register-settings.old.php:115
+msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: includes/admin.php:147
-msgid "Show logo also in the origin site"
+#: includes/register-settings.php:49
+msgid "Commercial Version"
 msgstr ""
 
-#: includes/admin.php:151
+#: includes/register-settings.php:50
+msgid ""
+"Commercial version removes the Flowplayer logo and allows you to use your "
+"own logo image. You can purchase a license and obtain a license key in "
+"flowplayer.org."
+msgstr ""
+
+#: includes/register-settings.php:55
+msgid "License Key"
+msgstr ""
+
+#: includes/register-settings.php:56
+msgid "Specify your License Key here."
+msgstr ""
+
+#: includes/register-settings.php:62
+msgid "Logo"
+msgstr ""
+
+#: includes/register-settings.php:68
+msgid "Show Logo on this site"
+msgstr ""
+
+#: includes/register-settings.php:69
+msgid "Uncheck this and the logo is only shown in externally embedded players."
+msgstr ""
+
+#: includes/register-settings.php:74
+msgid "Video Tracking"
+msgstr ""
+
+#: includes/register-settings.php:75
+msgid ""
+"Configure the video attribYou can track video traffic using Google Analytics "
+"(GA). Visit flowplayer.org for more info"
+msgstr ""
+
+#: includes/register-settings.php:80
+msgid "Goofle Analytics account ID"
+msgstr ""
+
+#: includes/register-settings.php:81
+msgid "Specify your GA account ID here."
+msgstr ""
+
+#: includes/register-settings.php:87
+msgid "CDN Options"
+msgstr ""
+
+#: includes/register-settings.php:88
+msgid ""
+"If you want to use a self-hosted copy of Flowplayer instead of the CDN "
+"hosted version uncheck Use CDN hosted version? Using the CDN hosted version "
+"is preferable in most situations."
+msgstr ""
+
+#: includes/register-settings.php:93
+msgid "CDN Hosted files"
+msgstr ""
+
+#: includes/register-settings.php:94
+msgid "Uncheck this to load the files from this site"
+msgstr ""
+
+#: includes/register-settings.php:107
+msgid "General Settings"
+msgstr ""
+
+#: includes/register-settings.php:280
 #, php-format
 msgid ""
-"Uncheck this and the logo is only shown in <a%s>virally embedded players</a>"
+"The callback function used for the <strong>%s</strong> setting is missing."
 msgstr ""
 
-#: includes/admin.php:160
-msgid "Tracking"
+#: includes/register-settings.php:330
+msgid "Upload Logo"
 msgstr ""
 
-#: includes/admin.php:161
-msgid ""
-"You can track video traffic using Google Analytics (GA). Specify your GA "
-"account ID here."
-msgstr ""
-
-#: includes/admin.php:165
-msgid "GA account"
-msgstr ""
-
-#: includes/admin.php:287
-msgid "Use as logo"
-msgstr ""
-
-#: includes/admin.php:290
-msgid "Use as splash"
-msgstr ""
-
-#: includes/admin.php:293
-msgid "Use with Flowplayer"
+#: includes/register-settings.php:347
+msgid "Settings Updated"
 msgstr ""
