@@ -60,7 +60,8 @@ function fp5_register_settings() {
 				'logo' => array(
 					'id' => 'logo',
 					'name' => __( 'Logo', 'fp5'),
-					'type' => 'upload'
+					'type' => 'upload',
+					'desc' => ''
 				),
 				'logo_origin' => array(
 					'id' => 'logo_origin',
