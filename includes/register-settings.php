@@ -167,5 +167,5 @@ function fp5_settings_sanitize( $input ) {
 function fp5_get_settings() {
 	$general_settings = get_option( 'fp5_settings_general' );
 
-	return $general_settings );
+	return $general_settings;
 }
