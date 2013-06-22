@@ -249,7 +249,7 @@ class Flowplayer5 {
 				'button' => __( 'Insert webvtt', 'flowplayer5' )                   // This will be used as the default button text
 			)
 		);
-		wp_localize_script( $this->plugin_slug . '-media', 'lgo',
+		wp_localize_script( $this->plugin_slug . '-media', 'logo',
 			array(
 				'title'  => __( 'Upload or choose a logo', 'flowplayer5' ), // This will be used as the default title
 				'button' => __( 'Insert Logo', 'flowplayer5' )                   // This will be used as the default button text
