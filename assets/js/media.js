@@ -116,7 +116,7 @@ jQuery(document).ready(function($){
              * localized stuff and such. Let's populate the title with our custom
              * text.
              */
-            title: tgm_nmp_media.title,
+            title: mp4_video.title,
 
             /**
              * We can force what type of media to show when the user views his/her
@@ -140,7 +140,7 @@ jQuery(document).ready(function($){
              * own events here, but the default event will work just fine.
              */
             button: {
-                text:  tgm_nmp_media.button
+                text:  mp4_video.button
             }
         });
 
@@ -196,14 +196,14 @@ jQuery(document).ready(function($){
 
             multiple: false,
 
-            title: tgm_nmp_media.title,
+            title: webm_video.title,
 
             library: {
                 type: 'video/webm'
             },
 
             button: {
-                text:  tgm_nmp_media.button
+                text:  webm_video.button
             }
         });
 
@@ -244,14 +244,14 @@ jQuery(document).ready(function($){
 
             multiple: false,
 
-            title: tgm_nmp_media.title,
+            title: ogg_video.title,
 
             library: {
                 type: 'video/ogg'
             },
 
             button: {
-                text:  tgm_nmp_media.button
+                text:  ogg_video.button
             }
         });
 
@@ -292,14 +292,14 @@ jQuery(document).ready(function($){
 
             multiple: false,
 
-            title: tgm_nmp_media.title,
+            title: webvtt.title,
 
             library: {
                 type: 'text/vtt'
             },
 
             button: {
-                text:  tgm_nmp_media.button
+                text:  webvtt.button
             }
         });
 
@@ -321,7 +321,7 @@ jQuery(document).ready(function ($) {
     $(".mediaUrl").blur(function () {
         $('#video video').remove();
         $('#video').append('<video controls>' +
-            '<source type="video/mp4" src="' + $('#tgm-new-media-image').val() + '"/>' +
+            '<source type="video/mp4" src="' + $('#mp4-video').val() + '"/>' +
             '<source type="video/webm" src="' + $('#webm-video').val() + '"/>' +
             '<source type="video/webm" src="' + $('#ogg-video').val() + '"/>' +
             '<track kind="subtitles" srclang="en" label="English" src="' + $('#webvtt').val() + '"/>' +
