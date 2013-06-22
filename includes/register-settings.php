@@ -35,12 +35,6 @@ function fp5_register_settings() {
 		/** Commercial Settings */
 		'commercial' => apply_filters('fp5_settings_commercial',
 			array(
-				'commercial_version' => array(
-					'id' => 'commercial_version',
-					'name' => '<h4>' . __('Commercial Version', 'fp5') . '</h4>',
-					'desc' => __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'fp5'),
-					'type' => 'header'
-				),
 				'key' => array(
 					'id' => 'key',
 					'name' => __('License Key', 'fp5'),
@@ -83,7 +77,7 @@ function fp5_register_settings() {
 	}
 
 	// Creates our settings in the options table
-	register_setting( 'fp5_settings_commercial', 'fp5_settings_commercial', 'fp5_settings_sanitize' );
+	register_setting( 'flowplayer5', 'flowplayer5', 'fp5_settings_sanitize' );
 
 }
 
