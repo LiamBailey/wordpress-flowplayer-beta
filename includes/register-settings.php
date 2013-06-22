@@ -68,7 +68,7 @@ function fp5_register_settings() {
 			'fp5_settings_commercial[' . $option['id'] . ']',
 			$option['name'],
 			function_exists( 'fp5_' . $option['type'] . '_callback' ) ? 'fp5_' . $option['type'] . '_callback' : 'fp5_missing_callback',
-			'fp5_settings_commercial',
+			'flowplayer5',
 			'fp5_settings_commercial',
 			array(
 				'id' => $option['id'],
