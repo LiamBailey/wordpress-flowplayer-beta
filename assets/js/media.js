@@ -34,7 +34,7 @@ jQuery(document).ready(function($){
             title: splash_image.title,
 
             library: {
-                type: 'video/webm'
+                type: 'image'
             },
 
             button: {

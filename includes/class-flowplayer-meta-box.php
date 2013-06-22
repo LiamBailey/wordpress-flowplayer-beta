@@ -113,7 +113,7 @@ class fp5_metabox {
 		<p>
 			<label for="splash-image"><?php _e( 'Splash Image', $this->plugin_slug )?></label>
 			<input class="mediaUrl" type="text" id="splash-image" size="70" value="<?php echo $fp5_stored_meta['splash-image'][0]; ?>" name="splash-image" />
-			<a href="#" class="fp5-add-splash-image button button-primary" title="<?php _e( 'Add mp4 video', $this->plugin_slug )?>"><?php _e( 'Add mp4 video', $this->plugin_slug )?></a>
+			<a href="#" class="fp5-add-splash-image button button-primary" title="<?php _e( 'Add splash image', $this->plugin_slug )?>"><?php _e( 'Add splash image', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
