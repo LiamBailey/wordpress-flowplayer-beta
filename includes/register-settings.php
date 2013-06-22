@@ -142,6 +142,53 @@ function fp5_text_callback( $args ) {
 }
 
 /**
+ * Upload Callback
+ *
+ * Renders upload fields.
+ *
+ * @since 1.0
+ * @param array $args Arguments passed by the setting
+ * @global $fp5_options Array of all the fp5 Options
+ * @return void
+ */
+function fp5_upload_callback($args) {
+	global $fp5_options;
+
+	if ( isset( $fp5_options[ $args['id'] ] ) )
+		$value = $fp5_options[$args['id']];
+	else
+		$value = isset($args['std']) ? $args['std'] : '';
+
+	$size = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
+
+	$html = '<input type="text" class="' . $args['size'] . '-text fp5_upload_field" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" value="' . esc_attr( $value ) . '"/>';
+	$html .= '<span>&nbsp;<input type="button" class="fp5_settings_upload_button button-secondary" value="' . __( 'Upload Logo', 'fp5' ) . '"/></span>';
+	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+
+	echo $html;
+}
+
+/**
+ * Checkbox Callback
+ *
+ * Renders checkboxes.
+ *
+ * @since 1.0
+ * @param array $args Arguments passed by the setting
+ * @global $fp5_options Array of all the fp5 Options
+ * @return void
+ */
+function fp5_checkbox_callback( $args ) {
+	global $fp5_options;
+
+	$checked = isset($fp5_options[$args['id']]) ? checked(1, $fp5_options[$args['id']], false) : '';
+	$html = '<input type="checkbox" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" value="1" ' . $checked . '/>';
+	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+
+	echo $html;
+}
+
+/**
  * Settings Taxes Description Callback
  *
  * Renders the taxes section description.
