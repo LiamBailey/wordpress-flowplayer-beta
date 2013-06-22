@@ -42,13 +42,6 @@ function fp5_register_settings() {
 					'type' => 'text',
 					'size' => 'medium'
 				),
-				'key' => array(
-					'id' => 'key',
-					'name' => __('License Key', 'fp5'),
-					'desc' => __('Specify your License Key here.', 'fp5'),
-					'type' => 'text',
-					'size' => 'medium'
-				),
 				'logo' => array(
 					'id' => 'logo',
 					'name' => __( 'Logo', 'fp5'),
