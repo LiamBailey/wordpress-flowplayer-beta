@@ -58,8 +58,8 @@ function fp5_register_settings() {
 
 	add_settings_section(
 		'fp5_settings_general',
-		__( 'General Settings', 'fp5' ),
-		'__return_false',
+		__( 'Commercial Version', 'fp5' ),
+		__('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'fp5'),
 		'fp5_settings_general'
 	);
 
