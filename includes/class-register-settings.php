@@ -255,7 +255,26 @@ function fp5_text_callback( $args ) {
 function fp5_textarea_callback( $args ) {
 	global $fp5_options;
 
-fp5 * @return void
+	if ( isset( $edd_options[ $args['id'] ] ) )
+		$value = $edd_options[ $args['id'] ];
+	else
+		$value = isset( $args['std'] ) ? $args['std'] : '';
+
+	$size = isset( $args['size'] ) && !is_null($args['size']) ? $args['size'] : 'regular';
+	$html = '<textarea class="large-text" cols="50" rows="5" id="edd_settings_' . $args['section'] . '[' . $args['id'] . ']" name="edd_settings_' . $args['section'] . '[' . $args['id'] . ']">' . esc_textarea( $value ) . '</textarea>';
+	$html .= '<label for="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+
+	echo $html;
+}
+
+/**
+ * Missing Callback
+ *
+ * If a function is missing for settings callbacks alert the user.
+ *
+ * @since 1.3.1
+ * @param array $args Arguments passed by the setting
+ * @return void
  */
 function fp5_missing_callback($args) {
 	printf( __( 'The callback function used for the <strong>%s</strong> setting is missing.', 'fp5' ), $args['id'] );
