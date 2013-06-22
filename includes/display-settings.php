@@ -21,8 +21,8 @@
 	<form method="post" action="options.php">
 		<?php
 		// This prints out all hidden setting fields
-		settings_fields( 'fp5_settings_general' );
-		do_settings_sections( 'fp5_settings_general' );
+		settings_fields( 'fp5_settings_commercial' );
+		do_settings_sections( 'fp5_settings_commercial' );
 		submit_button();
 		?>
 	</form>
