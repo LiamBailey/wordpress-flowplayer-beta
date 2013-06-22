@@ -57,9 +57,9 @@ function edd_register_settings() {
 					'type' => 'text',
 					'size' => 'small',
 				),
-				'splash_image' => array(
-					'id' => 'splash_image',
-					'name' => __( 'Splash Image', 'edd'),
+				'logo' => array(
+					'id' => 'logo',
+					'name' => __( 'Logo', 'edd'),
 					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'edd'),
 					'type' => 'upload',
 				),
