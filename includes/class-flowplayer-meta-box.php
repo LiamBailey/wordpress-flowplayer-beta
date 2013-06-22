@@ -111,9 +111,15 @@ class fp5_metabox {
 		</p>
 
 		<p>
-			<label for="tgm-new-media-image"><?php _e( 'mp4 video', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="tgm-new-media-image" size="70" value="<?php echo $fp5_stored_meta['tgm-new-media-image'][0]; ?>" name="tgm-new-media-image" />
-			<a href="#" class="tgm-open-media button button-primary" title="<?php _e( 'Add mp4 video', $this->plugin_slug )?>"><?php _e( 'Add mp4 video', $this->plugin_slug )?></a>
+			<label for="splash-image"><?php _e( 'Splash Image', $this->plugin_slug )?></label>
+			<input class="mediaUrl" type="text" id="splash-image" size="70" value="<?php echo $fp5_stored_meta['splash-image'][0]; ?>" name="splash-image" />
+			<a href="#" class="fp5-add-splash-image button button-primary" title="<?php _e( 'Add mp4 video', $this->plugin_slug )?>"><?php _e( 'Add mp4 video', $this->plugin_slug )?></a>
+		</p>
+
+		<p>
+			<label for="mp4-video"><?php _e( 'mp4 video', $this->plugin_slug )?></label>
+			<input class="mediaUrl" type="text" id="mp4-video" size="70" value="<?php echo $fp5_stored_meta['mp4-video'][0]; ?>" name="mp4-video" />
+			<a href="#" class="fp5-add-mp4 button button-primary" title="<?php _e( 'Add mp4 video', $this->plugin_slug )?>"><?php _e( 'Add mp4 video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>

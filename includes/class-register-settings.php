@@ -372,3 +372,17 @@ function edd_settings_sanitize( $input ) {
 	add_settings_error( 'edd-notices', '', __('Settings Updated', 'edd'), 'updated' );
 	return $input;
 }
+
+/**
+ * Get Settings
+ *
+ * Retrieves all plugin settings and returns them as a combined array.
+ *
+ * @since 1.0
+ * @return array Merged array of all the EDD settings
+ */
+function edd_get_settings() {
+	$general_settings = is_array( get_option( 'edd_settings_general' ) ) ? get_option( 'edd_settings_general' )  : array();
+
+	return array_merge( $general_settings );
+}
