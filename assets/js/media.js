@@ -13,7 +13,7 @@ jQuery(document).ready(function($){
     var fp5_splash_frame;
     
     // Bind to our click event in order to open up the new media experience.
-    $(document.body).on('click.tgmOpenMediaManager', '.fp5-add-splash-image', function(e){
+    $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-splash-image', function(e){
         // Prevent the default action from occuring.
         e.preventDefault();
 
@@ -60,7 +60,7 @@ jQuery(document).ready(function($){
     var fp5_mp4_frame;
     
     // Bind to our click event in order to open up the new media experience.
-    $(document.body).on('click.tgmOpenMediaManager', '.fp5-add-mp4', function(e){
+    $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-mp4', function(e){
         // Prevent the default action from occuring.
         e.preventDefault();
 
@@ -178,7 +178,7 @@ jQuery(document).ready(function($){
     var fp5_webm_frame;
     
     // Bind to our click event in order to open up the new media experience.
-    $(document.body).on('click.tgmOpenMediaManager', '.fp5-add-webm', function(e){
+    $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-webm', function(e){
         // Prevent the default action from occuring.
         e.preventDefault();
 
@@ -226,7 +226,7 @@ jQuery(document).ready(function($){
     var fp5_ogg_frame;
     
     // Bind to our click event in order to open up the new media experience.
-    $(document.body).on('click.tgmOpenMediaManager', '.fp5-add-ogg', function(e){
+    $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-ogg', function(e){
         // Prevent the default action from occuring.
         e.preventDefault();
 
@@ -274,7 +274,7 @@ jQuery(document).ready(function($){
     var fp5_webvtt_frame;
     
     // Bind to our click event in order to open up the new media experience.
-    $(document.body).on('click.tgmOpenMediaManager', '.fp5-add-webvtt', function(e){
+    $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-webvtt', function(e){
         // Prevent the default action from occuring.
         e.preventDefault();
 
