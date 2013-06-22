@@ -354,14 +354,14 @@ jQuery(document).ready(function($){
 
             multiple: false,
 
-            title: splash_image.title,
+            title: logo.title,
 
             library: {
                 type: 'image'
             },
 
             button: {
-                text: splash_image.button
+                text: logo.button
             }
         });
 

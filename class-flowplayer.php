@@ -231,22 +231,28 @@ class Flowplayer5 {
 				'button' => __( 'Insert mp4 Video', 'flowplayer5' )            // This will be used as the default button text
 			)
 		);
-				wp_localize_script( $this->plugin_slug . '-media', 'webm_video',
+		wp_localize_script( $this->plugin_slug . '-media', 'webm_video',
 			array(
 				'title'  => __( 'Upload or choose a webm video file', 'flowplayer5' ), // This will be used as the default title
 				'button' => __( 'Insert webm Video', 'flowplayer5' )            // This will be used as the default button text
 			)
 		);
-				wp_localize_script( $this->plugin_slug . '-media', 'ogg_video',
+		wp_localize_script( $this->plugin_slug . '-media', 'ogg_video',
 			array(
 				'title'  => __( 'Upload or choose a ogg video file', 'flowplayer5' ), // This will be used as the default title
 				'button' => __( 'Insert ogg Video', 'flowplayer5' )            // This will be used as the default button text
 			)
 		);
-				wp_localize_script( $this->plugin_slug . '-media', 'webvtt',
+		wp_localize_script( $this->plugin_slug . '-media', 'webvtt',
 			array(
 				'title'  => __( 'Upload or choose a webvtt file', 'flowplayer5' ), // This will be used as the default title
 				'button' => __( 'Insert webvtt', 'flowplayer5' )                   // This will be used as the default button text
+			)
+		);
+		wp_localize_script( $this->plugin_slug . '-media', 'lgo',
+			array(
+				'title'  => __( 'Upload or choose a logo', 'flowplayer5' ), // This will be used as the default title
+				'button' => __( 'Insert Logo', 'flowplayer5' )                   // This will be used as the default button text
 			)
 		);
 		wp_enqueue_media();
