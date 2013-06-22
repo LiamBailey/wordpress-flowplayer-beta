@@ -6,18 +6,67 @@
  * @package TGM New Media Plugin
  * @author  Thomas Griffin
  */
+
+// webm add
 jQuery(document).ready(function($){
     // Prepare the variable that holds our custom media manager.
-    var fp5_media_frame;
+    var fp5_splash_frame;
     
     // Bind to our click event in order to open up the new media experience.
-    $(document.body).on('click.tgmOpenMediaManager', '.fp5-open-media', function(e){
+    $(document.body).on('click.tgmOpenMediaManager', '.fp5-add-splash-image', function(e){
         // Prevent the default action from occuring.
         e.preventDefault();
 
         // If the frame already exists, re-open it.
-        if ( fp5_media_frame ) {
-            fp5_media_frame.open();
+        if ( fp5_splash_frame ) {
+            fp5_splash_frame.open();
+            return;
+        }
+
+        fp5_splash_frame = wp.media.frames.fp5_splash_frame = wp.media({
+
+            className: 'media-frame fp5-media-frame',
+
+            frame: 'select',
+
+            multiple: false,
+
+            title: splash_image.title,
+
+            library: {
+                type: 'video/webm'
+            },
+
+            button: {
+                text: splash_image.button
+            }
+        });
+
+        fp5_splash_frame.on('select', function(){
+            // Grab our attachment selection and construct a JSON representation of the model.
+            var media_attachment = fp5_splash_frame.state().get('selection').first().toJSON();
+
+            // Send the attachment URL to our custom input field via jQuery.
+            $('#splash-image').val(media_attachment.url);
+        });
+
+        // Now that everything has been set, let's open up the frame.
+        fp5_splash_frame.open();
+    });
+});
+
+jQuery(document).ready(function($){
+    // Prepare the variable that holds our custom media manager.
+    var fp5_mp4_frame;
+    
+    // Bind to our click event in order to open up the new media experience.
+    $(document.body).on('click.tgmOpenMediaManager', '.fp5-add-mp4', function(e){
+        // Prevent the default action from occuring.
+        e.preventDefault();
+
+        // If the frame already exists, re-open it.
+        if ( fp5_mp4_frame ) {
+            fp5_mp4_frame.open();
             return;
         }
 
@@ -28,7 +77,7 @@ jQuery(document).ready(function($){
          * wp-includes/js/media-views.js file to see some of the other default
          * options that can be utilized when creating your own custom media workflow.
          */
-        fp5_media_frame = wp.media.frames.fp5_media_frame = wp.media({
+        fp5_mp4_frame = wp.media.frames.fp5_mp4_frame = wp.media({
             /**
              * We can pass in a custom class name to our frame, so we do
              * it here to provide some extra context for styling our
@@ -110,16 +159,16 @@ jQuery(document).ready(function($){
          * insert the data into our custom input field. Specifically, our
          * media_attachment object will hold a key titled 'url' that we want to use.
          */
-        fp5_media_frame.on('select', function(){
+        fp5_mp4_frame.on('select', function(){
             // Grab our attachment selection and construct a JSON representation of the model.
-            var media_attachment = fp5_media_frame.state().get('selection').first().toJSON();
+            var media_attachment = fp5_mp4_frame.state().get('selection').first().toJSON();
 
             // Send the attachment URL to our custom input field via jQuery.
-            $('#tgm-new-media-image').val(media_attachment.url);
+            $('#mp4-video').val(media_attachment.url);
         });
 
         // Now that everything has been set, let's open up the frame.
-        fp5_media_frame.open();
+        fp5_mp4_frame.open();
     });
 });
 
