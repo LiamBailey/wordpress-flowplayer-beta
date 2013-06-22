@@ -328,3 +328,52 @@ jQuery(document).ready(function ($) {
             '</video>');
     });
 });
+
+
+// webm add
+jQuery(document).ready(function($){
+    // Prepare the variable that holds our custom media manager.
+    var fp5_logo_frame;
+    
+    // Bind to our click event in order to open up the new media experience.
+    $(document.body).on('click.fp5OpenMediaManager', '.edd_settings_upload_button', function(e){
+        // Prevent the default action from occuring.
+        e.preventDefault();
+
+        // If the frame already exists, re-open it.
+        if ( fp5_logo_frame ) {
+            fp5_logo_frame.open();
+            return;
+        }
+
+        fp5_logo_frame = wp.media.frames.fp5_logo_frame = wp.media({
+
+            className: 'media-frame fp5-media-frame',
+
+            frame: 'select',
+
+            multiple: false,
+
+            title: splash_image.title,
+
+            library: {
+                type: 'image'
+            },
+
+            button: {
+                text: splash_image.button
+            }
+        });
+
+        fp5_logo_frame.on('select', function(){
+            // Grab our attachment selection and construct a JSON representation of the model.
+            var media_attachment = fp5_logo_frame.state().get('selection').first().toJSON();
+
+            // Send the attachment URL to our custom input field via jQuery.
+            $('#edd_settings_general[logo]').val(media_attachment.url);
+        });
+
+        // Now that everything has been set, let's open up the frame.
+        fp5_logo_frame.open();
+    });
+});
