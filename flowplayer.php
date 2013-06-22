@@ -31,6 +31,7 @@ global $fp5_options;
 require_once( plugin_dir_path( __FILE__ ) . 'class-flowplayer.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer-meta-box.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/register-settings.php' );
+$fp5_options = fp5_get_settings();
 require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode.php' );
 
 //$fp5_options = fp5_get_settings();
