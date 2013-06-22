@@ -308,6 +308,7 @@ class Flowplayer5 {
 	 */
 	public function display_plugin_admin_page() {
 		include_once( 'includes/display-settings.php' );
+		$edd_options = edd_get_settings();
 	}
 
 	/**
