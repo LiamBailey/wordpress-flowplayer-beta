@@ -195,8 +195,13 @@ class fp5_metabox {
 			}
 
 			// Checks for input and saves if needed
-			if( isset( $_POST[ 'tgm-new-media-image' ] ) ) {
-				update_post_meta( $post_id, 'tgm-new-media-image', $_POST[ 'tgm-new-media-image' ] );
+			if( isset( $_POST[ 'splash-image' ] ) ) {
+				update_post_meta( $post_id, 'splash-image', $_POST[ 'splash-image' ] );
+			}
+
+			// Checks for input and saves if needed
+			if( isset( $_POST[ 'mp4-video' ] ) ) {
+				update_post_meta( $post_id, 'mp4-video', $_POST[ 'mp4-video' ] );
 			}
 
 			// Checks for input and saves if needed
