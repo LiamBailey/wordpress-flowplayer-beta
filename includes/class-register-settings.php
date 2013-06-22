@@ -55,12 +55,11 @@ function fp5_register_settings() {
 					'name' => __('License Key', 'fp5'),
 					'desc' => __('Specify your License Key here.', 'fp5'),
 					'type' => 'text',
-					'size' => 'small',
+					'size' => 'medium',
 				),
 				'logo' => array(
 					'id' => 'logo',
 					'name' => __( 'Logo', 'fp5'),
-					'desc' => __('This is the page buyers are sent to if their transaction is cancelled or fails', 'fp5'),
 					'type' => 'upload',
 				),
 				'logo_origin' => array(
@@ -80,7 +79,7 @@ function fp5_register_settings() {
 					'name' => __('Goofle Analytics account ID', 'fp5'),
 					'desc' => __('Specify your GA account ID here.', 'fp5'),
 					'type' => 'text',
-					'size' => 'small',
+					'size' => 'medium',
 				),
 				'cdn_options' => array(
 					'id' => 'cdn_options',

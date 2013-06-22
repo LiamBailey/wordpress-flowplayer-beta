@@ -336,7 +336,7 @@ jQuery(document).ready(function($){
     var fp5_logo_frame;
     
     // Bind to our click event in order to open up the new media experience.
-    $(document.body).on('click.fp5OpenMediaManager', '.edd_settings_upload_button', function(e){
+    $(document.body).on('click.fp5OpenMediaManager', '.fp5_settings_upload_button', function(e){
         // Prevent the default action from occuring.
         e.preventDefault();
 
@@ -370,7 +370,7 @@ jQuery(document).ready(function($){
             var media_attachment = fp5_logo_frame.state().get('selection').first().toJSON();
 
             // Send the attachment URL to our custom input field via jQuery.
-            $('#edd_settings_general[logo]').val(media_attachment.url);
+            $('#fp5_settings_general[logo]').val(media_attachment.url);
         });
 
         // Now that everything has been set, let's open up the frame.
