@@ -219,19 +219,13 @@ class Flowplayer5 {
 		//}
 
 		wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->version, false );
-		wp_localize_script( $this->plugin_slug . '-media', 'tgm_nmp_media',
-			array(
-				'title'  => __( 'Upload or choose a mp4 video file', 'flowplayer5' ), // This will be used as the default title
-				'button' => __( 'Insert mp4 Cideo', 'flowplayer5' )            // This will be used as the default button text
-			)
-		);
 		wp_localize_script( $this->plugin_slug . '-media', 'splash_image',
 			array(
 				'title'  => __( 'Upload or choose a splash image', 'flowplayer5' ), // This will be used as the default title
 				'button' => __( 'Insert Splash Image', 'flowplayer5' )            // This will be used as the default button text
 			)
 		);
-		wp_localize_script( $this->plugin_slug . '-media', 'c',
+		wp_localize_script( $this->plugin_slug . '-media', 'mp4_video',
 			array(
 				'title'  => __( 'Upload or choose a mp4 video file', 'flowplayer5' ), // This will be used as the default title
 				'button' => __( 'Insert mp4 Video', 'flowplayer5' )            // This will be used as the default button text
