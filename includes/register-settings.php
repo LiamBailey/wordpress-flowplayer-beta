@@ -255,14 +255,14 @@ function fp5_text_callback( $args ) {
 function fp5_textarea_callback( $args ) {
 	global $fp5_options;
 
-	if ( isset( $edd_options[ $args['id'] ] ) )
-		$value = $edd_options[ $args['id'] ];
+	if ( isset( $fp5_options[ $args['id'] ] ) )
+		$value = $fp5_options[ $args['id'] ];
 	else
 		$value = isset( $args['std'] ) ? $args['std'] : '';
 
 	$size = isset( $args['size'] ) && !is_null($args['size']) ? $args['size'] : 'regular';
-	$html = '<textarea class="large-text" cols="50" rows="5" id="edd_settings_' . $args['section'] . '[' . $args['id'] . ']" name="edd_settings_' . $args['section'] . '[' . $args['id'] . ']">' . esc_textarea( $value ) . '</textarea>';
-	$html .= '<label for="edd_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+	$html = '<textarea class="large-text" cols="50" rows="5" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']">' . esc_textarea( $value ) . '</textarea>';
+	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 
 	echo $html;
 }
