@@ -41,6 +41,25 @@ function fp5_register_settings() {
 					'desc' => __('Specify your License Key here.', 'fp5'),
 					'type' => 'text',
 					'size' => 'medium'
+				),
+				'key' => array(
+					'id' => 'key',
+					'name' => __('License Key', 'fp5'),
+					'desc' => __('Specify your License Key here.', 'fp5'),
+					'type' => 'text',
+					'size' => 'medium'
+				),
+				'logo' => array(
+					'id' => 'logo',
+					'name' => __( 'Logo', 'fp5'),
+					'type' => 'upload',
+					'desc' => ''
+				),
+				'logo_origin' => array(
+					'id' => 'logo_origin',
+					'name' => __('Show Logo on this site', 'fp5'),
+					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'fp5'),
+					'type' => 'checkbox'
 				)
 			)
 		)
