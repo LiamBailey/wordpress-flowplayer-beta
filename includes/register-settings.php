@@ -32,8 +32,8 @@ function fp5_register_settings() {
 	 * section to allow extensions and other plugins to add their own settings
 	 */
 	$fp5_settings = array(
-		/** General Settings */
-		'general' => apply_filters('fp5_settings_general',
+		/** Commercial Settings */
+		'commercial' => apply_filters('fp5_settings_commercial',
 			array(
 				'commercial_version' => array(
 					'id' => 'commercial_version',
@@ -52,29 +52,29 @@ function fp5_register_settings() {
 		)
 	);
 
-	if ( false == get_option( 'fp5_settings_general' ) ) {
-		add_option( 'fp5_settings_general' );
+	if ( false == get_option( 'fp5_settings_commercial' ) ) {
+		add_option( 'fp5_settings_commercial' );
 	}
 
 	add_settings_section(
-		'fp5_settings_general',
+		'fp5_settings_commercial',
 		__( 'Commercial Version', 'fp5' ),
 		'fp5_settings_commercial_description_callback',
-		'fp5_settings_general'
+		'flowplayer5'
 	);
 
-	foreach ( $fp5_settings['general'] as $option ) {
+	foreach ( $fp5_settings['commercial'] as $option ) {
 		add_settings_field(
-			'fp5_settings_general[' . $option['id'] . ']',
+			'fp5_settings_commercial[' . $option['id'] . ']',
 			$option['name'],
 			function_exists( 'fp5_' . $option['type'] . '_callback' ) ? 'fp5_' . $option['type'] . '_callback' : 'fp5_missing_callback',
-			'fp5_settings_general',
-			'fp5_settings_general',
+			'fp5_settings_commercial',
+			'fp5_settings_commercial',
 			array(
 				'id' => $option['id'],
 				'desc' => $option['desc'],
 				'name' => $option['name'],
-				'section' => 'general',
+				'section' => 'commercial',
 				'size' => isset( $option['size'] ) ? $option['size'] : null,
 				'options' => isset( $option['options'] ) ? $option['options'] : '',
 				'std' => isset( $option['std'] ) ? $option['std'] : ''
@@ -83,7 +83,7 @@ function fp5_register_settings() {
 	}
 
 	// Creates our settings in the options table
-	register_setting( 'fp5_settings_general', 'fp5_settings_general', 'fp5_settings_sanitize' );
+	register_setting( 'fp5_settings_commercial', 'fp5_settings_commercial', 'fp5_settings_sanitize' );
 
 }
 
