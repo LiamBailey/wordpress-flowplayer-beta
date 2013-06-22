@@ -59,7 +59,7 @@ function fp5_register_settings() {
 	add_settings_section(
 		'fp5_settings_general',
 		__( 'Commercial Version', 'fp5' ),
-		__('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'fp5'),
+		'fp5_settings_commercial_description_callback',
 		'fp5_settings_general'
 	);
 
@@ -126,6 +126,18 @@ function fp5_text_callback( $args ) {
 	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 
 	echo $html;
+}
+
+/**
+ * Settings Taxes Description Callback
+ *
+ * Renders the taxes section description.
+ *
+ * @since 1.3.3
+ * @return void
+ */
+function fp5_settings_commercial_description_callback() {
+	echo __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'fp5');
 }
 
 /**
