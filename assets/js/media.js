@@ -369,6 +369,7 @@ jQuery(document).ready(function($){
             // Grab our attachment selection and construct a JSON representation of the model.
             var media_attachment = fp5_logo_frame.state().get('selection').first().toJSON();
 
+			alert(val(media_attachment.url));
             // Send the attachment URL to our custom input field via jQuery.
             $('#fp5_settings_commercial[logo]').val(media_attachment.url);
         });
