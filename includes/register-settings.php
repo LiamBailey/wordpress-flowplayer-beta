@@ -46,6 +46,7 @@ function fp5_register_settings() {
 					'id' => 'logo',
 					'name' => __( 'Logo', 'fp5'),
 					'type' => 'upload',
+					'size' => 'medium',
 					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'fp5')
 				),
 				'logo_origin' => array(
