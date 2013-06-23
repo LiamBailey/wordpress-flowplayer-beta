@@ -45,7 +45,8 @@ function fp5_register_settings() {
 				'logo' => array(
 					'id' => 'logo',
 					'name' => __( 'Logo', 'fp5'),
-					'type' => 'upload'
+					'type' => 'upload',
+					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'fp5')
 				),
 				'logo_origin' => array(
 					'id' => 'logo_origin',
@@ -155,7 +156,7 @@ function fp5_upload_callback($args) {
 
 	$html = '<input type="text" class="' . $args['size'] . '-text fp5_upload_field" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" value="' . esc_attr( $value ) . '"/>';
 	$html .= '<span>&nbsp;<a type="button" class="fp5_settings_upload_button button-secondary" title="' . __( 'Upload Logo', 'fp5' ) . '"/></a>' . __( 'Upload Logo', 'fp5' ) . '</span>';
-	//$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 
 	echo $html;
 }
