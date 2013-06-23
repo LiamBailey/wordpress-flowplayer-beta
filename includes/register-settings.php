@@ -89,7 +89,7 @@ function fp5_register_settings() {
 	}
 
 	// Creates our settings in the options table
-	register_setting( 'flowplayer5', 'fp5_settings_commercial', 'fp5_settings_sanitize' );
+	register_setting( 'flowplayer5', 'flowplayer5', 'fp5_settings_sanitize' );
 
 }
 
