@@ -100,11 +100,11 @@ class fp5_metabox {
 			<span class="example-row-title"><?php _e('Video attributes')?></span>
 			<div class="example-row-content">
 				<label for="fp5-autoplay">
-					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="yes" <?php checked( $fp5_stored_meta['autoplay'][0], 'yes' ); ?> />
+					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="yes" <?php if ( isset ( $fp5_stored_meta['autoplay'] ) )  checked( $fp5_stored_meta['autoplay'][0], 'yes' ); ?> />
 					<?php _e( 'Autoplay?' )?>
 				</label>
 				<label for="fp5-loop">
-					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="yes" <?php checked( $fp5_stored_meta['loop'][0], 'yes' ); ?> />
+					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="yes" <?php if ( isset ( $fp5_stored_meta['loop'] ) )  checked( $fp5_stored_meta['loop'][0], 'yes' ); ?> />
 					<?php _e( 'Loop?' )?>
 				</label>
 			</div>
@@ -118,25 +118,25 @@ class fp5_metabox {
 
 		<p>
 			<label for="mp4-video"><?php _e( 'mp4 video', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="mp4-video" size="70" value="<?php echo $fp5_stored_meta['mp4-video'][0]; ?>" name="mp4-video" />
+			<input class="mediaUrl" type="text" id="mp4-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['mp4-video'] ) ) echo $fp5_stored_meta['mp4-video'][0]; ?>" name="mp4-video" />
 			<a href="#" class="fp5-add-mp4 button button-primary" title="<?php _e( 'Add mp4 video', $this->plugin_slug )?>"><?php _e( 'Add mp4 video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
 			<label for="webm-video"><?php _e( 'webm video', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="webm-video" size="70" value="<?php echo $fp5_stored_meta['webm-video'][0]; ?>" name="webm-video" />
+			<input class="mediaUrl" type="text" id="webm-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['webm-video'] ) ) echo $fp5_stored_meta['webm-video'][0]; ?>" name="webm-video" />
 			<a href="#" class="fp5-add-webm button button-primary" title="<?php _e( 'Add webm video', $this->plugin_slug )?>"><?php _e( 'Add webm video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
 			<label for="ogg-video"><?php _e( 'ogg video', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="ogg-video" size="70" value="<?php echo $fp5_stored_meta['ogg-video'][0]; ?>" name="ogg-video" />
+			<input class="mediaUrl" type="text" id="ogg-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['ogg-video'] ) ) echo $fp5_stored_meta['ogg-video'][0]; ?>" name="ogg-video" />
 			<a href="#" class="fp5-add-ogg button button-primary" title="<?php _e( 'Add ogg video', $this->plugin_slug )?>"><?php _e( 'Add ogg video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
 			<label for="webvtt"><?php _e( 'webvtt file', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="webvtt" size="70" value="<?php echo $fp5_stored_meta['webvtt'][0]; ?>" name="webvtt" />
+			<input class="mediaUrl" type="text" id="webvtt" size="70" value="<?php if ( isset ( $fp5_stored_meta['webvtt'] ) ) echo $fp5_stored_meta['webvtt'][0]; ?>" name="webvtt" />
 			<a href="#" class="fp5-add-webvtt button button-primary" title="<?php _e( 'Add webvtt file', $this->plugin_slug )?>"><?php _e( 'Add webvtt file', $this->plugin_slug )?></a>
 		</p>
 
@@ -148,15 +148,15 @@ class fp5_metabox {
 
 		<p>
 			<label for="max-width" class="example-row-title"><?php _e('Max width')?></label>
-			<input type="text" name="max-width" id="max-width" value="<?php echo $fp5_stored_meta['max-width'][0]; ?>" />
+			<input type="text" name="max-width" id="max-width" value="<?php if ( isset ( $fp5_stored_meta['max-width'] ) ) echo $fp5_stored_meta['max-width'][0]; ?>" />
 			<label for="aspect-ratio">
-				<input type="checkbox" name="aspect-ratio" id="aspect-ratio" value="yes" <?php checked( $fp5_stored_meta['aspect-ratio'][0], 'yes' ); ?> />
+				<input type="checkbox" name="aspect-ratio" id="aspect-ratio" value="yes" <?php if ( isset ( $fp5_stored_meta['aspect-ratio'] ) ) checked( $fp5_stored_meta['aspect-ratio'][0], 'yes' ); ?> />
 				<?php _e('Use video\'s aspect ratio')?>
 			</label>
 			<label for="max-height" class="example-row-title"><?php _e('Max height')?></label>
-			<input type="text" name="max-height" id="max-height" value="<?php echo $fp5_stored_meta['max-height'][0]; ?>" />
+			<input type="text" name="max-height" id="max-height" value="<?php if ( isset ( $fp5_stored_meta['max-height'] ) ) echo $fp5_stored_meta['max-height'][0]; ?>" />
 			<label for="fixed-width">
-				<input type="checkbox" name="fixed-width" id="fixed-width" value="yes" <?php checked( $fp5_stored_meta['fixed-width'][0], 'yes' ); ?> />
+				<input type="checkbox" name="fixed-width" id="fixed-width" value="yes" <?php if ( isset ( $fp5_stored_meta['fixed-width'] ) ) checked( $fp5_stored_meta['fixed-width'][0], 'yes' ); ?> />
 				<?php _e('Use fixed player size') ?>
 			</label>
 		</p>
