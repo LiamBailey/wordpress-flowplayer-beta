@@ -44,7 +44,7 @@ global $post;
 	if( !empty( $id ) ) {
 		return $id;
 	}
-	endif;;
+	endif;
 	if( !empty( $loop ) ) {
 		return $loop;
 	}endif;
