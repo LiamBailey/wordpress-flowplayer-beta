@@ -82,10 +82,10 @@ global $post;
 		echo $ga_account_id;
 	}
 	if( !empty( $logo_origin ) ) {
-		echo $logo_origin;
+		echo 'logo_origin';
 	}
 	if( !empty( $cdn ) ) {
-		echo $cdn;
+		echo 'cdn';
 	}
 
 	// Register ahortcode stylesheets and JavaScript
