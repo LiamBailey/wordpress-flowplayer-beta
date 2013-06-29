@@ -32,9 +32,14 @@ function fp5_register_settings() {
 	 * section to allow extensions and other plugins to add their own settings
 	 */
 	$fp5_settings = array(
-		/** Commercial Settings */
-		'commercial' => apply_filters('fp5_settings_commercial',
+		'general' => apply_filters('fp5_settings_general',
 			array(
+				'commercial_version' => array(
+					'id' => 'commercial_version',
+					'name' => '<h4>' . __('Commercial Version', 'fp5') . '</h4>',
+					'desc' => __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'fp5'),
+					'type' => 'header'
+				),
 				'key' => array(
 					'id' => 'key',
 					'name' => __('License Key', 'fp5'),
@@ -54,24 +59,26 @@ function fp5_register_settings() {
 					'name' => __('Show Logo on this site', 'fp5'),
 					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'fp5'),
 					'type' => 'checkbox'
-				)
-			)
-		),
-		/** Video Tracking Settings */
-		'video_tracking' => apply_filters('fp5_settings_video_tracking',
-			array(
+				),
+				'video_tracking' => array(
+					'id' => 'video_tracking',
+					'name' => '<strong>' . __('Video Tracking', 'fp5') . '</strong>',
+					'desc' => __('You can track video traffic using Google Analytics (GA). Visit flowplayer.org for more info', 'fp5'),
+					'type' => 'header'
+				),
 				'ga_accountId' => array(
 					'id' => 'ga_accountId',
 					'name' => __('Goofle Analytics account ID', 'fp5'),
 					'desc' => __('Specify your GA account ID here.', 'fp5'),
 					'type' => 'text',
 					'size' => 'medium'
-				)
-			)
-		),
-		/** CDN Settings */
-		'cdn' => apply_filters('fp5_settings_cdn',
-			array(
+				),
+				'cdn_options' => array(
+					'id' => 'cdn_options',
+					'name' => '<strong>' . __('CDN Options', 'fp5') . '</strong>',
+					'desc' => __('If you want to use a self-hosted copy of Flowplayer instead of the CDN hosted version uncheck Use CDN hosted version? Using the CDN hosted version is preferable in most situations.', 'fp5'),
+					'type' => 'header'
+				),
 				'cdn_option' => array(
 					'id' => 'cdn_option',
 					'name' => __('CDN Hosted files', 'fp5'),
@@ -82,87 +89,25 @@ function fp5_register_settings() {
 		)
 	);
 
-	if ( false == get_option( 'fp5_settings_commercial' ) ) {
-		add_option( 'fp5_settings_commercial' );
-	}
-
-	if ( false == get_option( 'fp5_settings_video_tracking' ) ) {
-		add_option( 'fp5_settings_video_tracking' );
-	}
-
-	if ( false == get_option( 'fp5_settings_cdn' ) ) {
-		add_option( 'fp5_settings_cdn' );
+	if ( false == get_option( 'fp5_settings_general' ) ) {
+		add_option( 'fp5_settings_general' );
 	}
 
 	add_settings_section(
-		'fp5_settings_commercial',
-		__( 'Commercial Version', 'fp5' ),
-		'fp5_settings_commercial_description_callback',
+		'fp5_settings_general',
+		__( 'General Settings', 'fp5' ),
+		'__return_false',
 		'flowplayer5'
 	);
 
 
 	foreach ( $fp5_settings['commercial'] as $option ) {
 		add_settings_field(
-			'fp5_settings_commercial[' . $option['id'] . ']',
+			'fp5_settings_general[' . $option['id'] . ']',
 			$option['name'],
 			function_exists( 'fp5_' . $option['type'] . '_callback' ) ? 'fp5_' . $option['type'] . '_callback' : 'fp5_missing_callback',
 			'flowplayer5',
-			'fp5_settings_commercial',
-			array(
-				'id' => $option['id'],
-				'desc' => $option['desc'],
-				'name' => $option['name'],
-				'section' => 'commercial',
-				'size' => isset( $option['size'] ) ? $option['size'] : null,
-				'options' => isset( $option['options'] ) ? $option['options'] : '',
-				'std' => isset( $option['std'] ) ? $option['std'] : ''
-			)
-		);
-	}
-
-	add_settings_section(
-		'fp5_settings_video_tracking',
-		__( 'Video Tracking', 'fp5' ),
-		'fp5_settings_video_tracking_description_callback',
-		'flowplayer5'
-	);
-
-
-	foreach ( $fp5_settings['video_tracking'] as $option ) {
-		add_settings_field(
-			'fp5_settings_video_tracking[' . $option['id'] . ']',
-			$option['name'],
-			function_exists( 'fp5_' . $option['type'] . '_callback' ) ? 'fp5_' . $option['type'] . '_callback' : 'fp5_missing_callback',
-			'flowplayer5',
-			'fp5_settings_video_tracking',
-			array(
-				'id' => $option['id'],
-				'desc' => $option['desc'],
-				'name' => $option['name'],
-				'section' => 'commercial',
-				'size' => isset( $option['size'] ) ? $option['size'] : null,
-				'options' => isset( $option['options'] ) ? $option['options'] : '',
-				'std' => isset( $option['std'] ) ? $option['std'] : ''
-			)
-		);
-	}
-
-	add_settings_section(
-		'fp5_settings_cdn',
-		__( 'CDN Options', 'fp5' ),
-		'fp5_settings_cdn_description_callback',
-		'flowplayer5'
-	);
-
-
-	foreach ( $fp5_settings['cdn'] as $option ) {
-		add_settings_field(
-			'fp5_settings_cdn[' . $option['id'] . ']',
-			$option['name'],
-			function_exists( 'fp5_' . $option['type'] . '_callback' ) ? 'fp5_' . $option['type'] . '_callback' : 'fp5_missing_callback',
-			'flowplayer5',
-			'fp5_settings_cdn',
+			'fp5_settings_general',
 			array(
 				'id' => $option['id'],
 				'desc' => $option['desc'],
@@ -176,8 +121,7 @@ function fp5_register_settings() {
 	}
 
 	// Creates our settings in the options table
-	global $fp5_options;
-	register_setting( 'fp5_settings_group', $fp5_options, 'fp5_settings_sanitize' );
+	register_setting( 'fp5_settings_group', 'fp5_settings_general', 'fp5_settings_sanitize' );
 
 }
 
@@ -270,39 +214,15 @@ function fp5_checkbox_callback( $args ) {
 }
 
 /**
- * Settings Commercial Description Callback
+ * Settings General Description Callback
  *
- * Renders the commercial section description.
+ * Renders the general section description.
  *
  * @since 1.3.3
  * @return void
  */
-function fp5_settings_commercial_description_callback() {
+function fp5_settings_general_description_callback() {
 	echo __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'fp5');
-}
-
-/**
- * Settings Video Tracking Description Callback
- *
- * Renders the video tracking section description.
- *
- * @since 1.3.3
- * @return void
- */
-function fp5_settings_video_tracking_description_callback() {
-	echo __('Configure the video attribYou can track video traffic using Google Analytics (GA). Visit flowplayer.org for more info.', 'fp5');
-}
-
-/**
- * Settings CDN Description Callback
- *
- * Renders the CDN options section description.
- *
- * @since 1.3.3
- * @return void
- */
-function fp5_settings_cdn_description_callback() {
-	echo __('If you want to use a self-hosted copy of Flowplayer instead of the CDN hosted version uncheck Use CDN hosted version? Using the CDN hosted version is preferable in most situations.', 'fp5');
 }
 
 /**
@@ -342,9 +262,7 @@ function fp5_settings_sanitize( $input ) {
  * @return array Merged array of all the EDD settings
  */
 function fp5_get_settings() {
-	$commercial_settings     = is_array( get_option( 'fp5_settings_commercial' ) )     ? get_option( 'fp5_settings_commercial' )  : array();
-	$video_tracking_settings = is_array( get_option( 'fp5_settings_video_tracking' ) ) ? get_option( 'fp5_settings_video_tracking' ) : array();
-	$cdn_settings            = is_array( get_option( 'fp5_settings_cdn' ) )            ? get_option( 'fp5_settings_cdn' ) : array();
+	$commercial_settings = is_array( get_option( 'fp5_settings_commercial' ) ) ? get_option( 'fp5_settings_commercial' ) : array();
 
-	return array_merge( $commercial_settings, $video_tracking_settings, $cdn_settings );
+	return array_merge( $commercial_settings );
 }
