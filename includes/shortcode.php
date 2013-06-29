@@ -19,13 +19,12 @@ global $post;
 	$id = $atts['id'];
 
 	// get the meta from the post type
-
 	$loop      = get_post_meta( $id, 'loop', true );
 	$autoplay  = get_post_meta( $id, 'autoplay', true );
 	$subtitles = get_post_meta( $id, 'webvtt', true );
 	$skin      = get_post_meta( $id, 'fp5-select-skin', true );
 	$splash    = get_post_meta( $id, 'splash-image', true );
-	$mp4       = get_post_meta( $id, 'tgm-new-media-image', true );
+	$mp4       = get_post_meta( $id, 'mp4-video', true );
 	$webm      = get_post_meta( $id, 'webm-video', true );
 	$ogg       = get_post_meta( $id, 'ogg-video', true) ;
 	$width     = get_post_meta( $id, 'max-width', true );

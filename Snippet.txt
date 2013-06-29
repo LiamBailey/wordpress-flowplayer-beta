@@ -14,3 +14,15 @@ flowplayer.conf = {
 	}
 };
 </script>
+
+add_filter('get_sample_permalink_html', 'perm', '',4);
+
+function perm($return, $id, $new_title, $new_slug){
+	global $post;
+	if($post->post_type == 'testimonials')
+	{
+		$ret2 = preg_replace('/<span id="edit-slug-buttons">.*<\/span>|<span id=\'view-post-btn\'>.*<\/span>/i', '', $return);
+	}
+
+	return $ret2;
+}
