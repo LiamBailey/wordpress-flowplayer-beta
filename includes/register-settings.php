@@ -78,6 +78,7 @@ function fp5_register_settings() {
 					'desc' => __('Uncheck this to load the files from this site', 'fp5'),
 					'type' => 'checkbox'
 				)
+			)
 		)
 	);
 
