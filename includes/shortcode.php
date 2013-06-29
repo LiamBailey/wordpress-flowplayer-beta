@@ -44,52 +44,52 @@ global $post;
 	if( !empty( $id ) ) {
 		return $id;
 	}
-	endif
+	endif;;
 	if( !empty( $loop ) ) {
 		return $loop;
-	}endif
+	}endif;
 	if( !empty( $autoplay ) ) {
 		echo $autoplay;
-	}endif
+	}endif;
 	if( !empty( $subtitles ) ) {
 		echo $subtitles;
-	}endif
+	}endif;
 	if( !empty( $mp4 ) ) {
 		echo $mp4;
 	}
 	if( !empty( $webm ) ) {
 		echo $webm;
-	}endif
+	}endif;
 	if( !empty( $ogg ) ) {
 		echo $ogg;
-	}endif
+	}endif;
 	if( !empty( $width ) ) {
 		echo $width;
-	}endif
+	}endif;
 	if( !empty( $height ) ) {
 		echo $height;
-	}endif
+	}endif;
 	if( !empty( $ratio ) ) {
 		echo $ratio;
-	}endif
+	}endif;
 	if( !empty( $fixed ) ) {
 		echo $fixed;
-	}endif
+	}endif;
 	if( !empty( $key ) ) {
 		echo $key;
-	}endif
+	}endif;
 	if( !empty( $logo ) ) {
 		echo $logo;
-	}endif
+	}endif;
 	if( !empty( $ga_account_id ) ) {
 		echo $ga_account_id;
-	}endif
+	}endif;
 	if( !empty( $logo_origin ) ) {
 		echo 'logo_origin';
-	}endif
+	}endif;
 	if( !empty( $cdn ) ) {
 		echo 'cdn';
-	}endif
+	}endif;
 
 	// Register ahortcode stylesheets and JavaScript
 	if ($cdn == 'true') {
