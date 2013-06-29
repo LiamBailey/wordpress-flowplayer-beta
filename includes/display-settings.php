@@ -21,7 +21,9 @@
 	<form method="post" action="options.php">
 		<?php
 		// This prints out all hidden setting fields
-		settings_fields( 'flowplayer5-group' );
+		settings_fields( 'fp5_settings_commercial' );
+		settings_fields( 'fp5_settings_video_tracking' );
+		settings_fields( 'fp5_settings_cdn' );
 		do_settings_sections( 'flowplayer5' );
 		submit_button();
 		?>

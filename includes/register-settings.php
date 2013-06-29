@@ -56,11 +56,40 @@ function fp5_register_settings() {
 					'type' => 'checkbox'
 				)
 			)
+		),
+		/** Video Tracking Settings */
+		'video_tracking' => apply_filters('fp5_settings_video_tracking',
+			array(
+				'ga_accountId' => array(
+					'id' => 'ga_accountId',
+					'name' => __('Goofle Analytics account ID', 'fp5'),
+					'desc' => __('Specify your GA account ID here.', 'fp5'),
+					'type' => 'text',
+					'size' => 'medium'
+				)
+		),
+		/** CDN Settings */
+		'cdn' => apply_filters('fp5_settings_cdn',
+			array(
+				'cdn_option' => array(
+					'id' => 'cdn_option',
+					'name' => __('CDN Hosted files', 'fp5'),
+					'desc' => __('Uncheck this to load the files from this site', 'fp5'),
+					'type' => 'checkbox'
+				)
 		)
 	);
 
 	if ( false == get_option( 'fp5_settings_commercial' ) ) {
 		add_option( 'fp5_settings_commercial' );
+	}
+
+	if ( false == get_option( 'fp5_settings_video_tracking' ) ) {
+		add_option( 'fp5_settings_video_tracking' );
+	}
+
+	if ( false == get_option( 'fp5_settings_cdn' ) ) {
+		add_option( 'fp5_settings_cdn' );
 	}
 
 	add_settings_section(
@@ -69,6 +98,7 @@ function fp5_register_settings() {
 		'fp5_settings_commercial_description_callback',
 		'flowplayer5'
 	);
+
 
 	foreach ( $fp5_settings['commercial'] as $option ) {
 		add_settings_field(
@@ -89,8 +119,64 @@ function fp5_register_settings() {
 		);
 	}
 
+	add_settings_section(
+		'fp5_settings_video_tracking',
+		__( 'Video Tracking', 'fp5' ),
+		'fp5_settings_video_tracking_description_callback',
+		'flowplayer5'
+	);
+
+
+	foreach ( $fp5_settings['video_tracking'] as $option ) {
+		add_settings_field(
+			'fp5_settings_video_tracking[' . $option['id'] . ']',
+			$option['name'],
+			function_exists( 'fp5_' . $option['type'] . '_callback' ) ? 'fp5_' . $option['type'] . '_callback' : 'fp5_missing_callback',
+			'flowplayer5',
+			'fp5_settings_video_tracking',
+			array(
+				'id' => $option['id'],
+				'desc' => $option['desc'],
+				'name' => $option['name'],
+				'section' => 'commercial',
+				'size' => isset( $option['size'] ) ? $option['size'] : null,
+				'options' => isset( $option['options'] ) ? $option['options'] : '',
+				'std' => isset( $option['std'] ) ? $option['std'] : ''
+			)
+		);
+	}
+
+		add_settings_section(
+		'fp5_settings_cdn',
+		__( 'CDN Options', 'fp5' ),
+		'fp5_settings_cdn_description_callback',
+		'flowplayer5'
+	);
+
+
+	foreach ( $fp5_settings['cdn'] as $option ) {
+		add_settings_field(
+			'fp5_settings_cdn[' . $option['id'] . ']',
+			$option['name'],
+			function_exists( 'fp5_' . $option['type'] . '_callback' ) ? 'fp5_' . $option['type'] . '_callback' : 'fp5_missing_callback',
+			'flowplayer5',
+			'fp5_settings_cdn',
+			array(
+				'id' => $option['id'],
+				'desc' => $option['desc'],
+				'name' => $option['name'],
+				'section' => 'commercial',
+				'size' => isset( $option['size'] ) ? $option['size'] : null,
+				'options' => isset( $option['options'] ) ? $option['options'] : '',
+				'std' => isset( $option['std'] ) ? $option['std'] : ''
+			)
+		);
+	}
+
 	// Creates our settings in the options table
-	register_setting( 'flowplayer5-group', 'fp5_settings_commercial', 'fp5_settings_sanitize' );
+	register_setting( 'fp5_settings_commercial', 'fp5_settings_commercial', 'fp5_settings_sanitize' );
+	register_setting( 'fp5_settings_video_tracking', 'fp5_settings_video_tracking', 'fp5_settings_sanitize' );
+	register_setting( 'fp5_settings_cdn', 'fp5_settings_cdn', 'fp5_settings_sanitize' );
 
 }
 
@@ -183,15 +269,39 @@ function fp5_checkbox_callback( $args ) {
 }
 
 /**
- * Settings Taxes Description Callback
+ * Settings Commercial Description Callback
  *
- * Renders the taxes section description.
+ * Renders the commercial section description.
  *
  * @since 1.3.3
  * @return void
  */
 function fp5_settings_commercial_description_callback() {
 	echo __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'fp5');
+}
+
+/**
+ * Settings Video Tracking Description Callback
+ *
+ * Renders the video tracking section description.
+ *
+ * @since 1.3.3
+ * @return void
+ */
+function fp5_settings_video_tracking_description_callback() {
+	echo __('Configure the video attribYou can track video traffic using Google Analytics (GA). Visit flowplayer.org for more info.', 'fp5');
+}
+
+/**
+ * Settings CDN Description Callback
+ *
+ * Renders the CDN options section description.
+ *
+ * @since 1.3.3
+ * @return void
+ */
+function fp5_settings_cdn_description_callback() {
+	echo __('If you want to use a self-hosted copy of Flowplayer instead of the CDN hosted version uncheck Use CDN hosted version? Using the CDN hosted version is preferable in most situations.', 'fp5');
 }
 
 /**
