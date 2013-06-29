@@ -148,7 +148,7 @@ function fp5_register_settings() {
 		);
 	}
 
-		add_settings_section(
+	add_settings_section(
 		'fp5_settings_cdn',
 		__( 'CDN Options', 'fp5' ),
 		'fp5_settings_cdn_description_callback',
@@ -342,7 +342,7 @@ function fp5_settings_sanitize( $input ) {
  * @since 1.0
  * @return array Merged array of all the EDD settings
  */
-function fp5_get_settings() {
+//function fp5_get_settings() {
 	$commercial_settings     = is_array( get_option( 'fp5_settings_commercial' ) )     ? get_option( 'fp5_settings_commercial' )  : array();
 	$video_tracking_settings = is_array( get_option( 'fp5_settings_video_tracking' ) ) ? get_option( 'fp5_settings_video_tracking' ) : array();
 	$cdn_settings            = is_array( get_option( 'fp5_settings_cdn' ) )            ? get_option( 'fp5_settings_cdn' ) : array();
