@@ -41,6 +41,9 @@ global $post;
 	$cdn = $options['cdn_option'];
 
 	// Checks and displays the retrieved value
+	if( !empty( $id ) ) {
+		return $id;
+	}
 	if( !empty( $loop ) ) {
 		return $loop;
 	}
