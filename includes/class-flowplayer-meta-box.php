@@ -90,9 +90,9 @@ class fp5_metabox {
 			</label>
 
 			<select id="fp5-select-skin" name="fp5-select-skin">
-				<option id="fp5-minimalist" value="minimalist"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
-				<option id="fp5-functional" value="functional"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
-				<option id="fp5-playful" value="playful"<?php selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
+				<option id="fp5-minimalist" value="minimalist"<?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
+				<option id="fp5-functional" value="functional"<?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
+				<option id="fp5-playful" value="playful"<?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
 			</select>
 		</p>
 
@@ -100,11 +100,11 @@ class fp5_metabox {
 			<span class="example-row-title"><?php _e('Video attributes')?></span>
 			<div class="example-row-content">
 				<label for="fp5-autoplay">
-					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="yes" <?php if ( isset ( $fp5_stored_meta['autoplay'] ) )  checked( $fp5_stored_meta['autoplay'][0], 'yes' ); ?> />
+					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="yes" <?php if ( isset ( $fp5_stored_meta['autoplay'] ) ) checked( $fp5_stored_meta['autoplay'][0], 'yes' ); ?> />
 					<?php _e( 'Autoplay?' )?>
 				</label>
 				<label for="fp5-loop">
-					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="yes" <?php if ( isset ( $fp5_stored_meta['loop'] ) )  checked( $fp5_stored_meta['loop'][0], 'yes' ); ?> />
+					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="yes" <?php if ( isset ( $fp5_stored_meta['loop'] ) ) checked( $fp5_stored_meta['loop'][0], 'yes' ); ?> />
 					<?php _e( 'Loop?' )?>
 				</label>
 			</div>
