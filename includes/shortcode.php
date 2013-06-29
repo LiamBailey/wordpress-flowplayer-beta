@@ -39,7 +39,7 @@ global $post;
 	$logo = $options['logo'];
 	$ga_account_id = $options['ga_account_id'];
 	$logo_origin = $options['logo_origin'];
-	$cdn = $options['cdn'];
+	$cdn = $options['cdn_option'];
 
 	// Checks and displays the retrieved value
 	if( !empty( $loop ) ) {
