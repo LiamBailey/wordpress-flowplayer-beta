@@ -84,7 +84,7 @@ global $post;
 	if( !empty( $logo_origin ) ) {
 		echo $logo_origin;
 	}
-	if( !empty( $logo_origin ) ) {
+	if( !empty( $cdn ) ) {
 		echo $cdn;
 	}
 
@@ -115,7 +115,7 @@ global $post;
 	// shortCode output
 	$return = '';
 	$return.=     '<script>';
-		if ($key != '' && $logoInOrigin) {
+		if ($key != '' && $logo_origin) {
 			$return .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
 		}
 	$return.='</script>';
