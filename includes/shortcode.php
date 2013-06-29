@@ -43,52 +43,53 @@ global $post;
 	// Checks and displays the retrieved value
 	if( !empty( $id ) ) {
 		return $id;
-	};
+	}
+	endif
 	if( !empty( $loop ) ) {
 		return $loop;
-	};
+	}endif
 	if( !empty( $autoplay ) ) {
 		echo $autoplay;
-	};
+	}endif
 	if( !empty( $subtitles ) ) {
 		echo $subtitles;
-	};
+	}endif
 	if( !empty( $mp4 ) ) {
 		echo $mp4;
 	}
 	if( !empty( $webm ) ) {
 		echo $webm;
-	};
+	}endif
 	if( !empty( $ogg ) ) {
 		echo $ogg;
-	};
+	}endif
 	if( !empty( $width ) ) {
 		echo $width;
-	};
+	}endif
 	if( !empty( $height ) ) {
 		echo $height;
-	};
+	}endif
 	if( !empty( $ratio ) ) {
 		echo $ratio;
-	};
+	}endif
 	if( !empty( $fixed ) ) {
 		echo $fixed;
-	};
+	}endif
 	if( !empty( $key ) ) {
 		echo $key;
-	};
+	}endif
 	if( !empty( $logo ) ) {
 		echo $logo;
-	};
+	}endif
 	if( !empty( $ga_account_id ) ) {
 		echo $ga_account_id;
-	};
+	}endif
 	if( !empty( $logo_origin ) ) {
 		echo 'logo_origin';
-	};
+	}endif
 	if( !empty( $cdn ) ) {
 		echo 'cdn';
-	};
+	}endif
 
 	// Register ahortcode stylesheets and JavaScript
 	if ($cdn == 'true') {
