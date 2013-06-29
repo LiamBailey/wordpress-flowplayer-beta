@@ -41,55 +41,55 @@ global $post;
 	$cdn = $options['cdn_option'];
 
 	// Checks and displays the retrieved value
-	if( !empty( $id ) ) {
+	if( isset( $id ) ) {
 		return $id;
 	}
-	endif;
-	if( !empty( $loop ) ) {
+	
+	if( isset( $loop ) ) {
 		return $loop;
-	}endif;
-	if( !empty( $autoplay ) ) {
+	}
+	if( isset( $autoplay ) ) {
 		echo $autoplay;
-	}endif;
-	if( !empty( $subtitles ) ) {
+	}
+	if( isset( $subtitles ) ) {
 		echo $subtitles;
-	}endif;
-	if( !empty( $mp4 ) ) {
+	}
+	if( isset( $mp4 ) ) {
 		echo $mp4;
 	}
-	if( !empty( $webm ) ) {
+	if( isset( $webm ) ) {
 		echo $webm;
-	}endif;
-	if( !empty( $ogg ) ) {
+	}
+	if( isset( $ogg ) ) {
 		echo $ogg;
-	}endif;
-	if( !empty( $width ) ) {
+	}
+	if( isset( $width ) ) {
 		echo $width;
-	}endif;
-	if( !empty( $height ) ) {
+	}
+	if( isset( $height ) ) {
 		echo $height;
-	}endif;
-	if( !empty( $ratio ) ) {
+	}
+	if( isset( $ratio ) ) {
 		echo $ratio;
-	}endif;
-	if( !empty( $fixed ) ) {
+	}
+	if( isset( $fixed ) ) {
 		echo $fixed;
-	}endif;
-	if( !empty( $key ) ) {
+	}
+	if( isset( $key ) ) {
 		echo $key;
-	}endif;
-	if( !empty( $logo ) ) {
+	}
+	if( isset( $logo ) ) {
 		echo $logo;
-	}endif;
-	if( !empty( $ga_account_id ) ) {
+	}
+	if( isset( $ga_account_id ) ) {
 		echo $ga_account_id;
-	}endif;
-	if( !empty( $logo_origin ) ) {
+	}
+	if( isset( $logo_origin ) ) {
 		echo 'logo_origin';
-	}endif;
-	if( !empty( $cdn ) ) {
+	}
+	if( isset( $cdn ) ) {
 		echo 'cdn';
-	}endif;
+	}
 
 	// Register ahortcode stylesheets and JavaScript
 	if ($cdn == 'true') {
