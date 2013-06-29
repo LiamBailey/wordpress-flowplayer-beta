@@ -14,7 +14,8 @@ $version = '1.0.0-beta';
 $plugin_slug = 'flowplayer5';
 $player_version = '5.4.1';
 global $post;
-//post_id
+
+	//post_id
 	$id = $atts['id'];
 
 	// get the meta from the post type
@@ -23,7 +24,7 @@ global $post;
 	$autoplay  = get_post_meta( $id, 'autoplay', true );
 	$subtitles = get_post_meta( $id, 'webvtt', true );
 	$skin      = get_post_meta( $id, 'fp5-select-skin', true );
-	$splash    = '';
+	$splash    = get_post_meta( $id, 'splash-image', true );
 	$mp4       = get_post_meta( $id, 'tgm-new-media-image', true );
 	$webm      = get_post_meta( $id, 'webm-video', true );
 	$ogg       = get_post_meta( $id, 'ogg-video', true) ;
@@ -31,7 +32,15 @@ global $post;
 	$height    = get_post_meta( $id, 'max-height', true );
 	$ratio     = get_post_meta( $id, 'aspect-ratio', true );
 	$fixed     = get_post_meta( $id, 'fixed-width', true );
-	
+
+	// set the options for the shortcode - pulled from the display-settings.php
+	$options = get_option('fp5_settings_general');
+	$key = $options['key'];
+	$logo = $options['logo'];
+	$ga_account_id = $options['ga_account_id'];
+	$logo_origin = $options['logo_origin'];
+	$cdn = $options['cdn'];
+
 	// Checks and displays the retrieved value
 	if( !empty( $loop ) ) {
 		return $loop;
@@ -63,14 +72,21 @@ global $post;
 	if( !empty( $fixed ) ) {
 		echo $fixed;
 	}
-
-	// set the options for the shortcode - pulled from the display-settings.php
-	$options = get_option('fp5_options');
-	$key = $options['key'];
-	$logo = $options['logo'];
-	$analytics = $options['ga_accountId'];
-	$logoInOrigin = $options['logoInOrigin'];
-	$cdn = $options['cdn'];
+	if( !empty( $key ) ) {
+		echo $key;
+	}
+	if( !empty( $logo ) ) {
+		echo $logo;
+	}
+	if( !empty( $ga_account_id ) ) {
+		echo $ga_account_id;
+	}
+	if( !empty( $logo_origin ) ) {
+		echo $logo_origin;
+	}
+	if( !empty( $logo_origin ) ) {
+		echo $cdn;
+	}
 
 	// Register ahortcode stylesheets and JavaScript
 	if ($cdn == 'true') {
@@ -81,72 +97,42 @@ global $post;
 		//wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', dirname(__FILE__) ), array( 'jquery' ), $version, false );
 	}
 
-    //get the splash image or featured image
-   if(!isset($splash)):
-   $splash = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
-   endif;
-
-    // find and assign the video attachments
-    $args = array(
-        'post_type' => 'attachment',
-        'post_parent' => $id
-    );
-   /* $attachments = new WP_Query($args);
-    if ($attachments) {
-        foreach ($attachments as $attachment) {
-
-            $filelink = the_attachment_link($attachment->ID, false);
-            $filetype = wp_check_filetype($filelink);
-            switch ($filetype) {
-                case 'mp4':
-                    $mp4 = $filelink;
-                    break;
-                case 'ogg':
-                    $ogg = $filelink;
-                    break;
-                case 'webm':
-                    $webm = $filelink;
-                    break;
-            }
-        }
-    }*/
-
-//shortcode processing
-    $ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
-    $fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px;height:' . $height . 'px; ' : 'max-width:' . $width . 'px');
-    $splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
-    //$class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
-    $class = 'flowplayer';
-    $data_key = ( $key != '' ? $key : '');
-    $data_logo = ( $key != '' && $logo != '' ?  $logo : '' );
-    $data_analytics = ( $analytics != '' ?  $analytics  : '' );
-    $data_ratio = ( $ratio != 0 ? $ratio : '' );
-    $attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
-    ( ( $loop == 'true' ) ? $loop : '' );
-    //( ( $preload == 'true' ) ? $preload : '' );
+	//shortcode processing
+	$ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
+	$fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px;height:' . $height . 'px; ' : 'max-width:' . $width . 'px');
+	$splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
+	//$class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
+	$class = 'flowplayer';
+	$data_key = ( $key != '' ? $key : '');
+	$data_logo = ( $key != '' && $logo != '' ?  $logo : '' );
+	$data_analytics = ( $ga_account_id != '' ?  $ga_account_id  : '' );
+	$data_ratio = ( $ratio != 0 ? $ratio : '' );
+	$attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
+	( ( $loop == 'true' ) ? $loop : '' );
+	//( ( $preload == 'true' ) ? $preload : '' );
 
 
-    // shortCode output
-$return = '';
-   $return.=     '<script>';
-        if ($key != '' && $logoInOrigin) {
-            $return .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
-        }
-    $return.='</script>';
-    $return.=    '<div style="' . $fixedStyle . $splash_style . '" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
-    $return.=     '<video' . $attributes . '>';
-        $mp4 != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
-        $webm != '' ? $return.='<source type="video/webm" src="' . $webm . '"/>' : '';
-        $ogg != '' ? $return.='<source type="video/ogg" src="' . $ogg . '"/>' : '';
-        $subtitles != '' ? $return.='<track src="' . $subtitles . '"/>' : '';
+	// shortCode output
+	$return = '';
+	$return.=     '<script>';
+		if ($key != '' && $logoInOrigin) {
+			$return .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
+		}
+	$return.='</script>';
+	$return.=    '<div style="' . $fixedStyle . $splash_style . '" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
+	$return.=     '<video' . $attributes . '>';
+		$mp4 != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
+		$webm != '' ? $return.='<source type="video/webm" src="' . $webm . '"/>' : '';
+		$ogg != '' ? $return.='<source type="video/ogg" src="' . $ogg . '"/>' : '';
+		$subtitles != '' ? $return.='<track src="' . $subtitles . '"/>' : '';
 
-    $return.=    '</video>';
-    $return.=     '</div>';
+	$return.=    '</video>';
+	$return.=     '</div>';
 
-    $return.=     '<script>	</script>';
+	$return.=     '<script>	</script>';
 
-    return $return;
-    }
+	return $return;
+	}
 
 // register shortcode
 add_shortcode('flowplayer', 'add_fp5_shortcode');

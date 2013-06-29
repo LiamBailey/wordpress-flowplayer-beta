@@ -66,8 +66,8 @@ function fp5_register_settings() {
 					'desc' => __('You can track video traffic using Google Analytics (GA). Visit flowplayer.org for more info', 'fp5'),
 					'type' => 'header'
 				),
-				'ga_accountId' => array(
-					'id' => 'ga_accountId',
+				'ga_account_id' => array(
+					'id' => 'ga_account_id',
 					'name' => __('Goofle Analytics account ID', 'fp5'),
 					'desc' => __('Specify your GA account ID here.', 'fp5'),
 					'type' => 'text',
