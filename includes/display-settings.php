@@ -22,9 +22,7 @@
 		<?php
 		// This prints out all hidden setting fields
 		settings_fields( 'fp5_settings_commercial_group' );
-		do_settings_sections( 'flowplayer5' );
 		settings_fields( 'fp5_settings_video_tracking_group' );
-		do_settings_sections( 'flowplayer5' );
 		settings_fields( 'fp5_settings_cdn_group' );
 		do_settings_sections( 'flowplayer5' );
 		submit_button();
