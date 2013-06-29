@@ -176,9 +176,8 @@ function fp5_register_settings() {
 	}
 
 	// Creates our settings in the options table
-	register_setting( 'fp5_settings_commercial_group', 'fp5_settings_commercial', 'fp5_settings_sanitize' );
-	register_setting( 'fp5_settings_video_tracking_group', 'fp5_settings_video_tracking', 'fp5_settings_sanitize' );
-	register_setting( 'fp5_settings_cdn_group', 'fp5_settings_cdn', 'fp5_settings_sanitize' );
+	global $fp5_options;
+	register_setting( 'fp5_settings_group', $fp5_options, 'fp5_settings_sanitize' );
 
 }
 
