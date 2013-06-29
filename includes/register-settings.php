@@ -67,6 +67,7 @@ function fp5_register_settings() {
 					'type' => 'text',
 					'size' => 'medium'
 				)
+			)
 		),
 		/** CDN Settings */
 		'cdn' => apply_filters('fp5_settings_cdn',
