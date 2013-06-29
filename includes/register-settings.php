@@ -100,7 +100,6 @@ function fp5_register_settings() {
 		'flowplayer5'
 	);
 
-
 	foreach ( $fp5_settings['general'] as $option ) {
 		add_settings_field(
 			'fp5_settings_general[' . $option['id'] . ']',
@@ -262,7 +261,7 @@ function fp5_settings_sanitize( $input ) {
  * @return array Merged array of all the EDD settings
  */
 function fp5_get_settings() {
-	$commercial_settings = is_array( get_option( 'fp5_settings_commercial' ) ) ? get_option( 'fp5_settings_commercial' ) : array();
+	$general_settings = is_array( get_option( 'fp5_settings_general' ) ) ? get_option( 'fp5_settings_general' ) : array();
 
-	return array_merge( $commercial_settings );
+	return array_merge( $general_settings );
 }
