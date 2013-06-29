@@ -101,7 +101,7 @@ function fp5_register_settings() {
 	);
 
 
-	foreach ( $fp5_settings['commercial'] as $option ) {
+	foreach ( $fp5_settings['general'] as $option ) {
 		add_settings_field(
 			'fp5_settings_general[' . $option['id'] . ']',
 			$option['name'],
@@ -112,7 +112,7 @@ function fp5_register_settings() {
 				'id' => $option['id'],
 				'desc' => $option['desc'],
 				'name' => $option['name'],
-				'section' => 'commercial',
+				'section' => 'general',
 				'size' => isset( $option['size'] ) ? $option['size'] : null,
 				'options' => isset( $option['options'] ) ? $option['options'] : '',
 				'std' => isset( $option['std'] ) ? $option['std'] : ''
