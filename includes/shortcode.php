@@ -42,11 +42,10 @@ global $post;
 
 	// Checks and displays the retrieved value
 	if( isset( $id ) ) {
-		return $id;
+		echo $id;
 	}
-	
 	if( isset( $loop ) ) {
-		return $loop;
+		echo $loop;
 	}
 	if( isset( $autoplay ) ) {
 		echo $autoplay;
