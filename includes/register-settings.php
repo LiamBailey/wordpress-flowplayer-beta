@@ -343,7 +343,9 @@ function fp5_settings_sanitize( $input ) {
  * @return array Merged array of all the EDD settings
  */
 function fp5_get_settings() {
-	$commercial_settings = is_array( get_option( 'fp5_settings_commercial' ) )    ? get_option( 'fp5_settings_commercial' )  : array();
+	$commercial_settings     = is_array( get_option( 'fp5_settings_commercial' ) )     ? get_option( 'fp5_settings_commercial' )  : array();
+	$video_tracking_settings = is_array( get_option( 'fp5_settings_video_tracking' ) ) ? get_option( 'fp5_settings_video_tracking' ) : array();
+	$cdn_settings            = is_array( get_option( 'fp5_settings_cdn' ) )            ? get_option( 'fp5_settings_cdn' ) : array();
 
-	return array_merge( $commercial_settings);
+	return array_merge( $commercial_settings, $video_tracking_settings, $cdn_settings );
 }
