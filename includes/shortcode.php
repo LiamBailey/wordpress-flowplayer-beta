@@ -43,52 +43,52 @@ global $post;
 	// Checks and displays the retrieved value
 	if( !empty( $id ) ) {
 		return $id;
-	}
+	};
 	if( !empty( $loop ) ) {
 		return $loop;
-	}
+	};
 	if( !empty( $autoplay ) ) {
 		echo $autoplay;
-	}
+	};
 	if( !empty( $subtitles ) ) {
 		echo $subtitles;
-	}
+	};
 	if( !empty( $mp4 ) ) {
 		echo $mp4;
 	}
 	if( !empty( $webm ) ) {
 		echo $webm;
-	}
+	};
 	if( !empty( $ogg ) ) {
 		echo $ogg;
-	}
+	};
 	if( !empty( $width ) ) {
 		echo $width;
-	}
+	};
 	if( !empty( $height ) ) {
 		echo $height;
-	}
+	};
 	if( !empty( $ratio ) ) {
 		echo $ratio;
-	}
+	};
 	if( !empty( $fixed ) ) {
 		echo $fixed;
-	}
+	};
 	if( !empty( $key ) ) {
 		echo $key;
-	}
+	};
 	if( !empty( $logo ) ) {
 		echo $logo;
-	}
+	};
 	if( !empty( $ga_account_id ) ) {
 		echo $ga_account_id;
-	}
+	};
 	if( !empty( $logo_origin ) ) {
 		echo 'logo_origin';
-	}
+	};
 	if( !empty( $cdn ) ) {
 		echo 'cdn';
-	}
+	};
 
 	// Register ahortcode stylesheets and JavaScript
 	if ($cdn == 'true') {
