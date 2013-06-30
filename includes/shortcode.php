@@ -37,7 +37,7 @@ global $post;
 	$key           = $options['key'];
 	$logo          = $options['logo'];
 	$ga_account_id = $options['ga_account_id'];
-	$logo_origin   = $options['logo_origin'];
+	$logo_origin   = isset( $options['logo_origin'] );
 	$cdn           = isset( $options['cdn_option'] );
 
 	// Checks and displays the retrieved value
@@ -91,7 +91,7 @@ global $post;
 	}
 
 	// Register ahortcode stylesheets and JavaScript
-	if( $cdn == '1' ) {
+	if( isset( $cdn ) ) {
 		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/' . $skin . '.css' );
 		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
 	} else {
@@ -99,12 +99,12 @@ global $post;
 		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', dirname(__FILE__) ), array( 'jquery' ), $version, false );
 	}
 
-	if(!empty ( $logo_origin ) ) {
+	if( isset ( $logo_origin ) ) {
 		wp_enqueue_style( $plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', dirname(__FILE__) ), $player_version );
 	}
 
 	//shortcode processing
-	$ratio          = ( !empty ( $width ) && !empty ( $height ) ? intval($height) / intval($width) : '' );
+	$ratio          = ( isset ( $width ) && isset( $height ) ? intval($height) / intval($width) : '' );
 	$fixed_style    = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $width . 'px; ' );
 	$splash_style   = 'background:#777 url(' . $splash . ') no-repeat;';
 	$class          = 'flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" );
