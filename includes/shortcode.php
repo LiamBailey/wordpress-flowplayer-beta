@@ -33,12 +33,12 @@ global $post;
 	$fixed     = get_post_meta( $id, 'fixed-width', true );
 
 	// set the options for the shortcode - pulled from the display-settings.php
-	$options = get_option('fp5_settings_general');
-	$key = $options['key'];
-	$logo = $options['logo'];
+	$options       = get_option('fp5_settings_general');
+	$key           = $options['key'];
+	$logo          = $options['logo'];
 	$ga_account_id = $options['ga_account_id'];
-	$logo_origin = $options['logo_origin'];
-	$cdn = $options['cdn_option'];
+	$logo_origin   = $options['logo_origin'];
+	$cdn           = $options['cdn_option'];
 
 	// Checks and displays the retrieved value
 	if( isset( $id ) ) {
@@ -100,38 +100,30 @@ global $post;
 	}
 
 	//shortcode processing
-	$ratio = ($width != '' && $height != '' ? intval($height) / intval($width) : '');
-	$fixedStyle = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $width . 'px; ');
-	$splash_style = 'background:#777 url(' . $splash . ') no-repeat;';
-	$class = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
-	$class = 'flowplayer';
-	$data_key = ( $key != '' ? $key : '');
-	$data_logo = ( $key != '' && $logo != '' ?  $logo : '' );
+	$ratio          = ( $width != '' && $height != '' ? intval($height) / intval($width) : '' );
+	$fixed_style    = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $width . 'px; ' );
+	$splash_style   = 'background:#777 url(' . $splash . ') no-repeat;';
+	$class          = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
+	$data_key       = ( $key != '' ? $key : '');
+	$data_logo      = ( $key != '' && $logo != '' ?  $logo : '' );
 	$data_analytics = ( $ga_account_id != '' ?  $ga_account_id  : '' );
-	$data_ratio = ( $ratio != 0 ? $ratio : '' );
-	$attributes = ( ( $autoplay == 'true' ) ? $autoplay : '' );
-	( ( $loop == 'true' ) ? $loop : '' );
-	//( ( $preload == 'true' ) ? $preload : '' );
+	$data_ratio     = ( $ratio != 0 ? $ratio : '' );
+	$attributes     = ( ( $autoplay == 'true' ) ? 'autoplay' : '' ) ( ( $loop == 'true' ) ? 'loop' : '' );
+	//( ( $preload == 'true' ) ? 'preload' : '' );
 
 
 	// shortCode output
 	$return = '';
-	$return.=     '<script>';
-		if ($key != '' && $logo_origin) {
-			$return .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
-		}
-	$return.='</script>';
-	$return.=    '<div style="' . $fixedStyle . $splash_style . '" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
-	$return.=     '<video' . $attributes . '>';
-		$mp4 != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
-		$webm != '' ? $return.='<source type="video/webm" src="' . $webm . '"/>' : '';
-		$ogg != '' ? $return.='<source type="video/ogg" src="' . $ogg . '"/>' : '';
-		$subtitles != '' ? $return.='<track src="' . $subtitles . '"/>' : '';
+	$return.= '<div style="' . $fixed_style . $splash_style . '" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
+	$return.= '<video' . $attributes . '>';
+		$mp4       != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
+		$webm      != '' ? $return.='<source type="video/webm" src="' . $webm . '"/>' : '';
+		$ogg       != '' ? $return.='<source type="video/ogg" src="' . $ogg . '"/>' : '';
+		$subtitles != '' ? $return.='<track  type="text/vtt" src="' . $subtitles . '"/>' : '';
+	$return.= '</video>';
+	$return.= '</div>';
 
-	$return.=    '</video>';
-	$return.=     '</div>';
-
-	$return.=     '<script>	</script>';
+	$return.= '<script> </script>';
 
 	return $return;
 	}
