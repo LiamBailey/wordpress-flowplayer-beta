@@ -91,7 +91,7 @@ global $post;
 	}
 
 	// Register ahortcode stylesheets and JavaScript
-	if(!empty ( $cdn ) {
+	if(!empty ( $cdn ) ) {
 		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/' . $skin . '.css' );
 		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
 	} else {
@@ -99,7 +99,7 @@ global $post;
 		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', dirname(__FILE__) ), array( 'jquery' ), $version, false );
 	}
 
-	if(!empty ( $logo_origin ) {
+	if(!empty ( $logo_origin ) ) {
 		wp_enqueue_style( $plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', dirname(__FILE__) ), $player_version );
 	}
 
