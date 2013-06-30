@@ -84,14 +84,14 @@ global $post;
 		echo $ga_account_id;
 	}
 	if( isset( $logo_origin ) ) {
-		echo 'logo_origin';
+		echo $logo_origin;
 	}
 	if( isset( $cdn ) ) {
-		echo 'cdn';
+		echo $cdn;
 	}
 
 	// Register ahortcode stylesheets and JavaScript
-	if(!empty ( $cdn ) ) {
+	if( $cdn == 'cdn_option' ) {
 		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/' . $skin . '.css' );
 		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
 	} else {
