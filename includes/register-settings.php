@@ -205,8 +205,8 @@ function fp5_upload_callback($args) {
 function fp5_checkbox_callback( $args ) {
 	global $fp5_options;
 
-	$checked = isset($fp5_options[$args['id']]) ? checked(1, $fp5_options[$args['id']], false) : '';
-	$html = '<input type="checkbox" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" value="1" ' . $checked . '/>';
+	$checked = isset($fp5_options[$args['id']]) ? checked( $fp5_options[$args['id']], 'true' ) : '';
+	$html = '<input type="checkbox" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" value="true" ' . $checked . '/>';
 	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
 
 	echo $html;
