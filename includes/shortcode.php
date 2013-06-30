@@ -110,7 +110,7 @@ global $post;
 	//shortcode processing
 	$ratio          = ( isset ( $width ) && isset( $height ) ? intval($height) / intval($width) : '' );
 	$fixed_style    = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $width . 'px; ' );
-	$splash_style   = 'background:#777 url(' . $splash . ') no-repeat;';
+	$splash_style   = 'background: url("' . $splash . '") no-repeat;';
 	$class          = 'flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" );
 	$data_key       = ( $key != '' ? $key : '');
 	$data_logo      = ( $key != '' && $logo != '' ?  $logo : '' );
