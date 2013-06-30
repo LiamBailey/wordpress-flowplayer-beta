@@ -19,9 +19,9 @@ global $post;
 	$id = $atts['id'];
 
 	// get the meta from the post type
-	$loop      = get_post_meta( $id, 'loop', true );
-	$autoplay  = get_post_meta( $id, 'autoplay', true );
-	$preload   = get_post_meta( $id, 'preload', true );
+	$loop      = get_post_meta( $id, 'fp5-loop', true );
+	$autoplay  = get_post_meta( $id, 'fp5-autoplay', true );
+	$preload   = get_post_meta( $id, 'fp5-preload', true );
 	$poster    = '';
 	$subtitles = get_post_meta( $id, 'webvtt', true );
 	$skin      = get_post_meta( $id, 'fp5-select-skin', true );
