@@ -38,7 +38,7 @@ global $post;
 	$logo          = $options['logo'];
 	$ga_account_id = $options['ga_account_id'];
 	$logo_origin   = $options['logo_origin'];
-	$cdn           = !empty ($options['cdn_option']) ? $options['cdn_option'] : '' );
+	$cdn           = !empty ($options['cdn_option']) ? $options['cdn_option'] : '';
 
 	// Checks and displays the retrieved value
 	if( isset( $id ) ) {
