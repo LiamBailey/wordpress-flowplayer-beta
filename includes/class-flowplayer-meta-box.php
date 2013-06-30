@@ -185,7 +185,7 @@ class fp5_metabox {
 			};
 
 			// Checks for input and saves
-			if( isset( $_POST[ 'autoplay' ] ) ) {
+			if( isset( $_POST[ 'fp5-autoplay' ] ) ) {
 				update_post_meta( $post_id, 'fp5-autoplay', 'true' );
 			} else {
 				update_post_meta( $post_id, 'fp5-autoplay', '' );
