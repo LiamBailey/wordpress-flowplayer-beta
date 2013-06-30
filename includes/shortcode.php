@@ -117,7 +117,7 @@ global $post;
 	$data_logo      = ( $key != '' && $logo != '' ?  $logo : '' );
 	$data_analytics = ( $ga_account_id != '' ?  $ga_account_id  : '' );
 	$data_ratio     = ( $ratio != 0 ? $ratio : '' );
-	$attributes     = isset ( $autoplay ) ? 'autoplay' : '' . ( $loop == 'true' ) ? 'loop' : '' . ( $preload == 'true' ) ? 'preload' : '' . ( $poster == 'true' ) ? 'poster' : ''; 
+	$attributes     = (isset ( $autoplay ) ? 'autoplay ' : '') . (( $loop == 'true' ) ? 'loop ' : '') . (( $preload == 'true' ) ? 'preload ' : '') . (( $poster == 'true' ) ? 'poster' : ''); 
 
 	// shortCode output
 	$return = '';
