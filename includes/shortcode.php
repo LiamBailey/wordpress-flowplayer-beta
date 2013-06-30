@@ -99,11 +99,15 @@ global $post;
 		//wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', dirname(__FILE__) ), array( 'jquery' ), $version, false );
 	}
 
+	if ($logo_origin == 'true') {
+		wp_enqueue_style( $plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', dirname(__FILE__) ), $player_version );
+	}
+
 	//shortcode processing
 	$ratio          = ( $width != '' && $height != '' ? intval($height) / intval($width) : '' );
 	$fixed_style    = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $width . 'px; ' );
 	$splash_style   = 'background:#777 url(' . $splash . ') no-repeat;';
-	$class          = '"flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" ) . '"';
+	$class          = 'flowplayer ' . $skin . ( $splash != "" ? " is-splash" : "" );
 	$data_key       = ( $key != '' ? $key : '');
 	$data_logo      = ( $key != '' && $logo != '' ?  $logo : '' );
 	$data_analytics = ( $ga_account_id != '' ?  $ga_account_id  : '' );

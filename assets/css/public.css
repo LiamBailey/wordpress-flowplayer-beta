@@ -1,0 +1,6 @@
+/* Display logo on own site */
+
+.flowplayer .fp-logo {
+	display: block;
+	opacity: 1;
+}
