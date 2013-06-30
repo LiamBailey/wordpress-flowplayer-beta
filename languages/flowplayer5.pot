@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flowplayer5 for WordPress\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-22 19:47+0100\n"
-"PO-Revision-Date: 2013-06-22 19:47+0100\n"
+"POT-Creation-Date: 2013-06-30 16:01+0100\n"
+"PO-Revision-Date: 2013-06-30 16:01+0100\n"
 "Last-Translator: Ulrich Pogson <grapplerulrich@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -144,164 +144,152 @@ msgstr ""
 msgid "Loop?"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:114
+#: includes/class-flowplayer-meta-box.php:112
+msgid "Preload?"
+msgstr ""
+
+#: includes/class-flowplayer-meta-box.php:118
 msgid "Splash Image"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:116
+#: includes/class-flowplayer-meta-box.php:120
 msgid "Add splash image"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:120
+#: includes/class-flowplayer-meta-box.php:124
 msgid "mp4 video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:122
+#: includes/class-flowplayer-meta-box.php:126
 msgid "Add mp4 video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:126
+#: includes/class-flowplayer-meta-box.php:130
 msgid "webm video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:128
+#: includes/class-flowplayer-meta-box.php:132
 msgid "Add webm video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:132
+#: includes/class-flowplayer-meta-box.php:136
 msgid "ogg video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:134
+#: includes/class-flowplayer-meta-box.php:138
 msgid "Add ogg video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:138
+#: includes/class-flowplayer-meta-box.php:142
 msgid "webvtt file"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:140
+#: includes/class-flowplayer-meta-box.php:144
 msgid "Add webvtt file"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:144
+#: includes/class-flowplayer-meta-box.php:148
 msgid "Preview"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:150
+#: includes/class-flowplayer-meta-box.php:154
 msgid "Max width"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:154
+#: includes/class-flowplayer-meta-box.php:158
 msgid "Use video's aspect ratio"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:156
+#: includes/class-flowplayer-meta-box.php:160
 msgid "Max height"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:160
+#: includes/class-flowplayer-meta-box.php:164
 msgid "Use fixed player size"
 msgstr ""
 
-#: includes/register-settings.old.php:57
-#, php-format
-msgid ""
-"Commercial version removes the Flowplayer logo and allows you to use your "
-"own logo image. You can obtain and purchase a license key at <a%s>flowplayer."
-"org</a>."
-msgstr ""
-
-#: includes/register-settings.old.php:91
-msgid "Add Logo"
-msgstr ""
-
-#: includes/register-settings.old.php:115
-msgid "You do not have sufficient permissions to access this page."
-msgstr ""
-
-#: includes/register-settings.php:49
+#: includes/register-settings.php:39
 msgid "Commercial Version"
 msgstr ""
 
-#: includes/register-settings.php:50
+#: includes/register-settings.php:40 includes/register-settings.php:224
 msgid ""
 "Commercial version removes the Flowplayer logo and allows you to use your "
 "own logo image. You can purchase a license and obtain a license key in "
 "flowplayer.org."
 msgstr ""
 
-#: includes/register-settings.php:55
+#: includes/register-settings.php:45
 msgid "License Key"
 msgstr ""
 
-#: includes/register-settings.php:56
+#: includes/register-settings.php:46
 msgid "Specify your License Key here."
 msgstr ""
 
-#: includes/register-settings.php:62
+#: includes/register-settings.php:52
 msgid "Logo"
 msgstr ""
 
-#: includes/register-settings.php:68
-msgid "Show Logo on this site"
-msgstr ""
-
-#: includes/register-settings.php:69
+#: includes/register-settings.php:55 includes/register-settings.php:60
 msgid "Uncheck this and the logo is only shown in externally embedded players."
 msgstr ""
 
-#: includes/register-settings.php:74
+#: includes/register-settings.php:59
+msgid "Show Logo on this site"
+msgstr ""
+
+#: includes/register-settings.php:65
 msgid "Video Tracking"
 msgstr ""
 
-#: includes/register-settings.php:75
+#: includes/register-settings.php:66
 msgid ""
-"Configure the video attribYou can track video traffic using Google Analytics "
-"(GA). Visit flowplayer.org for more info"
+"You can track video traffic using Google Analytics (GA). Visit flowplayer."
+"org for more info"
 msgstr ""
 
-#: includes/register-settings.php:80
+#: includes/register-settings.php:71
 msgid "Goofle Analytics account ID"
 msgstr ""
 
-#: includes/register-settings.php:81
+#: includes/register-settings.php:72
 msgid "Specify your GA account ID here."
 msgstr ""
 
-#: includes/register-settings.php:87
+#: includes/register-settings.php:78
 msgid "CDN Options"
 msgstr ""
 
-#: includes/register-settings.php:88
+#: includes/register-settings.php:79
 msgid ""
 "If you want to use a self-hosted copy of Flowplayer instead of the CDN "
 "hosted version uncheck Use CDN hosted version? Using the CDN hosted version "
 "is preferable in most situations."
 msgstr ""
 
-#: includes/register-settings.php:93
+#: includes/register-settings.php:84
 msgid "CDN Hosted files"
 msgstr ""
 
-#: includes/register-settings.php:94
+#: includes/register-settings.php:85
 msgid "Uncheck this to load the files from this site"
 msgstr ""
 
-#: includes/register-settings.php:107
+#: includes/register-settings.php:98
 msgid "General Settings"
 msgstr ""
 
-#: includes/register-settings.php:280
+#: includes/register-settings.php:189
+msgid "Upload Logo"
+msgstr ""
+
+#: includes/register-settings.php:237
 #, php-format
 msgid ""
 "The callback function used for the <strong>%s</strong> setting is missing."
 msgstr ""
 
-#: includes/register-settings.php:330
-msgid "Upload Logo"
-msgstr ""
-
-#: includes/register-settings.php:347
+#: includes/register-settings.php:251
 msgid "Settings Updated"
 msgstr ""

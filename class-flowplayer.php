@@ -175,8 +175,8 @@ class Flowplayer5 {
 		}
 
 		// set the options for the shortcode - pulled from the display-settings.php
-		$options = get_option('fp5_options');
-		$cdn = $options['cdn'];
+		$options = get_option('fp5_settings_general');
+		$cdn = isset( $fp5_options['cdn_option'] );
 
 		$screen = get_current_screen();
 		//if ( $screen->id == $this->plugin_screen_hook_suffix ) {
@@ -204,9 +204,9 @@ class Flowplayer5 {
 		}
 
 		// set the options for the shortcode - pulled from the display-settings.php
-		$options = get_option('fp5_options');
-		$key = $options['key'];
-		$cdn = $options['cdn'];
+		$options = get_option('fp5_settings_general');
+		$key = !empty ( $fp5_options['key'] );
+		$cdn = isset( $fp5_options['cdn_option'] );
 
 		$screen = get_current_screen();
 		//if ( $screen->id == $this->plugin_screen_hook_suffix ) {

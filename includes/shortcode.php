@@ -121,7 +121,7 @@ global $post;
 
 	// shortCode output
 	$return = '';
-	$return.= '<div style="' . $fixed_style . $splash_style . '" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
+	$return.= '<div style="' . $fixed_style . $splash_style . ' background-size: contain;" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
 	$return.= '<video ' . $attributes . '>';
 		$mp4       != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
 		$webm      != '' ? $return.='<source type="video/webm" src="' . $webm . '"/>' : '';
