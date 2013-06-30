@@ -186,16 +186,23 @@ class fp5_metabox {
 
 			// Checks for input and saves
 			if( isset( $_POST[ 'autoplay' ] ) ) {
-				update_post_meta( $post_id, 'autoplay', 'true' );
+				update_post_meta( $post_id, 'fp5-autoplay', 'true' );
 			} else {
-				update_post_meta( $post_id, 'autoplay', '' );
+				update_post_meta( $post_id, 'fp5-autoplay', '' );
 			}
 
 			// Checks for input and saves
-			if( isset( $_POST[ 'loop' ] ) ) {
-				update_post_meta( $post_id, 'loop', 'true' );
+			if( isset( $_POST[ 'fp5-loop' ] ) ) {
+				update_post_meta( $post_id, 'fp5-loop', 'true' );
 			} else {
-				update_post_meta( $post_id, 'loop', '' );
+				update_post_meta( $post_id, 'fp5-loop', '' );
+			}
+
+			// Checks for input and saves
+			if( isset( $_POST[ 'fp5-preload' ] ) ) {
+				update_post_meta( $post_id, 'fp5-preload', 'true' );
+			} else {
+				update_post_meta( $post_id, 'fp5-preload', '' );
 			}
 
 			// Checks for input and saves if needed
