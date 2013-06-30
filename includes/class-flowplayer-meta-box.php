@@ -100,12 +100,16 @@ class fp5_metabox {
 			<span class="example-row-title"><?php _e('Video attributes')?></span>
 			<div class="example-row-content">
 				<label for="fp5-autoplay">
-					<input type="checkbox" name="autoplay" id="autoplay" value="true" <?php if ( isset ( $fp5_stored_meta['autoplay'] ) ) checked( $fp5_stored_meta['autoplay'][0], 'true' ); ?> />
+					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="true" <?php if ( isset ( $fp5_stored_meta['autoplay'] ) ) checked( $fp5_stored_meta['autoplay'][0], 'true' ); ?> />
 					<?php _e( 'Autoplay?' )?>
 				</label>
 				<label for="fp5-loop">
-					<input type="checkbox" name="loop" id="loop" value="true" <?php if ( isset ( $fp5_stored_meta['loop'] ) ) checked( $fp5_stored_meta['loop'][0], 'true' ); ?> />
+					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="true" <?php if ( isset ( $fp5_stored_meta['loop'] ) ) checked( $fp5_stored_meta['loop'][0], 'true' ); ?> />
 					<?php _e( 'Loop?' )?>
+				</label>
+				<label for="fp5-preload">
+					<input type="checkbox" name="fp5-preload" id="fp5-preload" value="true" <?php if ( isset ( $fp5_stored_meta['preload'] ) ) checked( $fp5_stored_meta['preload'][0], 'true' ); ?> />
+					<?php _e( 'Preload?' )?>
 				</label>
 			</div>
 		</p>
