@@ -21,7 +21,8 @@ global $post;
 	// get the meta from the post type
 	$loop      = get_post_meta( $id, 'loop', true );
 	$autoplay  = get_post_meta( $id, 'autoplay', true );
-	$preload  = get_post_meta( $id, 'preload', true );
+	$preload   = get_post_meta( $id, 'preload', true );
+	$poster    = '';
 	$subtitles = get_post_meta( $id, 'webvtt', true );
 	$skin      = get_post_meta( $id, 'fp5-select-skin', true );
 	$splash    = get_post_meta( $id, 'splash-image', true );
@@ -111,7 +112,7 @@ global $post;
 	$ratio          = ( isset ( $width ) && isset( $height ) ? intval($height) / intval($width) : '' );
 	$fixed_style    = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $width . 'px; ' );
 	$splash_style   = 'background: #777 url(' . $splash . ') no-repeat;';
-	$class          = 'flowplayer ' . $skin . ( isset ( $splash ) ? " is-splash" : '' );
+	$class          = 'flowplayer ' . $skin . ( isset ( $splash ) ? ' is-splash' : '' );
 	$data_key       = ( $key != '' ? $key : '');
 	$data_logo      = ( $key != '' && $logo != '' ?  $logo : '' );
 	$data_analytics = ( $ga_account_id != '' ?  $ga_account_id  : '' );
