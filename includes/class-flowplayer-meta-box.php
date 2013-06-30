@@ -100,11 +100,11 @@ class fp5_metabox {
 			<span class="example-row-title"><?php _e('Video attributes')?></span>
 			<div class="example-row-content">
 				<label for="fp5-autoplay">
-					<input type="checkbox" name="autoplay" id="autoplay" value="yes" <?php if ( isset ( $fp5_stored_meta['autoplay'] ) ) checked( $fp5_stored_meta['autoplay'][0], 'yes' ); ?> />
+					<input type="checkbox" name="autoplay" id="autoplay" value="true" <?php if ( isset ( $fp5_stored_meta['autoplay'] ) ) checked( $fp5_stored_meta['autoplay'][0], 'true' ); ?> />
 					<?php _e( 'Autoplay?' )?>
 				</label>
 				<label for="fp5-loop">
-					<input type="checkbox" name="loop" id="loop" value="yes" <?php if ( isset ( $fp5_stored_meta['loop'] ) ) checked( $fp5_stored_meta['loop'][0], 'yes' ); ?> />
+					<input type="checkbox" name="loop" id="loop" value="true" <?php if ( isset ( $fp5_stored_meta['loop'] ) ) checked( $fp5_stored_meta['loop'][0], 'true' ); ?> />
 					<?php _e( 'Loop?' )?>
 				</label>
 			</div>
@@ -150,13 +150,13 @@ class fp5_metabox {
 			<label for="max-width" class="example-row-title"><?php _e('Max width')?></label>
 			<input type="text" name="max-width" id="max-width" value="<?php if ( isset ( $fp5_stored_meta['max-width'] ) ) echo $fp5_stored_meta['max-width'][0]; ?>" />
 			<label for="aspect-ratio">
-				<input type="checkbox" name="aspect-ratio" id="aspect-ratio" value="yes" <?php if ( isset ( $fp5_stored_meta['aspect-ratio'] ) ) checked( $fp5_stored_meta['aspect-ratio'][0], 'yes' ); ?> />
+				<input type="checkbox" name="aspect-ratio" id="aspect-ratio" value="true" <?php if ( isset ( $fp5_stored_meta['aspect-ratio'] ) ) checked( $fp5_stored_meta['aspect-ratio'][0], 'true' ); ?> />
 				<?php _e('Use video\'s aspect ratio')?>
 			</label>
 			<label for="max-height" class="example-row-title"><?php _e('Max height')?></label>
 			<input type="text" name="max-height" id="max-height" value="<?php if ( isset ( $fp5_stored_meta['max-height'] ) ) echo $fp5_stored_meta['max-height'][0]; ?>" />
 			<label for="fixed-width">
-				<input type="checkbox" name="fixed-width" id="fixed-width" value="yes" <?php if ( isset ( $fp5_stored_meta['fixed-width'] ) ) checked( $fp5_stored_meta['fixed-width'][0], 'yes' ); ?> />
+				<input type="checkbox" name="fixed-width" id="fixed-width" value="true" <?php if ( isset ( $fp5_stored_meta['fixed-width'] ) ) checked( $fp5_stored_meta['fixed-width'][0], 'true' ); ?> />
 				<?php _e('Use fixed player size') ?>
 			</label>
 		</p>
@@ -182,14 +182,14 @@ class fp5_metabox {
 
 			// Checks for input and saves
 			if( isset( $_POST[ 'autoplay' ] ) ) {
-				update_post_meta( $post_id, 'autoplay', 'yes' );
+				update_post_meta( $post_id, 'autoplay', 'true' );
 			} else {
 				update_post_meta( $post_id, 'autoplay', '' );
 			}
 
 			// Checks for input and saves
 			if( isset( $_POST[ 'loop' ] ) ) {
-				update_post_meta( $post_id, 'loop', 'yes' );
+				update_post_meta( $post_id, 'loop', 'true' );
 			} else {
 				update_post_meta( $post_id, 'loop', '' );
 			}
@@ -226,7 +226,7 @@ class fp5_metabox {
 
 			// Checks for input and saves
 			if( isset( $_POST[ 'aspect-ratio' ] ) ) {
-				update_post_meta( $post_id, 'aspect-ratio', 'yes' );
+				update_post_meta( $post_id, 'aspect-ratio', 'true' );
 			} else {
 				update_post_meta( $post_id, 'aspect-ratio', '' );
 			}
@@ -238,7 +238,7 @@ class fp5_metabox {
 
 			// Checks for input and saves
 			if( isset( $_POST[ 'fixed-width' ] ) ) {
-				update_post_meta( $post_id, 'fixed-width', 'yes' );
+				update_post_meta( $post_id, 'fixed-width', 'true' );
 			} else {
 				update_post_meta( $post_id, 'fixed-width', '' );
 			}
