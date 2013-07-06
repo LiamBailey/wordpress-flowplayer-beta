@@ -2,8 +2,8 @@
 Contributors: anssi, grapplerulrich
 Donate link: http://flowplayer.org/download
 Tags: video, html5 video, flowplayer
-Requires at least: 3.0.1
-Tested up to: 3.5
+Requires at least: 3.5
+Tested up to: 3.5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,7 +14,7 @@ A plugin for showing videos with FlowPlayer 5. From the makers of Flowplayer.
 
 The main features of this plugin are:
 
-* Post editor extension to easily post a video together with your WordPress post or page
+* Create video that can be added using shortcodes [flowplayer5 id="1"]
 * Skin selection with three default Flowplayer skins: Minimalist, Functional and Playful
 * Show your video in any desired player size
 * Playback options: autoPlay, loop
@@ -50,38 +50,45 @@ is supported by your web browser. See here for some info on video formats on dif
 
 == Changelog ==
 
-= 0.5 =
+= 1.0.0 =
+* complete rewrite of plugin
+* updated the Flowplayer code to version 5.4.3
+
+= 0.5.0 =
 * updated the Flowplayer code to version 5.3.2
 * fixed splash image sizing
 
-= 0.4 =
+= 0.4.0 =
 * fixed the new "show logo on origin site" checkbox that was introduced in version 0.3
 * now possible to add several players with different skins in one post/page
 * fixed: the "Send to Editor" button became non-functional if the media library window was closed without choosing media
 
-= 0.3 =
+= 0.3.0 =
 * now in the posting UI the height of the player is calculated based on video's aspect ratio
 * added option to show the logo also in the origin site, and not just only in virally embedded players
 
-= 0.2 =
+= 0.2.0 =
 * fixed to work when this plugin is symlinked in the wp-content/plugins directory
 * fixed link to plugins configuration page
 * fixed player scaling, does not use a fixed player size any more
 * added an option to make the player size fixed
 
-= 0.1 =
+= 0.1.0 =
 * Initial release
 
 == Upgrade Notice ==
 
-= 0.5 =
+= 1.0.0 =
+* Big plugin rewrite
+
+= 0.5.0 =
 * bugs fixed
 
-= 0.4 =
+= 0.4.0 =
 * fixes a critical issue with the media library
 
-= 0.2 =
+= 0.2.0 =
 * Bugs fixed. Player size is no longer fixed: Works better on different screen sizes.
 
-= 0.1 =
+= 0.1.0 =
 * This is the first stable release.

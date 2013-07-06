@@ -1,33 +1,22 @@
 <?php
 /**
- * The WordPress Plugin Boilerplate.
+ * Flowplayer 5 for Wordpress
  *
- * A foundation off of which to build well-documented WordPress plugins that also follow
- * WordPress coding standards and PHP best practices.
- *
- * Use PHPDoc tags if you wish to be able to document the code using a documentation
- * generator.
- *
- * @package PluginName
- * @author  Your Name <email@example.com>
- * @license GPL-2.0+
- * @link    TODO
- * @version 1.0.0
+ * @package   Flowplayer 5 for Wordpress
+ * @author    Ulrich Pogson <ulrich@pogson.ch>
+ * @license   GPL-2.0+
+ * @link      http://flowplayer.org/
+ * @copyright 2013 Flowplayer Ltd
  */
 
-/**
- * If this file is attempted to be accessed directly, we'll exit.
- *
- * The following check provides a level of security from other files
- * that request data directly.
- */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
 }
 
 function fp5_register_settings() {
 
-/**
+	/**
 	 * 'Whitelisted' fp5 settings, filters are provided for each settings
 	 * section to allow extensions and other plugins to add their own settings
 	 */
@@ -36,53 +25,53 @@ function fp5_register_settings() {
 			array(
 				'commercial_version' => array(
 					'id' => 'commercial_version',
-					'name' => '<h4>' . __('Commercial Version', 'fp5') . '</h4>',
+					'name' => '<h4>' . __('Commercial Version', 'flowplayer5') . '</h4>',
 					'desc' => __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'fp5'),
 					'type' => 'header'
 				),
 				'key' => array(
 					'id' => 'key',
 					'name' => __('License Key', 'fp5'),
-					'desc' => __('Specify your License Key here.', 'fp5'),
+					'desc' => __('Specify your License Key here.', 'flowplayer5'),
 					'type' => 'text',
-					'size' => 'medium'
+					'size' => 'large'
 				),
 				'logo' => array(
 					'id' => 'logo',
-					'name' => __( 'Logo', 'fp5'),
+					'name' => __( 'Logo', 'flowplayer5'),
 					'type' => 'upload',
-					'size' => 'medium',
-					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'fp5')
+					'size' => 'large',
+					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'flowplayer5')
 				),
 				'logo_origin' => array(
 					'id' => 'logo_origin',
 					'name' => __('Show Logo on this site', 'fp5'),
-					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'fp5'),
+					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'flowplayer5'),
 					'type' => 'checkbox'
 				),
 				'video_tracking' => array(
 					'id' => 'video_tracking',
 					'name' => '<strong>' . __('Video Tracking', 'fp5') . '</strong>',
-					'desc' => __('You can track video traffic using Google Analytics (GA). Visit flowplayer.org for more info', 'fp5'),
+					'desc' => __('You can track video traffic using Google Analytics (GA). Visit flowplayer.org for more info', 'flowplayer5'),
 					'type' => 'header'
 				),
 				'ga_account_id' => array(
 					'id' => 'ga_account_id',
-					'name' => __('Goofle Analytics account ID', 'fp5'),
-					'desc' => __('Specify your GA account ID here.', 'fp5'),
+					'name' => __('Goofle Analytics account ID', 'flowplayer5'),
+					'desc' => __('Specify your GA account ID here.', 'flowplayer5'),
 					'type' => 'text',
 					'size' => 'medium'
 				),
 				'cdn_options' => array(
 					'id' => 'cdn_options',
 					'name' => '<strong>' . __('CDN Options', 'fp5') . '</strong>',
-					'desc' => __('If you want to use a self-hosted copy of Flowplayer instead of the CDN hosted version uncheck Use CDN hosted version? Using the CDN hosted version is preferable in most situations.', 'fp5'),
+					'desc' => __('If you want to use a self-hosted copy of Flowplayer instead of the CDN hosted version uncheck Use CDN hosted version? Using the CDN hosted version is preferable in most situations.', 'flowplayer5'),
 					'type' => 'header'
 				),
 				'cdn_option' => array(
 					'id' => 'cdn_option',
-					'name' => __('CDN Hosted files', 'fp5'),
-					'desc' => __('Uncheck this to load the files from this site', 'fp5'),
+					'name' => __('CDN Hosted files', 'flowplayer5'),
+					'desc' => __('Uncheck this to load the files from this site', 'flowplayer5'),
 					'type' => 'checkbox'
 				)
 			)
@@ -95,7 +84,7 @@ function fp5_register_settings() {
 
 	add_settings_section(
 		'fp5_settings_general',
-		__( 'General Settings', 'fp5' ),
+		__( 'General Settings', 'flowplayer5' ),
 		'__return_false',
 		'flowplayer5'
 	);
@@ -138,7 +127,6 @@ add_action( 'admin_init', 'fp5_register_settings' );
 function fp5_header_callback( $args ) {
 	echo '<p class="description">' . $args['desc'] . '</p>';
 }
-
 
 /**
  * Text Callback
@@ -213,18 +201,6 @@ function fp5_checkbox_callback( $args ) {
 }
 
 /**
- * Settings General Description Callback
- *
- * Renders the general section description.
- *
- * @since 1.3.3
- * @return void
- */
-function fp5_settings_general_description_callback() {
-	echo __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'fp5');
-}
-
-/**
  * Missing Callback
  *
  * If a function is missing for settings callbacks alert the user.
@@ -234,7 +210,7 @@ function fp5_settings_general_description_callback() {
  * @return void
  */
 function fp5_missing_callback($args) {
-	printf( __( 'The callback function used for the <strong>%s</strong> setting is missing.', 'fp5' ), $args['id'] );
+	printf( __( 'The callback function used for the <strong>%s</strong> setting is missing.', 'flowplayer5' ), $args['id'] );
 }
 
 /**
@@ -248,7 +224,7 @@ function fp5_missing_callback($args) {
  * @return string $input Sanitizied value
  */
 function fp5_settings_sanitize( $input ) {
-	add_settings_error( 'fp5-notices', '', __('Settings Updated', 'fp5'), 'updated' );
+	add_settings_error( 'fp5-notices', '', __('Settings Updated', 'flowplayer5'), 'updated' );
 	return $input;
 }
 

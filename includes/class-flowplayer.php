@@ -3,19 +3,23 @@
  * Flowplayer 5 for Wordpress
  *
  * @package   Flowplayer 5 for Wordpress
- * @author    Your Name <email@example.com>
+ * @author    Ulrich Pogson <ulrich@pogson.ch>
  * @license   GPL-2.0+
- * @link      http://example.com
+ * @link      http://flowplayer.org/
  * @copyright 2013 Flowplayer Ltd
  */
+
+
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 
 /**
  * Plugin class.
  *
- * TODO: Rename this class to a proper name for your plugin.
- *
  * @package Flowplayer5
- * @author  Your Name <email@example.com>
+ * @author  Ulrich Pogson <ulrich@pogson.ch>
  */
 class Flowplayer5 {
 
@@ -40,7 +44,7 @@ class Flowplayer5 {
 	 *
 	 * @var     string
 	 */
-	protected $player_version = '5.4.1';
+	protected $player_version = '5.4.3';
 
 	function get_player_version() {
 		return $this->player_version;
@@ -98,11 +102,7 @@ class Flowplayer5 {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
-		// Load public-facing style sheet and JavaScript.
-		//add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		//add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
-		// Define custom functionality. Read more about actions and filters: http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
+		// Define custom functionality.
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
 		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
 
@@ -198,26 +198,6 @@ class Flowplayer5 {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_scripts() {
-
-		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
-			return;
-		}
-
-		// set the options for the shortcode - pulled from the display-settings.php
-		$options = get_option('fp5_settings_general');
-		$key = !empty ( $fp5_options['key'] );
-		$cdn = isset( $fp5_options['cdn_option'] );
-
-		$screen = get_current_screen();
-		//if ( $screen->id == $this->plugin_screen_hook_suffix ) {
-			//wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( '/assets/js/admin.js', __FILE__ ), array( 'jquery' ), $this->version );
-			if( $cdn == 'true' ) {
-				wp_enqueue_script( $this->plugin_slug . '-script', 'http://releases.flowplayer.org/' . $this->player_version . '/'.($key != '' ? 'commercial/' : '') . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
-			} else {
-				wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/'.($key != '' ? "commercial/" : "").'flowplayer.min.js', __FILE__ ), array( 'jquery' ), $this->version, false );
-			}
-		//}
-
 		wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->version, false );
 		wp_localize_script( $this->plugin_slug . '-media', 'splash_image',
 			array(
@@ -259,37 +239,12 @@ class Flowplayer5 {
 	}
 
 	/**
-	 * Register and enqueue public-facing style sheet.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'css/public.css', __FILE__ ), $this->version );
-	}
-
-	/**
-	 * Register and enqueues public-facing JavaScript files.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'js/public.js', __FILE__ ), array( 'jquery' ), $this->version );
-	}
-
-	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
 	 * @since    1.0.0
 	 */
 	public function add_plugin_admin_menu() {
 
-		/*
-		 * TODO:
-		 *
-		 * Change 'Page Title' to the title of your plugin admin page
-		 * Change 'Menu Text' to the text for menu item for the plugin settings page
-		 * Change 'plugin-name' to the name of your plugin
-		 */
 		$this->plugin_screen_hook_suffix = add_submenu_page(
 			'edit.php?post_type=flowplayer5video',
 			__( 'Flowplayer Settings', $this->plugin_slug ),
@@ -313,9 +268,6 @@ class Flowplayer5 {
 	/**
 	 * NOTE:  Actions are points in the execution of a page or process
 	 *        lifecycle that WordPress fires.
-	 *
-	 *        WordPress Actions: http://codex.wordpress.org/Plugin_API#Actions
-	 *        Action Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
 	 *
 	 * @since    1.0.0
 	 */
@@ -358,15 +310,11 @@ class Flowplayer5 {
 			'capability_type'     => 'page',
 		);
 
-		register_post_type( 'FlowPlayer5Video', $args );
+		register_post_type( 'flowplayer5', $args );
 	}
 
 	/**
-	 * NOTE:  Filters are points of execution in which WordPress modifies data
-	 *        before saving it or sending it to the browser.
-	 *
-	 *        WordPress Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *        Filter Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
+	 * Add mime support for webm and vtt.
 	 *
 	 * @since    1.0.0
 	 */

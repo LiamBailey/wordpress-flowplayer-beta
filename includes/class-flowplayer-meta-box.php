@@ -1,23 +1,20 @@
 <?php
 /**
- * Represents the view for the administration dashboard.
+ * Represents the the meta box in the custom post type.
  *
- * This includes the header, options, and other information that should provide
- * The User Interface to the end user.
- *
- * @package   PluginName
- * @author    Your Name <email@example.com>
+ * @package   Flowplayer 5 for Wordpress
+ * @author    Ulrich Pogson <ulrich@pogson.ch>
  * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2013 Your Name or Company Name
+ * @link      http://flowplayer.org/
+ * @copyright 2013 Flowplayer Ltd
  */
 
-class fp5_metabox {
+class video_meta_box {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 *
-	 * @since   0.1.0
+	 * @since   1.0.0
 	 *
 	 * @var     string
 	 */
@@ -27,16 +24,33 @@ class fp5_metabox {
 	 * Unique identifier for the plugin. This value is also used as the text domain
 	 * when internationalizing strings of text.
 	 *
-	 * @since    0.1.0
+	 * @since    1.0.0
 	 *
 	 * @var      string
 	 */
 	private $plugin_slug;
 
 	/**
+	 * Return an instance of this class.
+	 *
+	 * @since     1.0.0
+	 *
+	 * @return    object    A single instance of this class.
+	 */
+	public static function get_instance() {
+
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+	}
+
+	/**
 	 * Initializes the plugin by setting localization, filters, and administration functions.
 	 *
-	 * @since     0.1.0
+	 * @since     1.0.0
 	 */
 	public function __construct() {
 
@@ -54,8 +68,8 @@ class fp5_metabox {
 	/**
 	 * Registers the meta box for displaying the 'Post Short URL' in the post editor.
 	 *
-	 * @version    0.1.0
-	 * @since      0.1.0
+	 * @version    1.0.0
+	 * @since      1.0.0
 	 */
 	public function add_fp5_video_meta_box() {
 
@@ -63,7 +77,7 @@ class fp5_metabox {
 			'fp5_video_details',
 			__( 'Video Details', $this->plugin_slug ),
 			array( $this, 'display_fp5_video_meta_box' ),
-			'FlowPlayer5Video',
+			'flowplayer',
 			'normal',
 			'default'
 		 );
@@ -74,8 +88,8 @@ class fp5_metabox {
 	 * Displays the meta box for displaying the 'Post Short URL' or a default
 	 * message if one does not exist.
 	 *
-	 * @version    0.1.0
-	 * @since      0.1.0
+	 * @version    1.0.0
+	 * @since      1.0.0
 	 */
 	public function display_fp5_video_meta_box( $post ) {
 
@@ -97,8 +111,8 @@ class fp5_metabox {
 		</p>
 
 		<p>
-			<span class="example-row-title"><?php _e('Video attributes')?></span>
-			<div class="example-row-content">
+			<span class="fp5-row-title"><?php _e('Video attributes')?></span>
+			<div class="fp5-row-content">
 				<label for="fp5-autoplay">
 					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-autoplay'] ) ) checked( $fp5_stored_meta['fp5-autoplay'][0], 'true' ); ?> />
 					<?php _e( 'Autoplay?' )?>
@@ -107,41 +121,43 @@ class fp5_metabox {
 					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-loop'] ) ) checked( $fp5_stored_meta['fp5-loop'][0], 'true' ); ?> />
 					<?php _e( 'Loop?' )?>
 				</label>
-				<label for="fp5-preload">
-					<input type="checkbox" name="fp5-preload" id="fp5-preload" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) checked( $fp5_stored_meta['fp5-preload'][0], 'true' ); ?> />
-					<?php _e( 'Preload?' )?>
-				</label>
+				<label for="fp5-preload" class="fp5-row-title"><?php _e( 'Preload?' )?></label>
+				<select name="fp5-preload" id="fp5-preload">
+					<option value="auto" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'auto' ); ?>>auto</option>';
+					<option value="metadata" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'metadata' ); ?>>metadata</option>';
+					<option value="none" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'none' ); ?>>none</option>';
+				</select>
 			</div>
 		</p>
 
 		<p>
-			<label for="splash-image"><?php _e( 'Splash Image', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="splash-image" size="70" value="<?php if ( isset ( $fp5_stored_meta['splash-image'] ) ) echo $fp5_stored_meta['splash-image'][0]?>" name="splash-image" />
+			<label for="fp5-splash-image"><?php _e( 'Splash Image', $this->plugin_slug )?></label>
+			<input class="media-url" type="text" name="fp5-splash-image" id="fp5-splash-image" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-splash-image'] ) ) echo $fp5_stored_meta['fp5-splash-image'][0]?>" />
 			<a href="#" class="fp5-add-splash-image button button-primary" title="<?php _e( 'Add splash image', $this->plugin_slug )?>"><?php _e( 'Add splash image', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
-			<label for="mp4-video"><?php _e( 'mp4 video', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="mp4-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['mp4-video'] ) ) echo $fp5_stored_meta['mp4-video'][0]; ?>" name="mp4-video" />
+			<label for="fp5-mp4-video"><?php _e( 'mp4 video', $this->plugin_slug )?></label>
+			<input class="media-url" type="text" name="fp5-mp4-video" id="fp5-mp4-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-mp4-video'] ) ) echo $fp5_stored_meta['fp5-mp4-video'][0]; ?>" />
 			<a href="#" class="fp5-add-mp4 button button-primary" title="<?php _e( 'Add mp4 video', $this->plugin_slug )?>"><?php _e( 'Add mp4 video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
-			<label for="webm-video"><?php _e( 'webm video', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="webm-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['webm-video'] ) ) echo $fp5_stored_meta['webm-video'][0]; ?>" name="webm-video" />
+			<label for="fp5-webm-video"><?php _e( 'webm video', $this->plugin_slug )?></label>
+			<input class="media-url" type="text" name="fp5-webm-video" id="fp5-webm-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-webm-video'] ) ) echo $fp5_stored_meta['fp5-webm-video'][0]; ?>" />
 			<a href="#" class="fp5-add-webm button button-primary" title="<?php _e( 'Add webm video', $this->plugin_slug )?>"><?php _e( 'Add webm video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
-			<label for="ogg-video"><?php _e( 'ogg video', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="ogg-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['ogg-video'] ) ) echo $fp5_stored_meta['ogg-video'][0]; ?>" name="ogg-video" />
+			<label for="fp5-ogg-video"><?php _e( 'ogg video', $this->plugin_slug )?></label>
+			<input class="media-url" type="text" name="fp5-ogg-video" id="fp5-ogg-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-ogg-video'] ) ) echo $fp5_stored_meta['fp5-ogg-video'][0]; ?>" />
 			<a href="#" class="fp5-add-ogg button button-primary" title="<?php _e( 'Add ogg video', $this->plugin_slug )?>"><?php _e( 'Add ogg video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
-			<label for="webvtt"><?php _e( 'webvtt file', $this->plugin_slug )?></label>
-			<input class="mediaUrl" type="text" id="webvtt" size="70" value="<?php if ( isset ( $fp5_stored_meta['webvtt'] ) ) echo $fp5_stored_meta['webvtt'][0]; ?>" name="webvtt" />
-			<a href="#" class="fp5-add-webvtt button button-primary" title="<?php _e( 'Add webvtt file', $this->plugin_slug )?>"><?php _e( 'Add webvtt file', $this->plugin_slug )?></a>
+			<label for="fp5-vtt-subtitles"><?php _e( 'vtt file (Subtitles)', $this->plugin_slug )?></label>
+			<input class="media-url" type="text" name="fp5-vtt" id="fp5-vtt" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-vtt-subtitles'] ) ) echo $fp5_stored_meta['fp5-vtt-subtitles'][0]; ?>" />
+			<a href="#" class="fp5-add-vtt button button-primary" title="<?php _e( 'Add vtt file', $this->plugin_slug )?>"><?php _e( 'Add vtt file', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
@@ -151,16 +167,16 @@ class fp5_metabox {
 		</p>
 
 		<p>
-			<label for="max-width" class="example-row-title"><?php _e('Max width')?></label>
-			<input type="text" name="max-width" id="max-width" value="<?php if ( isset ( $fp5_stored_meta['max-width'] ) ) echo $fp5_stored_meta['max-width'][0]; ?>" />
-			<label for="aspect-ratio">
-				<input type="checkbox" name="aspect-ratio" id="aspect-ratio" value="true" <?php if ( isset ( $fp5_stored_meta['aspect-ratio'] ) ) checked( $fp5_stored_meta['aspect-ratio'][0], 'true' ); ?> />
+			<label for="fp5-max-width" class="fp5-row-title"><?php _e('Max width')?></label>
+			<input type="text" name="fp5-max-width" id="fp5-max-width" value="<?php if ( isset ( $fp5_stored_meta['fp5-max-width'] ) ) echo $fp5_stored_meta['fp5-max-width'][0]; ?>" />
+			<label for="fp5-aspect-ratio">
+				<input type="checkbox" name="fp5-aspect-ratio" id="fp5-aspect-ratio" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-aspect-ratio'] ) ) checked( $fp5_stored_meta['aspect-ratio'][0], 'true' ); ?> />
 				<?php _e('Use video\'s aspect ratio')?>
 			</label>
-			<label for="max-height" class="example-row-title"><?php _e('Max height')?></label>
-			<input type="text" name="max-height" id="max-height" value="<?php if ( isset ( $fp5_stored_meta['max-height'] ) ) echo $fp5_stored_meta['max-height'][0]; ?>" />
-			<label for="fixed-width">
-				<input type="checkbox" name="fixed-width" id="fixed-width" value="true" <?php if ( isset ( $fp5_stored_meta['fixed-width'] ) ) checked( $fp5_stored_meta['fixed-width'][0], 'true' ); ?> />
+			<label for="fp5-max-height" class="fp5-row-title"><?php _e('Max height')?></label>
+			<input type="text" name="fp5-max-height" id="fp5-max-height" value="<?php if ( isset ( $fp5_stored_meta['fp5-max-height'] ) ) echo $fp5_stored_meta['fp5-max-height'][0]; ?>" />
+			<label for="fp5-fixed-width">
+				<input type="checkbox" name="fp5-fixed-width" id="fp5-fixed-width" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-fixed-width'] ) ) checked( $fp5_stored_meta['fp5-fixed-width'][0], 'true' ); ?> />
 				<?php _e('Use fixed player size') ?>
 			</label>
 		</p>
@@ -172,8 +188,8 @@ class fp5_metabox {
 	 * When the post is saved or updated, generates a short URL to the existing post.
 	 *
 	 * @param    int     $post_id    The ID of the post being save
-	 * @version  0.1.0
-	 * @since    0.1.0
+	 * @version  1.0.0
+	 * @since    1.0.0
 	 */
 	public function save_fp5_video_details( $post_id ) {
 
@@ -206,52 +222,52 @@ class fp5_metabox {
 			}
 
 			// Checks for input and saves if needed
-			if( isset( $_POST[ 'splash-image' ] ) ) {
-				update_post_meta( $post_id, 'splash-image', $_POST[ 'splash-image' ] );
+			if( isset( $_POST[ 'fp5-splash-image' ] ) ) {
+				update_post_meta( $post_id, 'fp5-splash-image', $_POST[ 'fp5-splash-image' ] );
 			}
 
 			// Checks for input and saves if needed
-			if( isset( $_POST[ 'mp4-video' ] ) ) {
-				update_post_meta( $post_id, 'mp4-video', $_POST[ 'mp4-video' ] );
+			if( isset( $_POST[ 'fp5-mp4-video' ] ) ) {
+				update_post_meta( $post_id, 'fp5-mp4-video', $_POST[ 'fp5-mp4-video' ] );
 			}
 
 			// Checks for input and saves if needed
-			if( isset( $_POST[ 'webm-video' ] ) ) {
-				update_post_meta( $post_id, 'webm-video', $_POST[ 'webm-video' ] );
+			if( isset( $_POST[ 'fp5-webm-video' ] ) ) {
+				update_post_meta( $post_id, 'fp5-webm-video', $_POST[ 'fp5-webm-video' ] );
 			}
 
 			// Checks for input and saves if needed
-			if( isset( $_POST[ 'ogg-video' ] ) ) {
-				update_post_meta( $post_id, 'ogg-video', $_POST[ 'ogg-video' ] );
+			if( isset( $_POST[ 'fp5-ogg-video' ] ) ) {
+				update_post_meta( $post_id, 'fp5-ogg-video', $_POST[ 'fp5-ogg-video' ] );
 			}
 
 			// Checks for input and saves if needed
-			if( isset( $_POST[ 'webvtt' ] ) ) {
-				update_post_meta( $post_id, 'webvtt', $_POST[ 'webvtt' ] );
+			if( isset( $_POST[ 'fp5-vtt' ] ) ) {
+				update_post_meta( $post_id, 'fp5-vtt', $_POST[ 'fp5-vtt' ] );
 			}
 
 			// Checks for input and saves if needed
-			if( isset( $_POST[ 'max-width' ] ) ) {
-				update_post_meta( $post_id, 'max-width', $_POST[ 'max-width' ] );
+			if( isset( $_POST[ 'fp5-max-width' ] ) ) {
+				update_post_meta( $post_id, 'fp5-max-width', $_POST[ 'fp5-max-width' ] );
 			}
 
 			// Checks for input and saves
-			if( isset( $_POST[ 'aspect-ratio' ] ) ) {
-				update_post_meta( $post_id, 'aspect-ratio', 'true' );
+			if( isset( $_POST[ 'fp5-aspect-ratio' ] ) ) {
+				update_post_meta( $post_id, 'fp5-aspect-ratio', 'true' );
 			} else {
-				update_post_meta( $post_id, 'aspect-ratio', '' );
+				update_post_meta( $post_id, 'fp5-aspect-ratio', '' );
 			}
 
 			// Checks for input and saves if needed
-			if( isset( $_POST[ 'max-height' ] ) ) {
-				update_post_meta( $post_id, 'max-height', $_POST[ 'max-height' ] );
+			if( isset( $_POST[ 'fp5-max-height' ] ) ) {
+				update_post_meta( $post_id, 'fp5-max-height', $_POST[ 'fp5-max-height' ] );
 			}
 
 			// Checks for input and saves
-			if( isset( $_POST[ 'fixed-width' ] ) ) {
-				update_post_meta( $post_id, 'fixed-width', 'true' );
+			if( isset( $_POST[ 'fp5-fixed-width' ] ) ) {
+				update_post_meta( $post_id, 'fp5-fixed-width', 'true' );
 			} else {
-				update_post_meta( $post_id, 'fixed-width', '' );
+				update_post_meta( $post_id, 'fp5-fixed-width', '' );
 			}
 
 		}
@@ -265,8 +281,8 @@ class fp5_metabox {
 	 * @param    int     $post_id    The ID of the post being save
 	 * @param    string  $nonce      The nonce identifier associated with the value being saved
 	 * @return   bool                Whether or not the user has the ability to save this post.
-	 * @version  0.1.0
-	 * @since    0.1.0
+	 * @version  1.0.0
+	 * @since    1.0.0
 	 */
 	private function user_can_save( $post_id, $nonce ) {
 

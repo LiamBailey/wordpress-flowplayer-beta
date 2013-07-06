@@ -1,18 +1,27 @@
 <?php
+/**
+ * Flowplayer 5 for Wordpress
+ *
+ * @package   Flowplayer 5 for Wordpress
+ * @author    Ulrich Pogson <ulrich@pogson.ch>
+ * @license   GPL-2.0+
+ * @link      http://flowplayer.org/
+ * @copyright 2013 Flowplayer Ltd
+ */
 
-// changes made by Big Cloud Media ... still in progress.
-// [] shortcode update to accomodate meta data
 // example shortcode [flowplayer id='39']
 
-if (!defined('ABSPATH'))
-    exit;
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 
 // Add Shortcode
 function add_fp5_shortcode($atts) {
 
-$version = '1.0.0-beta';
-$plugin_slug = 'flowplayer5';
-$player_version = '5.4.1';
+$version        = '1.0.0-beta';
+$plugin_slug    = 'flowplayer5';
+$player_version = '5.4.3';
 global $post;
 
 	//post_id
@@ -23,16 +32,16 @@ global $post;
 	$autoplay  = get_post_meta( $id, 'fp5-autoplay', true );
 	$preload   = get_post_meta( $id, 'fp5-preload', true );
 	$poster    = '';
-	$subtitles = get_post_meta( $id, 'webvtt', true );
 	$skin      = get_post_meta( $id, 'fp5-select-skin', true );
-	$splash    = get_post_meta( $id, 'splash-image', true );
-	$mp4       = get_post_meta( $id, 'mp4-video', true );
-	$webm      = get_post_meta( $id, 'webm-video', true );
-	$ogg       = get_post_meta( $id, 'ogg-video', true) ;
-	$width     = get_post_meta( $id, 'max-width', true );
-	$height    = get_post_meta( $id, 'max-height', true );
-	$ratio     = get_post_meta( $id, 'aspect-ratio', true );
-	$fixed     = get_post_meta( $id, 'fixed-width', true );
+	$splash    = get_post_meta( $id, 'fp5-splash-image', true );
+	$mp4       = get_post_meta( $id, 'fp5-mp4-video', true );
+	$webm      = get_post_meta( $id, 'fp5-webm-video', true );
+	$ogg       = get_post_meta( $id, 'fp5-ogg-video', true) ;
+	$subtitles = get_post_meta( $id, 'fp5-vtt', true );
+	$width     = get_post_meta( $id, 'fp5-max-width', true );
+	$height    = get_post_meta( $id, 'fp5-max-height', true );
+	$ratio     = get_post_meta( $id, 'fp5-aspect-ratio', true );
+	$fixed     = get_post_meta( $id, 'fp5-fixed-width', true );
 
 	// set the options for the shortcode - pulled from the display-settings.php
 	$options       = get_option('fp5_settings_general');
@@ -41,59 +50,6 @@ global $post;
 	$ga_account_id = $options['ga_account_id'];
 	$logo_origin   = isset( $options['logo_origin'] );
 	$cdn           = isset( $options['cdn_option'] );
-
-	// Checks and displays the retrieved value
-	if( isset( $id ) ) {
-		echo $id;
-	}
-	if( isset( $loop ) ) {
-		echo $loop;
-	}
-	if( isset( $autoplay ) ) {
-		echo $autoplay;
-	}
-	if( isset( $subtitles ) ) {
-		echo $subtitles;
-	}
-	if( isset( $mp4 ) ) {
-		echo $mp4;
-	}
-	if( isset( $webm ) ) {
-		echo $webm;
-	}
-	if( isset( $ogg ) ) {
-		echo $ogg;
-	}
-	if( isset( $width ) ) {
-		echo $width;
-	}
-	if( isset( $height ) ) {
-		echo $height;
-	}
-	if( isset( $ratio ) ) {
-		echo $ratio;
-	}
-	if( isset( $fixed ) ) {
-		echo $fixed;
-	}
-	if( isset( $key ) ) {
-		echo $key;
-	}
-	if( isset( $logo ) ) {
-		echo $logo;
-	}
-	if( isset( $ga_account_id ) ) {
-		echo $ga_account_id;
-	}
-	if( isset( $splash ) ) {
-		echo $splash;
-	}
-	if( isset( $logo_origin ) ) {
-		echo $logo_origin;
-	}
-	if( isset( $cdn ) ) {
-		echo $cdn;
-	}
 
 	// Register ahortcode stylesheets and JavaScript
 	if( isset( $cdn ) ) {
@@ -112,12 +68,12 @@ global $post;
 	$ratio          = ( isset ( $width ) && isset( $height ) ? intval($height) / intval($width) : '' );
 	$fixed_style    = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $width . 'px; ' );
 	$splash_style   = 'background: #777 url(' . $splash . ') no-repeat;';
-	$class          = 'flowplayer ' . $skin . ( !empty ( $splash ) ? ' is-splash' : '' );
-	$data_key       = ( $key != '' ? $key : '');
-	$data_logo      = ( $key != '' && $logo != '' ?  $logo : '' );
-	$data_analytics = ( $ga_account_id != '' ?  $ga_account_id  : '' );
+	$class          = 'flowplayer ' . $skin . ( ! empty ( $splash ) ? ' is-splash' : '' );
+	$data_key       = ( isset ( $key ) ? $key : '');
+	$data_logo      = ( isset ( $key ) && isset ( $logo ) ? $logo : '' );
+	$data_analytics = ( isset ( $ga_account_id ) ? $ga_account_id  : '' );
 	$data_ratio     = ( $ratio != 0 ? $ratio : '' );
-	$attributes     = (isset ( $autoplay ) ? 'autoplay ' : '') . (( $loop == 'true' ) ? 'loop ' : '') . (( $preload == 'true' ) ? 'preload ' : '') . (( $poster == 'true' ) ? 'poster' : ''); 
+	$attributes     = ( isset ( $autoplay ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="'$preload'" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' ); 
 
 	// shortCode output
 	$return = '';
@@ -136,7 +92,7 @@ global $post;
 	}
 
 // register shortcode
-add_shortcode('flowplayer', 'add_fp5_shortcode');
+add_shortcode( 'flowplayer', 'add_fp5_shortcode' );
 
 
 // this needs to be completed... now standalone used to be included in the register shortcode script

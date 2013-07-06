@@ -1,15 +1,12 @@
 <?php
 /**
- * Represents the view for the administration dashboard.
+ * Display Settings
  *
- * This includes the header, options, and other information that should provide
- * The User Interface to the end user.
- *
- * @package   PluginName
- * @author    Your Name <email@example.com>
+ * @package   Flowplayer 5 for Wordpress
+ * @author    Ulrich Pogson <ulrich@pogson.ch>
  * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2013 Your Name or Company Name
+ * @link      http://flowplayer.org/
+ * @copyright 2013 Flowplayer Ltd
  */
 ?>
 <div class="wrap">
@@ -17,7 +14,7 @@
 	<?php screen_icon(); ?>
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
-	<?php settings_errors( 'edd-notices' ); ?>
+	<?php settings_errors( 'fp5-notices' ); ?>
 	<form method="post" action="options.php">
 		<?php
 		// This prints out all hidden setting fields
