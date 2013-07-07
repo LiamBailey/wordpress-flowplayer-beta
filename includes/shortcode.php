@@ -64,7 +64,7 @@ global $post;
 		wp_enqueue_style( $plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', dirname(__FILE__) ), $player_version );
 	}
 
-	//shortcode processing
+	// Shortcode processing
 	$ratio          = ( isset ( $width ) && isset( $height ) ? intval($height) / intval($width) : '' );
 	$fixed_style    = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $width . 'px; ' );
 	$splash_style   = 'background: #777 url(' . $splash . ') no-repeat;';
@@ -73,9 +73,9 @@ global $post;
 	$data_logo      = ( isset ( $key ) && isset ( $logo ) ? $logo : '' );
 	$data_analytics = ( isset ( $ga_account_id ) ? $ga_account_id  : '' );
 	$data_ratio     = ( $ratio != 0 ? $ratio : '' );
-	//$attributes     = ( isset ( $autoplay ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="'$preload'" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' ); 
+	$attributes     = ( ( $autoplay == 'true' ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="' . $preload . '" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' ); 
 
-	// shortCode output
+	// Shortcode output
 	$return  = '';
 	$return .= '<div style="' . $fixed_style . $splash_style . ' background-size: contain;" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
 	$return .= '<video ' . $attributes . '>';
@@ -91,7 +91,7 @@ global $post;
 	return $return;
 	}
 
-// register shortcode
+// Register shortcode
 add_shortcode( 'flowplayer', 'add_fp5_shortcode' );
 
 

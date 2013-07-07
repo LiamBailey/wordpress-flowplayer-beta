@@ -67,7 +67,9 @@ class video_meta_box {
 		$this->plugin_slug = 'flowplayer5';
 
 		// Setup the meta box responsible for displaying the short URL
-		add_action( 'add_meta_boxes', array( $this, 'add_fp5_video_meta_box' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_shortcode_meta_box' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_video_meta_box' ) );
+
 
 		// Setup the function responsible for generating and saving the short URL
 		add_action( 'save_post', array( $this, 'save_fp5_video_details' ) );
@@ -80,16 +82,59 @@ class video_meta_box {
 	 * @version    1.0.0
 	 * @since      1.0.0
 	 */
-	public function add_fp5_video_meta_box() {
+	public function add_shortcode_meta_box() {
+
+		add_meta_box(
+			'fp5_shortcode',
+			__( 'Shortcode', $this->plugin_slug ),
+			array( $this, 'display_shortcode_meta_box' ),
+			'flowplayer5',
+			'side',
+			'default'
+		);
+
+	}
+
+	/**
+	 * Displays the meta box for displaying the 'Post Short URL' or a default
+	 * message if one does not exist.
+	 *
+	 * @version    0.1.0
+	 * @since      0.1.0
+	 */
+	public function display_shortcode_meta_box() {
+
+		if ( get_the_ID() ) {
+
+			$html = 'Shortcode: [flowplayer id="' . get_the_ID() . '"]';
+
+		} else {
+			$html .= '<p id="wp-is-gd-url">';
+				$html .= __( 'No Shortcode has been generated.', $this->plugin_slug );
+			$html .= '</p>';
+
+		}
+
+		echo $html;
+
+	}
+
+	/**
+	 * Registers the meta box for displaying the 'Post Short URL' in the post editor.
+	 *
+	 * @version    1.0.0
+	 * @since      1.0.0
+	 */
+	public function add_video_meta_box() {
 
 		add_meta_box(
 			'fp5_video_details',
 			__( 'Video Details', $this->plugin_slug ),
-			array( $this, 'display_fp5_video_meta_box' ),
+			array( $this, 'display_video_meta_box' ),
 			'flowplayer5',
 			'normal',
 			'default'
-		 );
+		);
 
 	}
 
@@ -100,7 +145,7 @@ class video_meta_box {
 	 * @version    1.0.0
 	 * @since      1.0.0
 	 */
-	public function display_fp5_video_meta_box( $post ) {
+	public function display_video_meta_box( $post ) {
 
 		wp_nonce_field( plugin_basename( __FILE__ ), 'fp5-nonce' );
 		$fp5_stored_meta = get_post_meta( $post->ID );
