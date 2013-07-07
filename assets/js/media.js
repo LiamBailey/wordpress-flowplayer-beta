@@ -203,133 +203,60 @@ jQuery(document).ready(function ($) {
 
 // Settings Page
 // Add Logo
-jQuery(document).ready(function($){
-    var fp5_logo_frame;
 
-    $(document.body).on('click.fp5OpenMediaManager', '.fp5_settings_upload_button', function(e){
-        e.preventDefault();
+(function($) {
+   $(function() {
+      $.fn.wptuts = function(options) {
+         var selector = $(this).selector; // Get the selector
+         // Set default options
+         var defaults = {
+            'preview' : '.fp5_settings_upload_preview',
+            'text'    : '.fp5_upload_field',
+            'button'  : '.fp5_settings_upload_button',
+         };
+         var options  = $.extend(defaults, options);
 
-        if ( fp5_logo_frame ) {
-            fp5_logo_frame.open();
-            return;
-        }
+         var _custom_media = true;
+         var _orig_send_attachment = wp.media.editor.send.attachment;
 
-        fp5_logo_frame = wp.media.frames.fp5_logo_frame = wp.media({
-            className: 'media-frame fp5-media-frame',
-            frame: 'select',
-            multiple: false,
-            title: logo.title,
-            library: {
-                type: 'image'
-            },
-            button: {
-                text: logo.button
+          // When the Button is clicked...
+         $(options.button).click(function() {
+            // Get the Text element.
+            var button = $(this);
+            var text = $(this).siblings(options.text);
+            var send_attachment_bkp = wp.media.editor.send.attachment;
+
+            _custom_media = true;
+
+            wp.media.editor.send.attachment = function(props, attachment) {
+               if(_custom_media) {
+                  // Get the URL of the new image
+                  text.val(attachment.url).trigger('change');
+               } else {
+                  return _orig_send_attachment.apply(this, [props, attachment]);
+               };
             }
-        });
 
-        fp5_logo_frame.on('select', function(){
-            var media_attachment = fp5_logo_frame.state().get('selection').first().toJSON();
+            wp.media.editor.open(button);
 
-            $('#fp5_settings_general[logo]').val(media_attachment.url);
-        });
+            return false;
+         });
 
-        fp5_logo_frame.open();
-    });
-});
+         $('.add_media').on('click', function() {
+           _custom_media = false;
+         });
 
-jQuery(document).ready(function ($) {
-    // Settings Upload field JS
-    if( typeof wp == "undefined" || edd_vars.new_media_ui != '1' ){
-		//Old Thickbox uploader
-		if ( $( '.edd_settings_upload_button' ).length > 0 ) {
-			window.formfield = '';
+         $(options.text).bind('change', function() {
+            // Get the value of current object
+            var url = this.value;
+            // Determine the Preview field
+            var preview = $(this).siblings(options.preview);
+            // Bind the value to Preview field
+            $(preview).attr('src', url);
+         });
+      }
 
-			$('body').on('click', '.edd_settings_upload_button', function(e) {
-				e.preventDefault();
-				window.formfield = $(this).parent().prev();
-				window.tbframe_interval = setInterval(function() {
-					jQuery('#TB_iframeContent').contents().find('.savesend .button').val(edd_vars.use_this_file).end().find('#insert-gallery, .wp-post-thumbnail').hide();
-				}, 2000);
-				tb_show(edd_vars.add_new_download, 'media-upload.php?TB_iframe=true');
-			});
-
-			window.edd_send_to_editor = window.send_to_editor;
-			window.send_to_editor = function (html) {
-				if (window.formfield) {
-					imgurl = $('a', '<div>' + html + '</div>').attr('href');
-					window.formfield.val(imgurl);
-					window.clearInterval(window.tbframe_interval);
-					tb_remove();
-				} else {
-					window.edd_send_to_editor(html);
-				}
-				window.send_to_editor = window.edd_send_to_editor;
-				window.formfield = '';
-				window.imagefield = false;
-			}
-		}
-	} else {
-		// WP 3.5+ uploader
-		var file_frame;
-		window.formfield = '';
-
-		$('body').on('click', '.edd_settings_upload_button', function(e) {
-
-			e.preventDefault();
-
-			var button = $(this);
-
-			window.formfield = $(this).parent().prev();
-
-			// If the media frame already exists, reopen it.
-			if ( file_frame ) {
-				//file_frame.uploader.uploader.param( 'post_id', set_to_post_id );
-				file_frame.open();
-			  return;
-			}
-
-			// Create the media frame.
-			file_frame = wp.media.frames.file_frame = wp.media({
-				frame: 'post',
-				state: 'insert',
-				title: button.data( 'uploader_title' ),
-				button: {
-					text: button.data( 'uploader_button_text' ),
-				},
-				multiple: false
-			});
-
-			file_frame.on( 'menu:render:default', function(view) {
-		        // Store our views in an object.
-		        var views = {};
-
-		        // Unset default menu items
-		        view.unset('library-separator');
-		        view.unset('gallery');
-		        view.unset('featured-image');
-		        view.unset('embed');
-
-		        // Initialize the views in our view object.
-		        view.set(views);
-		    });
-
-			// When an image is selected, run a callback.
-			file_frame.on( 'insert', function() {
-
-				var selection = file_frame.state().get('selection');
-				selection.each( function( attachment, index ) {
-					attachment = attachment.toJSON();
-					window.formfield.val(attachment.url);
-				});
-			});
-
-			// Finally, open the modal
-			file_frame.open();
-		});
-
-
-		// WP 3.5+ uploader
-		var file_frame;
-		window.formfield = '';
-	}
-});
+      // Usage
+      $('.upload').wptuts(); // Use as default option.
+   });
+}(jQuery));

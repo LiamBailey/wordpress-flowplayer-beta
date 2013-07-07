@@ -25,7 +25,7 @@ function fp5_register_settings() {
 			array(
 				'commercial_version' => array(
 					'id' => 'commercial_version',
-					'name' => '<h4>' . __('Commercial Version', 'flowplayer5') . '</h4>',
+					'name' => '<strong>' . __('Commercial Version', 'flowplayer5') . '</strong>',
 					'desc' => __('Commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain a license key in flowplayer.org.', 'fp5'),
 					'type' => 'header'
 				),
@@ -34,14 +34,15 @@ function fp5_register_settings() {
 					'name' => __('License Key', 'fp5'),
 					'desc' => __('Specify your License Key here.', 'flowplayer5'),
 					'type' => 'text',
-					'size' => 'large'
+					'size' => 'medium'
 				),
 				'logo' => array(
 					'id' => 'logo',
 					'name' => __( 'Logo', 'flowplayer5'),
 					'type' => 'upload',
 					'size' => 'large',
-					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'flowplayer5')
+					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'flowplayer5'),
+					'preview' => 'true'
 				),
 				'logo_origin' => array(
 					'id' => 'logo_origin',
@@ -101,6 +102,7 @@ function fp5_register_settings() {
 				'desc' => $option['desc'],
 				'name' => $option['name'],
 				'section' => 'general',
+				'preview' => isset( $option['preview'] ) ? $option['preview'] : null,
 				'size' => isset( $option['size'] ) ? $option['size'] : null,
 				'options' => isset( $option['options'] ) ? $option['options'] : '',
 				'std' => isset( $option['std'] ) ? $option['std'] : ''
@@ -167,15 +169,16 @@ function fp5_upload_callback($args) {
 	global $fp5_options;
 
 	if ( isset( $fp5_options[ $args['id'] ] ) )
-		$value = $fp5_options[$args['id']];
+		$value = $fp5_options[ $args['id'] ];
 	else
-		$value = isset($args['std']) ? $args['std'] : '';
+		$value = isset( $args['std'] ) ? $args['std'] : '';
 
 	$size = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 
 	$html = '<input type="text" class="' . $args['size'] . '-text fp5_upload_field" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" value="' . esc_attr( $value ) . '"/>';
 	$html .= '<a href="#" type="button" class="fp5_settings_upload_button button-secondary" title="' . __( 'Upload Logo', 'fp5' ) . '"/>' . __( 'Upload Logo', 'fp5' ) . '</a>';
 	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+	$html .= isset( $args['preview'] ) && !is_null( $args['preview'] ) ? '<img style="max-width: 300px; display:block" src="' . esc_attr( $value ) . '" class="fp5_settings_upload_preview"/>' : '';
 
 	echo $html;
 }

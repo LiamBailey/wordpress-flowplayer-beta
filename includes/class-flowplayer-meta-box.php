@@ -63,7 +63,7 @@ class video_meta_box {
 	 */
 	public function __construct() {
 
-		$this->version = '0.1.0';
+		$this->version = '1.0.0';
 		$this->plugin_slug = 'flowplayer5';
 
 		// Setup the meta box responsible for displaying the short URL

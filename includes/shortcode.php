@@ -76,17 +76,17 @@ global $post;
 	//$attributes     = ( isset ( $autoplay ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="'$preload'" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' ); 
 
 	// shortCode output
-	$return = '';
-	$return.= '<div style="' . $fixed_style . $splash_style . ' background-size: contain;" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
-	$return.= '<video ' . $attributes . '>';
+	$return  = '';
+	$return .= '<div style="' . $fixed_style . $splash_style . ' background-size: contain;" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
+	$return .= '<video ' . $attributes . '>';
 		$mp4       != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
 		$webm      != '' ? $return.='<source type="video/webm" src="' . $webm . '"/>' : '';
 		$ogg       != '' ? $return.='<source type="video/ogg" src="' . $ogg . '"/>' : '';
 		$subtitles != '' ? $return.='<track  type="text/vtt" src="' . $subtitles . '"/>' : '';
-	$return.= '</video>';
-	$return.= '</div>';
+	$return .= '</video>';
+	$return .= '</div>';
 
-	$return.= '<script> </script>';
+	$return .= '<script> </script>';
 
 	return $return;
 	}
