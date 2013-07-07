@@ -174,18 +174,9 @@ class Flowplayer5 {
 			return;
 		}
 
-		// set the options for the shortcode - pulled from the display-settings.php
-		$options = get_option('fp5_settings_general');
-		$cdn = isset( $fp5_options['cdn_option'] );
-
 		$screen = get_current_screen();
 		//if ( $screen->id == $this->plugin_screen_hook_suffix ) {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( '/assets/css/admin.css', __FILE__ ), $this->version );
-			if( $cdn == 'true' ) {
-				wp_enqueue_style( $this->plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
-			} else {
-				wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
-			}
 		//}
 
 	}
@@ -246,7 +237,7 @@ class Flowplayer5 {
 	public function add_plugin_admin_menu() {
 
 		$this->plugin_screen_hook_suffix = add_submenu_page(
-			'edit.php?post_type=flowplayer5video',
+			'edit.php?post_type=flowplayer5',
 			__( 'Flowplayer Settings', $this->plugin_slug ),
 			__( 'Settings', $this->plugin_slug ),
 			'read',

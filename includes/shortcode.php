@@ -73,7 +73,7 @@ global $post;
 	$data_logo      = ( isset ( $key ) && isset ( $logo ) ? $logo : '' );
 	$data_analytics = ( isset ( $ga_account_id ) ? $ga_account_id  : '' );
 	$data_ratio     = ( $ratio != 0 ? $ratio : '' );
-	$attributes     = ( isset ( $autoplay ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="'$preload'" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' ); 
+	//$attributes     = ( isset ( $autoplay ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="'$preload'" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' ); 
 
 	// shortCode output
 	$return = '';
