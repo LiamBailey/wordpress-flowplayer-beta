@@ -158,10 +158,15 @@ class video_meta_box {
 			</label>
 
 			<select id="fp5-select-skin" name="fp5-select-skin">
-				<option id="fp5-minimalist" value="minimalist"<?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
-				<option id="fp5-functional" value="functional"<?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
-				<option id="fp5-playful" value="playful"<?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
+				<option id="fp5-minimalist" value="minimalist" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
+				<option id="fp5-functional" value="functional" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
+				<option id="fp5-playful" value="playful" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
 			</select>
+			<div class="option">
+				<img id="fp5_minimalist" class="minimalist player-preview " src="<?php echo plugins_url( '/assets/img/minimalist.png', dirname(__FILE__) ) ?>" />
+				<img id="fp5_functional" class="functional player-preview " src="<?php echo plugins_url( '/assets/img/functional.png', dirname(__FILE__) ) ?>" />
+				<img id="fp5_playful" class="playful player-preview " src="<?php echo plugins_url( '/assets/img/playful.png', dirname(__FILE__) ) ?>" />
+			</div>
 		</p>
 
 		<p>

@@ -260,3 +260,19 @@ jQuery(document).ready(function ($) {
       $('.upload').wptuts(); // Use as default option.
    });
 }(jQuery));
+
+// Update skin image according to selection
+jQuery(document).ready(function ($) {
+
+	$('#fp5-select-skin option').each(function () {
+		if ($(this).is(':selected')) {
+			$("." + $(this).val()).show();
+		}
+	});
+	$("select#fp5-select-skin").change(function () {
+		$("img").hide();
+		$("." + $(this).val()).show();
+	});
+
+
+});
