@@ -104,6 +104,7 @@ class Flowplayer5 {
 
 		// Define custom functionality.
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
+		add_filter( 'plugin_action_links', 'add_settings_action_link', 10, 2 );
 		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
 
 	}
@@ -246,6 +247,19 @@ class Flowplayer5 {
 		);
 
 	}
+
+	function add_settings_action_link( $links, $file ) {
+
+	/*
+	 * Insert the link at the beginning
+	 */
+	$in = '<a href="edit.php?post_type=flowplayer5&page=flowplayer5">' . __( 'Settings', $this->plugin_slug ) . '</a>';
+	array_unshift($links, $in);
+
+	return $links;
+
+	}
+
 
 	/**
 	 * Render the settings page for this plugin.
