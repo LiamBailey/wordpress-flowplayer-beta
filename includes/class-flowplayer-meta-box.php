@@ -49,6 +49,9 @@ class video_meta_box {
 	 */
 	public function __construct() {
 
+		$this->version = Flowplayer5::get_version();
+		$this->plugin_slug = Flowplayer5::get_plugin_slug();
+
 		// Setup the meta box responsible for displaying the short URL
 		add_action( 'add_meta_boxes', array( $this, 'add_shortcode_meta_box' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_video_meta_box' ) );
@@ -69,7 +72,7 @@ class video_meta_box {
 
 		add_meta_box(
 			'fp5_shortcode',
-			__( 'Shortcode', $flowplayer5->plugin_slug ),
+			__( 'Shortcode', $this->plugin_slug ),
 			array( $this, 'display_shortcode_meta_box' ),
 			'flowplayer5',
 			'side',
@@ -112,7 +115,7 @@ class video_meta_box {
 
 		add_meta_box(
 			'fp5_video_details',
-			__( 'Video Details', $flowplayer5->plugin_slug ),
+			__( 'Video Details', $this->plugin_slug ),
 			array( $this, 'display_video_meta_box' ),
 			'flowplayer5',
 			'normal',
@@ -137,7 +140,7 @@ class video_meta_box {
 
 		<p>
 			<label for="fp5-select-skin">
-				<?php _e( 'Select skin', $flowplayer5->plugin_slug ); ?>
+				<?php _e( 'Select skin', $this->plugin_slug ); ?>
 			</label>
 
 			<select id="fp5-select-skin" name="fp5-select-skin">
@@ -174,7 +177,7 @@ class video_meta_box {
 
 		<p>
 			<tr valign="top">
-				<th scope="row"><label for="fp5-splash-image"><?php _e( 'Splash Image', $flowplayer5->plugin_slug )?></label></th>
+				<th scope="row"><label for="fp5-splash-image"><?php _e( 'Splash Image', $this->plugin_slug )?></label></th>
 				<td>
 					<input class="media-url" type="text" name="fp5-splash-image" id="fp5-splash-image" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-splash-image'] ) ) echo $fp5_stored_meta['fp5-splash-image'][0]?>" />
 					<a href="#" class="fp5-add-splash-image button button-primary" title="<?php _e( 'Add splash image', $this->plugin_slug )?>"><?php _e( 'Add splash image', $this->plugin_slug )?></a>
