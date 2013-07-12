@@ -87,7 +87,7 @@ function fp5_register_settings() {
 		'fp5_settings_general',
 		__( 'General Settings', 'flowplayer5' ),
 		'__return_false',
-		'flowplayer5'
+		'flowplayer5_settings'
 	);
 
 	foreach ( $fp5_settings['general'] as $option ) {
@@ -95,7 +95,7 @@ function fp5_register_settings() {
 			'fp5_settings_general[' . $option['id'] . ']',
 			$option['name'],
 			function_exists( 'fp5_' . $option['type'] . '_callback' ) ? 'fp5_' . $option['type'] . '_callback' : 'fp5_missing_callback',
-			'flowplayer5',
+			'flowplayer5_settings',
 			'fp5_settings_general',
 			array(
 				'id' => $option['id'],

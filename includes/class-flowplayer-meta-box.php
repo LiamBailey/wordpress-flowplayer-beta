@@ -9,26 +9,12 @@
  * @copyright 2013 Flowplayer Ltd
  */
 
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 class video_meta_box {
-
-	/**
-	 * Plugin version, used for cache-busting of style and script file references.
-	 *
-	 * @since   1.0.0
-	 *
-	 * @var     string
-	 */
-	private $version;
-
-	/**
-	 * Unique identifier for the plugin. This value is also used as the text domain
-	 * when internationalizing strings of text.
-	 *
-	 * @since    1.0.0
-	 *
-	 * @var      string
-	 */
-	private $plugin_slug;
 
 	/**
 	 * Instance of this class.
@@ -63,9 +49,6 @@ class video_meta_box {
 	 */
 	public function __construct() {
 
-		$this->version = '1.0.0';
-		$this->plugin_slug = 'flowplayer5';
-
 		// Setup the meta box responsible for displaying the short URL
 		add_action( 'add_meta_boxes', array( $this, 'add_shortcode_meta_box' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_video_meta_box' ) );
@@ -86,7 +69,7 @@ class video_meta_box {
 
 		add_meta_box(
 			'fp5_shortcode',
-			__( 'Shortcode', $this->plugin_slug ),
+			__( 'Shortcode', $flowplayer5->plugin_slug ),
 			array( $this, 'display_shortcode_meta_box' ),
 			'flowplayer5',
 			'side',
@@ -129,7 +112,7 @@ class video_meta_box {
 
 		add_meta_box(
 			'fp5_video_details',
-			__( 'Video Details', $this->plugin_slug ),
+			__( 'Video Details', $flowplayer5->plugin_slug ),
 			array( $this, 'display_video_meta_box' ),
 			'flowplayer5',
 			'normal',
@@ -154,7 +137,7 @@ class video_meta_box {
 
 		<p>
 			<label for="fp5-select-skin">
-				<?php _e( 'Select skin', $this->plugin_slug ); ?>
+				<?php _e( 'Select skin', $flowplayer5->plugin_slug ); ?>
 			</label>
 
 			<select id="fp5-select-skin" name="fp5-select-skin">
@@ -191,7 +174,7 @@ class video_meta_box {
 
 		<p>
 			<tr valign="top">
-				<th scope="row"><label for="fp5-splash-image"><?php _e( 'Splash Image', $this->plugin_slug )?></label></th>
+				<th scope="row"><label for="fp5-splash-image"><?php _e( 'Splash Image', $flowplayer5->plugin_slug )?></label></th>
 				<td>
 					<input class="media-url" type="text" name="fp5-splash-image" id="fp5-splash-image" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-splash-image'] ) ) echo $fp5_stored_meta['fp5-splash-image'][0]?>" />
 					<a href="#" class="fp5-add-splash-image button button-primary" title="<?php _e( 'Add splash image', $this->plugin_slug )?>"><?php _e( 'Add splash image', $this->plugin_slug )?></a>

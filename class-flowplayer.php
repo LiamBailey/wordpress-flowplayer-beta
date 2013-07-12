@@ -242,21 +242,22 @@ class Flowplayer5 {
 			__( 'Flowplayer Settings', $this->plugin_slug ),
 			__( 'Settings', $this->plugin_slug ),
 			'read',
-			$this->plugin_slug,
+			$this->plugin_slug . '_settings',
 			array( $this, 'display_plugin_admin_page' )
 		);
 
 	}
 
-	function add_settings_action_link( $links, $file ) {
-
-	/*
-	 * Insert the link at the beginning
+	/**
+	 * Add settings action link.
+	 *
+	 * @since    1.0.0
 	 */
-	$in = '<a href="edit.php?post_type=flowplayer5&page=flowplayer5">' . __( 'Settings', $this->plugin_slug ) . '</a>';
-	array_unshift($links, $in);
+	function add_settings_action_link( $links ) {
 
-	return $links;
+	$plugin_links = '<a href="' . admin_url( 'edit.php?post_type=flowplayer5&page=flowplayer5_settings' ) . '">' . __( 'Settings', $this->plugin_slug ) . '</a>';
+
+	return array_merge( $plugin_links, $links );
 
 	}
 

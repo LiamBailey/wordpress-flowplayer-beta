@@ -1,4 +1,42 @@
 <?php
+/**
+ * Update Flowplayer5 to 2.0.0
+ *
+ * @package   Flowplayer 5 for Wordpress
+ * @author    Ulrich Pogson <ulrich@pogson.ch>
+ * @license   GPL-2.0+
+ * @link      http://flowplayer.org/
+ * @copyright 2013 Flowplayer Ltd
+ */
+
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
+global $wpdb, $flowplayer5;
+
+// Update brazillian state codes
+$wpdb->update(
+	$wpdb->postmeta,
+	array(
+		'meta_value' => 'BA'
+	),
+	array(
+		'meta_key'   => '_billing_state',
+		'meta_value' => 'BH'
+	)
+);
+$wpdb->update(
+	$wpdb->usermeta,
+	array(
+		'meta_value' => 'BA'
+	),
+	array(
+		'meta_key'   => 'billing_state',
+		'meta_value' => 'BH'
+	)
+);
 
 // this needs to be completed... now standalone used to be included in the register shortcode script
 function convert_video_shortcode($shortcode_array){/*  run the conversion script on the post on the fly.
