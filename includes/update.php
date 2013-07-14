@@ -21,15 +21,16 @@ if ( ! defined( 'WPINC' ) ) {
  * @return void
  */
 function do_update_flowplyer5() {
-	global $woocommerce;
+	global $flowplayer5;
+	$version = '1.0.0-beta';
 
 	// Do updates
-	$current_db_version = get_option( 'woocommerce_db_version' );
+	$current_db_version = get_option( 'flowplyer_db_version' );
 
 	if ( version_compare( $current_db_version, '1.0.0', '<' ) ) {
-		include( 'includes/updates/update-1.0.0.php' );
-		update_option( 'woocommerce_db_version', '1.0.0' );
+		include( 'update-1.0.0.php' );
+		update_option( 'flowplyer_db_version', '1.0.0' );
 	}
 
-	update_option( 'flowplyer_db_version', $woocommerce->version );
+	update_option( 'flowplyer_db_version', $version );
 }

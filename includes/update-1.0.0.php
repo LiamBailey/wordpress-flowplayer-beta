@@ -16,10 +16,17 @@ if ( ! defined( 'WPINC' ) ) {
 
 // Get entire array
 $plugin_options = get_option( 'plugin_options' );
+
+$new_options = array();
+
+// Update keys
+if( isset( $plugin_options['ga_accountId'] ) )
+	$new_options['ga_account_id'] = $plugin_options['ga_accountId'];
+
 // Update entire array
 update_option( 'plugin_settings_general', $plugin_options );
 // Delte old array
-delete_option( 'plugin_options' );
+//delete_option( 'plugin_options' );
 
 
 

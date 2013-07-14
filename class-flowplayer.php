@@ -235,22 +235,6 @@ class Flowplayer5 {
 
 	}
 
-	/*
-	 * Add settings action link.
-	 *
-	 * @since    1.0.0
-	 */
-	public function add_action_links( $links ) {
-
-		return array_merge(
-			array(
-				'settings' => '<a href="' . admin_url( 'edit.php?post_type=flowplayer5&page=flowplayer5_settings' ) . '">' . __( 'Settings', 'flowplayer5' ) . '</a>'
-			),
-			$links
-		);
-
-	}
-
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
@@ -262,7 +246,7 @@ class Flowplayer5 {
 			'edit.php?post_type=flowplayer5',
 			__( 'Flowplayer Settings', $this->plugin_slug ),
 			__( 'Settings', $this->plugin_slug ),
-			'read',
+			'manage_options',
 			$this->plugin_slug . '_settings',
 			array( $this, 'display_plugin_admin_page' )
 		);
@@ -277,6 +261,22 @@ class Flowplayer5 {
 	public function display_plugin_admin_page() {
 
 		include_once( 'includes/display-settings.php' );
+
+	}
+
+	/*
+	 * Add settings action link to the plugins page.
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_action_links( $links ) {
+
+		return array_merge(
+			array(
+				'settings' => '<a href="' . admin_url( 'edit.php?post_type=flowplayer5&page=flowplayer5_settings' ) . '">' . __( 'Settings', 'flowplayer5' ) . '</a>'
+			),
+			$links
+		);
 
 	}
 
