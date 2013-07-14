@@ -58,7 +58,7 @@ function fp5_register_settings() {
 				),
 				'ga_account_id' => array(
 					'id' => 'ga_account_id',
-					'name' => __('Goofle Analytics account ID', 'flowplayer5'),
+					'name' => __('Google Analytics account ID', 'flowplayer5'),
 					'desc' => __('Specify your GA account ID here.', 'flowplayer5'),
 					'type' => 'text',
 					'size' => 'medium'

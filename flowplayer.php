@@ -39,4 +39,4 @@ register_activation_hook( __FILE__, array( 'Flowplayer5', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'Flowplayer5', 'deactivate' ) );
 
 Flowplayer5::get_instance();
-video_meta_box::get_instance();
+Video_Meta_Box::get_instance();

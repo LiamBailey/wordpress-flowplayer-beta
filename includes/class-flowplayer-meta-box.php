@@ -14,7 +14,19 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-class video_meta_box {
+class Video_Meta_Box {
+
+	/**
+	 * Unique identifier for your plugin.
+	 *
+	 * Use this value (not the variable name) as the text domain when internationalizing strings of text. It should
+	 * match the Text Domain file header in the main plugin file.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @var      string
+	 */
+	protected $plugin_slug;
 
 	/**
 	 * Instance of this class.
@@ -50,6 +62,7 @@ class video_meta_box {
 	public function __construct() {
 
 		$flowplayer5 = Flowplayer5::get_instance();
+		$this->plugin_slug = $flowplayer5->get_plugin_slug();;
 
 		// Setup the meta box responsible for displaying the short URL
 		add_action( 'add_meta_boxes', array( $this, 'add_shortcode_meta_box' ) );
@@ -114,7 +127,7 @@ class video_meta_box {
 
 		add_meta_box(
 			'fp5_video_details',
-			__( 'Video Details', $flowplayer5->get_plugin_slug ),
+			__( 'Video Details', $this->plugin_slug ),
 			array( $this, 'display_video_meta_box' ),
 			'flowplayer5',
 			'normal',
@@ -139,7 +152,7 @@ class video_meta_box {
 
 		<p>
 			<label for="fp5-select-skin">
-				<?php _e( 'Select skin', $flowplayer5->get_plugin_slug ); ?>
+				<?php _e( 'Select skin', $this->plugin_slug ); ?>
 			</label>
 
 			<select id="fp5-select-skin" name="fp5-select-skin">
@@ -176,36 +189,36 @@ class video_meta_box {
 
 		<p>
 			<tr valign="top">
-				<th scope="row"><label for="fp5-splash-image"><?php _e( 'Splash Image', $flowplayer5->get_plugin_slug )?></label></th>
+				<th scope="row"><label for="fp5-splash-image"><?php _e( 'Splash Image', $this->plugin_slug )?></label></th>
 				<td>
 					<input class="media-url" type="text" name="fp5-splash-image" id="fp5-splash-image" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-splash-image'] ) ) echo $fp5_stored_meta['fp5-splash-image'][0]?>" />
-					<a href="#" class="fp5-add-splash-image button button-primary" title="<?php _e( 'Add splash image', $flowplayer5->get_plugin_slug )?>"><?php _e( 'Add splash image', $flowplayer5->get_plugin_slug )?></a>
+					<a href="#" class="fp5-add-splash-image button button-primary" title="<?php _e( 'Add splash image', $this->plugin_slug )?>"><?php _e( 'Add splash image', $this->plugin_slug )?></a>
 				</td>
 			</tr>
 		</p>
 
 		<p>
-			<label for="fp5-mp4-video"><?php _e( 'mp4 Video', $flowplayer5->get_plugin_slug )?></label>
+			<label for="fp5-mp4-video"><?php _e( 'mp4 Video', $this->plugin_slug )?></label>
 			<input class="media-url" type="text" name="fp5-mp4-video" id="fp5-mp4-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-mp4-video'] ) ) echo $fp5_stored_meta['fp5-mp4-video'][0]; ?>" />
-			<a href="#" class="fp5-add-mp4 button button-primary" title="<?php _e( 'Add mp4 Video', $flowplayer5->get_plugin_slug )?>"><?php _e( 'Add mp4 Video', $flowplayer5->get_plugin_slug )?></a>
+			<a href="#" class="fp5-add-mp4 button button-primary" title="<?php _e( 'Add mp4 Video', $this->plugin_slug )?>"><?php _e( 'Add mp4 Video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
-			<label for="fp5-webm-video"><?php _e( 'webm Video', $flowplayer5->get_plugin_slug )?></label>
+			<label for="fp5-webm-video"><?php _e( 'webm Video', $this->plugin_slug )?></label>
 			<input class="media-url" type="text" name="fp5-webm-video" id="fp5-webm-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-webm-video'] ) ) echo $fp5_stored_meta['fp5-webm-video'][0]; ?>" />
-			<a href="#" class="fp5-add-webm button button-primary" title="<?php _e( 'Add webm Video', $flowplayer5->get_plugin_slug )?>"><?php _e( 'Add webm Video', $flowplayer5->get_plugin_slug )?></a>
+			<a href="#" class="fp5-add-webm button button-primary" title="<?php _e( 'Add webm Video', $this->plugin_slug )?>"><?php _e( 'Add webm Video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
-			<label for="fp5-ogg-video"><?php _e( 'ogg Video', $flowplayer5->get_plugin_slug )?></label>
+			<label for="fp5-ogg-video"><?php _e( 'ogg Video', $this->plugin_slug )?></label>
 			<input class="media-url" type="text" name="fp5-ogg-video" id="fp5-ogg-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-ogg-video'] ) ) echo $fp5_stored_meta['fp5-ogg-video'][0]; ?>" />
-			<a href="#" class="fp5-add-ogg button button-primary" title="<?php _e( 'Add ogg Video', $flowplayer5->get_plugin_slug )?>"><?php _e( 'Add ogg Video', $flowplayer5->get_plugin_slug )?></a>
+			<a href="#" class="fp5-add-ogg button button-primary" title="<?php _e( 'Add ogg Video', $this->plugin_slug )?>"><?php _e( 'Add ogg Video', $this->plugin_slug )?></a>
 		</p>
 
 		<p>
-			<label for="fp5-vtt-subtitles"><?php _e( 'vtt file (Subtitles)', $flowplayer5->get_plugin_slug )?></label>
+			<label for="fp5-vtt-subtitles"><?php _e( 'vtt file (Subtitles)', $this->plugin_slug )?></label>
 			<input class="media-url" type="text" name="fp5-vtt-subtitles" id="fp5-vtt-subtitles" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-vtt-subtitles'] ) ) echo $fp5_stored_meta['fp5-vtt-subtitles'][0]; ?>" />
-			<a href="#" class="fp5-add-vtt button button-primary" title="<?php _e( 'Add vtt file', $flowplayer5->get_plugin_slug )?>"><?php _e( 'Add vtt file', $flowplayer5->get_plugin_slug )?></a>
+			<a href="#" class="fp5-add-vtt button button-primary" title="<?php _e( 'Add vtt file', $this->plugin_slug )?>"><?php _e( 'Add vtt file', $this->plugin_slug )?></a>
 		</p>
 
 		<p>

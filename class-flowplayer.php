@@ -273,7 +273,7 @@ class Flowplayer5 {
 
 		return array_merge(
 			array(
-				'settings' => '<a href="' . admin_url( 'edit.php?post_type=flowplayer5&page=flowplayer5_settings' ) . '">' . __( 'Settings', 'flowplayer5' ) . '</a>'
+				'settings' => '<a href="' . admin_url( 'edit.php?post_type=flowplayer5&page=flowplayer5_settings' ) . '">' . __( 'Settings', $this->plugin_slug ) . '</a>'
 			),
 			$links
 		);
@@ -289,24 +289,24 @@ class Flowplayer5 {
 	public function add_fp5_videos() {
 
 		$labels = array(
-			'name'                => _x( 'Videos', 'Post Type General Name', 'flowplayer5' ),
-			'singular_name'       => _x( 'Video', 'Post Type Singular Name', 'flowplayer5' ),
-			'menu_name'           => __( 'Video', 'flowplayer5' ),
-			'parent_item_colon'   => __( 'Parent Video', 'flowplayer5' ),
-			'all_items'           => __( 'All Videos', 'flowplayer5' ),
-			'view_item'           => __( 'View Video', 'flowplayer5' ),
-			'add_new_item'        => __( 'Add New Video', 'flowplayer5' ),
-			'add_new'             => __( 'New Video', 'flowplayer5' ),
-			'edit_item'           => __( 'Edit Video', 'flowplayer5' ),
-			'update_item'         => __( 'Update Video', 'flowplayer5' ),
-			'search_items'        => __( 'Search videos', 'flowplayer5' ),
-			'not_found'           => __( 'No videos found', 'flowplayer5' ),
-			'not_found_in_trash'  => __( 'No videos found in Trash', 'flowplayer5' ),
+			'name'                => _x( 'Videos', 'Post Type General Name', $this->plugin_slug ),
+			'singular_name'       => _x( 'Video', 'Post Type Singular Name', $this->plugin_slug ),
+			'menu_name'           => __( 'Video', $this->plugin_slug ),
+			'parent_item_colon'   => __( 'Parent Video', $this->plugin_slug ),
+			'all_items'           => __( 'All Videos', $this->plugin_slug ),
+			'view_item'           => __( 'View Video', $this->plugin_slug ),
+			'add_new_item'        => __( 'Add New Video', $this->plugin_slug ),
+			'add_new'             => __( 'New Video', $this->plugin_slug ),
+			'edit_item'           => __( 'Edit Video', $this->plugin_slug ),
+			'update_item'         => __( 'Update Video', $this->plugin_slug ),
+			'search_items'        => __( 'Search videos', $this->plugin_slug ),
+			'not_found'           => __( 'No videos found', $this->plugin_slug ),
+			'not_found_in_trash'  => __( 'No videos found in Trash', $this->plugin_slug ),
 		);
 
 		$args = array(
-			'label'               => __( 'Video', 'flowplayer5' ),
-			'description'         => __( 'Flowplayer videos', 'flowplayer5' ),
+			'label'               => __( 'Video', $this->plugin_slug ),
+			'description'         => __( 'Flowplayer videos', $this->plugin_slug ),
 			'labels'              => $labels,
 			'supports'            => array( 'title' ),
 			'hierarchical'        => false,
