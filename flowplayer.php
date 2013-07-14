@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name: Flowplayer 5 for Wordpress - beta
  * Plugin URI:  http://wordpress.org/extend/plugins/flowplayer5/
- * Description: A Flowplayer plugin for showing videos in WordPress. Integrates Flowplayer 5. Supports all three default Flowplayer skins, subtitles, tracking with Google Analytics, splash images. You can use your own watermark logo if you own a Commercial Flowplayer license. Without a license this plugin uses the Free version that includes a Flowplayer watermark. Visit the <a href="/wp-admin/options-general.php?page=fp5_options">configuration page</a> and set your Google Analytics ID and Flowplayer license key.
+ * Description: Show your videos esaily with Flowplayer 5. Supports all three default Flowplayer skins, subtitles, tracking with Google Analytics, splash images. You can use your own watermark logo if you own a Commercial Flowplayer license. Without a license this plugin uses the Free version that includes a Flowplayer watermark.
  * Version:     1.0.0-beta
  * Author:      Flowplayer ltd. Anssi Piirainen, Ulrich Pogson
  * Author URI:  http://flowplayer.org/
@@ -39,15 +39,3 @@ register_deactivation_hook( __FILE__, array( 'Flowplayer5', 'deactivate' ) );
 
 Flowplayer5::get_instance();
 video_meta_box::get_instance();
-
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'add_fp5_settings_action_link' );
-function add_fp5_settings_action_link( $links ) {
-
-	return array_merge(
-		array(
-			'settings' => '<a href="' . admin_url( 'edit.php?post_type=flowplayer5&page=flowplayer5_settings' ) . '">' . __( 'Settings', 'flowplayer5' ) . '</a>'
-		),
-		$links
-	);
- 
-}

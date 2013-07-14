@@ -104,6 +104,8 @@ class Flowplayer5 {
 
 		// Define custom functionality.
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
+		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . 'flowplayer.php' ); // replace "plugin-name"
+		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
 
 	}
@@ -123,6 +125,7 @@ class Flowplayer5 {
 		}
 
 		return self::$instance;
+
 	}
 
 	/**
@@ -159,6 +162,7 @@ class Flowplayer5 {
 
 		load_textdomain( $domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo' );
 		load_plugin_textdomain( $domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+
 	}
 
 	/**
@@ -189,6 +193,7 @@ class Flowplayer5 {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_scripts() {
+	
 		wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->version, false );
 		wp_localize_script( $this->plugin_slug . '-media', 'splash_image',
 			array(
@@ -227,6 +232,23 @@ class Flowplayer5 {
 			)
 		);
 		wp_enqueue_media();
+
+	}
+
+	/*
+	 * Add settings action link.
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_action_links( $links ) {
+
+		return array_merge(
+			array(
+				'settings' => '<a href="' . admin_url( 'edit.php?post_type=flowplayer5&page=flowplayer5_settings' ) . '">' . __( 'Settings', 'flowplayer5' ) . '</a>'
+			),
+			$links
+		);
+
 	}
 
 	/**
@@ -253,7 +275,9 @@ class Flowplayer5 {
 	 * @since    1.0.0
 	 */
 	public function display_plugin_admin_page() {
+
 		include_once( 'includes/display-settings.php' );
+
 	}
 
 	/**
@@ -263,6 +287,7 @@ class Flowplayer5 {
 	 * @since    1.0.0
 	 */
 	public function add_fp5_videos() {
+
 		$labels = array(
 			'name'                => _x( 'Videos', 'Post Type General Name', 'flowplayer5' ),
 			'singular_name'       => _x( 'Video', 'Post Type Singular Name', 'flowplayer5' ),
@@ -302,6 +327,7 @@ class Flowplayer5 {
 		);
 
 		register_post_type( 'flowplayer5', $args );
+
 	}
 
 	/**
@@ -310,9 +336,11 @@ class Flowplayer5 {
 	 * @since    1.0.0
 	 */
 	public function flowplayer_custom_mimes( $mimes ){
+
 			$mimes['webm'] = 'video/webm';
 			$mimes['vtt'] = 'text/vtt';
 		return $mimes;
+
 	}
 
 }

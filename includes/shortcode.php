@@ -9,12 +9,12 @@
  * @copyright 2013 Flowplayer Ltd
  */
 
-// example shortcode [flowplayer id='39']
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
+// example shortcode [flowplayer id='39']
 
 // Add Shortcode
 function add_fp5_shortcode($atts) {
@@ -63,6 +63,21 @@ global $post;
 	if( isset ( $logo_origin ) ) {
 		wp_enqueue_style( $plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', dirname(__FILE__) ), $player_version );
 	}
+
+	/* <!-- global options -->
+	<script>
+	flowplayer.conf = {
+		engine: "flash",
+		swf: "/media/swf/flowplayer.swf",
+		analytics: 'UA-27182341-1'
+		embed: {
+			library: "//mydomain.com/js/flowplayer.min.js",
+			script: "//mydomain.com/js/embed.min.js",
+			skin: "//mydomain.com/css/minimalist.css",
+			swf: "//mydomain.com/swf/flowplayer.swf"
+		}
+	};
+	</script> */
 
 	// Shortcode processing
 	$ratio          = ( isset ( $width ) && isset( $height ) ? intval($height) / intval($width) : '' );
