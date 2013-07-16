@@ -53,10 +53,10 @@ global $post;
 
 	// Register ahortcode stylesheets and JavaScript
 	if( isset( $cdn ) ) {
-		wp_enqueue_style( $plugin_slug . '-' . $skin, 'http://releases.flowplayer.org/' . $player_version . '/skin/' . $skin . '.css' );
+		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/all-skins.css' );
 		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
 	} else {
-		wp_enqueue_style( $plugin_slug . '-' . $skin, plugins_url( '/assets/flowplayer/skin/' . $skin . '.css', dirname(__FILE__) ), $player_version );
+		wp_enqueue_style( $plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', dirname(__FILE__) ), $player_version );
 		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', dirname( __FILE__ ) ), array( 'jquery' ), $player_version, false );
 	}
 
