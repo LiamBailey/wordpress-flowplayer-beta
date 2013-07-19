@@ -32,7 +32,7 @@ if( isset( $plugin_options['logoInOrigin'] ) )
 // Update entire array
 update_option( 'fp5_settings_general', $new_options );
 // Delte old array
-//delete_option( 'fp5_options' );
+delete_option( 'fp5_options' );
 
 
 

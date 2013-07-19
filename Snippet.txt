@@ -27,13 +27,6 @@ function perm($return, $id, $new_title, $new_slug){
 	return $ret2;
 }
 
-	$return.=     '<script>';
-		if ($key != '' && $logo_origin) {
-			$return .= 'jQuery("head").append(jQuery(\'<style>.flowplayer .fp-logo { display: block; opacity: 1; }</style>\'));';
-		}
-	$return.='</script>';
-
-	
 <div class="flowplayer">
 	<video>
 		<source type="application/x-mpegurl" src="/path/to/intro.m3u8">

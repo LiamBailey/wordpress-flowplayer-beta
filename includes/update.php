@@ -14,23 +14,19 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-/**
- * Runs the installer.
- *
- * @access public
- * @return void
- */
-function do_update_flowplyer5() {
-	global $flowplayer5;
-	$version = '1.0.0-beta';
+$fp5_options = get_option( 'fp5_options' );
+$fp5_version = get_option( 'fp5_version' );
+$fp5_player_version = get_option( 'fp5_player_version' );
 
-	// Do updates
-	$current_db_version = get_option( 'flowplyer_db_version' );
+if ( $fp5_options & ! $fp5_version ) {
 
-	if ( version_compare( $current_db_version, '1.0.0', '<' ) ) {
-		include( 'update-1.0.0.php' );
-		update_option( 'flowplyer_db_version', '1.0.0' );
-	}
+	// 1.0.0 is the first version to use this option so we must add it
+	$fp5_version = '1.0.0';
+	$fp5_player_version = '5.4.3';
 
-	update_option( 'flowplyer_db_version', $version );
+	add_option( 'fp5_version', $fp5_version );
+	add_option( 'fp5_player_version', $fp5_player_version );
+
+	include( 'update-1.0.0.php' );
+
 }

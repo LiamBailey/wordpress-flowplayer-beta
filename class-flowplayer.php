@@ -136,7 +136,7 @@ class Flowplayer5 {
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
 	 */
 	public static function activate( $network_wide ) {
-		// TODO: Define activation functionality here
+		require_once( plugin_dir_path( __FILE__ ) . 'includes/update.php' );
 	}
 
 	/**
