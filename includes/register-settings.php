@@ -31,7 +31,7 @@ function fp5_register_settings() {
 				),
 				'key' => array(
 					'id' => 'key',
-					'name' => __('License Key', 'fp5'),
+					'name' => __('License Key', 'flowplayer5'),
 					'desc' => __('Specify your License Key here.', 'flowplayer5'),
 					'type' => 'text',
 					'size' => 'medium'
@@ -46,13 +46,13 @@ function fp5_register_settings() {
 				),
 				'logo_origin' => array(
 					'id' => 'logo_origin',
-					'name' => __('Show Logo on this site', 'fp5'),
+					'name' => __('Show Logo on this site', 'flowplayer5'),
 					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'flowplayer5'),
 					'type' => 'checkbox'
 				),
 				'video_tracking' => array(
 					'id' => 'video_tracking',
-					'name' => '<strong>' . __('Video Tracking', 'fp5') . '</strong>',
+					'name' => '<strong>' . __('Video Tracking', 'flowplayer5') . '</strong>',
 					'desc' => __('You can track video traffic using Google Analytics (GA). Visit flowplayer.org for more info', 'flowplayer5'),
 					'type' => 'header'
 				),
@@ -65,7 +65,7 @@ function fp5_register_settings() {
 				),
 				'cdn_options' => array(
 					'id' => 'cdn_options',
-					'name' => '<strong>' . __('CDN Options', 'fp5') . '</strong>',
+					'name' => '<strong>' . __('CDN Options', 'flowplayer5') . '</strong>',
 					'desc' => __('If you want to use a self-hosted copy of Flowplayer instead of the CDN hosted version uncheck Use CDN hosted version? Using the CDN hosted version is preferable in most situations.', 'flowplayer5'),
 					'type' => 'header'
 				),
@@ -74,6 +74,40 @@ function fp5_register_settings() {
 					'name' => __('CDN Hosted files', 'flowplayer5'),
 					'desc' => __('Uncheck this to load the files from this site', 'flowplayer5'),
 					'type' => 'checkbox'
+				),
+				'embed_options' => array(
+					'id' => 'embed_options',
+					'name' => '<strong>' . __('Embed Options', 'flowplayer5') . '</strong>',
+					'desc' => __('By default the embed feature loads the embed script and Flowplayer assets from our CDN. This can be customized in the embed configuration object if you prefer to host the files yourself.', 'flowplayer5'),
+					'type' => 'header'
+				),
+				'library' => array(
+					'id' => 'library',
+					'name' => __('Libary', 'flowplayer5'),
+					'desc' => __('URL of the Flowplayer API library script', 'flowplayer5'),
+					'type' => 'text',
+					'size' => 'medium'
+				),
+				'script' => array(
+					'id' => 'script',
+					'name' => __('Script', 'flowplayer5'),
+					'desc' => __('URL of the embed script', 'flowplayer5'),
+					'type' => 'text',
+					'size' => 'medium'
+				),
+				'skin' => array(
+					'id' => 'skin',
+					'name' => __('Skin', 'flowplayer5'),
+					'desc' => __('URL of skin for embedding', 'flowplayer5'),
+					'type' => 'text',
+					'size' => 'medium'
+				),
+				'swf' => array(
+					'id' => 'swf',
+					'name' => __('SWF file', 'flowplayer5'),
+					'desc' => __('URL of SWF file for embedding', 'flowplayer5'),
+					'type' => 'text',
+					'size' => 'medium'
 				)
 			)
 		)
