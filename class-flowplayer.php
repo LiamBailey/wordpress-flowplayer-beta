@@ -102,11 +102,16 @@ class Flowplayer5 {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
+		// Load public-facing style sheet and JavaScript.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
 		// Define custom functionality.
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
-		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . 'flowplayer.php' ); // replace "plugin-name"
+		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . 'flowplayer.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
+		add_action( 'wp_head', array( $this, 'global_config_script' ) );
 
 	}
 
@@ -235,6 +240,53 @@ class Flowplayer5 {
 
 	}
 
+
+	/**
+	 * Register and enqueue public-facing style sheet.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_styles() {
+
+		// set the options for the shortcode - pulled from the register-settings.php
+		$options     = get_option('fp5_settings_general');
+		$cdn         = isset( $options['cdn_option'] );
+		$logo_origin = isset( $options['logo_origin'] );
+
+		// Register shortcode stylesheets and JavaScript
+		if( $cdn ) {
+			wp_enqueue_style( $this->plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
+		} else {
+			wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
+		}
+
+		if( $logo_origin ) {
+			wp_enqueue_style( $this->plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', __FILE__ ), $this->player_version );
+		}
+
+	}
+
+	/**
+	 * Register and enqueues public-facing JavaScript files.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_scripts() {
+
+		// set the options for the shortcode - pulled from the register-settings.php
+		$options = get_option('fp5_settings_general');
+		$key     = $options['key'];
+		$cdn     = isset( $options['cdn_option'] );
+
+		// Register shortcode stylesheets and JavaScript
+		if( $cdn ) {
+			wp_enqueue_script( $this->plugin_slug . '-script', 'http://releases.flowplayer.org/' . $this->player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
+		} else {
+			wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', __FILE__  ), array( 'jquery' ), $this->player_version, false );
+		}
+
+	}
+
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
@@ -342,5 +394,37 @@ class Flowplayer5 {
 		return $mimes;
 
 	}
+
+	public function global_config_script() {
+
+		// set the options for the shortcode - pulled from the display-settings.php
+		$options       = get_option('fp5_settings_general');
+		$embed_library = $options['library'];
+		$embed_script  = $options['script'];
+		$embed_skin    = $options['skin'];
+		$embed_swf     = $options['swf'];
+
+		if ( $embed_library || $embed_script || $embed_skin || $embed_swf ) {
+
+			$return = '<!-- flowplayer global options -->';
+			$return .= '<script>';
+			$return .= 'flowplayer.conf = {';
+				$return .= 'embed: {';
+					$return .= ( ! empty ( $embed_library ) ? 'library: "' . $embed_library . '",' : '' );
+					$return .= ( ! empty ( $embed_script ) ? 'script: "' . $embed_script . '",' : '' );
+					$return .= ( ! empty ( $embed_skin ) ? 'skin: "' . $embed_skin . '",' : '' );
+					$return .= ( ! empty ( $embed_swf ) ? 'swf: "' . $embed_swf . '"' : '' );
+				$return .= '}';
+			$return .= '};';
+			$return .= '</script>';
+
+			echo $return;
+
+		}
+
+
+
+	}
+
 
 }

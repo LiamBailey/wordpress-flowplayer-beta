@@ -43,41 +43,11 @@ global $post;
 	$ratio     = get_post_meta( $id, 'fp5-aspect-ratio', true );
 	$fixed     = get_post_meta( $id, 'fp5-fixed-width', true );
 
-	// set the options for the shortcode - pulled from the display-settings.php
+	// set the options for the shortcode - pulled from the register-settings.php
 	$options       = get_option('fp5_settings_general');
 	$key           = $options['key'];
 	$logo          = $options['logo'];
 	$ga_account_id = $options['ga_account_id'];
-	$logo_origin   = isset( $options['logo_origin'] );
-	$cdn           = isset( $options['cdn_option'] );
-
-	// Register ahortcode stylesheets and JavaScript
-	if( isset( $cdn ) ) {
-		wp_enqueue_style( $plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $player_version . '/skin/all-skins.css' );
-		wp_enqueue_script( $plugin_slug . '-script', 'http://releases.flowplayer.org/' . $player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $player_version, false );
-	} else {
-		wp_enqueue_style( $plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', dirname(__FILE__) ), $player_version );
-		wp_enqueue_script( $plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', dirname( __FILE__ ) ), array( 'jquery' ), $player_version, false );
-	}
-
-	if( isset ( $logo_origin ) ) {
-		wp_enqueue_style( $plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', dirname(__FILE__) ), $player_version );
-	}
-
-	/* <!-- global options -->
-	<script>
-	flowplayer.conf = {
-		engine: "flash",
-		swf: "/media/swf/flowplayer.swf",
-		analytics: 'UA-27182341-1'
-		embed: {
-			library: "//mydomain.com/js/flowplayer.min.js",
-			script: "//mydomain.com/js/embed.min.js",
-			skin: "//mydomain.com/css/minimalist.css",
-			swf: "//mydomain.com/swf/flowplayer.swf"
-		}
-	};
-	</script> */
 
 	// Shortcode processing
 	$ratio          = ( isset ( $width ) && isset( $height ) ? intval($height) / intval($width) : '' );
@@ -91,8 +61,7 @@ global $post;
 	$attributes     = ( ( $autoplay == 'true' ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="' . $preload . '" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' ); 
 
 	// Shortcode output
-	$return  = '';
-	$return .= '<div style="' . $fixed_style . $splash_style . ' background-size: contain;" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
+	$return = '<div style="' . $fixed_style . $splash_style . ' background-size: contain;" class="' . $class . '" data-key="' . $data_key . '" data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '" data-ratio="' . $data_ratio . '">';
 	$return .= '<video ' . $attributes . '>';
 		$mp4       != '' ? $return.='<source type="video/mp4" src="' . $mp4 . '"/>' : '';
 		$webm      != '' ? $return.='<source type="video/webm" src="' . $webm . '"/>' : '';
