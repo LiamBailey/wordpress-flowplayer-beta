@@ -106,12 +106,16 @@ class Flowplayer5 {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
+		add_action( 'wp_head', array( $this, 'global_config_script' ) );
+
 		// Define custom functionality.
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
 		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . 'flowplayer.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
+		add_action( 'admin_print_styles-post.php', array( $this, 'hide_view_button' ) );
+		add_action( 'wp_before_admin_bar_render', array( $this, 'remove_view_button_admin_bar' ) );
+		add_filter( 'post_row_actions', array( $this, 'remove_view_row_action' ), 10, 1 );
 		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
-		add_action( 'wp_head', array( $this, 'global_config_script' ) );
 
 	}
 
@@ -287,6 +291,35 @@ class Flowplayer5 {
 
 	}
 
+	public function global_config_script() {
+
+		// set the options for the shortcode - pulled from the display-settings.php
+		$options       = get_option('fp5_settings_general');
+		$embed_library = $options['library'];
+		$embed_script  = $options['script'];
+		$embed_skin    = $options['skin'];
+		$embed_swf     = $options['swf'];
+
+		if ( $embed_library || $embed_script || $embed_skin || $embed_swf ) {
+
+			$return = '<!-- flowplayer global options -->';
+			$return .= '<script>';
+			$return .= 'flowplayer.conf = {';
+				$return .= 'embed: {';
+					$return .= ( ! empty ( $embed_library ) ? 'library: "' . $embed_library . '",' : '' );
+					$return .= ( ! empty ( $embed_script ) ? 'script: "' . $embed_script . '",' : '' );
+					$return .= ( ! empty ( $embed_skin ) ? 'skin: "' . $embed_skin . '",' : '' );
+					$return .= ( ! empty ( $embed_swf ) ? 'swf: "' . $embed_swf . '"' : '' );
+				$return .= '}';
+			$return .= '};';
+			$return .= '</script>';
+
+			echo $return;
+
+		}
+
+	}
+
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
@@ -383,6 +416,50 @@ class Flowplayer5 {
 	}
 
 	/**
+	 * Hides the 'view' button in the post edit page
+	 *
+	 * @param $hook
+	 */
+	public function hide_view_button( $hook ) {
+
+		if( get_post_type() === 'flowplayer5' ) {
+			echo '<style>#edit-slug-box{ display: none;}</style>';
+		}
+		
+		return;
+
+	}
+
+	/**
+	 * Removes the 'view' link in the admin bar
+	 *
+	 */
+	public function remove_view_button_admin_bar() {
+
+		global $wp_admin_bar;
+
+		if( get_post_type() === 'flowplayer5'){
+
+		$wp_admin_bar->remove_menu('view');
+
+		}
+
+	}
+
+	/**
+	 * Renmoves the 'view' button in the posts list page
+	 *
+	 * @param $actions
+	 */
+	public function remove_view_row_action( $actions ) {
+
+		if( get_post_type() === 'flowplayer5' )
+			unset( $actions['view'] );
+		return $actions;
+
+	}
+
+	/**
 	 * Add mime support for webm and vtt.
 	 *
 	 * @since    1.0.0
@@ -394,37 +471,5 @@ class Flowplayer5 {
 		return $mimes;
 
 	}
-
-	public function global_config_script() {
-
-		// set the options for the shortcode - pulled from the display-settings.php
-		$options       = get_option('fp5_settings_general');
-		$embed_library = $options['library'];
-		$embed_script  = $options['script'];
-		$embed_skin    = $options['skin'];
-		$embed_swf     = $options['swf'];
-
-		if ( $embed_library || $embed_script || $embed_skin || $embed_swf ) {
-
-			$return = '<!-- flowplayer global options -->';
-			$return .= '<script>';
-			$return .= 'flowplayer.conf = {';
-				$return .= 'embed: {';
-					$return .= ( ! empty ( $embed_library ) ? 'library: "' . $embed_library . '",' : '' );
-					$return .= ( ! empty ( $embed_script ) ? 'script: "' . $embed_script . '",' : '' );
-					$return .= ( ! empty ( $embed_skin ) ? 'skin: "' . $embed_skin . '",' : '' );
-					$return .= ( ! empty ( $embed_swf ) ? 'swf: "' . $embed_swf . '"' : '' );
-				$return .= '}';
-			$return .= '};';
-			$return .= '</script>';
-
-			echo $return;
-
-		}
-
-
-
-	}
-
 
 }
