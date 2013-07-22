@@ -151,43 +151,6 @@ class Video_Meta_Box {
 		?>
 
 		<p>
-			<label for="fp5-select-skin">
-				<?php _e( 'Select skin', $this->plugin_slug ); ?>
-			</label>
-
-			<select id="fp5-select-skin" name="fp5-select-skin">
-				<option id="fp5-minimalist" value="minimalist" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
-				<option id="fp5-functional" value="functional" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
-				<option id="fp5-playful" value="playful" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
-			</select>
-			<div class="option">
-				<img id="fp5_minimalist" class="minimalist player-preview " src="<?php echo plugins_url( '/assets/img/minimalist.png', dirname(__FILE__) ) ?>" />
-				<img id="fp5_functional" class="functional player-preview " src="<?php echo plugins_url( '/assets/img/functional.png', dirname(__FILE__) ) ?>" />
-				<img id="fp5_playful" class="playful player-preview " src="<?php echo plugins_url( '/assets/img/playful.png', dirname(__FILE__) ) ?>" />
-			</div>
-		</p>
-
-		<p>
-			<span class="fp5-row-title"><?php _e('Video attributes')?></span>
-			<div class="fp5-row-content">
-				<label for="fp5-autoplay">
-					<?php _e( 'Autoplay?' )?>
-					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-autoplay'] ) ) checked( $fp5_stored_meta['fp5-autoplay'][0], 'true' ); ?> />
-				</label>
-				<label for="fp5-loop">
-					<?php _e( 'Loop?' )?>
-					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-loop'] ) ) checked( $fp5_stored_meta['fp5-loop'][0], 'true' ); ?> />
-				</label>
-				<label for="fp5-preload" class="fp5-row-title"><?php _e( 'Preload?' )?></label>
-				<select name="fp5-preload" id="fp5-preload">
-					<option value="auto" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'auto' ); ?>>auto</option>';
-					<option value="metadata" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'metadata' ); ?>>metadata</option>';
-					<option value="none" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'none' ); ?>>none</option>';
-				</select>
-			</div>
-		</p>
-
-		<p>
 			<tr valign="top">
 				<th scope="row"><label for="fp5-splash-image"><?php _e( 'Splash Image', $this->plugin_slug )?></label></th>
 				<td>
@@ -219,6 +182,58 @@ class Video_Meta_Box {
 			<label for="fp5-vtt-subtitles"><?php _e( 'vtt file (Subtitles)', $this->plugin_slug )?></label>
 			<input class="media-url" type="text" name="fp5-vtt-subtitles" id="fp5-vtt-subtitles" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-vtt-subtitles'] ) ) echo $fp5_stored_meta['fp5-vtt-subtitles'][0]; ?>" />
 			<a href="#" class="fp5-add-vtt button button-primary" title="<?php _e( 'Add vtt file', $this->plugin_slug )?>"><?php _e( 'Add vtt file', $this->plugin_slug )?></a>
+		</p>
+
+		<p>
+			<span class="fp5-row-title"><strong><?php _e( 'Select skin' )?></strong></span>
+			<div class="fp5-row-content">
+				<select id="fp5-select-skin" name="fp5-select-skin">
+					<option id="fp5-minimalist" value="minimalist" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
+					<option id="fp5-functional" value="functional" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
+					<option id="fp5-playful" value="playful" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
+				</select>
+				<div class="player-previews">
+					<img id="fp5_minimalist" class="minimalist player-preview" src="<?php echo plugins_url( '/assets/img/minimalist.png', dirname(__FILE__) ) ?>" />
+					<img id="fp5_functional" class="functional player-preview" src="<?php echo plugins_url( '/assets/img/functional.png', dirname(__FILE__) ) ?>" />
+					<img id="fp5_playful" class="playful player-preview" src="<?php echo plugins_url( '/assets/img/playful.png', dirname(__FILE__) ) ?>" />
+				</div>
+			</div>
+		</p>
+
+		<p>
+			<span class="fp5-row-title"><strong><?php _e('Video attributes')?></strong></span>
+			<div class="fp5-row-content">
+				<label for="fp5-autoplay">
+					<?php _e( 'Autoplay?' )?>
+					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-autoplay'] ) ) checked( $fp5_stored_meta['fp5-autoplay'][0], 'true' ); ?> />
+				</label>
+				<label for="fp5-loop">
+					<?php _e( 'Loop?' )?>
+					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-loop'] ) ) checked( $fp5_stored_meta['fp5-loop'][0], 'true' ); ?> />
+				</label>
+				<label for="fp5-preload" class="fp5-row-title"><?php _e( 'Preload?' )?></label>
+				<select name="fp5-preload" id="fp5-preload">
+					<option value="auto" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'auto' ); ?>>auto</option>';
+					<option value="metadata" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'metadata' ); ?>>metadata</option>';
+					<option value="none" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'none' ); ?>>none</option>';
+				</select>
+			</div>
+		</p>
+
+		<p>
+			<span class="fp5-row-title"><strong><?php _e('Flowplayer options')?></strong></span>
+			<div class="fp5-row-content">
+				<label for="fp5-fixed-controls">
+					<?php _e( 'Fixed Controls?' )?>
+					<input type="checkbox" name="fp5-fixed-controls" id="fp5-fixed-controls" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-fixed-controls'] ) ) checked( $fp5_stored_meta['fp5-fixed-controls'][0], 'true' ); ?> />
+				</label>
+				<label for="fp5-color" class="fp5-row-title"><?php _e( 'Coloring?' )?></label>
+				<select name="fp5-color" id="fp5-color">
+					<option value="auto" <?php if ( isset ( $fp5_stored_meta['fp5-color'] ) ) selected( $fp5_stored_meta['fp5-color'][0], 'color-alt' ); ?>>Alternate coloring</option>';
+					<option value="metadata" <?php if ( isset ( $fp5_stored_meta['fp5-color'] ) ) selected( $fp5_stored_meta['fp5-color'][0], 'color-alt2' ); ?>>Alternate coloring #2</option>';
+					<option value="none" <?php if ( isset ( $fp5_stored_meta['fp5-color'] ) ) selected( $fp5_stored_meta['fp5-color'][0], 'color-light' ); ?>>Light coloring</option>';
+				</select>
+			</div>
 		</p>
 
 		<p>
@@ -278,6 +293,18 @@ class Video_Meta_Box {
 			// Checks for input and saves
 			if( isset( $_POST[ 'fp5-preload' ] ) ) {
 				update_post_meta( $post_id, 'fp5-preload', $_POST[ 'fp5-preload' ] );
+			}
+
+			// Checks for input and saves
+			if( isset( $_POST[ 'fp5-fixed-controls' ] ) ) {
+				update_post_meta( $post_id, 'fp5-fixed-controls', 'true' );
+			} else {
+				update_post_meta( $post_id, 'fp5-fixed-controls', '' );
+			}
+
+			// Checks for input and saves
+			if( isset( $_POST[ 'fp5-coloring' ] ) ) {
+				update_post_meta( $post_id, 'fp5-coloring', $_POST[ 'fp5-coloring' ] );
 			}
 
 			// Checks for input and saves if needed

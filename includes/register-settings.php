@@ -40,7 +40,7 @@ function fp5_register_settings() {
 					'id' => 'logo',
 					'name' => __( 'Logo', 'flowplayer5'),
 					'type' => 'upload',
-					'size' => 'large',
+					'size' => 'regular',
 					'desc' => __('Uncheck this and the logo is only shown in externally embedded players.', 'flowplayer5'),
 					'preview' => 'true'
 				),

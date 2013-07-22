@@ -188,22 +188,44 @@ jQuery(document).ready(function($){
     });
 });
 
+
 jQuery(document).ready(function ($) {
+
+	// Create html5 preview and calculate width and height of preview
     $('#video video').remove();
     $(".media-url").blur(function () {
         $('#video video').remove();
-        $('#video').append('<video controls>' +
+        $('#video').append('<video controls id="preview">' +
             '<source type="video/mp4" src="' + $('#fp5-mp4-video').val() + '"/>' +
             '<source type="video/webm" src="' + $('#fp5-webm-video').val() + '"/>' +
             '<source type="video/webm" src="' + $('#fp5-ogg-video').val() + '"/>' +
             '<track kind="subtitles" srclang="en" label="English" src="' + $('#fp5-vtt').val() + '"/>' +
             '</video>');
+        
+        var preview = $("#preview");
+
+        preview.bind("loadeddata", function () {
+            jQuery("#fp5-max-width").val(this.videoWidth);
+            jQuery("#fp5-max-height").val(this.videoHeight);
+        });
+
     });
+
+	// Update skin image according to selection
+	$('#fp5-select-skin option').each(function () {
+		if ($(this).is(':selected')) {
+			$("." + $(this).val()).show();
+		}
+	});
+	$("select#fp5-select-skin").change(function () {
+		$("img").hide();
+		$("." + $(this).val()).show();
+	});
+		
 });
 
 // Settings Page
 // Add Logo
-
 (function($) {
    $(function() {
       $.fn.wptuts = function(options) {
@@ -260,19 +282,3 @@ jQuery(document).ready(function ($) {
       $('.upload').wptuts(); // Use as default option.
    });
 }(jQuery));
-
-// Update skin image according to selection
-jQuery(document).ready(function ($) {
-
-	$('#fp5-select-skin option').each(function () {
-		if ($(this).is(':selected')) {
-			$("." + $(this).val()).show();
-		}
-	});
-	$("select#fp5-select-skin").change(function () {
-		$("img").hide();
-		$("." + $(this).val()).show();
-	});
-
-
-});
