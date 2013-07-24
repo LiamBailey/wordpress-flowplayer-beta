@@ -40,8 +40,9 @@ function add_fp5_shortcode( $atts ) {
 	$webm           = get_post_meta( $id, 'fp5-webm-video', true );
 	$ogg            = get_post_meta( $id, 'fp5-ogg-video', true) ;
 	$subtitles      = get_post_meta( $id, 'fp5-vtt', true );
-	$width          = get_post_meta( $id, 'fp5-max-width', true );
-	$height         = get_post_meta( $id, 'fp5-max-height', true );
+	$max_width      = get_post_meta( $id, 'fp5-max-width', true );
+	$width          = get_post_meta( $id, 'fp5-width', true );
+	$height         = get_post_meta( $id, 'fp5-height', true );
 	$ratio          = get_post_meta( $id, 'fp5-aspect-ratio', true );
 	$fixed          = get_post_meta( $id, 'fp5-fixed-width', true );
 
@@ -53,7 +54,7 @@ function add_fp5_shortcode( $atts ) {
 
 	// Shortcode processing
 	$ratio            = ( ( $width != 0 && $height != 0 ) ? intval( $height ) / intval( $width ) : '' );
-	$fixed_style      = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $width . 'px; ' );
+	$size             = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $max_width . 'px; ' );
 	$splash_style     = 'background: #777 url(' . $splash . ') no-repeat;';
 	$class            = 'flowplayer ' . $skin . ( ! empty ( $splash ) ? ' is-splash' : '' );
 	$data_key         = ( isset ( $key ) ? 'data-key="' . $key . '"' : '');
@@ -64,7 +65,7 @@ function add_fp5_shortcode( $atts ) {
 	$modifier_classes = ( isset ( $fixed_controls ) ? $fixed_controls : '' ) . ( isset ( $coloring ) ? $coloring : '' );
 
 	// Shortcode output
-	$return = '<div style="' . $fixed_style . $splash_style . $modifier_classes . ' background-size: contain;" class="' . $class . '"' . $data_key . ' data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '"' . $data_ratio . '>';
+	$return = '<div style="' . $size . $splash_style . $modifier_classes . ' background-size: contain;" class="' . $class . '"' . $data_key . ' data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '"' . $data_ratio . '>';
 		$return .= '<video ' . $attributes . '>';
 			$webm      != '' ? $return .= '<source type="video/webm" src="' . $webm . '"/>' : '';
 			$mp4       != '' ? $return .= '<source type="video/mp4" src="' . $mp4 . '"/>' : '';

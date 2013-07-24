@@ -83,7 +83,7 @@ class Flowplayer5 {
 	 *
 	 * @var      string
 	 */
-	protected $plugin_screen_hook_suffix = null;
+	protected $plugin_settings_screen_hook_suffix = null;
 
 	/**
 	 * Initialize the plugin by setting localization, filters, and administration functions.
@@ -112,7 +112,7 @@ class Flowplayer5 {
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
 		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . 'flowplayer.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
-		add_action( 'admin_print_styles-post.php', array( $this, 'hide_view_button' ) );
+		add_action( 'admin_head', array( $this, 'hide_view_button' ) );
 		add_action( 'wp_before_admin_bar_render', array( $this, 'remove_view_button_admin_bar' ) );
 		add_filter( 'post_row_actions', array( $this, 'remove_view_row_action' ), 10, 1 );
 		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
@@ -183,12 +183,9 @@ class Flowplayer5 {
 	 */
 	public function enqueue_admin_styles() {
 
-		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
-			return;
-		}
-
-		$screen = get_current_screen();
-		//if ( $screen->id == $this->plugin_screen_hook_suffix ) {
+		$current_screen = get_current_screen();
+		
+		//if ( $current_screen->post_type === $this->plugin_slug ) {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( '/assets/css/admin.css', __FILE__ ), $this->version );
 		//}
 
@@ -202,45 +199,51 @@ class Flowplayer5 {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_scripts() {
-	
-		wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->version, false );
-		wp_localize_script( $this->plugin_slug . '-media', 'splash_image',
-			array(
-				'title'  => __( 'Upload or choose a splash image', 'flowplayer5' ), // This will be used as the default title
-				'button' => __( 'Insert Splash Image', 'flowplayer5' )            // This will be used as the default button text
-			)
-		);
-		wp_localize_script( $this->plugin_slug . '-media', 'mp4_video',
-			array(
-				'title'  => __( 'Upload or choose a mp4 video file', 'flowplayer5' ), // This will be used as the default title
-				'button' => __( 'Insert mp4 Video', 'flowplayer5' )            // This will be used as the default button text
-			)
-		);
-		wp_localize_script( $this->plugin_slug . '-media', 'webm_video',
-			array(
-				'title'  => __( 'Upload or choose a webm video file', 'flowplayer5' ), // This will be used as the default title
-				'button' => __( 'Insert webm Video', 'flowplayer5' )            // This will be used as the default button text
-			)
-		);
-		wp_localize_script( $this->plugin_slug . '-media', 'ogg_video',
-			array(
-				'title'  => __( 'Upload or choose a ogg video file', 'flowplayer5' ), // This will be used as the default title
-				'button' => __( 'Insert ogg Video', 'flowplayer5' )            // This will be used as the default button text
-			)
-		);
-		wp_localize_script( $this->plugin_slug . '-media', 'webvtt',
-			array(
-				'title'  => __( 'Upload or choose a webvtt file', 'flowplayer5' ), // This will be used as the default title
-				'button' => __( 'Insert webvtt', 'flowplayer5' )                   // This will be used as the default button text
-			)
-		);
-		wp_localize_script( $this->plugin_slug . '-media', 'logo',
-			array(
-				'title'  => __( 'Upload or choose a logo', 'flowplayer5' ), // This will be used as the default title
-				'button' => __( 'Insert Logo', 'flowplayer5' )                   // This will be used as the default button text
-			)
-		);
-		wp_enqueue_media();
+
+		$current_screen = get_current_screen();
+		
+		if ( $current_screen->post_type === $this->plugin_slug ) {
+
+			wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->version, false );
+			wp_localize_script( $this->plugin_slug . '-media', 'splash_image',
+				array(
+					'title'  => __( 'Upload or choose a splash image', 'flowplayer5' ), // This will be used as the default title
+					'button' => __( 'Insert Splash Image', 'flowplayer5' )            // This will be used as the default button text
+				)
+			);
+			wp_localize_script( $this->plugin_slug . '-media', 'mp4_video',
+				array(
+					'title'  => __( 'Upload or choose a mp4 video file', 'flowplayer5' ), // This will be used as the default title
+					'button' => __( 'Insert mp4 Video', 'flowplayer5' )            // This will be used as the default button text
+				)
+			);
+			wp_localize_script( $this->plugin_slug . '-media', 'webm_video',
+				array(
+					'title'  => __( 'Upload or choose a webm video file', 'flowplayer5' ), // This will be used as the default title
+					'button' => __( 'Insert webm Video', 'flowplayer5' )            // This will be used as the default button text
+				)
+			);
+			wp_localize_script( $this->plugin_slug . '-media', 'ogg_video',
+				array(
+					'title'  => __( 'Upload or choose a ogg video file', 'flowplayer5' ), // This will be used as the default title
+					'button' => __( 'Insert ogg Video', 'flowplayer5' )            // This will be used as the default button text
+				)
+			);
+			wp_localize_script( $this->plugin_slug . '-media', 'webvtt',
+				array(
+					'title'  => __( 'Upload or choose a webvtt file', 'flowplayer5' ), // This will be used as the default title
+					'button' => __( 'Insert webvtt', 'flowplayer5' )                   // This will be used as the default button text
+				)
+			);
+			wp_localize_script( $this->plugin_slug . '-media', 'logo',
+				array(
+					'title'  => __( 'Upload or choose a logo', 'flowplayer5' ), // This will be used as the default title
+					'button' => __( 'Insert Logo', 'flowplayer5' )                   // This will be used as the default button text
+				)
+			);
+			wp_enqueue_media();
+
+		}
 
 	}
 
@@ -327,7 +330,7 @@ class Flowplayer5 {
 	 */
 	public function add_plugin_admin_menu() {
 
-		$this->plugin_screen_hook_suffix = add_submenu_page(
+		$this->plugin_settings_screen_hook_suffix = add_submenu_page(
 			'edit.php?post_type=flowplayer5',
 			__( 'Flowplayer Settings', $this->plugin_slug ),
 			__( 'Settings', $this->plugin_slug ),
@@ -420,10 +423,12 @@ class Flowplayer5 {
 	 *
 	 * @param $hook
 	 */
-	public function hide_view_button( $hook ) {
+	public function hide_view_button() {
+	
+		$current_screen = get_current_screen();
 
-		if( get_post_type() === 'flowplayer5' ) {
-			echo '<style>#edit-slug-box{ display: none;}</style>';
+		if( $current_screen->post_type === $this->plugin_slug ) {
+			echo '<style>#edit-slug-box{ display: none; }</style>';
 		}
 		
 		return;
@@ -438,7 +443,7 @@ class Flowplayer5 {
 
 		global $wp_admin_bar;
 
-		if( get_post_type() === 'flowplayer5'){
+		if( get_post_type() === $this->plugin_slug ){
 
 		$wp_admin_bar->remove_menu('view');
 
@@ -453,8 +458,9 @@ class Flowplayer5 {
 	 */
 	public function remove_view_row_action( $actions ) {
 
-		if( get_post_type() === 'flowplayer5' )
+		if( get_post_type() === $this->plugin_slug )
 			unset( $actions['view'] );
+
 		return $actions;
 
 	}
@@ -466,8 +472,9 @@ class Flowplayer5 {
 	 */
 	public function flowplayer_custom_mimes( $mimes ){
 
-			$mimes['webm'] = 'video/webm';
-			$mimes['vtt'] = 'text/vtt';
+		$mimes['webm'] = 'video/webm';
+		$mimes['vtt'] = 'text/vtt';
+
 		return $mimes;
 
 	}

@@ -191,6 +191,17 @@ jQuery(document).ready(function($){
 
 jQuery(document).ready(function ($) {
 
+	// Update skin image according to selection
+	$('#fp5-select-skin option').each(function () {
+		if ($(this).is(':selected')) {
+			$("." + $(this).val()).show();
+		}
+	});
+	$("select#fp5-select-skin").change(function () {
+		$("img").hide();
+		$("." + $(this).val()).show();
+	});
+
 	// Create html5 preview and calculate width and height of preview
     $('#video video').remove();
     $(".media-url").blur(function () {
@@ -205,22 +216,27 @@ jQuery(document).ready(function ($) {
         var preview = $("#preview");
 
         preview.bind("loadeddata", function () {
-            jQuery("#fp5-max-width").val(this.videoWidth);
-            jQuery("#fp5-max-height").val(this.videoHeight);
+            $("#fp5-width").val(this.videoWidth);
+            $("#fp5-height").val(this.videoHeight);
         });
 
     });
 
-	// Update skin image according to selection
-	$('#fp5-select-skin option').each(function () {
-		if ($(this).is(':selected')) {
-			$("." + $(this).val()).show();
+	// Check state of height box depending on aspect rato checkbox
+	var ratioCheckbox = $("#fp5-aspect-ratio");
+
+    ratioCheckbox.change(function ChangeStateRatio() {
+		if (ratioCheckbox.attr('checked',false)) {
+			$('#fp5-height').attr("readonly", "true");
+			$('#fp5-width').attr("readonly", "true");
+			ratioCheckbox.val("false");
+		} else {
+			$('#fp5-height').removeAttr("readonly");
+			$('#fp5-width').removeAttr("readonly");
+			ratioCheckbox.val("true");
 		}
-	});
-	$("select#fp5-select-skin").change(function () {
-		$("img").hide();
-		$("." + $(this).val()).show();
-	});
+    });
+	window.onload = ChangeStateRatio;
 		
 });
 

@@ -243,14 +243,19 @@ class Video_Meta_Box {
 		</p>
 
 		<p>
-			<label for="fp5-max-width" class="fp5-row-title"><?php _e('Max width')?></label>
+			<label for="fp5-max-width" class="fp5-row-title"><?php _e('Max Width')?></label>
 			<input type="text" name="fp5-max-width" id="fp5-max-width" value="<?php if ( isset ( $fp5_stored_meta['fp5-max-width'] ) ) echo $fp5_stored_meta['fp5-max-width'][0]; ?>" />
+			<label for="fp5-width" class="fp5-row-title"><?php _e('Width')?></label>
+			<input type="text" name="fp5-width" id="fp5-width" value="<?php if ( isset ( $fp5_stored_meta['fp5-width'] ) ) echo $fp5_stored_meta['fp5-width'][0]; ?>" />
+			<label for="fp5-height" class="fp5-row-title"><?php _e('Height')?></label>
+			<input type="text" name="fp5-height" id="fp5-height" value="<?php if ( isset ( $fp5_stored_meta['fp5-height'] ) ) echo $fp5_stored_meta['fp5-height'][0]; ?>" />
+		</p>
+
+		<p>
 			<label for="fp5-aspect-ratio">
 				<input type="checkbox" name="fp5-aspect-ratio" id="fp5-aspect-ratio" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-aspect-ratio'] ) ) checked( $fp5_stored_meta['fp5-aspect-ratio'][0], 'true' ); ?> />
-				<?php _e('Use video\'s aspect ratio')?>
+				<?php _e('Change video dimensions')?>
 			</label>
-			<label for="fp5-max-height" class="fp5-row-title"><?php _e('Max height')?></label>
-			<input type="text" name="fp5-max-height" id="fp5-max-height" value="<?php if ( isset ( $fp5_stored_meta['fp5-max-height'] ) ) echo $fp5_stored_meta['fp5-max-height'][0]; ?>" />
 			<label for="fp5-fixed-width">
 				<input type="checkbox" name="fp5-fixed-width" id="fp5-fixed-width" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-fixed-width'] ) ) checked( $fp5_stored_meta['fp5-fixed-width'][0], 'true' ); ?> />
 				<?php _e('Use fixed player size') ?>
@@ -337,16 +342,21 @@ class Video_Meta_Box {
 				update_post_meta( $post_id, 'fp5-max-width', $_POST[ 'fp5-max-width' ] );
 			}
 
+			// Checks for input and saves if needed
+			if( isset( $_POST[ 'fp5-width' ] ) ) {
+				update_post_meta( $post_id, 'fp5-width', $_POST[ 'fp5-width' ] );
+			}
+
+			// Checks for input and saves if needed
+			if( isset( $_POST[ 'fp5-height' ] ) ) {
+				update_post_meta( $post_id, 'fp5-height', $_POST[ 'fp5-height' ] );
+			}
+
 			// Checks for input and saves
 			if( isset( $_POST[ 'fp5-aspect-ratio' ] ) ) {
 				update_post_meta( $post_id, 'fp5-aspect-ratio', 'true' );
 			} else {
 				update_post_meta( $post_id, 'fp5-aspect-ratio', '' );
-			}
-
-			// Checks for input and saves if needed
-			if( isset( $_POST[ 'fp5-max-height' ] ) ) {
-				update_post_meta( $post_id, 'fp5-max-height', $_POST[ 'fp5-max-height' ] );
 			}
 
 			// Checks for input and saves
