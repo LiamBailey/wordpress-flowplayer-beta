@@ -197,29 +197,26 @@ class Video_Meta_Box {
 					</td>
 				</tr>
 
-				<tr valign="top">
-					<th scope="row"><span class="fp5-row-title"><strong><?php _e( 'Select skin' )?></strong></span></th>
-				</tr>
-
-				<tr valign="top">
-					<th scope="row"><label for="fp5-vtt-subtitles">
-						<select id="fp5-select-skin" name="fp5-select-skin">
-						<option id="fp5-minimalist" value="minimalist" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
-						<option id="fp5-functional" value="functional" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
-						<option id="fp5-playful" value="playful" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
-						</select>
-					</th>
-					<td>	
-						<div class="player-previews">
-							<img id="fp5_minimalist" class="minimalist player-preview" src="<?php echo plugins_url( '/assets/img/minimalist.png', dirname(__FILE__) ) ?>" />
-							<img id="fp5_functional" class="functional player-preview" src="<?php echo plugins_url( '/assets/img/functional.png', dirname(__FILE__) ) ?>" />
-							<img id="fp5_playful" class="playful player-preview" src="<?php echo plugins_url( '/assets/img/playful.png', dirname(__FILE__) ) ?>" />
-						</div>
-					</td>
-				</tr>
-
 			</tbody>
 		</table>
+
+		<p>
+			<div class="fp5-row-content">
+				<span class="fp5-row-title"><strong><?php _e( 'Select skin', $this->plugin_slug )?></strong></span>
+			</div>
+			<div class="fp5-row-content">
+				<select id="fp5-select-skin" name="fp5-select-skin">
+					<option id="fp5-minimalist" value="minimalist" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'minimalist' ); ?>>Minimalist</option>
+					<option id="fp5-functional" value="functional" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'functional' ); ?>>Functional</option>
+					<option id="fp5-playful" value="playful" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
+				</select>
+				<div class="player-previews">
+					<img id="fp5_minimalist" class="minimalist player-preview" src="<?php echo plugins_url( '/assets/img/minimalist.png', dirname(__FILE__) ) ?>" />
+					<img id="fp5_functional" class="functional player-preview" src="<?php echo plugins_url( '/assets/img/functional.png', dirname(__FILE__) ) ?>" />
+					<img id="fp5_playful" class="playful player-preview" src="<?php echo plugins_url( '/assets/img/playful.png', dirname(__FILE__) ) ?>" />
+				</div>
+			</div>
+		</p>
 
 		<p>
 			<div class="fp5-row-content">
