@@ -29,6 +29,10 @@
 	margin-bottom: -7px;
 }
 
+.fp5-row-content {
+	padding: 0 12px;
+}
+
 #fp5-preview {
 	display: none;
 }

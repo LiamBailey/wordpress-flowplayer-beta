@@ -225,18 +225,26 @@ jQuery(document).ready(function ($) {
 	// Check state of height box depending on aspect rato checkbox
 	var ratioCheckbox = $("#fp5-aspect-ratio");
 
-    ratioCheckbox.change(function ChangeStateRatio() {
-		if (ratioCheckbox.attr('checked',false)) {
-			$('#fp5-height').attr("readonly", "true");
-			$('#fp5-width').attr("readonly", "true");
-			ratioCheckbox.val("false");
-		} else {
+    ratioCheckbox.change(function() {
+		if (ratioCheckbox.attr('checked')) {
 			$('#fp5-height').removeAttr("readonly");
 			$('#fp5-width').removeAttr("readonly");
 			ratioCheckbox.val("true");
+		} else {
+			$('#fp5-height').attr("readonly", "true");
+			$('#fp5-width').attr("readonly", "true");
+			ratioCheckbox.val("false");
 		}
     });
-	window.onload = ChangeStateRatio;
+	window.onload = function() {
+		if (ratioCheckbox.attr('checked')) {
+			$('#fp5-height').removeAttr("readonly");
+			$('#fp5-width').removeAttr("readonly");
+		} else {
+			$('#fp5-height').attr("readonly", "true");
+			$('#fp5-width').attr("readonly", "true");
+		}
+	};
 		
 });
 
