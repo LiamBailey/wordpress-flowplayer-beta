@@ -154,7 +154,7 @@ class Video_Meta_Box {
 			<tbody>
 
 				<tr valign="top">
-					<th scope="row"><span class="fp5-row-title"><strong><?php _e('Media files')?></strong></span></th>
+					<th scope="row"><span class="fp5-row-title"><strong><?php _e( 'Media files', $this->plugin_slug )?></strong></span></th>
 				</tr>
 
 				<tr valign="top">
@@ -223,18 +223,20 @@ class Video_Meta_Box {
 
 		<p>
 			<div class="fp5-row-content">
-				<span class="fp5-row-title"><strong><?php _e('Video attributes')?></strong></span>
+				<span class="fp5-row-title"><strong><?php _e( 'Video attributes', $this->plugin_slug )?></strong></span>
 			</div>
 			<div class="fp5-row-content">
 				<label for="fp5-autoplay">
-					<?php _e( 'Autoplay?' )?>
+					<?php _e( 'Autoplay?', $this->plugin_slug )?>
 					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-autoplay'] ) ) checked( $fp5_stored_meta['fp5-autoplay'][0], 'true' ); ?> />
 				</label>
+				|
 				<label for="fp5-loop">
-					<?php _e( 'Loop?' )?>
+					<?php _e( 'Loop?', $this->plugin_slug )?>
 					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-loop'] ) ) checked( $fp5_stored_meta['fp5-loop'][0], 'true' ); ?> />
 				</label>
-				<label for="fp5-preload" class="fp5-row-title"><?php _e( 'Preload?' )?></label>
+				|
+				<label for="fp5-preload" class="fp5-row-title"><?php _e( 'Preload?', $this->plugin_slug )?></label>
 				<select name="fp5-preload" id="fp5-preload">
 					<option value="auto" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'auto' ); ?>>auto</option>';
 					<option value="metadata" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'metadata' ); ?>>metadata</option>';
@@ -245,38 +247,40 @@ class Video_Meta_Box {
 
 		<p>
 			<div class="fp5-row-content">
-				<span class="fp5-row-title"><strong><?php _e('Flowplayer options')?></strong></span>
+				<span class="fp5-row-title"><strong><?php _e( 'Flowplayer options', $this->plugin_slug )?></strong></span>
 			</div>
 			<div class="fp5-row-content">
 				<label for="fp5-fixed-controls">
-					<?php _e( 'Fixed Controls?' )?>
+					<?php _e( 'Fixed Controls?', $this->plugin_slug )?>
 					<input type="checkbox" name="fp5-fixed-controls" id="fp5-fixed-controls" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-fixed-controls'] ) ) checked( $fp5_stored_meta['fp5-fixed-controls'][0], 'true' ); ?> />
 				</label>
-				<label for="fp5-color" class="fp5-row-title"><?php _e( 'Coloring?' )?></label>
-				<select name="fp5-color" id="fp5-color">
-					<option value="auto" <?php if ( isset ( $fp5_stored_meta['fp5-color'] ) ) selected( $fp5_stored_meta['fp5-color'][0], 'color-alt' ); ?>>Alternate coloring</option>';
-					<option value="metadata" <?php if ( isset ( $fp5_stored_meta['fp5-color'] ) ) selected( $fp5_stored_meta['fp5-color'][0], 'color-alt2' ); ?>>Alternate coloring #2</option>';
-					<option value="none" <?php if ( isset ( $fp5_stored_meta['fp5-color'] ) ) selected( $fp5_stored_meta['fp5-color'][0], 'color-light' ); ?>>Light coloring</option>';
+				|
+				<label for="fp5-coloring" class="fp5-row-title"><?php _e( 'Coloring?', $this->plugin_slug )?></label>
+				<select name="fp5-coloring" id="fp5-coloring">
+					<option value="default" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'default' ); ?>><?php _e( 'Default coloring', $this->plugin_slug )?></option>';
+					<option value="color-alt" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'color-alt' ); ?>><?php _e( 'Alternate coloring', $this->plugin_slug )?></option>';
+					<option value="color-alt2" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'color-alt2' ); ?>><?php _e( 'Alternate coloring #2', $this->plugin_slug )?></option>';
+					<option value="color-light" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'color-light' ); ?>><?php _e( 'Light coloring', $this->plugin_slug )?></option>';
 				</select>
 			</div>
 		</p>
 
 		<p>
-			<div id="fp5-preview" class="preview"><?php _e( 'Preview' ) ?>
+			<div id="fp5-preview" class="preview">
 				<div id="video"></div>
 			</div>
 		</p>
 
 		<p>
 			<div class="fp5-row-content">
-				<span class="fp5-row-title"><strong><?php _e('Size options')?></strong></span>
+				<span class="fp5-row-title"><strong><?php _e( 'Size options', $this->plugin_slug )?></strong></span>
 			</div>
 			<div class="fp5-row-content">
-				<label for="fp5-max-width" class="fp5-row-title"><?php _e('Max Width')?></label>
+				<label for="fp5-max-width" class="fp5-row-title"><?php _e( 'Max Width', $this->plugin_slug )?></label>
 				<input type="text" name="fp5-max-width" id="fp5-max-width" value="<?php if ( isset ( $fp5_stored_meta['fp5-max-width'] ) ) echo $fp5_stored_meta['fp5-max-width'][0]; ?>" />
-				<label for="fp5-width" class="fp5-row-title"><?php _e('Width')?></label>
+				<label for="fp5-width" class="fp5-row-title"><?php _e( 'Width', $this->plugin_slug )?></label>
 				<input type="text" name="fp5-width" id="fp5-width" value="<?php if ( isset ( $fp5_stored_meta['fp5-width'] ) ) echo $fp5_stored_meta['fp5-width'][0]; ?>" />
-				<label for="fp5-height" class="fp5-row-title"><?php _e('Height')?></label>
+				<label for="fp5-height" class="fp5-row-title"><?php _e( 'Height', $this->plugin_slug )?></label>
 				<input type="text" name="fp5-height" id="fp5-height" value="<?php if ( isset ( $fp5_stored_meta['fp5-height'] ) ) echo $fp5_stored_meta['fp5-height'][0]; ?>" />
 			</div>
 		</p>
@@ -285,11 +289,12 @@ class Video_Meta_Box {
 			<div class="fp5-row-content">
 				<label for="fp5-aspect-ratio">
 					<input type="checkbox" name="fp5-aspect-ratio" id="fp5-aspect-ratio" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-aspect-ratio'] ) ) checked( $fp5_stored_meta['fp5-aspect-ratio'][0], 'true' ); ?> />
-					<?php _e('Change video dimensions')?>
+					<?php _e( 'Change video dimensions', $this->plugin_slug )?>
 				</label>
+				|
 				<label for="fp5-fixed-width">
 					<input type="checkbox" name="fp5-fixed-width" id="fp5-fixed-width" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-fixed-width'] ) ) checked( $fp5_stored_meta['fp5-fixed-width'][0], 'true' ); ?> />
-					<?php _e('Use fixed player size') ?>
+					<?php _e( 'Use fixed player size', $this->plugin_slug ) ?>
 				</label>
 			</div>
 		</p>

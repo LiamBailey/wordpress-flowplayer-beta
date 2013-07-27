@@ -106,15 +106,22 @@ class Flowplayer5 {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
+		// Load script for global configuration
 		add_action( 'wp_head', array( $this, 'global_config_script' ) );
 
-		// Define custom functionality.
+		// Add custom post type
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
+		
+		// Add action links
 		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . 'flowplayer.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
+		
+		// Hide or remove view button
 		add_action( 'admin_head', array( $this, 'hide_view_button' ) );
 		add_action( 'wp_before_admin_bar_render', array( $this, 'remove_view_button_admin_bar' ) );
 		add_filter( 'post_row_actions', array( $this, 'remove_view_row_action' ), 10, 1 );
+		
+		// Add file support
 		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
 
 	}

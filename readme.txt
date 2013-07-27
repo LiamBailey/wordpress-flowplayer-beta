@@ -1,35 +1,57 @@
 === Flowplayer 5 for Wordpress ===
 Contributors: anssi, grapplerulrich
 Donate link: http://flowplayer.org/download
-Tags: video, html5 video, flowplayer
+Tags: video, html5 video, flowplayer, responsive
 Requires at least: 3.5
 Tested up to: 3.5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A plugin for showing videos with FlowPlayer 5. From the makers of Flowplayer.
+A HTML5 responsive video player plugin. From the makers of Flowplayer.
 
 == Description ==
 
 The main features of this plugin are:
 
-* Create video that can be added using shortcodes [flowplayer5 id="1"]
+* Video can be added using shortcodes [flowplayer5 id="1"]
 * Skin selection with three default Flowplayer skins: Minimalist, Functional and Playful
 * Show your video in any desired player size
-* Playback options: autoPlay, loop
+* Playback options: autoplay, loop
 * Include a [splash image](http://flowplayer.org/docs/index.html#splash) for your video
-* Subtitles support
+* [Subtitles](http://flowplayer.org/docs/subtitles.html)support 
 * Google Analytics support for tracking video audience and traffic
 * Video selection using the WordPress' Media Library
-* Previews the selected video and detects the video dimensions for configuring the correct player size
+* Detects the video dimensions for configuring the correct player size
 * Commercial Flowplayer version can be enabled by supplying a [license key](http://flowplayer.org/download)
 * Use your own logo watermark images when using the commercial Flowplayer version
 
+== Credits ==
+Thank you Tom McFarlin for the [WordPress Plugin Boilerplate](https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate)
+
 == Installation ==
 
-1. Upload the plugin folder to your /wp-content/plugins/ directory
-1. Activate the plugin and configure the plugin global settings, see below for details.
+= Using The WordPress Dashboard =
+
+1. Navigate to the 'Add New' Plugin Dashboard
+2. Search for 'Flowplayer5'
+3. Click 'Install Now'
+4. Activate the plugin on the WordPress Plugin Dashboard
+
+= Using The WordPress Dashboard =
+
+1. Navigate to the 'Add New' Plugin Dashboard
+2. Navigate to the 'Upload' area
+3. Select `flowplayer5.zip` from your computer
+4. Upload
+5. Activate the plugin on the WordPress Plugin Dashboard
+
+= Using FTP =
+
+1. Download `flowplayer5.zip`
+2. Extract the `flowplayer5` directory to your computer
+3. Upload the `flowplayer5` directory to your `wp-content/plugins` directory
+4. Activate the plugin on the WordPress Plugins dashboard
 
 Configuration
 
@@ -79,7 +101,7 @@ is supported by your web browser. See here for some info on video formats on dif
 == Upgrade Notice ==
 
 = 1.0.0 =
-* Big plugin rewrite
+* big plugin rewrite
 
 = 0.5.0 =
 * bugs fixed

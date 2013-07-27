@@ -54,18 +54,18 @@ function add_fp5_shortcode( $atts ) {
 
 	// Shortcode processing
 	$ratio            = ( ( $width != 0 && $height != 0 ) ? intval( $height ) / intval( $width ) : '' );
-	$size             = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : 'max-width:' . $max_width . 'px; ' );
+	$size             = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : ( ( $max_width != 0 ) ?  'max-width:' . $max_width . 'px; ' : '' ) );
 	$splash_style     = 'background: #777 url(' . $splash . ') no-repeat;';
-	$class            = 'flowplayer ' . $skin . ( ! empty ( $splash ) ? ' is-splash' : '' );
-	$data_key         = ( isset ( $key ) ? 'data-key="' . $key . '"' : '');
-	$data_logo        = ( isset ( $key ) && isset ( $logo ) ? $logo : '' );
-	$data_analytics   = ( isset ( $ga_account_id ) ? $ga_account_id  : '' );
+	$class            = 'flowplayer ' . $skin . ( ! empty ( $splash ) ? ' is-splash ' : '' );
+	$data_key         = ( 0 < strlen ( $key ) ? 'data-key="' . $key . '"' : '');
+	$data_logo        = ( 0 < strlen  ( $key ) && 0 < strlen  ( $logo ) ? 'data-logo="' . $logo . '" ' : '' );
+	$data_analytics   = ( 0 < strlen  ( $ga_account_id ) ? 'data-analytics="' . $ga_account_id . '" ' : '' );
 	$data_ratio       = ( $ratio != 0 ? 'data-ratio="' . $ratio . '"' : '' );
 	$attributes       = ( ( $autoplay == 'true' ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="' . $preload . '" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' );
-	$modifier_classes = ( isset ( $fixed_controls ) ? $fixed_controls : '' ) . ( isset ( $coloring ) ? $coloring : '' );
+	$modifier_classes = ( isset ( $fixed_controls ) ? 'fixed-controls ' : '' ) . ( $coloring != 'default' ? $coloring : '' );
 
 	// Shortcode output
-	$return = '<div style="' . $size . $splash_style . $modifier_classes . ' background-size: contain;" class="' . $class . '"' . $data_key . ' data-logo="' . $data_logo . '" data-analytics="' . $data_analytics . '"' . $data_ratio . '>';
+	$return = '<div style="' . $size . $splash_style . ' background-size: contain;" class="' . $class . $modifier_classes . '" ' . $data_key . $data_logo . $data_analytics . $data_ratio . '>';
 		$return .= '<video ' . $attributes . '>';
 			$webm      != '' ? $return .= '<source type="video/webm" src="' . $webm . '"/>' : '';
 			$mp4       != '' ? $return .= '<source type="video/mp4" src="' . $mp4 . '"/>' : '';
