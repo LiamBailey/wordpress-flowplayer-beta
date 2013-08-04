@@ -34,28 +34,24 @@ update_option( 'fp5_settings_general', $new_options );
 // Delte old array
 delete_option( 'fp5_options' );
 
-add_action( 'admin_init', 'convert_video_shortcode' );
+add_action( 'init', 'convert_video_shortcode' );
 
 // this needs to be completed... now standalone used to be included in the register shortcode script
-function convert_video_shortcode( $shortcode_array ){/*  run the conversion script on the post on the fly.
+function convert_video_shortcode( $shortcode_array ){/* run the conversion script on the post on the fly.
 
-	[flowplayer splash="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.jpg"
-	webm="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.webm"
-   mp4="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.mp4"
-ogg="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.ogv"
-width="1920" height="1080" skin="minimalist"]
-	
+	[flowplayer splash="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.jpg" webm="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.webm" mp4="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.mp4" ogg="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.ogv" width="1920" height="1080" skin="minimalist" autoplay="true" loop="true" fixed="fixed" subtitles="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.vtt"]
+
 	This may need to be turned into a class and activated on the settings page via a "run conversion" button.
 
-   Conversion steps:
+	Conversion steps:
 
-   1) Gather video data from shortcode
-   2) Create custom fp5video post and add video data to it (linking videos to that post, etc.)
+	1) Gather video data from shortcode
+	2) Create custom fp5video post and add video data to it (linking videos to that post, etc.)
 		- add appropriate video data to meta-fields on new video post
 		- add specified splash image as the video post featured image
-   3) replace existing shortcode with new shortcode that references the newly create fp5video post.
+	3) replace existing shortcode with new shortcode that references the newly create fp5video post.
 
-   */
+	*/
 
 		// get values from shortcode
 		$old_shortcode_atts = shortcode_atts(
@@ -71,14 +67,16 @@ width="1920" height="1080" skin="minimalist"]
 				'width' => '',
 				'height' => '',
 				'fixed' => 'false'
-			), $atts);
+			),
+			$atts
+		);
 
 		// get the id of the current post
 		$the_post_id =  get_the_id();
 
 		// create custom video post, return id
 		$vid_post_id = create_fp5video_post( $old_shortcode_atts );
-		
+
 		// add meta to the new video post
 		$addpostmeta = add_meta_to_fp5video( $vid_post_id, $old_shortcode_atts );
 
@@ -95,7 +93,7 @@ width="1920" height="1080" skin="minimalist"]
 
 
 // create the new "video" post
-function create_fp5video_post($array){
+function create_fp5video_post( $array ){
 
 	// create video name and slug
 	$namearray = create_slug_and_title( $array );
@@ -131,16 +129,13 @@ function create_slug_and_title( $stuff ){
 		$slug = sanitize_title_with_dashes( $title, $unused='', $context = 'display' );
 	endif;
 
-	$namearray = array( 'title'=>$title,'slug'=>$slug );
+	$namearray = array( 'title'=>$title, 'slug'=>$slug );
 
 return $namearray;
 }
 
 // add meta to the new video post
 function add_meta_to_fp5_video( $vid_post_id, $old_shortcode_atts ){
-
-	// @todo account for video not being hosted on the site.
-	// @todo account for the featured image not being hosting on site.
 
 	$unique = true;
 

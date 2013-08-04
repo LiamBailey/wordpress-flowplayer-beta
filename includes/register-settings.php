@@ -1,6 +1,6 @@
 <?php
 /**
- * Flowplayer 5 for Wordpress
+ * Register Settings
  *
  * @package   Flowplayer 5 for Wordpress
  * @author    Ulrich Pogson <ulrich@pogson.ch>

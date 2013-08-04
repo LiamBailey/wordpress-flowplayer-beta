@@ -1,6 +1,6 @@
 <?php
 /**
- * Represents the the meta box in the custom post type.
+ * Meta boxes for custom post type
  *
  * @package   Flowplayer 5 for Wordpress
  * @author    Ulrich Pogson <ulrich@pogson.ch>
@@ -62,22 +62,20 @@ class Video_Meta_Box {
 	public function __construct() {
 
 		$flowplayer5 = Flowplayer5::get_instance();
-		$this->plugin_slug = $flowplayer5->get_plugin_slug();;
+		$this->plugin_slug = $flowplayer5->get_plugin_slug();
 
-		// Setup the meta box responsible for displaying the short URL
+		// Setup the meta boxs for the video and shortcode
 		add_action( 'add_meta_boxes', array( $this, 'add_shortcode_meta_box' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_video_meta_box' ) );
 
-
-		// Setup the function responsible for generating and saving the short URL
+		// Setup the function responsible for saving
 		add_action( 'save_post', array( $this, 'save_fp5_video_details' ) );
 
 	}
 
 	/**
-	 * Registers the meta box for displaying the 'Post Short URL' in the post editor.
+	 * Registers the meta box for displaying the 'Shortcode' in the post editor.
 	 *
-	 * @version    1.0.0
 	 * @since      1.0.0
 	 */
 	public function add_shortcode_meta_box() {
@@ -94,10 +92,8 @@ class Video_Meta_Box {
 	}
 
 	/**
-	 * Displays the meta box for displaying the 'Post Short URL' or a default
-	 * message if one does not exist.
+	 * Displays the meta box for displaying the 'Shortcode'
 	 *
-	 * @version    0.1.0
 	 * @since      0.1.0
 	 */
 	public function display_shortcode_meta_box() {
@@ -110,7 +106,7 @@ class Video_Meta_Box {
 	}
 
 	/**
-	 * Registers the meta box for displaying the 'Post Short URL' in the post editor.
+	 * Registers the meta box for displaying the 'Flowplayer Video' in the post editor.
 	 *
 	 * @version    1.0.0
 	 * @since      1.0.0
@@ -129,10 +125,8 @@ class Video_Meta_Box {
 	}
 
 	/**
-	 * Displays the meta box for displaying the 'Post Short URL' or a default
-	 * message if one does not exist.
+	 * Displays the meta box for displaying the 'Flowplayer Video'
 	 *
-	 * @version    1.0.0
 	 * @since      1.0.0
 	 */
 	public function display_video_meta_box( $post ) {
@@ -147,7 +141,7 @@ class Video_Meta_Box {
 
 				<tr valign="top">
 					<th scope="row"><span class="fp5-row-title"><strong><?php _e( 'Media files', $this->plugin_slug )?></strong></span></th>
-					<td><?php _e( 'It is recommended to add at least two video formats so that the video plays on as many browsers as possible. To be able to calculate the demensions of the video the video format added needs to be comptible with the browser.', $this->plugin_slug ) ?> <a href="http://flowplayer.org/docs/#video-formats" target="_blank"><?php _e( 'About video formats.', $this->plugin_slug ) ?></a>
+					<td><?php _e( 'It is recommended to add at least two video formats so that the video plays on as many browsers as possible. To be able to calculate the dimensions of the video the video format added needs to be comptible with the browser.', $this->plugin_slug ) ?> <a href="http://flowplayer.org/docs/#video-formats" target="_blank"><?php _e( 'About video formats.', $this->plugin_slug ) ?></a>
 					</td>
 				</tr>
 
@@ -297,7 +291,6 @@ class Video_Meta_Box {
 	 * When the post is saved or updated, generates a short URL to the existing post.
 	 *
 	 * @param    int     $post_id    The ID of the post being save
-	 * @version  1.0.0
 	 * @since    1.0.0
 	 */
 	public function save_fp5_video_details( $post_id ) {
@@ -405,7 +398,6 @@ class Video_Meta_Box {
 	 * @param    int     $post_id    The ID of the post being save
 	 * @param    string  $nonce      The nonce identifier associated with the value being saved
 	 * @return   bool                Whether or not the user has the ability to save this post.
-	 * @version  1.0.0
 	 * @since    1.0.0
 	 */
 	private function user_can_save( $post_id, $nonce ) {
