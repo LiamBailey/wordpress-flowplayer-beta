@@ -39,7 +39,7 @@ add_action( 'init', 'convert_video_shortcode' );
 // this needs to be completed... now standalone used to be included in the register shortcode script
 function convert_video_shortcode( $shortcode_array ){/* run the conversion script on the post on the fly.
 
-	[flowplayer splash="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.jpg" webm="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.webm" mp4="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.mp4" ogg="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.ogv" width="1920" height="1080" skin="minimalist" autoplay="true" loop="true" fixed="fixed" subtitles="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.vtt"]
+	[flowplayer splash="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.jpg" webm="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.webm" mp4="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.mp4" ogg="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.ogv" width="1920" height="1080" skin="functional" autoplay="true" loop="true" fixed="true" subtitles="http://flowplayer.grappler.tk/files/2013/02/trailer_1080p.vtt"]
 
 	This may need to be turned into a class and activated on the settings page via a "run conversion" button.
 
@@ -53,36 +53,34 @@ function convert_video_shortcode( $shortcode_array ){/* run the conversion scrip
 
 	*/
 
-		// get values from shortcode
-		$old_shortcode_atts = shortcode_atts(
-			array(
-				'mp4' => '',
-				'webm' => '',
-				'ogg' => '',
-				'skin' => 'minimalist',
-				'splash' => '',
-				'autoplay' => 'false',
-				'loop' => 'false',
-				'subtitles' => '',
-				'width' => '',
-				'height' => '',
-				'fixed' => 'false'
-			),
-			$atts
-		);
+	// get values from shortcode
+	$old_shortcode_atts = shortcode_atts(
+		array(
+			'mp4' => '',
+			'webm' => '',
+			'ogg' => '',
+			'skin' => 'minimalist',
+			'splash' => '',
+			'autoplay' => 'false',
+			'loop' => 'false',
+			'subtitles' => '',
+			'width' => '',
+			'height' => '',
+			'fixed' => 'false'
+		),
+		$atts
+	);
 
-		// get the id of the current post
-		$the_post_id =  get_the_id();
+	// get the id of the current post
+	$the_post_id =  get_the_id();
 
-		// create custom video post, return id
-		$vid_post_id = create_fp5video_post( $old_shortcode_atts );
+	// create custom video post, return id
+	$vid_post_id = create_fp5video_post( $old_shortcode_atts );
 
-		// add meta to the new video post
-		$addpostmeta = add_meta_to_fp5video( $vid_post_id, $old_shortcode_atts );
+	// add meta to the new video post
+	$addpostmeta = add_meta_to_fp5video( $vid_post_id, $old_shortcode_atts );
 
-	}
-
-
+}
 
 /***
  * 
@@ -90,32 +88,28 @@ function convert_video_shortcode( $shortcode_array ){/* run the conversion scrip
  * 
  */
 
-
-
 // create the new "video" post
-function create_fp5video_post( $array ){
+function fp5_create_video_post( $array ){
 
 	// create video name and slug
-	$namearray = create_slug_and_title( $array );
+	$namearray = fp5_create_title( $array );
 
 	$title = $namearray['title'];
-	$slug = $namearray['slug'];
 
 	// create new video post
-	$product = array(
-		'post_name'   => $slug,
-		'post_status' => 'publish',
-		'post_title'  => $title,
+	$video = array(
 		'post_type'   => 'flowplayer5'
+		'post_title'  => $title,
+		'post_status' => 'publish',
 	);
 	
-	$video_post_id = wp_insert_post( $product );
+	$video_post_id = wp_insert_post( $video );
 
 	return $video_post_id;
 }
 
 // create the slug and title for the new video post
-function create_slug_and_title( $stuff ){
+function fp5_create_title( $stuff ){
 	extract( $stuff );
 
 	if( $mp4 ):
@@ -129,92 +123,65 @@ function create_slug_and_title( $stuff ){
 		$slug = sanitize_title_with_dashes( $title, $unused='', $context = 'display' );
 	endif;
 
-	$namearray = array( 'title'=>$title, 'slug'=>$slug );
+	$namearray = array( 'title'=>$title );
 
 return $namearray;
+
 }
 
 // add meta to the new video post
-function add_meta_to_fp5_video( $vid_post_id, $old_shortcode_atts ){
+function add_meta_to_fp5_video( $video_post_id, $old_shortcode_atts ){
 
 	$unique = true;
 
-	// run through shortcode and add meta
-	foreach( $old_shortcode_atts as $key => $value ){
-
-		add_post_meta( $vid_post_id, $key, $value, $unique );
-
-	} // end foreach $old_shortcode
-
-	//check for missing post meta
-	$fp5_mp4_video = get_post_meta( $vid_post_id, 'fp5-mp4-video', true );
-	if( !isset( $fp5_mp4_video ) ){
-		add_post_meta( $vid_post_id, 'fp5-mp4-video', $unique );
+	if( $old_shortcode_atts['mp4'] ){
+		add_post_meta( $video_post_id, 'fp5-mp4-video', $old_shortcode_atts['mp4'], $unique );
 	}
 
-	//check for missing post meta
-	$fp5_webm_video = get_post_meta( $vid_post_id, 'fp5-webm-video', true );
-	if( !isset( $fp5_webm_video ) ){
-		add_post_meta( $vid_post_id, 'fp5-webm-video', $unique );
+	if( $old_shortcode_atts['webm']){
+		add_post_meta( $video_post_id, 'fp5-webm-video', $old_shortcode_atts['webm'], $unique );
 	}
 
-	//check for missing post meta
-	$fp5_ogg_video = get_post_meta( $vid_post_id, 'fp5-ogg-video', true );
-	if( !isset( $fp5_ogg_video ) ){
-		add_post_meta( $vid_post_id, 'fp5-ogg-video', $unique );
+	if( $old_shortcode_atts['ogg'] ){
+		add_post_meta( $video_post_id, 'fp5-ogg-video', $old_shortcode_atts['ogg'], $unique );
 	}
 
-	$fp5_vtt_subtitles = get_post_meta( $vid_post_id, 'fp5-vtt-subtitles', true );
-	if( !isset( $fp5_vtt_subtitles ) ){
-		add_post_meta( $vid_post_id, 'fp5-vtt-subtitles', $unique );
+	if( $old_shortcode_atts['skin'] ){
+		add_post_meta( $video_post_id, 'fp5-select-skin', $old_shortcode_atts['skin'], $unique );
 	}
 
-	//check for missing post meta
-	$fp5_select_skin = get_post_meta( $vid_post_id, 'fp5-select-skin', true );
-	if( !isset( $fp5_select_skin ) ){
-		add_post_meta( $vid_post_id, 'fp5-select-skin', $unique );
+	if( $old_shortcode_atts['splash'] ){
+		add_post_meta( $video_post_id, 'fp5-splash-image', $old_shortcode_atts['splash'], $unique );
 	}
 
-	//check for missing post meta
-	$fp5_splash_image = get_post_meta( $vid_post_id, 'fp5-splash-image', true );
-	if( !isset( $fp5_splash_image ) ){
-		add_post_meta( $vid_post_id, 'fp5-splash-image', $unique );
+	if( $old_shortcode_atts['autoplay'] ){
+		add_post_meta( $video_post_id, 'fp5-autoplay', $old_shortcode_atts['autoplay'], $unique  );
 	}
 
-	//check for missing post meta
-	$fp5_autoplay = get_post_meta( $vid_post_id, 'fp5-autoplay', true );
-	if( !isset( $fp5_autoplay ) ){
-		add_post_meta( $vid_post_id, 'fp5-autoplay', $unique );
+	if( $old_shortcode_atts['loop'] ){
+		add_post_meta( $video_post_id, 'fp5-loop', $old_shortcode_atts['loop'], $unique  );
 	}
 
-	//check for missing post meta
-	$fp5_loop = get_post_meta( $vid_post_id, 'fp5-loop', true );
-	if( !isset( $fp5_loop ) ){
-		add_post_meta( $vid_post_id, 'fp5-loop', $unique );
+	if( $old_shortcode_atts['subtitles'] ){
+		add_post_meta( $video_post_id, 'fp5-vtt-subtitles', $old_shortcode_atts['subtitles'], $unique );
 	}
 
-	//check for missing post meta
-	$fp5_width = get_post_meta( $vid_post_id, 'fp5-width', true );
-	if( !isset( $fp5_width ) ){
-		add_post_meta( $vid_post_id, 'fp5-width', $unique );
+	if( $old_shortcode_atts['width'] ){
+		add_post_meta( $video_post_id, 'fp5-width', $old_shortcode_atts['width'], $unique );
 	}
 
-	//check for missing post meta
-	$fp5_height = get_post_meta( $vid_post_id, 'fp5-height', true );
-	if( !isset( $fp5_height ) ){
-		add_post_meta( $vid_post_id, 'fp5-height', $unique );
+	if( $old_shortcode_atts['height'] ){
+		add_post_meta( $video_post_id, 'fp5-height', $old_shortcode_atts['height'], $unique );
 	}
 
-	//check for missing post meta
-	$fp5_fixed_width = get_post_meta( $vid_post_id, 'fp5-fixed-width', true );
-	if( !isset( $fp5_fixed_width ) ){
-		add_post_meta( $vid_post_id, 'fp5-fixed-width', $unique );
+	if( $old_shortcode_atts['fixed'] ){
+		add_post_meta( $video_post_id, 'fp5-fixed-width', $old_shortcode_atts['fixed'], $unique  );
 	}
 
 }
 
 // generate the shortcode to replace old shortcode
-function generate_new_shortcode( $vid_post_id ) {
-	$shortcode = '[flowplayer id="' . $vid_post_id . '"]';
+function generate_new_shortcode( $video_post_id ) {
+	$shortcode = '[flowplayer id="' . $video_post_id . '"]';
 	return $shortcode;
 }

@@ -10,9 +10,8 @@
  * @since    1.0.0
  */
 
-// Add Splash Image
 jQuery(document).ready(function($){
-
+// Add Splash Image
     var fp5_splash_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-splash-image', function(e){
@@ -42,15 +41,13 @@ jQuery(document).ready(function($){
             var media_attachment = fp5_splash_frame.state().get('selection').first().toJSON();
 
             $('#fp5-splash-image').val(media_attachment.url);
+            CreatePreview();
         });
 
         fp5_splash_frame.open();
     });
-});
 
 // Add mp4 video
-jQuery(document).ready(function($){
-
     var fp5_mp4_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-mp4', function(e){
@@ -78,13 +75,12 @@ jQuery(document).ready(function($){
         fp5_mp4_frame.on('select', function(){
             var media_attachment = fp5_mp4_frame.state().get('selection').first().toJSON();
             $('#fp5-mp4-video').val(media_attachment.url);
+            CreatePreview();
         });
         fp5_mp4_frame.open();
     });
-});
 
 // Add webm video
-jQuery(document).ready(function($){
     var fp5_webm_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-webm', function(e){
@@ -112,14 +108,13 @@ jQuery(document).ready(function($){
             var media_attachment = fp5_webm_frame.state().get('selection').first().toJSON();
 
             $('#fp5-webm-video').val(media_attachment.url);
+            CreatePreview();
         });
 
         fp5_webm_frame.open();
     });
-});
 
 // Add ogg video
-jQuery(document).ready(function($){
     var fp5_ogg_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-ogg', function(e){
@@ -147,14 +142,13 @@ jQuery(document).ready(function($){
             var media_attachment = fp5_ogg_frame.state().get('selection').first().toJSON();
 
             $('#fp5-ogg-video').val(media_attachment.url);
+            CreatePreview();
         });
 
         fp5_ogg_frame.open();
     });
-});
 
 // Add vtt subtitles
-jQuery(document).ready(function($){
     var fp5_webvtt_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-vtt', function(e){
@@ -182,37 +176,34 @@ jQuery(document).ready(function($){
             var media_attachment = fp5_webvtt_frame.state().get('selection').first().toJSON();
 
             $('#fp5-vtt-subtitles').val(media_attachment.url);
+            CreatePreview();
         });
 
         fp5_webvtt_frame.open();
     });
-});
 
+    // Update skin image according to selection
+    $('#fp5-select-skin option').each(function () {
+        if ($(this).is(':selected')) {
+            $("." + $(this).val()).show();
+        }
+    });
+    $("select#fp5-select-skin").change(function () {
+        $("img").hide();
+        $("." + $(this).val()).show();
+    });
 
-jQuery(document).ready(function ($) {
-
-	// Update skin image according to selection
-	$('#fp5-select-skin option').each(function () {
-		if ($(this).is(':selected')) {
-			$("." + $(this).val()).show();
-		}
-	});
-	$("select#fp5-select-skin").change(function () {
-		$("img").hide();
-		$("." + $(this).val()).show();
-	});
-
-	// Create html5 preview and calculate width and height of preview
+    // Create html5 preview and calculate width and height of preview
+    var CreatePreview;
     $('#video video').remove();
-    $(".media-url").blur(function () {
+    $(".media-url").blur(CreatePreview=function() {
         $('#video video').remove();
         $('#video').append('<video controls id="preview">' +
             '<source type="video/mp4" src="' + $('#fp5-mp4-video').val() + '"/>' +
             '<source type="video/webm" src="' + $('#fp5-webm-video').val() + '"/>' +
             '<source type="video/webm" src="' + $('#fp5-ogg-video').val() + '"/>' +
-            '<track kind="subtitles" srclang="en" label="English" src="' + $('#fp5-vtt').val() + '"/>' +
             '</video>');
-        
+
         var preview = $("#preview");
 
         preview.bind("loadeddata", function () {
@@ -222,87 +213,63 @@ jQuery(document).ready(function ($) {
 
     });
 
-	// Check state of height box depending on aspect rato checkbox
-	var ratioCheckbox = $("#fp5-aspect-ratio");
+    // Check state of height box depending on aspect rato checkbox
+    var ratioCheckbox = $("#fp5-aspect-ratio");
 
-    ratioCheckbox.change(function() {
-		if (ratioCheckbox.attr('checked')) {
-			$('#fp5-height').removeAttr("readonly");
-			$('#fp5-width').removeAttr("readonly");
-			ratioCheckbox.val("true");
-		} else {
-			$('#fp5-height').attr("readonly", "true");
-			$('#fp5-width').attr("readonly", "true");
-			ratioCheckbox.val("false");
-		}
+    ratioCheckbox.change(function () {
+        if (ratioCheckbox.attr('checked')) {
+            $('#fp5-height').removeAttr("readonly");
+            $('#fp5-width').removeAttr("readonly");
+            ratioCheckbox.val("true");
+        } else {
+            $('#fp5-height').attr("readonly", "true");
+            $('#fp5-width').attr("readonly", "true");
+            ratioCheckbox.val("false");
+        }
     });
-	window.onload = function() {
-		if (ratioCheckbox.attr('checked')) {
-			$('#fp5-height').removeAttr("readonly");
-			$('#fp5-width').removeAttr("readonly");
-		} else {
-			$('#fp5-height').attr("readonly", "true");
-			$('#fp5-width').attr("readonly", "true");
-		}
-	};
-		
-});
+    window.onload = function () {
+        if (ratioCheckbox.attr('checked')) {
+            $('#fp5-height').removeAttr("readonly");
+            $('#fp5-width').removeAttr("readonly");
+        } else {
+            $('#fp5-height').attr("readonly", "true");
+            $('#fp5-width').attr("readonly", "true");
+        }
+    };
+
 
 // Settings Page
 // Add Logo
-(function($) {
-   $(function() {
-      $.fn.wptuts = function(options) {
-         var selector = $(this).selector; // Get the selector
-         // Set default options
-         var defaults = {
-            'preview' : '.fp5_settings_upload_preview',
-            'text'    : '.fp5_upload_field',
-            'button'  : '.fp5_settings_upload_button',
-         };
-         var options  = $.extend(defaults, options);
+    var fp5_logo_frame;
 
-         var _custom_media = true;
-         var _orig_send_attachment = wp.media.editor.send.attachment;
+    $(document.body).on('click.fp5OpenMediaManager', '.fp5_settings_upload_button', function(e){
+        e.preventDefault();
 
-          // When the Button is clicked...
-         $(options.button).click(function() {
-            // Get the Text element.
-            var button = $(this);
-            var text = $(this).siblings(options.text);
-            var send_attachment_bkp = wp.media.editor.send.attachment;
+        if ( fp5_logo_frame ) {
+            fp5_logo_frame.open();
+            return;
+        }
 
-            _custom_media = true;
-
-            wp.media.editor.send.attachment = function(props, attachment) {
-               if(_custom_media) {
-                  // Get the URL of the new image
-                  text.val(attachment.url).trigger('change');
-               } else {
-                  return _orig_send_attachment.apply(this, [props, attachment]);
-               };
+        fp5_logo_frame = wp.media.frames.fp5_logo_frame = wp.media({
+            className: 'media-frame fp5-media-frame',
+            frame: 'select',
+            multiple: false,
+            title: logo.title,
+            library: {
+                type: 'image'
+            },
+            button: {
+                text:  logo.button
             }
+        });
 
-            wp.media.editor.open(button);
+        fp5_logo_frame.on('select', function(){
+            var media_attachment = fp5_logo_frame.state().get('selection').first().toJSON();
 
-            return false;
-         });
+            $('.fp5_upload_field').val(media_attachment.url);
+            $('.fp5_settings_upload_preview').attr('src',media_attachment.url);
+        });
 
-         $('.add_media').on('click', function() {
-           _custom_media = false;
-         });
-
-         $(options.text).bind('change', function() {
-            // Get the value of current object
-            var url = this.value;
-            // Determine the Preview field
-            var preview = $(this).siblings(options.preview);
-            // Bind the value to Preview field
-            $(preview).attr('src', url);
-         });
-      }
-
-      // Usage
-      $('.upload').wptuts(); // Use as default option.
-   });
-}(jQuery));
+        fp5_logo_frame.open();
+    });
+});

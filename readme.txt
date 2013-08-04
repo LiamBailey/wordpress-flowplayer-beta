@@ -3,7 +3,7 @@ Contributors: anssi, grapplerulrich
 Donate link: http://flowplayer.org/download
 Tags: video, html5 video, flowplayer, responsive
 Requires at least: 3.5
-Tested up to: 3.5.2
+Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,14 +14,15 @@ A HTML5 responsive video player plugin. From the makers of Flowplayer.
 
 The main features of this plugin are:
 
+* One central place to mange all of your videos
 * Video can be added using shortcodes [flowplayer5 id="1"]
 * Skin selection with three default Flowplayer skins: Minimalist, Functional and Playful
 * Show your video in any desired player size
 * Playback options: autoplay, loop
 * Include a [splash image](http://flowplayer.org/docs/index.html#splash) for your video
 * [Subtitles](http://flowplayer.org/docs/subtitles.html)support 
-* Google Analytics support for tracking video audience and traffic
-* Video selection using the WordPress' Media Library
+* [Google Analytics](http://flowplayer.org/docs/analytics.html) support for tracking video audience and traffic
+* Video selection using the WordPress 3.5 Media Library
 * Detects the video dimensions for configuring the correct player size
 * Commercial Flowplayer version can be enabled by supplying a [license key](http://flowplayer.org/download)
 * Use your own logo watermark images when using the commercial Flowplayer version
@@ -60,10 +61,7 @@ global options. You can purchase a commercial license in [flowplayer.org](http:/
 
 == Frequently Asked Questions ==
 
-= Why is the "Send to Editor" button inactive? =
 
-The button becomes active once the video preview is shown. For the preview to work you need to provide a video file that
-is supported by your web browser. See here for some info on video formats on different browsers: http://flowplayer.org/docs/#video-formats
 
 == Screenshots ==
 
@@ -73,8 +71,12 @@ is supported by your web browser. See here for some info on video formats on dif
 == Changelog ==
 
 = 1.0.0 =
-* complete rewrite of plugin
+* complete rewrite of plugin - now you can manage all of your videos in one place.
 * updated the Flowplayer code to version 5.4.3
+* added preload option
+* added CDN option
+* added a few more flowplayer options
+* added emebed options
 
 = 0.5.0 =
 * updated the Flowplayer code to version 5.3.2
