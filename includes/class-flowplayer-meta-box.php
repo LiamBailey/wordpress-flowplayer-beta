@@ -102,16 +102,8 @@ class Video_Meta_Box {
 	 */
 	public function display_shortcode_meta_box() {
 
-		if ( get_the_ID() ) {
-
-			$html = 'Shortcode: [flowplayer id="' . get_the_ID() . '"]';
-
-		} else {
-			$html .= '<p id="wp-is-gd-url">';
-				$html .= __( 'No Shortcode has been generated.', $this->plugin_slug );
-			$html .= '</p>';
-
-		}
+			$html = '<strong>[flowplayer id="' . get_the_ID() . '"]</strong>';
+			$html .= '<p>' . __( 'Copy this shortcode to a post, page or widget to show the video.', $this->plugin_slug ) . '</p>'; 
 
 		echo $html;
 
@@ -127,7 +119,7 @@ class Video_Meta_Box {
 
 		add_meta_box(
 			'fp5_video_details',
-			__( 'Video Details', $this->plugin_slug ),
+			__( 'Flowplayer Video', $this->plugin_slug ),
 			array( $this, 'display_video_meta_box' ),
 			'flowplayer5',
 			'normal',
@@ -147,7 +139,7 @@ class Video_Meta_Box {
 
 		wp_nonce_field( plugin_basename( __FILE__ ), 'fp5-nonce' );
 		$fp5_stored_meta = get_post_meta( $post->ID );
-		$fp5_select_skin = get_post_meta($post->ID,'_fp5_select_skin',true);
+		$fp5_select_skin = get_post_meta( $post->ID,'_fp5_select_skin',true );
 		?>
 
 		<table class="form-table">
@@ -155,10 +147,12 @@ class Video_Meta_Box {
 
 				<tr valign="top">
 					<th scope="row"><span class="fp5-row-title"><strong><?php _e( 'Media files', $this->plugin_slug )?></strong></span></th>
+					<td><?php _e( 'It is recommended to add at least two video formats so that the video plays on as many browsers as possible. To be able to calculate the demensions of the video the video format added needs to be comptible with the browser.', $this->plugin_slug ) ?> <a href="http://flowplayer.org/docs/#video-formats" target="_blank"><?php _e( 'About video formats.', $this->plugin_slug ) ?></a>
+					</td>
 				</tr>
 
 				<tr valign="top">
-					<th scope="row"><label for="fp5-splash-image"><?php _e( 'Splash Image', $this->plugin_slug )?></label></th>
+					<th scope="row"><label for="fp5-splash-image"><?php _e( 'Splash Image', $this->plugin_slug )?></label> <a href="http://flowplayer.org/docs/index.html#splash" target="_blank">?</a></th>
 					<td>
 						<input class="media-url" type="text" name="fp5-splash-image" id="fp5-splash-image" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-splash-image'] ) ) echo $fp5_stored_meta['fp5-splash-image'][0]?>" />
 						<a href="#" class="fp5-add-splash-image button button-primary" title="<?php _e( 'Add splash image', $this->plugin_slug )?>"><?php _e( 'Add splash image', $this->plugin_slug )?></a>
@@ -167,7 +161,7 @@ class Video_Meta_Box {
 
 				<tr valign="top">
 					<th scope="row"><label for="fp5-mp4-video"><?php _e( 'mp4 Video', $this->plugin_slug )?></label></th>
-					<td>	
+					<td>
 						<input class="media-url" type="text" name="fp5-mp4-video" id="fp5-mp4-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-mp4-video'] ) ) echo $fp5_stored_meta['fp5-mp4-video'][0]; ?>" />
 						<a href="#" class="fp5-add-mp4 button button-primary" title="<?php _e( 'Add mp4 Video', $this->plugin_slug )?>"><?php _e( 'Add mp4 Video', $this->plugin_slug )?></a>
 					</td>
@@ -175,7 +169,7 @@ class Video_Meta_Box {
 
 				<tr valign="top">
 					<th scope="row"><label for="fp5-webm-video"><?php _e( 'webm Video', $this->plugin_slug )?></label></th>
-					<td>	
+					<td>
 						<input class="media-url" type="text" name="fp5-webm-video" id="fp5-webm-video" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-webm-video'] ) ) echo $fp5_stored_meta['fp5-webm-video'][0]; ?>" />
 						<a href="#" class="fp5-add-webm button button-primary" title="<?php _e( 'Add webm Video', $this->plugin_slug )?>"><?php _e( 'Add webm Video', $this->plugin_slug )?></a>
 					</td>
@@ -190,8 +184,8 @@ class Video_Meta_Box {
 				</tr>
 
 				<tr valign="top">
-					<th scope="row"><label for="fp5-vtt-subtitles"><?php _e( 'vtt file (Subtitles)', $this->plugin_slug )?></label></th>
-					<td>	
+					<th scope="row"><label for="fp5-vtt-subtitles"><?php _e( 'vtt file (Subtitles)', $this->plugin_slug )?></label> <a href="http://flowplayer.org/docs/subtitles.html" target="_blank">?</a></th>
+					<td>
 						<input class="media-url" type="text" name="fp5-vtt-subtitles" id="fp5-vtt-subtitles" size="70" value="<?php if ( isset ( $fp5_stored_meta['fp5-vtt-subtitles'] ) ) echo $fp5_stored_meta['fp5-vtt-subtitles'][0]; ?>" />
 						<a href="#" class="fp5-add-vtt button button-primary" title="<?php _e( 'Add vtt file', $this->plugin_slug )?>"><?php _e( 'Add vtt file', $this->plugin_slug )?></a>
 					</td>
@@ -220,20 +214,20 @@ class Video_Meta_Box {
 
 		<p>
 			<div class="fp5-row-content">
-				<span class="fp5-row-title"><strong><?php _e( 'Video attributes', $this->plugin_slug )?></strong></span>
+				<span class="fp5-row-title"><strong><?php _e( 'Video attributes', $this->plugin_slug )?></strong> <a href="http://flowplayer.org/docs/index.html#video-attributes" target="_blank">?</a></span>
 			</div>
 			<div class="fp5-row-content">
 				<label for="fp5-autoplay">
-					<?php _e( 'Autoplay?', $this->plugin_slug )?>
+					<?php _e( 'Autoplay', $this->plugin_slug )?>
 					<input type="checkbox" name="fp5-autoplay" id="fp5-autoplay" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-autoplay'] ) ) checked( $fp5_stored_meta['fp5-autoplay'][0], 'true' ); ?> />
 				</label>
 				|
 				<label for="fp5-loop">
-					<?php _e( 'Loop?', $this->plugin_slug )?>
+					<?php _e( 'Loop', $this->plugin_slug )?>
 					<input type="checkbox" name="fp5-loop" id="fp5-loop" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-loop'] ) ) checked( $fp5_stored_meta['fp5-loop'][0], 'true' ); ?> />
 				</label>
 				|
-				<label for="fp5-preload" class="fp5-row-title"><?php _e( 'Preload?', $this->plugin_slug )?></label>
+				<label for="fp5-preload" class="fp5-row-title"><?php _e( 'Preload', $this->plugin_slug )?></label>
 				<select name="fp5-preload" id="fp5-preload">
 					<option value="auto" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'auto' ); ?>>auto</option>';
 					<option value="metadata" <?php if ( isset ( $fp5_stored_meta['fp5-preload'] ) ) selected( $fp5_stored_meta['fp5-preload'][0], 'metadata' ); ?>>metadata</option>';
@@ -244,20 +238,20 @@ class Video_Meta_Box {
 
 		<p>
 			<div class="fp5-row-content">
-				<span class="fp5-row-title"><strong><?php _e( 'Flowplayer options', $this->plugin_slug )?></strong></span>
+				<span class="fp5-row-title"><strong><?php _e( 'Flowplayer options', $this->plugin_slug )?></strong> <a href="http://flowplayer.org/docs/skinning.html#modifier-classes" target="_blank">?</a></span>
 			</div>
 			<div class="fp5-row-content">
 				<label for="fp5-fixed-controls">
-					<?php _e( 'Fixed Controls?', $this->plugin_slug )?>
+					<?php _e( 'Fixed Controls', $this->plugin_slug )?>
 					<input type="checkbox" name="fp5-fixed-controls" id="fp5-fixed-controls" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-fixed-controls'] ) ) checked( $fp5_stored_meta['fp5-fixed-controls'][0], 'true' ); ?> />
 				</label>
 				|
-				<label for="fp5-coloring" class="fp5-row-title"><?php _e( 'Coloring?', $this->plugin_slug )?></label>
+				<label for="fp5-coloring" class="fp5-row-title"><?php _e( 'Coloring', $this->plugin_slug )?></label>
 				<select name="fp5-coloring" id="fp5-coloring">
-					<option value="default" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'default' ); ?>><?php _e( 'Default coloring', $this->plugin_slug )?></option>';
-					<option value="color-alt" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'color-alt' ); ?>><?php _e( 'Alternate coloring', $this->plugin_slug )?></option>';
-					<option value="color-alt2" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'color-alt2' ); ?>><?php _e( 'Alternate coloring #2', $this->plugin_slug )?></option>';
-					<option value="color-light" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'color-light' ); ?>><?php _e( 'Light coloring', $this->plugin_slug )?></option>';
+					<option value="default" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'default' ); ?>><?php _e( 'Default', $this->plugin_slug )?></option>';
+					<option value="color-alt" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'color-alt' ); ?>><?php _e( 'Black & White', $this->plugin_slug )?></option>';
+					<option value="color-alt2" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'color-alt2' ); ?>><?php _e( 'Red', $this->plugin_slug )?></option>';
+					<option value="color-light" <?php if ( isset ( $fp5_stored_meta['fp5-coloring'] ) ) selected( $fp5_stored_meta['fp5-coloring'][0], 'color-light' ); ?>><?php _e( 'Light', $this->plugin_slug )?></option>';
 				</select>
 			</div>
 		</p>

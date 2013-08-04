@@ -26,12 +26,12 @@ function fp5_register_settings() {
 				'commercial_version' => array(
 					'id'   => 'commercial_version',
 					'name' => '<strong>' . __('Commercial Version', 'flowplayer5') . '</strong>',
-					'desc' => __('The commercial version removes the Flowplayer logo and allows you to use your own logo image. You can purchase a license and obtain the license key at <a href="http://flowplayer.org/download/">Flowplayer.org</a>.', 'fp5'),
+					'desc' => __( 'The commercial version removes the Flowplayer logo and allows you to use your own logo image.', 'flowplayer5' ) . ' <a href="http://flowplayer.org/download/">' . __( 'Purchase license', 'flowplayer5' ) . '</a>',
 					'type' => 'header'
 				),
 				'key' => array(
 					'id'   => 'key',
-					'name' => __('License Key', 'flowplayer5'),
+					'name' => __('License Key', 'flowplayer5') . ' <a href="http://flowplayer.org/docs/index.html#commercial-configuration">?</a>',
 					'desc' => __('Specify your License Key here.', 'flowplayer5'),
 					'type' => 'text',
 					'size' => 'medium'
@@ -47,13 +47,13 @@ function fp5_register_settings() {
 				'logo_origin' => array(
 					'id'   => 'logo_origin',
 					'name' => __('Show Logo on this site', 'flowplayer5'),
-					'desc' => __('Check to show logo on this site. Uncheck for only externally embedded videos.', 'flowplayer5'),
+					'desc' => __('Show logo on this site. Uncheck to show on only externally embedded videos.', 'flowplayer5'),
 					'type' => 'checkbox'
 				),
 				'video_tracking' => array(
 					'id'   => 'video_tracking',
-					'name' => '<strong>' . __('Video Tracking', 'flowplayer5') . '</strong>',
-					'desc' => __('You can track video traffic using Google Analytics (GA). <a href="http://flowplayer.org/docs/analytics.html">Further info</a>', 'flowplayer5'),
+					'name' => '<strong>' . __('Video Tracking', 'flowplayer5') . '</strong> <a href="http://flowplayer.org/docs/analytics.html">?</a>',
+					'desc' => __('You can track video traffic using Google Analytics (GA).', 'flowplayer5'),
 					'type' => 'header'
 				),
 				'ga_account_id' => array(
@@ -72,13 +72,13 @@ function fp5_register_settings() {
 				'cdn_option' => array(
 					'id'   => 'cdn_option',
 					'name' => __('CDN hosted files', 'flowplayer5'),
-					'desc' => __('Check to load the files locally', 'flowplayer5'),
+					'desc' => __('Load the files locally', 'flowplayer5'),
 					'type' => 'checkbox'
 				),
 				'embed_options' => array(
 					'id' => 'embed_options',
-					'name' => '<strong>' . __('Embed Options', 'flowplayer5') . '</strong>',
-					'desc' => __('By default the embed feature loads the embed script and Flowplayer assets from our CDN. This can be customized in the embed configuration object if you prefer to host the files yourself.', 'flowplayer5'),
+					'name' => '<strong>' . __('Embed Options', 'flowplayer5') . '</strong> <a href="http://flowplayer.org/docs/embedding.html#configuration">?</a>',
+					'desc' => __('By default the embed feature loads the embed script and Flowplayer assets from our CDN. You can use the fields below to change the locations of these assets.', 'flowplayer5'),
 					'type' => 'header'
 				),
 				'library' => array(
@@ -86,28 +86,28 @@ function fp5_register_settings() {
 					'name' => __('Libary', 'flowplayer5'),
 					'desc' => __('URL of the Flowplayer API library script', 'flowplayer5'),
 					'type' => 'text',
-					'size' => 'medium'
+					'size' => 'regular'
 				),
 				'script' => array(
 					'id'   => 'script',
 					'name' => __('Script', 'flowplayer5'),
 					'desc' => __('URL of the embed script', 'flowplayer5'),
 					'type' => 'text',
-					'size' => 'medium'
+					'size' => 'regular'
 				),
 				'skin' => array(
 					'id'   => 'skin',
 					'name' => __('Skin', 'flowplayer5'),
 					'desc' => __('URL of skin for embedding', 'flowplayer5'),
 					'type' => 'text',
-					'size' => 'medium'
+					'size' => 'regular'
 				),
 				'swf' => array(
 					'id'   => 'swf',
 					'name' => __('SWF file', 'flowplayer5'),
 					'desc' => __('URL of SWF file for embedding', 'flowplayer5'),
 					'type' => 'text',
-					'size' => 'medium'
+					'size' => 'regular'
 				)
 			)
 		)

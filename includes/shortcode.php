@@ -56,7 +56,7 @@ function add_fp5_shortcode( $atts ) {
 	$ratio            = ( ( $width != 0 && $height != 0 ) ? intval( $height ) / intval( $width ) : '' );
 	$size             = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : ( ( $max_width != 0 ) ?  'max-width:' . $max_width . 'px; ' : '' ) );
 	$splash_style     = 'background: #777 url(' . $splash . ') no-repeat;';
-	$class            = 'flowplayer ' . $skin . ( ! empty ( $splash ) ? ' is-splash ' : '' );
+	$class            = 'flowplayer ' . $skin . ' ' . ( ! empty ( $splash ) ? 'is-splash ' : '' );
 	$data_key         = ( 0 < strlen ( $key ) ? 'data-key="' . $key . '"' : '');
 	$data_logo        = ( 0 < strlen  ( $key ) && 0 < strlen  ( $logo ) ? 'data-logo="' . $logo . '" ' : '' );
 	$data_analytics   = ( 0 < strlen  ( $ga_account_id ) ? 'data-analytics="' . $ga_account_id . '" ' : '' );

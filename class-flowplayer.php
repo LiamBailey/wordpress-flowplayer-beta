@@ -111,16 +111,14 @@ class Flowplayer5 {
 
 		// Add custom post type
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
-		
+
 		// Add action links
 		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . 'flowplayer.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
-		
-		// Hide or remove view button
-		add_action( 'admin_head', array( $this, 'hide_view_button' ) );
-		add_action( 'wp_before_admin_bar_render', array( $this, 'remove_view_button_admin_bar' ) );
-		add_filter( 'post_row_actions', array( $this, 'remove_view_row_action' ), 10, 1 );
-		
+
+		// Edit messages
+		add_filter( 'post_updated_messages', array( $this, 'set_messages' ) );
+
 		// Add file support
 		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
 
@@ -191,7 +189,7 @@ class Flowplayer5 {
 	public function enqueue_admin_styles() {
 
 		$current_screen = get_current_screen();
-		
+
 		//if ( $current_screen->post_type === $this->plugin_slug ) {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( '/assets/css/admin.css', __FILE__ ), $this->version );
 		//}
@@ -215,25 +213,25 @@ class Flowplayer5 {
 			wp_localize_script( $this->plugin_slug . '-media', 'splash_image',
 				array(
 					'title'  => __( 'Upload or choose a splash image', 'flowplayer5' ), // This will be used as the default title
-					'button' => __( 'Insert Splash Image', 'flowplayer5' )            // This will be used as the default button text
+					'button' => __( 'Insert Splash Image', 'flowplayer5' )              // This will be used as the default button text
 				)
 			);
 			wp_localize_script( $this->plugin_slug . '-media', 'mp4_video',
 				array(
 					'title'  => __( 'Upload or choose a mp4 video file', 'flowplayer5' ), // This will be used as the default title
-					'button' => __( 'Insert mp4 Video', 'flowplayer5' )            // This will be used as the default button text
+					'button' => __( 'Insert mp4 Video', 'flowplayer5' )                   // This will be used as the default button text
 				)
 			);
 			wp_localize_script( $this->plugin_slug . '-media', 'webm_video',
 				array(
 					'title'  => __( 'Upload or choose a webm video file', 'flowplayer5' ), // This will be used as the default title
-					'button' => __( 'Insert webm Video', 'flowplayer5' )            // This will be used as the default button text
+					'button' => __( 'Insert webm Video', 'flowplayer5' )                   // This will be used as the default button text
 				)
 			);
 			wp_localize_script( $this->plugin_slug . '-media', 'ogg_video',
 				array(
 					'title'  => __( 'Upload or choose a ogg video file', 'flowplayer5' ), // This will be used as the default title
-					'button' => __( 'Insert ogg Video', 'flowplayer5' )            // This will be used as the default button text
+					'button' => __( 'Insert ogg Video', 'flowplayer5' )                   // This will be used as the default button text
 				)
 			);
 			wp_localize_script( $this->plugin_slug . '-media', 'webvtt',
@@ -245,7 +243,7 @@ class Flowplayer5 {
 			wp_localize_script( $this->plugin_slug . '-media', 'logo',
 				array(
 					'title'  => __( 'Upload or choose a logo', 'flowplayer5' ), // This will be used as the default title
-					'button' => __( 'Insert Logo', 'flowplayer5' )                   // This will be used as the default button text
+					'button' => __( 'Insert Logo', 'flowplayer5' )              // This will be used as the default button text
 				)
 			);
 			wp_enqueue_media();
@@ -269,7 +267,7 @@ class Flowplayer5 {
 
 		// Register shortcode stylesheets and JavaScript
 		if( $cdn ) {
-			wp_enqueue_style( $this->plugin_slug .'-skins' , 'http://releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
+			wp_enqueue_style( $this->plugin_slug .'-skins' , '//releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
 		} else {
 			wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
 		}
@@ -294,7 +292,7 @@ class Flowplayer5 {
 
 		// Register shortcode stylesheets and JavaScript
 		if( $cdn ) {
-			wp_enqueue_script( $this->plugin_slug . '-script', 'http://releases.flowplayer.org/' . $this->player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
+			wp_enqueue_script( $this->plugin_slug . '-script', '//releases.flowplayer.org/' . $this->player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
 		} else {
 			wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', __FILE__  ), array( 'jquery' ), $this->player_version, false );
 		}
@@ -405,7 +403,7 @@ class Flowplayer5 {
 			'labels'              => $labels,
 			'supports'            => array( 'title' ),
 			'hierarchical'        => false,
-			'public'              => true,
+			'public'              => false,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'show_in_nav_menus'   => true,
@@ -415,7 +413,7 @@ class Flowplayer5 {
 			'can_export'          => true,
 			'has_archive'         => false,
 			'exclude_from_search' => true,
-			'publicly_queryable'  => true,
+			'publicly_queryable'  => false,
 			'query_var'           => 'video',
 			'rewrite'             => false,
 			'capability_type'     => 'page',
@@ -426,49 +424,31 @@ class Flowplayer5 {
 	}
 
 	/**
-	 * Hides the 'view' button in the post edit page
+	 * Edit custom post type messages.
 	 *
-	 * @param $hook
+	 * @since    1.0.0
 	 */
-	public function hide_view_button() {
-	
-		$current_screen = get_current_screen();
+	public function set_messages($messages) {
 
-		if( $current_screen->post_type === $this->plugin_slug ) {
-			echo '<style>#edit-slug-box{ display: none; }</style>';
-		}
-		
-		return;
+		global $post;
 
-	}
+		$messages[$this->plugin_slug] = array(
 
-	/**
-	 * Removes the 'view' link in the admin bar
-	 *
-	 */
-	public function remove_view_button_admin_bar() {
+			0  => '', // Unused. Messages start at index 1.
+			1  => __( 'Video updated.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: <strong>%1$s</strong>.', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
+			2  => __( 'Custom field updated.', $this->plugin_slug ),
+			3  => __( 'Custom field deleted.', $this->plugin_slug ),
+			4  => __( 'Video updated.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: <strong>%1$s</strong>.', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
+			5  => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s', $this->plugin_slug ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6  => __( 'Video published.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: <strong>%1$s</strong>.', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
+			7  => __( 'Video saved.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: <strong>%1$s</strong>.', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
+			8  => __( 'Video submitted.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: <strong>%1$s</strong>.', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
+			9  => sprintf( __( 'Video scheduled for: <strong>%1$s</strong>.', $this->plugin_slug ), date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ) ),
+			10 => __( 'Video draft updated.', $this->plugin_slug ),
 
-		global $wp_admin_bar;
+		);
 
-		if( get_post_type() === $this->plugin_slug ){
-
-		$wp_admin_bar->remove_menu('view');
-
-		}
-
-	}
-
-	/**
-	 * Renmoves the 'view' button in the posts list page
-	 *
-	 * @param $actions
-	 */
-	public function remove_view_row_action( $actions ) {
-
-		if( get_post_type() === $this->plugin_slug )
-			unset( $actions['view'] );
-
-		return $actions;
+		return $messages;
 
 	}
 
