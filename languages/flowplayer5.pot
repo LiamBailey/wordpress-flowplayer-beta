@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flowplayer5 for WordPress\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-04 17:30+0100\n"
-"PO-Revision-Date: 2013-08-04 17:30+0100\n"
+"POT-Creation-Date: 2013-08-04 23:24+0100\n"
+"PO-Revision-Date: 2013-08-04 23:24+0100\n"
 "Last-Translator: Ulrich Pogson <grapplerulrich@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -172,142 +172,142 @@ msgstr ""
 msgid "Video draft updated."
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:87
+#: includes/class-flowplayer-meta-box.php:85
 msgid "Shortcode"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:106
+#: includes/class-flowplayer-meta-box.php:102
 msgid "Copy this shortcode to a post, page or widget to show the video."
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:122
+#: includes/class-flowplayer-meta-box.php:118
 msgid "Flowplayer Video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:149
+#: includes/class-flowplayer-meta-box.php:143
 msgid "Media files"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:150
+#: includes/class-flowplayer-meta-box.php:144
 msgid ""
 "It is recommended to add at least two video formats so that the video plays "
-"on as many browsers as possible. To be able to calculate the demensions of "
+"on as many browsers as possible. To be able to calculate the dimensions of "
 "the video the video format added needs to be comptible with the browser."
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:150
+#: includes/class-flowplayer-meta-box.php:144
 msgid "About video formats."
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:155
+#: includes/class-flowplayer-meta-box.php:149
 msgid "Splash Image"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:158
+#: includes/class-flowplayer-meta-box.php:152
 msgid "Add splash image"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:163
+#: includes/class-flowplayer-meta-box.php:157
 msgid "mp4 Video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:166
+#: includes/class-flowplayer-meta-box.php:160
 msgid "Add mp4 Video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:171
+#: includes/class-flowplayer-meta-box.php:165
 msgid "webm Video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:174
+#: includes/class-flowplayer-meta-box.php:168
 msgid "Add webm Video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:179
+#: includes/class-flowplayer-meta-box.php:173
 msgid "ogg Video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:182
+#: includes/class-flowplayer-meta-box.php:176
 msgid "Add ogg Video"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:187
+#: includes/class-flowplayer-meta-box.php:181
 msgid "vtt file (Subtitles)"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:190
+#: includes/class-flowplayer-meta-box.php:184
 msgid "Add vtt file"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:199
+#: includes/class-flowplayer-meta-box.php:193
 msgid "Select skin"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:217
+#: includes/class-flowplayer-meta-box.php:211
 msgid "Video attributes"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:221
+#: includes/class-flowplayer-meta-box.php:215
 msgid "Autoplay"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:226
+#: includes/class-flowplayer-meta-box.php:220
 msgid "Loop"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:230
+#: includes/class-flowplayer-meta-box.php:224
 msgid "Preload"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:241
+#: includes/class-flowplayer-meta-box.php:235
 msgid "Flowplayer options"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:245
+#: includes/class-flowplayer-meta-box.php:239
 msgid "Fixed Controls"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:249
+#: includes/class-flowplayer-meta-box.php:243
 msgid "Coloring"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:251
+#: includes/class-flowplayer-meta-box.php:245
 msgid "Default"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:252
+#: includes/class-flowplayer-meta-box.php:246
 msgid "Black & White"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:253
+#: includes/class-flowplayer-meta-box.php:247
 msgid "Red"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:254
+#: includes/class-flowplayer-meta-box.php:248
 msgid "Light"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:267
+#: includes/class-flowplayer-meta-box.php:261
 msgid "Size options"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:270
+#: includes/class-flowplayer-meta-box.php:264
 msgid "Max Width"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:272
+#: includes/class-flowplayer-meta-box.php:266
 msgid "Width"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:274
+#: includes/class-flowplayer-meta-box.php:268
 msgid "Height"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:283
+#: includes/class-flowplayer-meta-box.php:277
 msgid "Change video dimensions"
 msgstr ""
 
-#: includes/class-flowplayer-meta-box.php:288
+#: includes/class-flowplayer-meta-box.php:282
 msgid "Use fixed player size"
 msgstr ""
 
@@ -343,7 +343,7 @@ msgstr ""
 
 #: includes/register-settings.php:50
 msgid ""
-"Check to show logo on this site. Uncheck for only externally embedded videos."
+"Show logo on this site. Uncheck to show on only externally embedded videos."
 msgstr ""
 
 #: includes/register-settings.php:55
@@ -377,7 +377,7 @@ msgid "CDN hosted files"
 msgstr ""
 
 #: includes/register-settings.php:75
-msgid "Check to load the files locally"
+msgid "Load the files locally"
 msgstr ""
 
 #: includes/register-settings.php:80

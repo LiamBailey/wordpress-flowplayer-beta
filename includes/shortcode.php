@@ -23,7 +23,7 @@ function add_fp5_shortcode( $atts ) {
 
 	// get post id
 	$id = $atts['id'];
-	if ( !$id ) {
+	if ( $id ) {
 	// get the meta from the post type
 	$loop           = get_post_meta( $id, 'fp5-loop', true );
 	$autoplay       = get_post_meta( $id, 'fp5-autoplay', true );
@@ -137,7 +137,7 @@ add_shortcode( 'flowplayer', 'add_fp5_shortcode' );
 
 			// create new video post
 			$video = array(
-				'post_type'   => 'flowplayer5'
+				'post_type'   => 'flowplayer5',
 				'post_title'  => $title,
 				'post_status' => 'publish',
 			);
