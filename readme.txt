@@ -1,4 +1,4 @@
-=== Flowplayer 5 for Wordpress ===
+=== Flowplayer 5 for WordPress ===
 Contributors: anssi, grapplerulrich
 Donate link: http://flowplayer.org/download
 Tags: video, html5 video, flowplayer, responsive
@@ -28,7 +28,7 @@ The main features of this plugin are:
 * Use your own logo watermark images when using the commercial Flowplayer version
 
 == Credits ==
-Thank you Tom McFarlin for the [WordPress Plugin Boilerplate](https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate)
+Thank you [Tom McFarlin](http://tommcfarlin.com/) for the [WordPress Plugin Boilerplate](https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate)
 
 == Installation ==
 
@@ -76,7 +76,7 @@ global options. You can purchase a commercial license in [flowplayer.org](http:/
 * added preload option
 * added CDN option
 * added a few more flowplayer options
-* added emebed options
+* added embed options
 
 = 0.5.0 =
 * updated the Flowplayer code to version 5.3.2

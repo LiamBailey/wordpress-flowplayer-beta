@@ -1,8 +1,8 @@
 <?php
 /**
- * Flowplayer 5 for Wordpress
+ * Flowplayer 5 for WordPress
  *
- * @package   Flowplayer 5 for Wordpress
+ * @package   Flowplayer 5 for WordPress
  * @author    Ulrich Pogson <ulrich@pogson.ch>
  * @license   GPL-2.0+
  * @link      http://flowplayer.org/
@@ -287,7 +287,7 @@ class Flowplayer5 {
 
 		// set the options for the shortcode - pulled from the register-settings.php
 		$options = get_option('fp5_settings_general');
-		$key     = $options['key'];
+		$key     = ( ! empty ( $options['key'] ) ? $options['key'] : '' );
 		$cdn     = isset( $options['cdn_option'] );
 
 		// Register shortcode stylesheets and JavaScript
@@ -303,10 +303,10 @@ class Flowplayer5 {
 
 		// set the options for the shortcode - pulled from the display-settings.php
 		$options       = get_option('fp5_settings_general');
-		$embed_library = $options['library'];
-		$embed_script  = $options['script'];
-		$embed_skin    = $options['skin'];
-		$embed_swf     = $options['swf'];
+		$embed_library = ( ! empty ( $options['library'] ) ? $options['library'] : '' );
+		$embed_script  = ( ! empty ( $options['script'] ) ? $options['script'] : '' );
+		$embed_skin    = ( ! empty ( $options['skin'] ) ? $options['skin'] : '' );
+		$embed_swf     = ( ! empty ( $options['swf'] ) ? $options['swf'] : '' );
 
 		if ( $embed_library || $embed_script || $embed_skin || $embed_swf ) {
 

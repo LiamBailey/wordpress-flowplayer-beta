@@ -2,7 +2,7 @@
 /**
  * Display Settings
  *
- * @package   Flowplayer 5 for Wordpress
+ * @package   Flowplayer 5 for WordPress
  * @author    Ulrich Pogson <ulrich@pogson.ch>
  * @license   GPL-2.0+
  * @link      http://flowplayer.org/
