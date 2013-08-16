@@ -30,7 +30,7 @@ class Flowplayer5 {
 	 *
 	 * @var     string
 	 */
-	protected $version = '1.0.0-beta';
+	protected $version = '1.0.0';
 
 	function get_version() {
 		return $this->version;
