@@ -20,7 +20,6 @@ The main features of this plugin are:
 * Show your video in any desired player size
 * Playback options: autoplay, loop
 * Include a [splash image](http://flowplayer.org/docs/index.html#splash) for your video
-* [Subtitles](http://flowplayer.org/docs/subtitles.html)support 
 * [Google Analytics](http://flowplayer.org/docs/analytics.html) support for tracking video audience and traffic
 * Video selection using the WordPress 3.5 Media Library
 * Detects the video dimensions for configuring the correct player size
@@ -57,26 +56,29 @@ Thank you [Tom McFarlin](http://tommcfarlin.com/) for the [WordPress Plugin Boil
 Configuration
 
 You can configure Google Analytics, a Commercial Flowplayer license key and a custom watermark logo in the plugin's
-global options. You can purchase a commercial license in [flowplayer.org](http://flowplayer.org/download).
+global options. You can purchase a commercial license at [flowplayer.org](http://flowplayer.org/download).
 
 == Frequently Asked Questions ==
 
+= Why is the subtitles option no longer available? =
 
+WordPress 3.6 updated jQuery to version 1.10 and included jQuery Migrate. Flowplayer 5.4.3 with subtitles did not work. When version 5.5 will be released the subtitles with be added back.
 
 == Screenshots ==
 
-1. Plugin global options
-2. Posting a video
+1. Posting a video
+2. Plugin Settings
 
 == Changelog ==
 
 = 1.0.0 =
-* complete rewrite of plugin - now you can manage all of your videos in one place.
+* complete rewrite of plugin - now you can manage all of your videos in one place
 * updated the Flowplayer code to version 5.4.3
 * added preload option
 * added CDN option
 * added a few more flowplayer options
 * added embed options
+* removed subtitles temporarily till Flowplayer version 5.5 is released
 
 = 0.5.0 =
 * updated the Flowplayer code to version 5.3.2
