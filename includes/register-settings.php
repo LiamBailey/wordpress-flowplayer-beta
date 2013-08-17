@@ -66,7 +66,7 @@ function fp5_register_settings() {
 				'cdn_options' => array(
 					'id'   => 'cdn_options',
 					'name' => '<strong>' . __('CDN Option', 'flowplayer5') . '</strong>',
-					'desc' => __('By default the Flowplayer assets are loaded from our CDN. This option loads the assets from this site.', 'flowplayer5'),
+					'desc' => __('By default the Flowplayer assets are served from Flowplayer\'s CDN. Use this option to have the assets (JS, CSS and SWF) to be served from this domain.', 'flowplayer5'),
 					'type' => 'header'
 				),
 				'cdn_option' => array(

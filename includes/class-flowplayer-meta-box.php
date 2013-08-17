@@ -98,7 +98,7 @@ class Video_Meta_Box {
 	 */
 	public function display_shortcode_meta_box() {
 
-			$html = '<strong>[flowplayer id="' . get_the_ID() . '"]</strong>';
+			$html = '[flowplayer id="' . get_the_ID() . '"]';
 			$html .= '<p>' . __( 'Copy this shortcode to a post, page or widget to show the video.', $this->plugin_slug ) . '</p>'; 
 
 		echo $html;

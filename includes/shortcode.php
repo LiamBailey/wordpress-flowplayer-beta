@@ -32,7 +32,7 @@ function add_fp5_shortcode( $atts ) {
 		$autoplay       = get_post_meta( $id, 'fp5-autoplay', true );
 		$preload        = get_post_meta( $id, 'fp5-preload', true );
 		$poster         = '';
-		$fixed_controls = get_post_meta( $id, 'fp5-fixed-contols', true );
+		$fixed_controls = get_post_meta( $id, 'fp5-fixed-controls', true );
 		$coloring       = get_post_meta( $id, 'fp5-coloring', true );
 		$skin           = get_post_meta( $id, 'fp5-select-skin', true );
 		$splash         = get_post_meta( $id, 'fp5-splash-image', true );
@@ -51,18 +51,19 @@ function add_fp5_shortcode( $atts ) {
 		$key           = $options['key'];
 		$logo          = $options['logo'];
 		$ga_account_id = $options['ga_account_id'];
+		$logo_origin   = isset( $options['logo_origin'] );
 
 		// Shortcode processing
 		$ratio            = ( ( $width != 0 && $height != 0 ) ? intval( $height ) / intval( $width ) : '' );
 		$size             = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : ( ( $max_width != 0 ) ?  'max-width:' . $max_width . 'px; ' : '' ) );
 		$splash_style     = 'background: #777 url(' . $splash . ') no-repeat;';
-		$class            = 'flowplayer ' . $skin . ' ' . ( ! empty ( $splash ) ? 'is-splash ' : '' );
-		$data_key         = ( 0 < strlen ( $key ) ? 'data-key="' . $key . '"' : '');
+		$class            = 'flowplayer ' . $skin . ' ' . ( ! empty ( $splash ) ? 'is-splash ' : '' ) . ( ! empty ( $logo_origin ) ? 'commercial ' : '' );
+		$data_key         = ( 0 < strlen ( $key ) ? 'data-key="' . $key . '" ' : '');
 		$data_logo        = ( 0 < strlen  ( $key ) && 0 < strlen  ( $logo ) ? 'data-logo="' . $logo . '" ' : '' );
 		$data_analytics   = ( 0 < strlen  ( $ga_account_id ) ? 'data-analytics="' . $ga_account_id . '" ' : '' );
 		$data_ratio       = ( $ratio != 0 ? 'data-ratio="' . $ratio . '"' : '' );
 		$attributes       = ( ( $autoplay == 'true' ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="' . $preload . '" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' );
-		$modifier_classes = ( isset ( $fixed_controls ) ? 'fixed-controls ' : '' ) . ( $coloring != 'default' ? $coloring : '' );
+		$modifier_classes = ( ( $fixed_controls == 'true' ) ? 'fixed-controls ' : '' ) . ( $coloring != 'default' ? $coloring : '' );
 
 		// Shortcode output
 		$return = '<div style="' . $size . $splash_style . ' background-size: contain;" class="' . $class . $modifier_classes . '" ' . $data_key . $data_logo . $data_analytics . $data_ratio . '>';
@@ -116,7 +117,7 @@ function add_fp5_shortcode( $atts ) {
 		$size             = ( $fixed == 'true' && $width != '' && $height != '' ? 'width:' . $width . 'px; height:' . $height . 'px; ' : ( ( $width != 0 ) ?  'max-width:' . $width . 'px; ' : '' ) );
 		$splash_style     = 'background: #777 url(' . $splash . ') no-repeat;';
 		$class            = 'flowplayer ' . $skin . ' ' . ( ! empty ( $splash ) ? 'is-splash ' : '' );
-		$data_key         = ( 0 < strlen ( $key ) ? 'data-key="' . $key . '"' : '');
+		$data_key         = ( 0 < strlen ( $key ) ? 'data-key="' . $key . '" ' : '');
 		$data_logo        = ( 0 < strlen  ( $key ) && 0 < strlen  ( $logo ) ? 'data-logo="' . $logo . '" ' : '' );
 		$data_analytics   = ( 0 < strlen  ( $ga_account_id ) ? 'data-analytics="' . $ga_account_id . '" ' : '' );
 		$data_ratio       = ( $ratio != 0 ? 'data-ratio="' . $ratio . '"' : '' );

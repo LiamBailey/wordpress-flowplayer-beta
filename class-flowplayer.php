@@ -263,16 +263,25 @@ class Flowplayer5 {
 		// set the options for the shortcode - pulled from the register-settings.php
 		$options     = get_option('fp5_settings_general');
 		$cdn         = isset( $options['cdn_option'] );
-		$logo_origin = isset( $options['logo_origin'] );
+
+		global $post;
 
 		// Register shortcode stylesheets and JavaScript
-		if( $cdn ) {
-			wp_enqueue_style( $this->plugin_slug .'-skins' , '//releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
+		if( function_exists( 'has_shortcode' ) ) {
+			if( has_shortcode( $post->post_content, 'flowplayer' ) ) {
+				if( $cdn ) {
+					wp_enqueue_style( $this->plugin_slug .'-skins' , '//releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
+				} else {
+					wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
+				}
+				wp_enqueue_style( $this->plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', __FILE__ ), $this->player_version );
+			}
 		} else {
-			wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
-		}
-
-		if( $logo_origin ) {
+			if( $cdn ) {
+				wp_enqueue_style( $this->plugin_slug .'-skins' , '//releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
+			} else {
+				wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
+			}
 			wp_enqueue_style( $this->plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', __FILE__ ), $this->player_version );
 		}
 
@@ -290,11 +299,23 @@ class Flowplayer5 {
 		$key     = ( ! empty ( $options['key'] ) ? $options['key'] : '' );
 		$cdn     = isset( $options['cdn_option'] );
 
+		global $post;
+
 		// Register shortcode stylesheets and JavaScript
-		if( $cdn ) {
-			wp_enqueue_script( $this->plugin_slug . '-script', '//releases.flowplayer.org/' . $this->player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
+		if( function_exists( 'has_shortcode' ) ) {
+			if( has_shortcode( $post->post_content, 'flowplayer' ) ) {
+				if( $cdn ) {
+					wp_enqueue_script( $this->plugin_slug . '-script', '//releases.flowplayer.org/' . $this->player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
+				} else {
+					wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', __FILE__  ), array( 'jquery' ), $this->player_version, false );
+				}
+			}
 		} else {
-			wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', __FILE__  ), array( 'jquery' ), $this->player_version, false );
+			if( $cdn ) {
+				wp_enqueue_script( $this->plugin_slug . '-script', '//releases.flowplayer.org/' . $this->player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
+			} else {
+				wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', __FILE__  ), array( 'jquery' ), $this->player_version, false );
+			}
 		}
 
 	}
@@ -435,15 +456,15 @@ class Flowplayer5 {
 		$messages[$this->plugin_slug] = array(
 
 			0  => '', // Unused. Messages start at index 1.
-			1  => __( 'Video updated.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: <strong>%1$s</strong>.', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
+			1  => __( 'Video updated.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: %1$s', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
 			2  => __( 'Custom field updated.', $this->plugin_slug ),
 			3  => __( 'Custom field deleted.', $this->plugin_slug ),
-			4  => __( 'Video updated.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: <strong>%1$s</strong>.', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
+			4  => __( 'Video updated.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: %1$s', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
 			5  => isset( $_GET['revision'] ) ? sprintf( __( $singular . ' restored to revision from %s', $this->plugin_slug ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6  => __( 'Video published.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: <strong>%1$s</strong>.', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
-			7  => __( 'Video saved.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: <strong>%1$s</strong>.', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
-			8  => __( 'Video submitted.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: <strong>%1$s</strong>.', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
-			9  => sprintf( __( 'Video scheduled for: <strong>%1$s</strong>.', $this->plugin_slug ), date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ) ),
+			6  => __( 'Video published.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: %1$s', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
+			7  => __( 'Video saved.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: %1$s', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
+			8  => __( 'Video submitted.', $this->plugin_slug ) . ' ' . sprintf( __( 'Shortcode: %1$s', $this->plugin_slug ), '[flowplayer id="' . get_the_ID() . '"]' ),
+			9  => sprintf( __( 'Video scheduled for: %1$s', $this->plugin_slug ), date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ) ),
 			10 => __( 'Video draft updated.', $this->plugin_slug ),
 
 		);
