@@ -60,9 +60,17 @@ global options. You can purchase a commercial license at [flowplayer.org](http:/
 
 == Frequently Asked Questions ==
 
-= Why is the subtitles option no longer available? =
+= Why are the subtitlen no longer available? =
 
-WordPress 3.6 updated jQuery to version 1.10 and included jQuery Migrate. Flowplayer 5.4.3 with subtitles did not work. When version 5.5 will be released the subtitles with be added back.
+WordPress 3.6 updated jQuery to version 1.10 and included jQuery Migrate. Flowplayer 5.4.3 when using subtitles is not compatible with jQuery Migrate. When version 5.5 is released the subtitles will be added back.
+
+= What happens when I disable the plugin? =
+
+Nothing, other then it being disabled.
+
+= What happens when I uninstall the plugin? =
+
+Why would you want to do that? :-) If you do need to uninstall the plugin all of the data (Flowplayer videos and settings) will be deleted so that you do not have unnecessary info in your database. Your media files will not be deleted. If you want to backup the Flowplayer videos that you have created you can easily export them under Tools -> Export -> Videos.
 
 == Screenshots ==
 
