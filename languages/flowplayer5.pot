@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flowplayer5 for WordPress\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-16 13:56+0100\n"
-"PO-Revision-Date: 2013-08-16 13:56+0100\n"
+"POT-Creation-Date: 2013-08-17 13:57+0100\n"
+"PO-Revision-Date: 2013-08-17 13:57+0100\n"
 "Last-Translator: Ulrich Pogson <grapplerulrich@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -64,111 +64,111 @@ msgstr ""
 msgid "Insert Logo"
 msgstr ""
 
-#: class-flowplayer.php:340
+#: class-flowplayer.php:361
 msgid "Flowplayer Settings"
 msgstr ""
 
-#: class-flowplayer.php:341 class-flowplayer.php:369
+#: class-flowplayer.php:362 class-flowplayer.php:390
 msgid "Settings"
 msgstr ""
 
-#: class-flowplayer.php:385
+#: class-flowplayer.php:406
 msgid "Videos"
 msgstr ""
 
-#: class-flowplayer.php:386 class-flowplayer.php:387 class-flowplayer.php:401
+#: class-flowplayer.php:407 class-flowplayer.php:408 class-flowplayer.php:422
 msgid "Video"
 msgstr ""
 
-#: class-flowplayer.php:388
+#: class-flowplayer.php:409
 msgid "Parent Video"
 msgstr ""
 
-#: class-flowplayer.php:389
+#: class-flowplayer.php:410
 msgid "All Videos"
 msgstr ""
 
-#: class-flowplayer.php:390
+#: class-flowplayer.php:411
 msgid "View Video"
 msgstr ""
 
-#: class-flowplayer.php:391
+#: class-flowplayer.php:412
 msgid "Add New Video"
 msgstr ""
 
-#: class-flowplayer.php:392
+#: class-flowplayer.php:413
 msgid "New Video"
 msgstr ""
 
-#: class-flowplayer.php:393
+#: class-flowplayer.php:414
 msgid "Edit Video"
 msgstr ""
 
-#: class-flowplayer.php:394
+#: class-flowplayer.php:415
 msgid "Update Video"
 msgstr ""
 
-#: class-flowplayer.php:395
+#: class-flowplayer.php:416
 msgid "Search videos"
 msgstr ""
 
-#: class-flowplayer.php:396
+#: class-flowplayer.php:417
 msgid "No videos found"
 msgstr ""
 
-#: class-flowplayer.php:397
+#: class-flowplayer.php:418
 msgid "No videos found in Trash"
 msgstr ""
 
-#: class-flowplayer.php:402
+#: class-flowplayer.php:423
 msgid "Flowplayer videos"
 msgstr ""
 
-#: class-flowplayer.php:438 class-flowplayer.php:441
+#: class-flowplayer.php:459 class-flowplayer.php:462
 msgid "Video updated."
 msgstr ""
 
-#: class-flowplayer.php:438 class-flowplayer.php:441 class-flowplayer.php:443
-#: class-flowplayer.php:444 class-flowplayer.php:445
+#: class-flowplayer.php:459 class-flowplayer.php:462 class-flowplayer.php:464
+#: class-flowplayer.php:465 class-flowplayer.php:466
 #, php-format
-msgid "Shortcode: <strong>%1$s</strong>."
+msgid "Shortcode: %1$s"
 msgstr ""
 
-#: class-flowplayer.php:439
+#: class-flowplayer.php:460
 msgid "Custom field updated."
 msgstr ""
 
-#: class-flowplayer.php:440
+#: class-flowplayer.php:461
 msgid "Custom field deleted."
 msgstr ""
 
-#: class-flowplayer.php:442
+#: class-flowplayer.php:463
 #, php-format
 msgid " restored to revision from %s"
 msgstr ""
 
-#: class-flowplayer.php:443
+#: class-flowplayer.php:464
 msgid "Video published."
 msgstr ""
 
-#: class-flowplayer.php:444
+#: class-flowplayer.php:465
 msgid "Video saved."
 msgstr ""
 
-#: class-flowplayer.php:445
+#: class-flowplayer.php:466
 msgid "Video submitted."
 msgstr ""
 
-#: class-flowplayer.php:446
+#: class-flowplayer.php:467
 #, php-format
-msgid "Video scheduled for: <strong>%1$s</strong>."
+msgid "Video scheduled for: %1$s"
 msgstr ""
 
-#: class-flowplayer.php:446
+#: class-flowplayer.php:467
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: class-flowplayer.php:447
+#: class-flowplayer.php:468
 msgid "Video draft updated."
 msgstr ""
 
@@ -368,8 +368,8 @@ msgstr ""
 
 #: includes/register-settings.php:69
 msgid ""
-"By default the Flowplayer assets are loaded from our CDN. This option loads "
-"the assets from this site."
+"By default the Flowplayer assets are served from Flowplayer's CDN. Use this "
+"option to have the assets (JS, CSS and SWF) to be served from this domain."
 msgstr ""
 
 #: includes/register-settings.php:74
