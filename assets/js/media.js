@@ -1,5 +1,5 @@
 /**
- * Display Settings
+ * JavaScript for Flowplaywer posts
  *
  * @package   Flowplayer 5 for Wordpress
  * @author    Ulrich Pogson <ulrich@pogson.ch>
@@ -237,39 +237,21 @@ jQuery(document).ready(function($){
         }
     };
 
-
-// Settings Page
-// Add Logo
-    var fp5_logo_frame;
-
-    $(document.body).on('click.fp5OpenMediaManager', '.fp5_settings_upload_button', function(e){
-        e.preventDefault();
-
-        if ( fp5_logo_frame ) {
-            fp5_logo_frame.open();
-            return;
-        }
-
-        fp5_logo_frame = wp.media.frames.fp5_logo_frame = wp.media({
-            className: 'media-frame fp5-media-frame',
-            frame: 'select',
-            multiple: false,
-            title: logo.title,
-            library: {
-                type: 'image'
-            },
-            button: {
-                text:  logo.button
-            }
-        });
-
-        fp5_logo_frame.on('select', function(){
-            var media_attachment = fp5_logo_frame.state().get('selection').first().toJSON();
-
-            $('.fp5_upload_field').val(media_attachment.url);
-            $('.fp5_settings_upload_preview').attr('src',media_attachment.url);
-        });
-
-        fp5_logo_frame.open();
+    // Flowplayer Drive
+    $(".fp5-add-drive").colorbox({
+        inline: true,
+        width: '100%',
+        height: '100%',
+        transition: "none",
+        opacity: '.7',
     });
+    $('.choose-video').click(function () {
+        var that = $(this);
+        $('input#fp5-splash-image').val(that.attr('data-img'));
+        $('input#fp5-mp4-video').val(that.attr('data-mp4'));
+        $('input#fp5-webm-video').val(that.attr('data-webm'));
+        $.colorbox.close();
+        CreatePreview();
+    });
+
 });
