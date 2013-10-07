@@ -52,7 +52,7 @@ class Flowplayer_Drive {
 		$user_name = ( isset( $options['user_name'] ) ) ? $options['user_name'] : '';
 		$password  = ( isset( $options['password'] ) ) ? $options['password'] : '';
 
-		$auth_api_url = esc_url_raw( 'http://account.api.dev.flowplayer.org/auth' );
+		$auth_api_url = 'http://account.api.dev.flowplayer.org/auth';
 
 		$response_auth = wp_remote_get( $auth_api_url );
 
@@ -65,7 +65,20 @@ class Flowplayer_Drive {
 
 		$parameters = '?callback=?&username=' . $user_name . '&hash=' . sha1( $user_name . $seed . sha1( $password ) ) . '&seed=' . $seed;
 
-		$url = esc_url_raw( 'http://account.api.dev.flowplayer.org/auth' . $parameters );
+        $query = 'http://example.com/link?foo=bar';
+        
+
+		$url_base = esc_url_raw( 'http://account.api.dev.flowplayer.org/auth' );
+
+        $url = add_query_arg( 
+            array(
+                'callback' => '?',
+                'username' => $user_name,
+                'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
+                'seed'     => $seed
+            ),
+            $url_base
+        );
 
 		$response = wp_remote_get( $auth_api_url );
 

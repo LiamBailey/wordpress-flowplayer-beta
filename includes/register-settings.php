@@ -166,7 +166,11 @@ function fp5_register_settings() {
 	}
 
 	// Creates our settings in the options table
-	register_setting( 'fp5_settings_group', 'fp5_settings_general', 'fp5_settings_sanitize' );
+	register_setting( 
+        'fp5_settings_group',
+        'fp5_settings_general',
+        'fp5_settings_sanitize'
+    );
 
 }
 
@@ -301,8 +305,13 @@ function fp5_missing_callback($args) {
  * @return string $input Sanitised value
  */
 function fp5_settings_sanitize( $input ) {
-	add_settings_error( 'fp5-notices', '', __('Settings Updated', 'flowplayer5'), 'updated' );
-	return $input;
+	add_settings_error(
+        'fp5-notices',
+        '',
+        __('Settings Updated', 'flowplayer5'),
+        'updated'
+    );
+	return trim( $input );
 }
 
 /**
