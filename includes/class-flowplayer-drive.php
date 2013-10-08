@@ -52,23 +52,15 @@ class Flowplayer_Drive {
 		$user_name = ( isset( $options['user_name'] ) ) ? $options['user_name'] : '';
 		$password  = ( isset( $options['password'] ) ) ? $options['password'] : '';
 
-		$auth_api_url = 'http://account.api.dev.flowplayer.org/auth';
+		$auth_api_url = 'http://account.api.dev.flowplayer.org/auth?_format=json';
 
 		$response_auth = wp_remote_get( $auth_api_url );
 
 		$body_auth = wp_remote_retrieve_body( $response_auth );
 
 		$json = json_decode( $body_auth );
-		return $json;
- 
-		/*$seed = $json->result;
-
-		$parameters = '?callback=?&username=' . $user_name . '&hash=' . sha1( $user_name . $seed . sha1( $password ) ) . '&seed=' . $seed;
-
-        $query = 'http://example.com/link?foo=bar';
-        
-
-		$url_base = esc_url_raw( 'http://account.api.dev.flowplayer.org/auth' );
+		
+		$seed = $json->result;
 
         $url = add_query_arg( 
             array(
@@ -77,16 +69,16 @@ class Flowplayer_Drive {
                 'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
                 'seed'     => $seed
             ),
-            $url_base
+            $auth_api_url
         );
 
-		$response = wp_remote_get( $auth_api_url );
+		$response = wp_remote_get( $url );
 
 		$body = wp_remote_retrieve_body( $response );
 
 		$auth = json_decode( $body );
 
-		return $auth->authcode;*/
+		return $auth->authcode;
 
 	} // end make_twitter_request
 
