@@ -34,7 +34,7 @@ $fp5_options = fp5_get_settings();
 if( is_admin() ) {
 	require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer-meta-box.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'includes/insert-video-button.php' );
-	require_once( plugin_dir_path( __FILE__ ) . 'includes/flowplayer-drive.php' );
+	require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer-drive.php' );
 } else {
 	require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode.php' );
 }
