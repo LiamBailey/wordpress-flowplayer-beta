@@ -35,8 +35,6 @@ if( is_admin() ) {
 	require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer-meta-box.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'includes/insert-video-button.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'includes/flowplayer-drive.php' );
-	//require_once( 'Flowplayer/Auth.class.php' );
-	//require_once( 'Flowplayer/Library/Client.class.php' );
 } else {
 	require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode.php' );
 }

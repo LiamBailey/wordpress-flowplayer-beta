@@ -62,15 +62,15 @@ class Flowplayer_Drive {
 		
 		$seed = $json->result;
 
-        $url = add_query_arg( 
-            array(
-                'callback' => '?',
-                'username' => $user_name,
-                'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
-                'seed'     => $seed
-            ),
-            $auth_api_url
-        );
+		$url = add_query_arg( 
+			array(
+				'callback' => '?',
+				'username' => $user_name,
+				'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
+				'seed'     => $seed
+			),
+			$auth_api_url
+		);
 
 		$response = wp_remote_get( $url );
 
@@ -148,12 +148,12 @@ class Flowplayer_Drive {
 					$return .= '</div>';
 				$return .= '</a>';
 			$return .= '</div>';
-	
+
 			echo $return;
 		}
-	
+
 	}
-	
+
 	/**
 	 * Content for flowplayer drive colorbox modal
 	 *
