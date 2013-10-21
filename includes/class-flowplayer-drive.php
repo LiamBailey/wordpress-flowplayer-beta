@@ -52,7 +52,7 @@ class Flowplayer_Drive {
 		$user_name = ( isset( $options['user_name'] ) ) ? $options['user_name'] : '';
 		$password  = ( isset( $options['password'] ) ) ? $options['password'] : '';
 
-		$auth_api_url = 'http://account.api.dev.flowplayer.org/auth?_format=json';
+		$auth_api_url = 'http://account.api.flowplayer.org/auth?_format=json';
 
 		$response_auth = wp_remote_get( $auth_api_url );
 
@@ -90,7 +90,7 @@ class Flowplayer_Drive {
 	private function make_video_request() {
 
 		$authcode = $this->make_auth_request;
-		$video_api_url = esc_url_raw( 'http://videos.api.dev.flowplayer.org/account?videos=true&authcode=' . $authcode );
+		$video_api_url = esc_url_raw( 'http://videos.api.flowplayer.org/account?videos=true&authcode=' . $authcode );
 
 		$response = wp_remote_get( $video_api_url );
 
