@@ -309,7 +309,11 @@ class Video_Meta_Box {
 
 			// Checks for input and saves if needed
 			if( isset( $_POST[ 'fp5-select-skin' ] ) ) {
-				update_post_meta( $post_id, 'fp5-select-skin', $_POST[ 'fp5-select-skin' ] );
+				update_post_meta(
+                    $post_id,
+                    'fp5-select-skin',
+                    $_POST[ 'fp5-select-skin' ]
+                );
 			}
 
 			// Checks for input and saves
