@@ -26,7 +26,7 @@ class Flowplayer_Drive {
 	 */
 	private function __construct() {
 		add_action( 'admin_footer', array( $this, 'fp5_drive_content' ) );
-	} // end constructor
+	}
 
 	/**
 	 * Creates an instance of this class
@@ -38,7 +38,7 @@ class Flowplayer_Drive {
 			self::$instance = new self;
 		}
 		return self::$instance;
-	} // end get_instance
+	}
 
 	/**
 	 * Attempts to request the specified user's JSON feed from Twitter
@@ -59,7 +59,7 @@ class Flowplayer_Drive {
 		$body_auth = wp_remote_retrieve_body( $response_auth );
 
 		$json = json_decode( $body_auth );
-		
+
 		$seed = $json->result;
 
 		$url = add_query_arg( 
@@ -78,9 +78,9 @@ class Flowplayer_Drive {
 
 		$auth = json_decode( $body );
 
-		return $auth->authcode;
+		return $auth->result->authcode;
 
-	} // end make_twitter_request
+	}
 
 	/**
 	 * Attempts to request the specified user's JSON feed from Twitter
@@ -89,7 +89,7 @@ class Flowplayer_Drive {
 	 */
 	private function make_video_request() {
 
-		$authcode = $this->make_auth_request;
+		$authcode = $this->make_auth_request();
 		$video_api_url = esc_url_raw( 'http://videos.api.flowplayer.org/account?videos=true&authcode=' . $authcode );
 
 		$response = wp_remote_get( $video_api_url );
@@ -100,22 +100,17 @@ class Flowplayer_Drive {
  
 		return $json;
 
-	} // end make_twitter_request
+	}
 
 	/**
 	 * Fetches all videos from Flowplayer Drive
 	 *
 	 * @since      1.3.0
 	 */
-	public function listVideos(){
-		$res = $this->make_video_request();
-		$ret = array();
-		foreach($res->body as $row) {
-			$ret[] = new Video($row);
-		}
-		return $ret;
+	public function list_user_videos(){
+		$user = $this->make_video_request();
+		return $user->videos;
 	}
-
 
 	/**
 	 * Fetches all videos from Flowplayer Drive
@@ -124,26 +119,26 @@ class Flowplayer_Drive {
 	 */
 	public function get_videos() {
 
-		foreach ( $client->listVideos() as $video ) {
+		foreach ( $this->list_user_videos() as $video ) {
 
-			foreach ( $video->get( 'encodings' ) as $encoding ) {
-				if ( $encoding[ 'status' ] === 'done' & $encoding[ 'format' ] === 'webm' ) {
-					$webm = $encoding['url'];
+			foreach ( $video->encodings as $encoding ) {
+				if ( $encoding->status === 'done' & $encoding->format === 'webm' ) {
+					$webm = $encoding->url;
 				}
-				if ( $encoding[ 'status' ] === 'done' & $encoding[ 'format' ] === 'mp4' ) {
-					$mp4 = $encoding['url'];
+				if ( $encoding->status === 'done' & $encoding->format === 'mp4' ) {
+					$mp4 = $encoding->url;
 				}
-				if ( $encoding[ 'status' ] === 'done' & $encoding[ 'format' ] === 'mp4' ) {
-					$duration = gmdate( "H:i:s", $encoding['duration'] );
-				} elseif ( $encoding[ 'status' ] === 'done' & $encoding[ 'format' ] === 'webm' ) {
-					$duration = gmdate( "H:i:s", $encoding['duration'] );
+				if ( $encoding->status === 'done' & $encoding->format=== 'mp4' ) {
+					$duration = gmdate( "H:i:s", $encoding->duration );
+				} elseif ( $encoding->status === 'done' & $encoding->format === 'webm' ) {
+					$duration = gmdate( "H:i:s", $encoding->duration );
 				}
 			}
-	
+
 			$return = '<div class="video">';
-				$return .= '<a href="#" class="choose-video" data-webm="' . $webm .'" data-mp4="' . $mp4 .'" data-img="' . $video->get( 'snapshotUrl' ) . '">';
-					$return .= '<h2 class="video-title">' . $video->get( 'title' ) . '</h2>';
-					$return .= '<div class="thumb" style="background-image: url(' . $video->get( 'thumbnailUrl' ) . ');">';
+				$return .= '<a href="#" class="choose-video" data-webm="' . $webm .'" data-mp4="' . $mp4 .'" data-img="' . $video->snapshotUrl . '">';
+					$return .= '<h2 class="video-title">' . $video->title . '</h2>';
+					$return .= '<div class="thumb" style="background-image: url(' . $video->thumbnailUrl . ');">';
 						$return .= '<em class="duration">' . $duration . '</em>';
 					$return .= '</div>';
 				$return .= '</a>';
@@ -166,20 +161,19 @@ class Flowplayer_Drive {
 		// Only run in post/page creation and edit screens
 		if ( $screen->base == 'post' && $screen->post_type == 'flowplayer5' ) {
 			?>
-			<div style="display: block;">
+			<div style="display: none;">
 				<div class="media-frame-router">
 					<div class="media-router"><a href="#" class="media-menu-item">Upload Videos</a><a href="#" class="media-menu-item active">Flowplayer Drive</a></div>
 				</div>
 				<div id="flowplayer-drive">
-					<?php //$this->make_auth_request(); ?>
-					<?php $this->make_auth_request(); ?>
+					<?php $this->get_videos(); ?>
 				</div>
 			</div>
 			<?php
 		}
 	}
 
-} // end class
+}
 
 // Trigger the plugin
 Flowplayer_Drive::get_instance();
