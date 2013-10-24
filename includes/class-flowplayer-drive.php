@@ -1,49 +1,72 @@
 <?php
 /**
- * Flowplayer Drive
+ * Flowplayer
  *
- * @package   Flowplayer 5 for WordPress
+ * @package   Flowplayer_Drive
  * @author    Ulrich Pogson <ulrich@pogson.ch>
  * @license   GPL-2.0+
  * @link      http://flowplayer.org/
  * @copyright 2013 Flowplayer Ltd
  */
 
-class Flowplayer_Drive {
+/**
+ * Flowplayer Drive Class
+ *
+ * @package Flowplayer_Drive
+ * @author  Ulrich Pogson <ulrich@pogson.ch>
+ */
+class Plugin_Name_Admin {
 
 	/**
 	 * Instance of this class.
 	 *
-	 * @var      Flowplayer_Drive
+	 * @since    1.2.0
+	 *
+	 * @var      object
 	 */
-	private static $instance;
+	protected static $instance = null;
 
 	/**
-	 * Initializes the plugin so that the Twitter information is appended to the end of a single post.
-	 * Note that this constructor relies on the Singleton Pattern
+	 * Initialize the plugin by loading admin scripts & styles and adding a
+	 * settings page and menu.
 	 *
-	 * @since      1.3.0
+	 * @since    1.2.0
 	 */
 	private function __construct() {
+
+		/*
+		 * Call $plugin_slug from public plugin class.
+		 *
+		 */
+		$plugin = Flowplayer5::get_instance();
+		$this->plugin_slug = $plugin->get_plugin_slug();
+
+		// Add content to footer bottom
 		add_action( 'admin_footer', array( $this, 'fp5_drive_content' ) );
+
 	}
 
 	/**
-	 * Creates an instance of this class
+	 * Return an instance of this class.
 	 *
-	 * @since      1.3.0
+	 * @since    1.2.0
+	 *
+	 * @return   object    A single instance of this class.
 	 */
-	public function get_instance() {
+	public static function get_instance() {
+
+		// If the single instance hasn't been set, set it now.
 		if ( null == self::$instance ) {
 			self::$instance = new self;
 		}
+
 		return self::$instance;
 	}
 
 	/**
-	 * Attempts to request the specified user's JSON feed from Twitter
+	 * Flowplayer Drive API authentication
 	 *
-	 * @since      1.3.0
+	 * @since    1.2.0
 	 */
 	private function make_auth_request() {
 
@@ -52,27 +75,27 @@ class Flowplayer_Drive {
 		$user_name = ( isset( $options['user_name'] ) ) ? $options['user_name'] : '';
 		$password  = ( isset( $options['password'] ) ) ? $options['password'] : '';
 
-		$auth_api_url = 'http://account.api.flowplayer.org/auth?_format=json';
+		$account_api_url = esc_url_raw( 'http://account.api.flowplayer.org/auth?_format=json' );
 
-		$response_auth = wp_remote_get( $auth_api_url );
+		$response_account = wp_remote_get( $account_api_url );
 
-		$body_auth = wp_remote_retrieve_body( $response_auth );
+		$body_account = wp_remote_retrieve_body( $response_account );
 
-		$json = json_decode( $body_auth );
+		$json = json_decode( $body_account );
 
 		$seed = $json->result;
 
-		$url = add_query_arg( 
+		$auth_api_url = esc_url_raw( add_query_arg(
 			array(
 				'callback' => '?',
 				'username' => $user_name,
 				'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
 				'seed'     => $seed
 			),
-			$auth_api_url
-		);
+			$account_api_url
+		) );
 
-		$response = wp_remote_get( $url );
+		$response = wp_remote_get( $auth_api_url );
 
 		$body = wp_remote_retrieve_body( $response );
 
@@ -83,13 +106,14 @@ class Flowplayer_Drive {
 	}
 
 	/**
-	 * Attempts to request the specified user's JSON feed from Twitter
+	 * Attempts to request videos
 	 *
-	 * @since      1.3.0
+	 * @since    1.2.0
 	 */
 	private function make_video_request() {
 
 		$authcode = $this->make_auth_request();
+
 		$video_api_url = esc_url_raw( 'http://videos.api.flowplayer.org/account?videos=true&authcode=' . $authcode );
 
 		$response = wp_remote_get( $video_api_url );
@@ -98,28 +122,18 @@ class Flowplayer_Drive {
 
 		$json = json_decode( $body );
  
-		return $json;
+		return $json->videos;
 
 	}
 
 	/**
 	 * Fetches all videos from Flowplayer Drive
 	 *
-	 * @since      1.3.0
-	 */
-	public function list_user_videos(){
-		$user = $this->make_video_request();
-		return $user->videos;
-	}
-
-	/**
-	 * Fetches all videos from Flowplayer Drive
-	 *
-	 * @since      1.3.0
+	 * @since    1.2.0
 	 */
 	public function get_videos() {
 
-		foreach ( $this->list_user_videos() as $video ) {
+		foreach ( $this->make_video_request() as $video ) {
 
 			foreach ( $video->encodings as $encoding ) {
 				if ( $encoding->status === 'done' & $encoding->format === 'webm' ) {
@@ -152,7 +166,7 @@ class Flowplayer_Drive {
 	/**
 	 * Content for flowplayer drive colorbox modal
 	 *
-	 * @since      1.3.0
+	 * @since    1.2.0
 	 */
 	public function fp5_drive_content() {
 
@@ -174,6 +188,3 @@ class Flowplayer_Drive {
 	}
 
 }
-
-// Trigger the plugin
-Flowplayer_Drive::get_instance();
