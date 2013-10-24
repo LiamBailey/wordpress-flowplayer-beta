@@ -146,7 +146,7 @@ class Flowplayer_Drive {
 
 		$videos_api_url = esc_url_raw( add_query_arg(
 			array(
-				'videos' => 'true',
+				'videos'   => 'true',
 				'authcode' => $authcode
 			),
 			$this->video_api_url

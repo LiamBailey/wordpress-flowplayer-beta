@@ -46,4 +46,5 @@ register_deactivation_hook( __FILE__, array( 'Flowplayer5', 'deactivate' ) );
 Flowplayer5::get_instance();
 if( is_admin() ) {
 	Video_Meta_Box::get_instance();
+	Flowplayer_Drive::get_instance();
 }
