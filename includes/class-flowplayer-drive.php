@@ -15,7 +15,25 @@
  * @package Flowplayer_Drive
  * @author  Ulrich Pogson <ulrich@pogson.ch>
  */
-class Plugin_Name_Admin {
+class Flowplayer_Drive {
+
+	/**
+	 * Flowplayer Account API URL
+	 *
+	 * @since    1.2.0
+	 *
+	 * @var      string
+	 */
+	private $account_api_url = 'http://account.api.flowplayer.org/auth?_format=json';
+
+	/**
+	 * Flowplayer Video API URL
+	 *
+	 * @since    1.2.0
+	 *
+	 * @var      string
+	 */
+	private $video_api_url = 'http://videos.api.flowplayer.org/account';
 
 	/**
 	 * Instance of this class.
@@ -75,33 +93,45 @@ class Plugin_Name_Admin {
 		$user_name = ( isset( $options['user_name'] ) ) ? $options['user_name'] : '';
 		$password  = ( isset( $options['password'] ) ) ? $options['password'] : '';
 
-		$account_api_url = esc_url_raw( 'http://account.api.flowplayer.org/auth?_format=json' );
+		$response_account = wp_remote_get( $this->account_api_url );
 
-		$response_account = wp_remote_get( $account_api_url );
+		if( is_wp_error( $response_account ) )
+			return;
 
-		$body_account = wp_remote_retrieve_body( $response_account );
+			$body_account = wp_remote_retrieve_body( $response_account );
 
-		$json = json_decode( $body_account );
+		if( is_wp_error( $body_account ) )
+			return;
 
-		$seed = $json->result;
+			if ( $response_account['response']['code'] == 200 ) {
 
-		$auth_api_url = esc_url_raw( add_query_arg(
-			array(
-				'callback' => '?',
-				'username' => $user_name,
-				'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
-				'seed'     => $seed
-			),
-			$account_api_url
-		) );
+				$json = json_decode( $body_account );
 
-		$response = wp_remote_get( $auth_api_url );
+				$seed = $json->result;
 
-		$body = wp_remote_retrieve_body( $response );
+				$auth_api_url = esc_url_raw( add_query_arg(
+					array(
+						'callback' => '?',
+						'username' => $user_name,
+						'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
+						'seed'     => $seed
+					),
+					$this->account_api_url
+				) );
 
-		$auth = json_decode( $body );
+				$response = wp_remote_get( $auth_api_url );
 
-		return $auth->result->authcode;
+				$body = wp_remote_retrieve_body( $response );
+
+				$auth = json_decode( $body );
+
+				return $auth->result->authcode;
+
+			} else {
+
+				echo __( 'Unable to contact API service.', 'flowplayer5' );
+
+			}
 
 	}
 
@@ -114,9 +144,15 @@ class Plugin_Name_Admin {
 
 		$authcode = $this->make_auth_request();
 
-		$video_api_url = esc_url_raw( 'http://videos.api.flowplayer.org/account?videos=true&authcode=' . $authcode );
+		$videos_api_url = esc_url_raw( add_query_arg(
+			array(
+				'videos' => 'true',
+				'authcode' => $authcode
+			),
+			$this->video_api_url
+		) );
 
-		$response = wp_remote_get( $video_api_url );
+		$response = wp_remote_get( $videos_api_url );
 
 		$body = wp_remote_retrieve_body( $response );
 
@@ -133,32 +169,36 @@ class Plugin_Name_Admin {
 	 */
 	public function get_videos() {
 
-		foreach ( $this->make_video_request() as $video ) {
+		if( is_wp_error( $this->account_api_url ) || is_wp_error( $this->video_api_url ) ) {
+			return;
+		} else {
+			foreach ( $this->make_video_request() as $video ) {
 
-			foreach ( $video->encodings as $encoding ) {
-				if ( $encoding->status === 'done' & $encoding->format === 'webm' ) {
-					$webm = $encoding->url;
+				foreach ( $video->encodings as $encoding ) {
+					if ( $encoding->status === 'done' & $encoding->format === 'webm' ) {
+						$webm = $encoding->url;
+					}
+					if ( $encoding->status === 'done' & $encoding->format === 'mp4' ) {
+						$mp4 = $encoding->url;
+					}
+					if ( $encoding->status === 'done' & $encoding->format=== 'mp4' ) {
+						$duration = gmdate( "H:i:s", $encoding->duration );
+					} elseif ( $encoding->status === 'done' & $encoding->format === 'webm' ) {
+						$duration = gmdate( "H:i:s", $encoding->duration );
+					}
 				}
-				if ( $encoding->status === 'done' & $encoding->format === 'mp4' ) {
-					$mp4 = $encoding->url;
-				}
-				if ( $encoding->status === 'done' & $encoding->format=== 'mp4' ) {
-					$duration = gmdate( "H:i:s", $encoding->duration );
-				} elseif ( $encoding->status === 'done' & $encoding->format === 'webm' ) {
-					$duration = gmdate( "H:i:s", $encoding->duration );
-				}
+
+				$return = '<div class="video">';
+					$return .= '<a href="#" class="choose-video" data-webm="' . $webm .'" data-mp4="' . $mp4 .'" data-img="' . $video->snapshotUrl . '">';
+						$return .= '<h2 class="video-title">' . $video->title . '</h2>';
+						$return .= '<div class="thumb" style="background-image: url(' . $video->thumbnailUrl . ');">';
+							$return .= '<em class="duration">' . $duration . '</em>';
+						$return .= '</div>';
+					$return .= '</a>';
+				$return .= '</div>';
+
+				echo $return;
 			}
-
-			$return = '<div class="video">';
-				$return .= '<a href="#" class="choose-video" data-webm="' . $webm .'" data-mp4="' . $mp4 .'" data-img="' . $video->snapshotUrl . '">';
-					$return .= '<h2 class="video-title">' . $video->title . '</h2>';
-					$return .= '<div class="thumb" style="background-image: url(' . $video->thumbnailUrl . ');">';
-						$return .= '<em class="duration">' . $duration . '</em>';
-					$return .= '</div>';
-				$return .= '</a>';
-			$return .= '</div>';
-
-			echo $return;
 		}
 
 	}
@@ -177,7 +217,7 @@ class Plugin_Name_Admin {
 			?>
 			<div style="display: none;">
 				<div class="media-frame-router">
-					<div class="media-router"><a href="#" class="media-menu-item">Upload Videos</a><a href="#" class="media-menu-item active">Flowplayer Drive</a></div>
+					<div class="media-router"><a href="#" class="media-menu-item"><?php __( 'Upload Videos' ) ?></a><a href="#" class="media-menu-item active"><?php __( 'Flowplayer Drive' ) ?></a></div>
 				</div>
 				<div id="flowplayer-drive">
 					<?php $this->get_videos(); ?>
