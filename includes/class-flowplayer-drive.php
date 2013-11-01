@@ -86,52 +86,64 @@ class Flowplayer_Drive {
 	 *
 	 * @since    1.2.0
 	 */
+	private function get_auth_seed() {
+
+		$response_account = wp_remote_get( esc_url_raw( $this->account_api_url ) );
+
+		if ( wp_remote_retrieve_response_code( $response_account ) == 200 ) {
+
+			$body_account = wp_remote_retrieve_body( $response_account );
+
+			$json = json_decode( $body_account );
+
+			return $json->result;
+
+		} else {
+
+			$error_msg = __( 'Unable to contact to Auth Seed API service.', 'flowplayer5' );
+
+		}
+
+	}
+
+	/**
+	 * Flowplayer Drive API authentication
+	 *
+	 * @since    1.2.0
+	 */
 	private function make_auth_request() {
 
 		// get the login info
 		$options   = get_option('fp5_settings_general');
 		$user_name = ( isset( $options['user_name'] ) ) ? $options['user_name'] : '';
 		$password  = ( isset( $options['password'] ) ) ? $options['password'] : '';
+		$seed      = $this->get_auth_seed();
 
-		$response_account = wp_remote_get( $this->account_api_url );
+		$auth_api_url = esc_url_raw( add_query_arg(
+			array(
+				'callback' => '?',
+				'username' => $user_name,
+				'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
+				'seed'     => $seed
+			),
+			esc_url_raw( $this->account_api_url )
+		) );
 
-		if( is_wp_error( $response_account ) )
-			return;
+		$response = wp_remote_get( $auth_api_url );
 
-			$body_account = wp_remote_retrieve_body( $response_account );
+		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
 
-		if( is_wp_error( $body_account ) )
-			return;
+			$body = wp_remote_retrieve_body( $response );
 
-			if ( $response_account['response']['code'] == 200 ) {
+			$auth = json_decode( $body );
 
-				$json = json_decode( $body_account );
+			return $auth->result->authcode;
 
-				$seed = $json->result;
+		} else {
 
-				$auth_api_url = esc_url_raw( add_query_arg(
-					array(
-						'callback' => '?',
-						'username' => $user_name,
-						'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
-						'seed'     => $seed
-					),
-					$this->account_api_url
-				) );
+			$error_msg = __( 'Unable to contact to Auth API service.', 'flowplayer5' );
 
-				$response = wp_remote_get( $auth_api_url );
-
-				$body = wp_remote_retrieve_body( $response );
-
-				$auth = json_decode( $body );
-
-				return $auth->result->authcode;
-
-			} else {
-
-				echo __( 'Unable to contact API service.', 'flowplayer5' );
-
-			}
+		}
 
 	}
 
@@ -144,21 +156,29 @@ class Flowplayer_Drive {
 
 		$authcode = $this->make_auth_request();
 
-		$videos_api_url = esc_url_raw( add_query_arg(
+		$verified_video_api_url = esc_url_raw( add_query_arg(
 			array(
 				'videos'   => 'true',
 				'authcode' => $authcode
 			),
-			$this->video_api_url
+			esc_url_raw( $this->video_api_url )
 		) );
 
-		$response = wp_remote_get( $videos_api_url );
+		$response_videos = wp_remote_get( $verified_video_api_url );
 
-		$body = wp_remote_retrieve_body( $response );
+		if ( wp_remote_retrieve_response_code( $response_videos ) == 200 ) {
 
-		$json = json_decode( $body );
- 
-		return $json->videos;
+			$body = wp_remote_retrieve_body( $response_videos );
+
+			$json = json_decode( $body );
+
+			return $json->videos;
+
+		} else {
+
+			$error_msg = __( 'Unable to contact to Video API service.', 'flowplayer5' );
+
+		}
 
 	}
 
@@ -169,10 +189,11 @@ class Flowplayer_Drive {
 	 */
 	public function get_videos() {
 
-		if( is_wp_error( $this->account_api_url ) || is_wp_error( $this->video_api_url ) ) {
-			return;
-		} else {
-			foreach ( $this->make_video_request() as $video ) {
+		$json_videos = $this->make_video_request();
+
+		if ( !isset( $error_msg ) ) {
+
+			foreach ( $json_videos as $video ) {
 
 				foreach ( $video->encodings as $encoding ) {
 					if ( $encoding->status === 'done' & $encoding->format === 'webm' ) {
@@ -198,7 +219,13 @@ class Flowplayer_Drive {
 				$return .= '</div>';
 
 				echo $return;
+
 			}
+
+		} else {
+
+		return $error_msg;
+
 		}
 
 	}
