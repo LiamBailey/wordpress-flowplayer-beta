@@ -54,19 +54,19 @@ function fp5_register_settings() {
 				'flowplayer_drive' => array(
 					'id'   => 'flowplayer_drive',
 					'name' => '<strong>' . __('Flowplayer Designer', 'flowplayer5') . '</strong>',
-					'desc' => __( 'Flowplayer Drive hosts your video in all of the formats that you need.', 'flowplayer5' ) . ' <a href="http://flowplayer.org/download/">' . __( 'Purchase Subscription', 'flowplayer5' ) . '</a>',
+					'desc' => __( 'Flowplayer Designer is a new feature that will hosts your video in all of the formats that you need.', 'flowplayer5' ) . ' <a href="http://flowplayer.org/designer/">' . '</a>',
 					'type' => 'header'
 				),
 				'user_name' => array(
 					'id'   => 'user_name',
-					'name' => __('User name', 'flowplayer5') . ' <a href="http://flowplayer.org/docs/index.html#commercial-configuration">?</a>',
+					'name' => __('User name', 'flowplayer5'),
 					'desc' => __('Specify your user name here.', 'flowplayer5'),
 					'type' => 'text',
 					'size' => 'medium'
 				),
 				'password' => array(
 					'id'   => 'password',
-					'name' => __('Password', 'flowplayer5') . ' <a href="http://flowplayer.org/docs/index.html#commercial-configuration">?</a>',
+					'name' => __('Password', 'flowplayer5'),
 					'desc' => __('Specify your password here.', 'flowplayer5'),
 					'type' => 'password',
 					'size' => 'medium'
