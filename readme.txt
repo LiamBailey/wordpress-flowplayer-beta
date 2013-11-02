@@ -3,7 +3,7 @@ Contributors: anssi, grapplerulrich
 Donate link: http://flowplayer.org/download
 Tags: video, html5 video, flowplayer, responsive, flowplayer5
 Requires at least: 3.5
-Tested up to: 3.6.1
+Tested up to: 3.7.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -77,12 +77,19 @@ Nothing, other then it being disabled.
 
 Why would you want to do that? :-) If you do need to uninstall the plugin all of the data (Flowplayer videos and settings) will be deleted so that you do not have unnecessary data left on your database. Your media files will not be deleted. If you want to backup the Flowplayer videos that you have created you can easily export them under Tools -> Export -> Videos.
 
+= API Issues? =
+
+
+
 == Screenshots ==
 
 1. Posting a video
 2. Plugin Settings
 
 == Changelog ==
+
+= 1.2.0 =
+* add videos from Flowplayer
 
 = 1.1.0 =
 * add extra column to show the shortcode in the overview
@@ -121,6 +128,12 @@ Why would you want to do that? :-) If you do need to uninstall the plugin all of
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+* add videos from Flowplayer
+
+= 1.1.0 =
+* add small new features
 
 = 1.0.0 =
 * big plugin rewrite

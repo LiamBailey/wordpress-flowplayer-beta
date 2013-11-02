@@ -1,5 +1,5 @@
 /**
- * JavaScript for Flowplaywer posts
+ * JavaScript for Flowplayer Videos
  *
  * @package   Flowplayer 5 for Wordpress
  * @author    Ulrich Pogson <ulrich@pogson.ch>
@@ -11,7 +11,7 @@
  */
 
 jQuery(document).ready(function($){
-// Add Splash Image
+    // Add Splash Image
     var fp5_splash_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-splash-image', function(e){
@@ -47,7 +47,7 @@ jQuery(document).ready(function($){
         fp5_splash_frame.open();
     });
 
-// Add mp4 video
+    // Add mp4 video
     var fp5_mp4_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-mp4', function(e){
@@ -80,7 +80,7 @@ jQuery(document).ready(function($){
         fp5_mp4_frame.open();
     });
 
-// Add webm video
+    // Add webm video
     var fp5_webm_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-webm', function(e){
@@ -114,7 +114,7 @@ jQuery(document).ready(function($){
         fp5_webm_frame.open();
     });
 
-// Add ogg video
+    // Add ogg video
     var fp5_ogg_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-ogg', function(e){
@@ -148,7 +148,7 @@ jQuery(document).ready(function($){
         fp5_ogg_frame.open();
     });
 
-// Add vtt subtitles
+    // Add vtt subtitles
     var fp5_webvtt_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5-add-vtt', function(e){

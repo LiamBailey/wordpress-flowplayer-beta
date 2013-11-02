@@ -39,8 +39,6 @@ add_action( 'media_buttons', 'fp5_media_button', 11 );
  * Prints the footer code needed for the Insert Video button.
  *
  * @since    1.1.0
- * @global   $pagenow
- * @global   $typenow
  */
 function fp5_modal_content() {
 	$screen = get_current_screen();

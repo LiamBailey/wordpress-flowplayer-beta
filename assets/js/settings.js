@@ -7,13 +7,12 @@
  * @link      http://flowplayer.org/
  * @copyright 2013 Flowplayer Ltd
  
- * @since    1.0.0
+ * @since   1.3.0
  */
 
 jQuery(document).ready(function($){
 
-// Settings Page
-// Add Logo
+    // Add Logo
     var fp5_logo_frame;
 
     $(document.body).on('click.fp5OpenMediaManager', '.fp5_settings_upload_button', function(e){

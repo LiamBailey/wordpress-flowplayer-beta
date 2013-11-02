@@ -53,7 +53,7 @@ function fp5_register_settings() {
 				),
 				'flowplayer_drive' => array(
 					'id'   => 'flowplayer_drive',
-					'name' => '<strong>' . __('Flowplayer Drive', 'flowplayer5') . '</strong>',
+					'name' => '<strong>' . __('Flowplayer Designer', 'flowplayer5') . '</strong>',
 					'desc' => __( 'Flowplayer Drive hosts your video in all of the formats that you need.', 'flowplayer5' ) . ' <a href="http://flowplayer.org/download/">' . __( 'Purchase Subscription', 'flowplayer5' ) . '</a>',
 					'type' => 'header'
 				),
