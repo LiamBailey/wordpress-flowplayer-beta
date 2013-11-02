@@ -45,8 +45,7 @@ class Flowplayer_Drive {
 	protected static $instance = null;
 
 	/**
-	 * Initialize the plugin by loading admin scripts & styles and adding a
-	 * settings page and menu.
+	 * Initialize Flowplayer Drive
 	 *
 	 * @since    1.2.0
 	 */
@@ -82,11 +81,11 @@ class Flowplayer_Drive {
 	}
 
 	/**
-	 * Flowplayer Drive API authentication
+	 * Fetch Flowplayer Drive API authentication seed
 	 *
 	 * @since    1.2.0
 	 */
-	private function get_auth_seed() {
+	private function make_auth_seed_request() {
 
 		$response_account = wp_remote_get( esc_url_raw( $this->account_api_url ) );
 
@@ -100,14 +99,14 @@ class Flowplayer_Drive {
 
 		} else {
 
-			$error_msg = __( 'Unable to contact to Auth Seed API service.', 'flowplayer5' );
+			echo '<div class="api-error"><p>' . __( 'Unable to connect to the Authentication Seed API.', 'flowplayer5' ) . '</p></div>';
 
 		}
 
 	}
 
 	/**
-	 * Flowplayer Drive API authentication
+	 * Fetch Flowplayer Drive API authentication code
 	 *
 	 * @since    1.2.0
 	 */
@@ -117,38 +116,55 @@ class Flowplayer_Drive {
 		$options   = get_option('fp5_settings_general');
 		$user_name = ( isset( $options['user_name'] ) ) ? $options['user_name'] : '';
 		$password  = ( isset( $options['password'] ) ) ? $options['password'] : '';
-		$seed      = $this->get_auth_seed();
 
-		$auth_api_url = esc_url_raw( add_query_arg(
-			array(
-				'callback' => '?',
-				'username' => $user_name,
-				'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
-				'seed'     => $seed
-			),
-			esc_url_raw( $this->account_api_url )
-		) );
+		if ( $user_name == '' || $password == '' ) {
 
-		$response = wp_remote_get( $auth_api_url );
+			$return = '<div class="login-error"><p>';
+			$return .= sprintf(
+				__( 'Please <a href="%1$s">login</a> with your <a href="%2$s">Flowplayer.org</a> username and password.', $this->plugin_slug ),
+				esc_url( admin_url( 'edit.php?post_type=flowplayer5&page=flowplayer5_settings' ) ),
+				esc_url( 'http://flowplayer.org/' )
+			);
+			$return .= '</p></div>';
 
-		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
-
-			$body = wp_remote_retrieve_body( $response );
-
-			$auth = json_decode( $body );
-
-			return $auth->result->authcode;
+			echo $return;
 
 		} else {
 
-			$error_msg = __( 'Unable to contact to Auth API service.', 'flowplayer5' );
+			$seed = $this->make_auth_seed_request();
+
+			$auth_api_url = esc_url_raw( add_query_arg(
+				array(
+					'callback' => '?',
+					'username' => $user_name,
+					'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
+					'seed'     => $seed
+				),
+				esc_url_raw( $this->account_api_url )
+			) );
+
+			$response_auth = wp_remote_get( $auth_api_url );
+
+			if ( wp_remote_retrieve_response_code( $response_auth ) == 200 ) {
+
+				$body = wp_remote_retrieve_body( $response_auth );
+
+				$auth = json_decode( $body );
+
+				return $auth->result->authcode;
+
+			} else {
+
+				echo '<div class="api-error"><p>' . __( 'Unable to connect to the Authentication API.', $this->plugin_slug ) . '</p></div>';
+
+			}
 
 		}
 
 	}
 
 	/**
-	 * Attempts to request videos
+	 * Fetch Flowplayer Drive Videos
 	 *
 	 * @since    1.2.0
 	 */
@@ -176,14 +192,14 @@ class Flowplayer_Drive {
 
 		} else {
 
-			$error_msg = __( 'Unable to contact to Video API service.', 'flowplayer5' );
+			echo '<div class="api-error"><p>' . __( 'Unable to connect to the Video API.', $this->plugin_slug ) . '</p></div>';
 
 		}
 
 	}
 
 	/**
-	 * Fetches all videos from Flowplayer Drive
+	 * Structure Flowplayer Drive Videos
 	 *
 	 * @since    1.2.0
 	 */
@@ -191,7 +207,7 @@ class Flowplayer_Drive {
 
 		$json_videos = $this->make_video_request();
 
-		if ( !isset( $error_msg ) ) {
+		if ( is_array( $json_videos ) ) {
 
 			foreach ( $json_videos as $video ) {
 
@@ -222,16 +238,12 @@ class Flowplayer_Drive {
 
 			}
 
-		} else {
-
-		return $error_msg;
-
 		}
 
 	}
 
 	/**
-	 * Content for flowplayer drive colorbox modal
+	 * Content for Flowplayer Drive colorbox modal
 	 *
 	 * @since    1.2.0
 	 */
@@ -244,7 +256,7 @@ class Flowplayer_Drive {
 			?>
 			<div style="display: none;">
 				<div class="media-frame-router">
-					<div class="media-router"><a href="#" class="media-menu-item"><?php __( 'Upload Videos' ) ?></a><a href="#" class="media-menu-item active"><?php __( 'Flowplayer Drive' ) ?></a></div>
+					<div class="media-router"><a href="#" class="media-menu-item"><?php __( 'Upload Videos', $this->plugin_slug ) ?></a><a href="#" class="media-menu-item active"><?php __( 'Flowplayer Drive', $this->plugin_slug ) ?></a></div>
 				</div>
 				<div id="flowplayer-drive">
 					<?php $this->get_videos(); ?>
