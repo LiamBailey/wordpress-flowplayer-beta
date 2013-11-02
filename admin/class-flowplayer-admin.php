@@ -64,9 +64,8 @@ class Flowplayer5_Admin {
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
 
 		// Add action links
-		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . $this->plugin_slug . 'php' );
-		//add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
-		add_filter( 'plugin_action_links', array( $this, 'add_action_links' ) );
+		$plugin_basename = $this->plugin_slug . '/' . $this->plugin_slug . '.php';
+		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
 		// Edit update messages
 		add_filter( 'post_updated_messages', array( $this, 'set_messages' ) );
