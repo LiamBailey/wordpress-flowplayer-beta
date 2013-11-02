@@ -210,9 +210,9 @@ class Video_Meta_Box {
 					<option id="fp5-playful" value="playful" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
 				</select>
 				<div class="player-previews">
-					<img id="fp5_minimalist" class="minimalist player-preview" src="<?php echo plugins_url( '/admin/assets/img/minimalist.png', dirname(__FILE__) ) ?>" />
-					<img id="fp5_functional" class="functional player-preview" src="<?php echo plugins_url( '/admin/assets/img/functional.png', dirname(__FILE__) ) ?>" />
-					<img id="fp5_playful" class="playful player-preview" src="<?php echo plugins_url( '/admin/assets/img/playful.png', dirname(__FILE__) ) ?>" />
+					<img id="fp5_minimalist" class="minimalist player-preview" src="<?php echo plugins_url( '/assets/img/minimalist.png', dirname(__FILE__) ) ?>" />
+					<img id="fp5_functional" class="functional player-preview" src="<?php echo plugins_url( '/assets/img/functional.png', dirname(__FILE__) ) ?>" />
+					<img id="fp5_playful" class="playful player-preview" src="<?php echo plugins_url( '/assets/img/playful.png', dirname(__FILE__) ) ?>" />
 				</div>
 			</div>
 		</p>
@@ -292,6 +292,15 @@ class Video_Meta_Box {
 					<input type="checkbox" name="fp5-fixed-width" id="fp5-fixed-width" value="true" <?php if ( isset ( $fp5_stored_meta['fp5-fixed-width'] ) ) checked( $fp5_stored_meta['fp5-fixed-width'][0], 'true' ); ?> />
 					<?php _e( 'Use fixed player size', $this->plugin_slug ) ?>
 				</label>
+			</div>
+		</p>
+
+		<p>
+			<div class="fp5-row-content hidden">
+				<label for="fp5-user-id" class="fp5-row-title">User ID</label>
+				<input type="text" name="fp5-user-id" id="fp5-user-id" value="<?php if ( isset ( $fp5_stored_meta['fp5-user-id'] ) ) echo esc_attr( $fp5_stored_meta['fp5-user-id'][0] ); ?>" />
+				<label for="fp5-video-id" class="fp5-row-title">Video ID</label>
+				<input type="text" name="fp5-video-id" id="fp5-video-id" value="<?php if ( isset ( $fp5_stored_meta['fp5-video-id'] ) ) echo esc_attr( $fp5_stored_meta['fp5-video-id'][0] ); ?>" />
 			</div>
 		</p>
 
@@ -438,7 +447,7 @@ class Video_Meta_Box {
 				update_post_meta(
 					$post_id,
 					'fp5-width',
-					$_POST[ 'fp5-width' ]
+					$_POST['fp5-width']
 				);
 			}
 
@@ -447,7 +456,7 @@ class Video_Meta_Box {
 				update_post_meta(
 					$post_id,
 					'fp5-height',
-					$_POST[ 'fp5-height' ]
+					$_POST['fp5-height']
 				);
 			}
 
@@ -478,6 +487,24 @@ class Video_Meta_Box {
 					$post_id,
 					'fp5-fixed-width',
 					''
+				);
+			}
+
+			// Checks for input and saves if needed
+			if( isset( $_POST['fp5-user-id'] ) ) {
+				update_post_meta(
+					$post_id,
+					'fp5-user-id',
+					$_POST['fp5-user-id']
+				);
+			}
+
+			// Checks for input and saves if needed
+			if( isset( $_POST['fp5-video-id'] ) ) {
+				update_post_meta(
+					$post_id,
+					'fp5-video-id',
+					$_POST['fp5-video-id']
 				);
 			}
 
