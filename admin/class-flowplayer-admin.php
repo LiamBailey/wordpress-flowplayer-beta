@@ -15,56 +15,12 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Initial Flowplayer class
+ * Initial Flowplayer Admin class
  *
- * @package Flowplayer5
+ * @package Flowplayer5_Admin
  * @author  Ulrich Pogson <ulrich@pogson.ch>
  */
 class Flowplayer5_Admin {
-
-	/**
-	 * Plugin version, used for cache-busting of style and script file references.
-	 *
-	 * @since   1.0.0
-	 *
-	 * @var     string
-	 */
-	protected $version = '1.0.0';
-
-	public function get_version() {
-		return $this->version;
-	}
-
-
-	/**
-	 * Player version, used for cache-busting of style and script file references.
-	 *
-	 * @since   1.0.0
-	 *
-	 * @var     string
-	 */
-	protected $player_version = '5.4.3';
-
-	public function get_player_version() {
-		return $this->player_version;
-	}
-
-
-	/**
-	 * Unique identifier for your plugin.
-	 *
-	 * Use this value (not the variable name) as the text domain when internationalizing strings of text. It should
-	 * match the Text Domain file header in the main plugin file.
-	 *
-	 * @since    1.0.0
-	 *
-	 * @var      string
-	 */
-	protected $plugin_slug = 'flowplayer5';
-
-	public function get_plugin_slug() {
-		return $this->plugin_slug;
-	}
 
 	/**
 	 * Instance of this class.
@@ -91,6 +47,12 @@ class Flowplayer5_Admin {
 	 */
 	private function __construct() {
 
+		$plugin = Flowplayer5::get_instance();
+		// Call $version from public plugin class.
+		$this->version = $plugin->version();
+		// Call $plugin_slug from public plugin class.
+		$this->plugin_slug = $plugin->get_plugin_slug();
+
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
@@ -102,8 +64,9 @@ class Flowplayer5_Admin {
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
 
 		// Add action links
-		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . 'flowplayer.php' );
-		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
+		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . $this->plugin_slug . 'php' );
+		//add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
+		add_filter( 'plugin_action_links', array( $this, 'add_action_links' ) );
 
 		// Edit update messages
 		add_filter( 'post_updated_messages', array( $this, 'set_messages' ) );

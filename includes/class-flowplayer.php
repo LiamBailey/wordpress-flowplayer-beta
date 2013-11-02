@@ -31,11 +31,6 @@ class Flowplayer5 {
 	 */
 	protected $version = '1.0.0';
 
-	public function get_version() {
-		return $this->version;
-	}
-
-
 	/**
 	 * Player version, used for cache-busting of style and script file references.
 	 *
@@ -44,11 +39,6 @@ class Flowplayer5 {
 	 * @var     string
 	 */
 	protected $player_version = '5.4.3';
-
-	public function get_player_version() {
-		return $this->player_version;
-	}
-
 
 	/**
 	 * Unique identifier for your plugin.
@@ -61,10 +51,6 @@ class Flowplayer5 {
 	 * @var      string
 	 */
 	protected $plugin_slug = 'flowplayer5';
-
-	public function get_plugin_slug() {
-		return $this->plugin_slug;
-	}
 
 	/**
 	 * Instance of this class.
@@ -97,6 +83,39 @@ class Flowplayer5 {
 	}
 
 	/**
+	 * Return the player version.
+	 *
+	 * @since    1.0.0
+	 *
+	 *@return    Player version variable.
+	 */
+	public function get_version() {
+		return $this->version;
+	}
+
+	/**
+	 * Return the player version.
+	 *
+	 * @since    1.0.0
+	 *
+	 *@return    Player version variable.
+	 */
+	public function get_player_version() {
+		return $this->player_version;
+	}
+
+	/**
+	 * Return the plugin slug.
+	 *
+	 * @since    1.0.0
+	 *
+	 *@return    Plugin slug variable.
+	 */
+	public function get_plugin_slug() {
+		return $this->plugin_slug;
+	}
+
+	/**
 	 * Return an instance of this class.
 	 *
 	 * @since    1.0.0
@@ -122,7 +141,7 @@ class Flowplayer5 {
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
 	 */
 	public static function activate( $network_wide ) {
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/update.php' );
+		require_once( plugin_dir_path( __FILE__ ) . 'update.php' );
 	}
 
 	/**
@@ -147,7 +166,7 @@ class Flowplayer5 {
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-		load_plugin_textdomain( $domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+		load_plugin_textdomain( $domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 	}
 

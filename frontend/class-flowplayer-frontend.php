@@ -15,56 +15,12 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Initial Flowplayer class
+ * Initial Flowplayer Frontend class
  *
- * @package Flowplayer5
+ * @package Flowplayer5_Frontend
  * @author  Ulrich Pogson <ulrich@pogson.ch>
  */
 class Flowplayer5_Frontend {
-
-	/**
-	 * Plugin version, used for cache-busting of style and script file references.
-	 *
-	 * @since   1.0.0
-	 *
-	 * @var     string
-	 */
-	protected $version = '1.0.0';
-
-	public function get_version() {
-		return $this->version;
-	}
-
-
-	/**
-	 * Player version, used for cache-busting of style and script file references.
-	 *
-	 * @since   1.0.0
-	 *
-	 * @var     string
-	 */
-	protected $player_version = '5.4.3';
-
-	public function get_player_version() {
-		return $this->player_version;
-	}
-
-
-	/**
-	 * Unique identifier for your plugin.
-	 *
-	 * Use this value (not the variable name) as the text domain when internationalizing strings of text. It should
-	 * match the Text Domain file header in the main plugin file.
-	 *
-	 * @since    1.0.0
-	 *
-	 * @var      string
-	 */
-	protected $plugin_slug = 'flowplayer5';
-
-	public function get_plugin_slug() {
-		return $this->plugin_slug;
-	}
 
 	/**
 	 * Instance of this class.
@@ -76,20 +32,17 @@ class Flowplayer5_Frontend {
 	protected static $instance = null;
 
 	/**
-	 * Slug of the plugin screen.
-	 *
-	 * @since    1.0.0
-	 *
-	 * @var      string
-	 */
-	protected $plugin_settings_screen_hook_suffix = null;
-
-	/**
 	 * Initialize the plugin by setting localization, filters, and administration functions.
 	 *
 	 * @since    1.0.0
 	 */
 	private function __construct() {
+
+		$plugin = Flowplayer5::get_instance();
+		// Call $player_version from public plugin class.
+		$this->player_version = $plugin->player_version();
+		// Call $plugin_slug from public plugin class.
+		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		// Load public-facing style sheet and JavaScript.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
