@@ -210,9 +210,9 @@ class Video_Meta_Box {
 					<option id="fp5-playful" value="playful" <?php if ( isset ( $fp5_stored_meta['fp5-select-skin'] ) ) selected( $fp5_stored_meta['fp5-select-skin'][0], 'playful' ); ?>>Playful</option>
 				</select>
 				<div class="player-previews">
-					<img id="fp5_minimalist" class="minimalist player-preview" src="<?php echo plugins_url( '/assets/img/minimalist.png', dirname(__FILE__) ) ?>" />
-					<img id="fp5_functional" class="functional player-preview" src="<?php echo plugins_url( '/assets/img/functional.png', dirname(__FILE__) ) ?>" />
-					<img id="fp5_playful" class="playful player-preview" src="<?php echo plugins_url( '/assets/img/playful.png', dirname(__FILE__) ) ?>" />
+					<img id="fp5_minimalist" class="minimalist player-preview" src="<?php echo plugins_url( '/admin/assets/img/minimalist.png', dirname(__FILE__) ) ?>" />
+					<img id="fp5_functional" class="functional player-preview" src="<?php echo plugins_url( '/admin/assets/img/functional.png', dirname(__FILE__) ) ?>" />
+					<img id="fp5_playful" class="playful player-preview" src="<?php echo plugins_url( '/admin/assets/img/playful.png', dirname(__FILE__) ) ?>" />
 				</div>
 			</div>
 		</p>
