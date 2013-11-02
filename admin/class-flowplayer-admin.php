@@ -49,7 +49,7 @@ class Flowplayer5_Admin {
 
 		$plugin = Flowplayer5::get_instance();
 		// Call $version from public plugin class.
-		$this->version = $plugin->version();
+		$this->version = $plugin->get_version();
 		// Call $plugin_slug from public plugin class.
 		$this->plugin_slug = $plugin->get_plugin_slug();
 

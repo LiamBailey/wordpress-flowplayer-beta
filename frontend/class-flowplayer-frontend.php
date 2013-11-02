@@ -40,7 +40,7 @@ class Flowplayer5_Frontend {
 
 		$plugin = Flowplayer5::get_instance();
 		// Call $player_version from public plugin class.
-		$this->player_version = $plugin->player_version();
+		$this->player_version = $plugin->get_player_version();
 		// Call $plugin_slug from public plugin class.
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
