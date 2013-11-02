@@ -87,7 +87,7 @@ class Flowplayer5 {
 	/**
 	 * Initialize the plugin by setting localization, filters, and administration functions.
 	 *
-	 * @since     1.0.0
+	 * @since    1.0.0
 	 */
 	private function __construct() {
 
@@ -130,9 +130,9 @@ class Flowplayer5 {
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     1.0.0
+	 * @since    1.0.0
 	 *
-	 * @return    object    A single instance of this class.
+	 * @return   object    A single instance of this class.
 	 */
 	public static function get_instance() {
 
@@ -185,9 +185,9 @@ class Flowplayer5 {
 	/**
 	 * Register and enqueue admin-specific style sheet.
 	 *
-	 * @since     1.0.0
+	 * @since    1.0.0
 	 *
-	 * @return    null    Return early if no settings page is registered.
+	 * @return   null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_styles() {
 
@@ -205,9 +205,9 @@ class Flowplayer5 {
 	/**
 	 * Register and enqueue admin-specific JavaScript.
 	 *
-	 * @since     1.0.0
+	 * @since    1.0.0
 	 *
-	 * @return    null    Return early if no settings page is registered.
+	 * @return   null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_scripts() {
 

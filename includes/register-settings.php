@@ -17,7 +17,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Registers all of the required Flowplayer 5 settings.
  *
- * @since 1.0.0
+ * @since    1.0.0
  */
 function fp5_register_settings() {
 
@@ -167,10 +167,10 @@ function fp5_register_settings() {
 
 	// Creates our settings in the options table
 	register_setting( 
-        'fp5_settings_group',
-        'fp5_settings_general',
-        'fp5_settings_sanitize'
-    );
+		'fp5_settings_group',
+		'fp5_settings_general',
+		'fp5_settings_sanitize'
+	);
 
 }
 
@@ -181,8 +181,8 @@ add_action( 'admin_init', 'fp5_register_settings' );
  *
  * Renders the header.
  *
- * @since 1.0.0
- * @param array $args Arguments passed by the setting
+ * @since    1.0.0
+ * @param    array $args Arguments passed by the setting
  */
 function fp5_header_callback( $args ) {
 	echo '<p class="description">' . $args['desc'] . '</p>';
@@ -193,9 +193,9 @@ function fp5_header_callback( $args ) {
  *
  * Renders text fields.
  *
- * @since 1.0.0
- * @param array $args Arguments passed by the setting
- * @global $fp5_options Array of all the fp5 Options
+ * @since    1.0.0
+ * @param    array $args Arguments passed by the setting
+ * @global   $fp5_options Array of all the fp5 Options
  */
 function fp5_text_callback( $args ) {
 	global $fp5_options;
@@ -217,9 +217,9 @@ function fp5_text_callback( $args ) {
  *
  * Renders text fields.
  *
- * @since 1.3.0
- * @param array $args Arguments passed by the setting
- * @global $fp5_options Array of all the fp5 Options
+ * @since    1.2.0
+ * @param    array $args Arguments passed by the setting
+ * @global   $fp5_options Array of all the fp5 Options
  */
 function fp5_password_callback( $args ) {
 	global $fp5_options;
@@ -241,9 +241,9 @@ function fp5_password_callback( $args ) {
  *
  * Renders upload fields.
  *
- * @since 1.0
- * @param array $args Arguments passed by the setting
- * @global $fp5_options Array of all the fp5 Options
+ * @since    1.0.0
+ * @param    array $args Arguments passed by the setting
+ * @global   $fp5_options Array of all the fp5 Options
  */
 function fp5_upload_callback($args) {
 	global $fp5_options;
@@ -268,9 +268,9 @@ function fp5_upload_callback($args) {
  *
  * Renders checkboxes.
  *
- * @since 1.0
- * @param array $args Arguments passed by the setting
- * @global $fp5_options Array of all the fp5 Options
+ * @since    1.0.0
+ * @param    array $args Arguments passed by the setting
+ * @global   $fp5_options Array of all the fp5 Options
  */
 function fp5_checkbox_callback( $args ) {
 	global $fp5_options;
@@ -287,8 +287,8 @@ function fp5_checkbox_callback( $args ) {
  *
  * If a function is missing for settings callbacks alert the user.
  *
- * @since 1.0.0
- * @param array $args Arguments passed by the setting
+ * @since    1.0.0
+ * @param    array $args Arguments passed by the setting
  */
 function fp5_missing_callback($args) {
 	printf( __( 'The callback function used for the <strong>%s</strong> setting is missing.', 'flowplayer5' ), $args['id'] );
@@ -300,18 +300,18 @@ function fp5_missing_callback($args) {
  * Adds a settings error (for the updated message)
  * At some point this will validate input
  *
- * @since 1.0.0
- * @param array $input The value inputted in the field
- * @return string $input Sanitised value
+ * @since    1.0.0
+ * @param    array $input The value inputted in the field
+ * @return   string $input Sanitised value
  */
 function fp5_settings_sanitize( $input ) {
 	add_settings_error(
-        'fp5-notices',
-        '',
-        __('Settings Updated', 'flowplayer5'),
-        'updated'
-    );
-	return trim( $input );
+		'fp5-notices',
+		'',
+		__('Settings Updated', 'flowplayer5'),
+		'updated'
+	);
+	return $input;
 }
 
 /**
@@ -319,8 +319,8 @@ function fp5_settings_sanitize( $input ) {
  *
  * Retrieves all plugin settings and returns them as a combined array.
  *
- * @since 1.0.0
- * @return array Merged array of all the EDD settings
+ * @since    1.0.0
+ * @return   array Merged array of all the EDD settings
  */
 function fp5_get_settings() {
 	$general_settings = is_array( get_option( 'fp5_settings_general' ) ) ? get_option( 'fp5_settings_general' ) : array();

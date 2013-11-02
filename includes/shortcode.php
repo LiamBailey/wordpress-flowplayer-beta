@@ -19,9 +19,9 @@ if ( ! defined( 'WPINC' ) ) {
  *
  * Retrieves a media files and settings to display a video.
  *
- * @since 1.0.0
- * @param array $atts Shortcode attributes
- * @example [flowplayer id='39']
+ * @since    1.0.0
+ * @param    array $atts Shortcode attributes
+ * @example  [flowplayer id='39']
  */
 function add_fp5_shortcode( $atts ) {
 
@@ -67,18 +67,28 @@ function add_fp5_shortcode( $atts ) {
 		$data_key         = ( 0 < strlen ( $key ) ? 'data-key="' . $key . '" ' : '');
 		$data_logo        = ( 0 < strlen  ( $key ) && 0 < strlen  ( $logo ) ? 'data-logo="' . $logo . '" ' : '' );
 		$data_analytics   = ( 0 < strlen  ( $ga_account_id ) ? 'data-analytics="' . $ga_account_id . '" ' : '' );
-		$data_ratio       = ( $ratio != 0 ? 'data-ratio="' . $ratio . '"' : '' );
-		$attributes       = ( ( $autoplay == 'true' ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="' . $preload . '" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' );
+		$data_ratio       = ( $ratio != 0 ? 'data-ratio="' . $ratio . '" ' : '' );
+
 		$modifier_classes = ( ( $fixed_controls == 'true' ) ? 'fixed-controls ' : '' ) . ( $coloring != 'default' ? $coloring : '' );
+		$flowplayer_data  = $data_key . $data_logo . $data_analytics . $data_ratio;
+		$attributes       = ( ( $autoplay == 'true' ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' ) . ( isset ( $preload ) ? 'preload="' . $preload . '" ' : '' ) . ( ( $poster == 'true' ) ? 'poster' : '' );
 
 		// Shortcode output
-		$return = '<div style="' . $size . $splash_style . ' background-size: contain;" class="' . $class . $modifier_classes . '" ' . $data_key . $data_logo . $data_analytics . $data_ratio . '>';
+		$return = '<div style="' . $size . $splash_style . ' background-size: contain;" class="' . $class . $modifier_classes . '" ' . apply_filters( 'fp5_filter_flowplayer_data', $flowplayer_data ) . '>';
+			ob_start();
+			$return .= do_action( 'fp5_video_top' );
+			$return .= ob_get_contents();
+			ob_clean();
 			$return .= '<video ' . $attributes . '>';
 				$webm      != '' ? $return .= '<source type="video/webm" src="' . $webm . '">' : '';
 				$mp4       != '' ? $return .= '<source type="video/mp4" src="' . $mp4 . '">' : '';
 				$ogg       != '' ? $return .= '<source type="video/ogg" src="' . $ogg . '">' : '';
 				// $subtitles != '' ? $return .= '<track src="' . $subtitles . '"/>' : '';
 			$return .= '</video>';
+			ob_start();
+			$return .= do_action( 'fp5_video_bottom' );
+			$return .= ob_get_contents();
+			ob_clean();
 		$return .= '</div>';
 
 		// Extra options
@@ -131,11 +141,12 @@ function add_fp5_shortcode( $atts ) {
 		$data_key         = ( 0 < strlen ( $key ) ? 'data-key="' . $key . '" ' : '');
 		$data_logo        = ( 0 < strlen  ( $key ) && 0 < strlen  ( $logo ) ? 'data-logo="' . $logo . '" ' : '' );
 		$data_analytics   = ( 0 < strlen  ( $ga_account_id ) ? 'data-analytics="' . $ga_account_id . '" ' : '' );
-		$data_ratio       = ( $ratio != 0 ? 'data-ratio="' . $ratio . '"' : '' );
+		$data_ratio       = ( $ratio != 0 ? 'data-ratio="' . $ratio . '" ' : '' );
+		$flowplayer_data  = $data_key . $data_logo . $data_analytics . $data_ratio;
 		$attributes       = ( ( $autoplay == 'true' ) ? 'autoplay ' : '' ) . ( ( $loop == 'true' ) ? 'loop ' : '' );
 
 		// Shortcode output
-		$return = '<div style="' . $size . $splash_style . ' background-size: contain;" class="' . $class . '" ' . $data_key . $data_logo . $data_analytics . $data_ratio . '>';
+		$return = '<div style="' . $size . $splash_style . ' background-size: contain;" class="' . $class . '" ' . apply_filters( 'fp5_filter_flowplayer_data', $flowplayer_data ) . '>';
 			$return .= '<video ' . $attributes . '>';
 				$webm      != '' ? $return .= '<source type="video/webm" src="' . $webm . '">' : '';
 				$mp4       != '' ? $return .= '<source type="video/mp4" src="' . $mp4 . '">' : '';
