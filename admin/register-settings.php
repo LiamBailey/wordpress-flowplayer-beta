@@ -22,7 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
 function fp5_register_settings() {
 
 	$fp5_settings = array(
-		'general' => apply_filters('fp5_settings_general',
+		'general' => apply_filters( 'fp5_settings_general',
 			array(
 				'commercial_version' => array(
 					'id'   => 'commercial_version',
@@ -32,14 +32,14 @@ function fp5_register_settings() {
 				),
 				'key' => array(
 					'id'   => 'key',
-					'name' => __('License Key', 'flowplayer5') . ' <a href="http://flowplayer.org/docs/index.html#commercial-configuration">?</a>',
-					'desc' => __('Specify your License Key here.', 'flowplayer5'),
+					'name' => __( 'License Key', 'flowplayer5' ) . ' <a href="http://flowplayer.org/docs/index.html#commercial-configuration">?</a>',
+					'desc' => __( 'Specify your License Key here.', 'flowplayer5' ),
 					'type' => 'text',
 					'size' => 'medium'
 				),
 				'logo' => array(
 					'id'   => 'logo',
-					'name' => __( 'Logo', 'flowplayer5'),
+					'name' => __( 'Logo', 'flowplayer5' ),
 					'type' => 'upload',
 					'size' => 'regular',
 					'desc' => '',
@@ -47,86 +47,86 @@ function fp5_register_settings() {
 				),
 				'logo_origin' => array(
 					'id'   => 'logo_origin',
-					'name' => __('Show Logo on this site', 'flowplayer5'),
-					'desc' => __('Show logo on this site. Uncheck to show on only externally embedded videos.', 'flowplayer5'),
+					'name' => __( 'Show Logo on this site', 'flowplayer5' ),
+					'desc' => __( 'Show logo on this site. Uncheck to show on only externally embedded videos.', 'flowplayer5' ),
 					'type' => 'checkbox'
 				),
 				'flowplayer_drive' => array(
 					'id'   => 'flowplayer_drive',
-					'name' => '<strong>' . __('Flowplayer Designer', 'flowplayer5') . '</strong>',
-					'desc' => __( 'Flowplayer Designer is a new feature that will hosts your video in all of the formats that you need.', 'flowplayer5' ) . ' <a href="http://flowplayer.org/designer/">' . '</a>',
+					'name' => '<strong>' . __( 'Flowplayer Designer', 'flowplayer5' ) . '</strong> <a href="http://flowplayer.org/designer/">?</a>',
+					'desc' => __( 'Flowplayer Designer is a new feature that will hosts your video in all of the formats that you need.', 'flowplayer5' ),
 					'type' => 'header'
 				),
 				'user_name' => array(
 					'id'   => 'user_name',
-					'name' => __('User name', 'flowplayer5'),
-					'desc' => __('Specify your user name here.', 'flowplayer5'),
+					'name' => __( 'User name', 'flowplayer5' ),
+					'desc' => __( 'Specify your user name here.', 'flowplayer5') ,
 					'type' => 'text',
 					'size' => 'medium'
 				),
 				'password' => array(
 					'id'   => 'password',
-					'name' => __('Password', 'flowplayer5'),
-					'desc' => __('Specify your password here.', 'flowplayer5'),
+					'name' => __( 'Password', 'flowplayer5' ),
+					'desc' => __( 'Specify your password here.', 'flowplayer5' ),
 					'type' => 'password',
 					'size' => 'medium'
 				),
 				'video_tracking' => array(
 					'id'   => 'video_tracking',
-					'name' => '<strong>' . __('Video Tracking', 'flowplayer5') . '</strong> <a href="http://flowplayer.org/docs/analytics.html">?</a>',
-					'desc' => __('You can track video traffic using Google Analytics (GA).', 'flowplayer5'),
+					'name' => '<strong>' . __( 'Video Tracking', 'flowplayer5' ) . '</strong> <a href="http://flowplayer.org/docs/analytics.html">?</a>',
+					'desc' => __( 'You can track video traffic using Google Analytics (GA).', 'flowplayer5' ),
 					'type' => 'header'
 				),
 				'ga_account_id' => array(
 					'id'   => 'ga_account_id',
-					'name' => __('Google Analytics account ID', 'flowplayer5'),
-					'desc' => __('Specify your GA account ID here.', 'flowplayer5'),
+					'name' => __( 'Google Analytics account ID', 'flowplayer5' ),
+					'desc' => __( 'Specify your GA account ID here.', 'flowplayer5' ),
 					'type' => 'text',
 					'size' => 'medium'
 				),
 				'cdn_options' => array(
 					'id'   => 'cdn_options',
-					'name' => '<strong>' . __('CDN Option', 'flowplayer5') . '</strong>',
-					'desc' => __('By default the Flowplayer assets (JS, CSS and SWF) are served from this domain. Use this option to have the assets served from Flowplayer\'s CDN.', 'flowplayer5'),
+					'name' => '<strong>' . __( 'CDN Option', 'flowplayer5' ) . '</strong>',
+					'desc' => __( 'By default the Flowplayer assets (JS, CSS and SWF) are served from this domain. Use this option to have the assets served from Flowplayer\'s CDN.', 'flowplayer5' ),
 					'type' => 'header'
 				),
 				'cdn_option' => array(
 					'id'   => 'cdn_option',
-					'name' => __('CDN hosted files', 'flowplayer5'),
-					'desc' => __('Use Flowplayer\'s CDN', 'flowplayer5'),
+					'name' => __( 'CDN hosted files', 'flowplayer5' ),
+					'desc' => __( 'Use Flowplayer\'s CDN', 'flowplayer5' ),
 					'type' => 'checkbox'
 				),
 				'embed_options' => array(
 					'id' => 'embed_options',
-					'name' => '<strong>' . __('Embed Options', 'flowplayer5') . '</strong> <a href="http://flowplayer.org/docs/embedding.html#configuration">?</a>',
-					'desc' => __('By default the embed feature loads the embed script and Flowplayer assets from our CDN. You can use the fields below to change the locations of these assets.', 'flowplayer5'),
+					'name' => '<strong>' . __( 'Embed Options', 'flowplayer5' ) . '</strong> <a href="http://flowplayer.org/docs/embedding.html#configuration">?</a>',
+					'desc' => __( 'By default the embed feature loads the embed script and Flowplayer assets from our CDN. You can use the fields below to change the locations of these assets.', 'flowplayer5' ),
 					'type' => 'header'
 				),
 				'library' => array(
 					'id' => 'library',
-					'name' => __('Library', 'flowplayer5'),
-					'desc' => __('URL of the Flowplayer API library script', 'flowplayer5'),
+					'name' => __( 'Library', 'flowplayer5'),
+					'desc' => __( 'URL of the Flowplayer API library script', 'flowplayer5' ),
 					'type' => 'text',
 					'size' => 'regular'
 				),
 				'script' => array(
 					'id'   => 'script',
-					'name' => __('Script', 'flowplayer5'),
-					'desc' => __('URL of the embed script', 'flowplayer5'),
+					'name' => __( 'Script', 'flowplayer5' ),
+					'desc' => __( 'URL of the embed script', 'flowplayer5' ),
 					'type' => 'text',
 					'size' => 'regular'
 				),
 				'skin' => array(
 					'id'   => 'skin',
-					'name' => __('Skin', 'flowplayer5'),
-					'desc' => __('URL of skin for embedding', 'flowplayer5'),
+					'name' => __( 'Skin', 'flowplayer5' ),
+					'desc' => __( 'URL of skin for embedding', 'flowplayer5' ),
 					'type' => 'text',
 					'size' => 'regular'
 				),
 				'swf' => array(
 					'id'   => 'swf',
-					'name' => __('SWF file', 'flowplayer5'),
-					'desc' => __('URL of SWF file for embedding', 'flowplayer5'),
+					'name' => __( 'SWF file', 'flowplayer5'),
+					'desc' => __( 'URL of SWF file for embedding', 'flowplayer5' ),
 					'type' => 'text',
 					'size' => 'regular'
 				)

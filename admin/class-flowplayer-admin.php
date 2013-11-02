@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @package Flowplayer5
  * @author  Ulrich Pogson <ulrich@pogson.ch>
  */
-class Flowplayer5 {
+class Flowplayer5_Admin {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
@@ -91,22 +91,12 @@ class Flowplayer5 {
 	 */
 	private function __construct() {
 
-		// Load plugin text domain
-		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
-
-		// Load public-facing style sheet and JavaScript.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
-		// Load script for global configuration
-		add_action( 'wp_head', array( $this, 'global_config_script' ) );
 
 		// Add custom post type
 		add_action( 'init', array( $this, 'add_fp5_videos' ) );
@@ -142,43 +132,6 @@ class Flowplayer5 {
 		}
 
 		return self::$instance;
-
-	}
-
-	/**
-	 * Fired when the plugin is activated.
-	 *
-	 * @since    1.0.0
-	 *
-	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
-	 */
-	public static function activate( $network_wide ) {
-		require_once( plugin_dir_path( __FILE__ ) . 'includes/update.php' );
-	}
-
-	/**
-	 * Fired when the plugin is deactivated.
-	 *
-	 * @since    1.0.0
-	 *
-	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Deactivate" action, false if WPMU is disabled or plugin is deactivated on an individual blog.
-	 */
-	public static function deactivate( $network_wide ) {
-		// TODO: Define deactivation functionality here
-	}
-
-	/**
-	 * Load the plugin text domain for translation.
-	 *
-	 * @since    1.0.0
-	 */
-	public function load_plugin_textdomain() {
-
-		$domain = $this->plugin_slug;
-		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-
-		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-		load_plugin_textdomain( $domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 
 	}
 
@@ -280,103 +233,6 @@ class Flowplayer5 {
 
 	}
 
-
-	/**
-	 * Register and enqueue public-facing style sheet.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles() {
-
-		// set the options for the shortcode - pulled from the register-settings.php
-		$options = get_option('fp5_settings_general');
-		$cdn     = isset( $options['cdn_option'] );
-
-		global $post;
-
-		// Register shortcode stylesheets and JavaScript
-		if( function_exists( 'has_shortcode' ) ) {
-			if( has_shortcode( $post->post_content, 'flowplayer' ) ) {
-				if( $cdn ) {
-					wp_enqueue_style( $this->plugin_slug .'-skins' , '//releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
-				} else {
-					wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
-				}
-				wp_enqueue_style( $this->plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', __FILE__ ), $this->player_version );
-			}
-		} else {
-			if( $cdn ) {
-				wp_enqueue_style( $this->plugin_slug .'-skins' , '//releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
-			} else {
-				wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
-			}
-			wp_enqueue_style( $this->plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', __FILE__ ), $this->player_version );
-		}
-
-	}
-
-	/**
-	 * Register and enqueues public-facing JavaScript files.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() {
-
-		// set the options for the shortcode - pulled from the register-settings.php
-		$options = get_option('fp5_settings_general');
-		$key     = ( ! empty ( $options['key'] ) ? $options['key'] : '' );
-		$cdn     = isset( $options['cdn_option'] );
-
-		global $post;
-
-		// Register shortcode stylesheets and JavaScript
-		if( function_exists( 'has_shortcode' ) ) {
-			if( has_shortcode( $post->post_content, 'flowplayer' ) ) {
-				if( $cdn ) {
-					wp_enqueue_script( $this->plugin_slug . '-script', '//releases.flowplayer.org/' . $this->player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
-				} else {
-					wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', __FILE__  ), array( 'jquery' ), $this->player_version, false );
-				}
-			}
-		} else {
-			if( $cdn ) {
-				wp_enqueue_script( $this->plugin_slug . '-script', '//releases.flowplayer.org/' . $this->player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
-			} else {
-				wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', __FILE__  ), array( 'jquery' ), $this->player_version, false );
-			}
-		}
-
-	}
-
-	public function global_config_script() {
-
-		// set the options for the shortcode - pulled from the display-settings.php
-		$options       = get_option('fp5_settings_general');
-		$embed_library = ( ! empty ( $options['library'] ) ? $options['library'] : '' );
-		$embed_script  = ( ! empty ( $options['script'] ) ? $options['script'] : '' );
-		$embed_skin    = ( ! empty ( $options['skin'] ) ? $options['skin'] : '' );
-		$embed_swf     = ( ! empty ( $options['swf'] ) ? $options['swf'] : '' );
-
-		if ( $embed_library || $embed_script || $embed_skin || $embed_swf ) {
-
-			$return = '<!-- flowplayer global options -->';
-			$return .= '<script>';
-			$return .= 'flowplayer.conf = {';
-				$return .= 'embed: {';
-					$return .= ( ! empty ( $embed_library ) ? 'library: "' . $embed_library . '",' : '' );
-					$return .= ( ! empty ( $embed_script ) ? 'script: "' . $embed_script . '",' : '' );
-					$return .= ( ! empty ( $embed_skin ) ? 'skin: "' . $embed_skin . '",' : '' );
-					$return .= ( ! empty ( $embed_swf ) ? 'swf: "' . $embed_swf . '"' : '' );
-				$return .= '}';
-			$return .= '};';
-			$return .= '</script>';
-
-			echo $return;
-
-		}
-
-	}
-
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
@@ -402,7 +258,7 @@ class Flowplayer5 {
 	 */
 	public function display_plugin_admin_page() {
 
-		include_once( 'includes/display-settings.php' );
+		include_once( 'views/display-settings.php' );
 
 	}
 
