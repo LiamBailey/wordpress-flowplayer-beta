@@ -27,6 +27,10 @@ if ( ! defined( 'WPINC' ) ) {
 
 global $fp5_options;
 
+// Plugin Root File
+if ( ! defined( 'FP5_PLUGIN_FILE' ) )
+		define( 'FP5_PLUGIN_FILE', __FILE__ );
+
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'admin/register-settings.php' );
 $fp5_options = fp5_get_settings();

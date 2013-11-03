@@ -62,16 +62,7 @@ class Flowplayer5 {
 	protected static $instance = null;
 
 	/**
-	 * Slug of the plugin screen.
-	 *
-	 * @since    1.0.0
-	 *
-	 * @var      string
-	 */
-	protected $plugin_settings_screen_hook_suffix = null;
-
-	/**
-	 * Initialize the plugin by setting localization, filters, and administration functions.
+	 * Initialize the plugin by setting localization.
 	 *
 	 * @since    1.0.0
 	 */
@@ -166,7 +157,7 @@ class Flowplayer5 {
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-		load_plugin_textdomain( $domain, FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( $domain, FALSE, basename( dirname( FP5_PLUGIN_FILE ) ) . '/languages/' );
 
 	}
 
