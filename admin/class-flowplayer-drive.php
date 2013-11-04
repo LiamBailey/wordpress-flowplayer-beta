@@ -137,7 +137,7 @@ class Flowplayer_Drive {
 				array(
 					'callback' => '?',
 					'username' => $user_name,
-					'hash'     => sha1( $user_name . $seed . sha1( $password ) ),
+					'hash'     => sha1( $user_name . $seed . $password ),
 					'seed'     => $seed
 				),
 				esc_url_raw( $this->account_api_url )
