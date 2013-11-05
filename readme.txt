@@ -33,20 +33,20 @@ The meta box settings was adapted from [Theme Foundation](http://themefoundation
 
 == Installation ==
 
-= Using The WordPress Dashboard =
+= Installing from the WordPress dashboard =
 
-1. Navigate to the 'Add New' Plugin Dashboard
-2. Search for 'Flowplayer5'
+1. Navigate to the 'Add New' plugins dashboard
+2. Search for 'Flowplayer5 for WordPress'
 3. Click 'Install Now'
-4. Activate the plugin on the WordPress Plugin Dashboard
+4. Activate the plugin on the WordPress Plugin dashboard
 
-= Using The WordPress Dashboard =
+= Uploading in the WordPress dashboard =
 
-1. Navigate to the 'Add New' Plugin Dashboard
+1. Navigate to the 'Add New' plugins dashboard
 2. Navigate to the 'Upload' area
 3. Select `flowplayer5.zip` from your computer
 4. Upload
-5. Activate the plugin on the WordPress Plugin Dashboard
+5. Activate the plugin on the WordPress Plugin dashboard
 
 = Using FTP =
 
@@ -79,7 +79,11 @@ Why would you want to do that? :-) If you do need to uninstall the plugin all of
 
 = API Issues? =
 
+If you are unable to conect to the Flowplayer Designer videos, make sure you are conected to the internet and are logined in. You can add your username and password in the Video Settings.
 
+= Known Flowplayer Issues? =
+
+If you are having a issue please check the [Flowplayer Known Issues page](http://flowplayer.org/docs/known-issues.html).
 
 == Screenshots ==
 
@@ -89,11 +93,13 @@ Why would you want to do that? :-) If you do need to uninstall the plugin all of
 == Changelog ==
 
 = 1.2.0 =
-* add videos from Flowplayer
+* added functionalityto fetch videos from Flowplayer Designer directly in the admin area
+* added a few filters and actions
+* reorganisations of files and folders
 
 = 1.1.0 =
-* add extra column to show the shortcode in the overview
-* add a button in the posts pages so add shortcodes easily
+* added an extra column to show the shortcode in the overview
+* added a button in the posts pages so add shortcodes easily
 * fixed typos and updated pot file
 
 = 1.0.0 =
@@ -130,7 +136,7 @@ Why would you want to do that? :-) If you do need to uninstall the plugin all of
 == Upgrade Notice ==
 
 = 1.2.0 =
-* add videos from Flowplayer
+* add videos from Flowplayer Designer directly in the admin area
 
 = 1.1.0 =
 * add small new features

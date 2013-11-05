@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Flowplayer5 for WordPress\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-02 23:56+0100\n"
-"PO-Revision-Date: 2013-11-02 23:57+0100\n"
+"POT-Creation-Date: 2013-11-05 10:25+0100\n"
+"PO-Revision-Date: 2013-11-05 10:25+0100\n"
 "Last-Translator: Ulrich Pogson <grapplerulrich@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -191,7 +191,7 @@ msgid "Date"
 msgstr ""
 
 #: admin/class-flowplayer-drive.php:102
-msgid "Unable to connect to the Authentication Seed API."
+msgid "Unable to connect to the Flowplayer Authentication Seed API."
 msgstr ""
 
 #: admin/class-flowplayer-drive.php:124
@@ -201,19 +201,26 @@ msgid ""
 "a> username and password."
 msgstr ""
 
-#: admin/class-flowplayer-drive.php:158
-msgid "Unable to connect to the Authentication API."
+#: admin/class-flowplayer-drive.php:162
+#, php-format
+msgid ""
+"You have enter a incorrect username and/or password. Please check your "
+"username and password in the <a href=\"%1$s\">settings</a>."
 msgstr ""
 
-#: admin/class-flowplayer-drive.php:195
-msgid "Unable to connect to the Video API."
+#: admin/class-flowplayer-drive.php:173
+msgid "Unable to connect to the Flowplayer Authentication API."
 msgstr ""
 
-#: admin/class-flowplayer-drive.php:259
+#: admin/class-flowplayer-drive.php:212
+msgid "Unable to connect to the Flowplayer Video API."
+msgstr ""
+
+#: admin/class-flowplayer-drive.php:278
 msgid "Upload Videos"
 msgstr ""
 
-#: admin/class-flowplayer-drive.php:259
+#: admin/class-flowplayer-drive.php:278
 msgid "Flowplayer Drive"
 msgstr ""
 
@@ -526,4 +533,36 @@ msgstr ""
 
 #: admin/register-settings.php:311
 msgid "Settings Updated"
+msgstr ""
+
+#: admin/views/display-settings.php:32
+msgid "About Flowplayer 5"
+msgstr ""
+
+#: admin/views/display-settings.php:34
+msgid "FAQ"
+msgstr ""
+
+#: admin/views/display-settings.php:35
+msgid "Support Forum"
+msgstr ""
+
+#: admin/views/display-settings.php:36
+msgid "Rate us on WordPress.org"
+msgstr ""
+
+#: admin/views/display-settings.php:37
+msgid "Changelog"
+msgstr ""
+
+#: admin/views/display-settings.php:38
+msgid "Follow us on Twitter"
+msgstr ""
+
+#: admin/views/display-settings.php:39
+msgid "Like us on Facebook"
+msgstr ""
+
+#: admin/views/display-settings.php:40
+msgid "Flowplayer Website"
 msgstr ""
