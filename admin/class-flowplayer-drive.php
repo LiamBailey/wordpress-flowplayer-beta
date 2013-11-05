@@ -207,7 +207,18 @@ class Flowplayer_Drive {
 
 		} else {
 
-			if ( $json != 'authcode missing' ) {
+			if ( $json == 'Cannot find account' ) {
+
+				$return = '<div class="new-user-error"><p>';
+				$return .= sprintf(
+					__( 'You have not uploaded any videos yet. You can upload the video in <a href="%1$s">Flowplayer Designer</a>.', $this->plugin_slug ),
+					esc_url( 'http://flowplayer.org/designer/' )
+				);
+				$return .= '</p></div>';
+
+				echo $return;
+
+			} elseif ( $json != 'authcode missing' ) {
 
 				echo '<div class="api-error"><p>' . __( 'Unable to connect to the Flowplayer Video API.', $this->plugin_slug ) . '</p></div>';
 
