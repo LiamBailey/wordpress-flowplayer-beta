@@ -305,8 +305,15 @@ function fp5_missing_callback($args) {
  * @return   string $input Sanitised value
  */
 function fp5_settings_sanitize( $input ) {
+
+	// get the settings
+	$options   = get_option('fp5_settings_general');
 	// protect password by hashing it immediately
-	$input['password'] = ( ! empty( $input['password'] ) ) ? sha1( $input['password'] ) : '';
+	if ( ! empty( $input['password'] ) ) {
+		$input['password'] = sha1( $input['password'] );
+	} elseif ( ! empty( $options['password'] ) ) {
+		$input['password'] = $options['password'];
+	}
 
 	add_settings_error(
 		'fp5-notices',
