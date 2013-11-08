@@ -128,7 +128,7 @@ class Flowplayer5_Admin {
 		// Only run on flowplayer new and edit post screens
 		if ( $screen->post_type === $this->plugin_slug && $screen->base == 'post' ) {
 
-			wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->version, false );
+			wp_enqueue_script( $this->plugin_slug . '-media', plugins_url( '/assets/js/media.js', __FILE__ ), array(), $this->plugin_version, false );
 			wp_localize_script( $this->plugin_slug . '-media', 'splash_image',
 				array(
 					'title'  => __( 'Upload or choose a splash image', $this->plugin_slug ), // This will be used as the default title
@@ -173,7 +173,7 @@ class Flowplayer5_Admin {
 		// Only run on settings screen
 		if ( $screen->post_type === $this->plugin_slug && $screen->id == 'flowplayer5_page_flowplayer5_settings' ) {
 
-			wp_enqueue_script( $this->plugin_slug . '-settings', plugins_url( '/assets/js/settings.js', __FILE__ ), array(), $this->version, false );
+			wp_enqueue_script( $this->plugin_slug . '-settings', plugins_url( '/assets/js/settings.js', __FILE__ ), array(), $this->plugin_version, false );
 			wp_localize_script( $this->plugin_slug . '-settings', 'logo',
 				array(
 					'title'  => __( 'Upload or choose a logo', $this->plugin_slug ), // This will be used as the default title
