@@ -71,6 +71,9 @@ class Flowplayer5 {
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
+		// Add file support
+		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
+
 	}
 
 	/**
@@ -158,6 +161,20 @@ class Flowplayer5 {
 
 		load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
 		load_plugin_textdomain( $domain, FALSE, basename( dirname( FP5_PLUGIN_FILE ) ) . '/languages/' );
+
+	}
+
+	/**
+	 * Add mime support for webm and vtt.
+	 *
+	 * @since    1.0.0
+	 */
+	public function flowplayer_custom_mimes( $mimes ){
+
+		$mimes['webm'] = 'video/webm';
+		$mimes['vtt']  = 'text/vtt';
+
+		return $mimes;
 
 	}
 

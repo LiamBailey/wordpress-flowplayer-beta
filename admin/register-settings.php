@@ -207,7 +207,7 @@ function fp5_text_callback( $args ) {
 
 	$size = isset( $args['size'] ) && !is_null($args['size']) ? $args['size'] : 'regular';
 	$html = '<input type="text" class="' . $args['size'] . '-text" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" value="' . esc_attr( $value ) . '"/>';
-	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> ' . $args['desc'] . '</label>';
 
 	echo $html;
 }
@@ -224,14 +224,19 @@ function fp5_text_callback( $args ) {
 function fp5_password_callback( $args ) {
 	global $fp5_options;
 
+	// get the settings
+	$options = get_option('fp5_settings_general');
+
 	if ( isset( $fp5_options[ $args['id'] ] ) )
 		$value = $fp5_options[ $args['id'] ];
 	else
 		$value = isset( $args['std'] ) ? $args['std'] : '';
 
 	$size = isset( $args['size'] ) && !is_null($args['size']) ? $args['size'] : 'regular';
+	$desc = empty( $options['password'] ) ? $args['desc'] : __( 'Your passord is saved. For security reasons it will not be displayed here.', 'flowplayer5' );
+
 	$html = '<input type="password" class="' . $args['size'] . '-text" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"/>';
-	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> ' . $desc . '</label>';
 
 	echo $html;
 }
@@ -257,7 +262,7 @@ function fp5_upload_callback($args) {
 
 	$html = '<input type="text" class="' . $args['size'] . '-text fp5_upload_field" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" value="' . esc_attr( $value ) . '"/>';
 	$html .= '<a href="#" type="button" class="fp5_settings_upload_button button-secondary" title="' . __( 'Add Logo', 'fp5' ) . '"/>' . __( 'Add Logo', 'fp5' ) . '</a>';
-	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> ' . $args['desc'] . '</label>';
 	$html .= isset( $args['preview'] ) && !is_null( $args['preview'] ) ? '<img style="max-width: 300px; display:block" src="' . esc_attr( $value ) . '" class="fp5_settings_upload_preview"/>' : '';
 
 	echo $html;
@@ -277,7 +282,7 @@ function fp5_checkbox_callback( $args ) {
 
 	$checked = isset($fp5_options[$args['id']]) ? checked(1, $fp5_options[$args['id']], false) : '';
 	$html = '<input type="checkbox" id="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" name="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']" value="1" ' . $checked . '/>';
-	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> '  . $args['desc'] . '</label>';
+	$html .= '<label for="fp5_settings_' . $args['section'] . '[' . $args['id'] . ']"> ' . $args['desc'] . '</label>';
 
 	echo $html;
 }
@@ -321,6 +326,7 @@ function fp5_settings_sanitize( $input ) {
 		__('Settings Updated', 'flowplayer5'),
 		'updated'
 	);
+
 	return $input;
 }
 

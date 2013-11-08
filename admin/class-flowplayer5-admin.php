@@ -48,8 +48,8 @@ class Flowplayer5_Admin {
 	private function __construct() {
 
 		$plugin = Flowplayer5::get_instance();
-		// Call $version from public plugin class.
-		$this->version = $plugin->get_version();
+		// Call $plugin_version from public plugin class.
+		$this->plugin_version = $plugin->get_plugin_version();
 		// Call $plugin_slug from public plugin class.
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
@@ -73,9 +73,6 @@ class Flowplayer5_Admin {
 		// Add column and rows
 		add_filter( 'manage_flowplayer5_posts_columns',  array( $this, 'shortcode_column'), 5, 2 );
 		add_action( 'manage_flowplayer5_posts_custom_column',  array( $this, 'shortcode_row'), 5, 2 );
-
-		// Add file support
-		add_filter( 'upload_mimes', array( $this, 'flowplayer_custom_mimes' ) );
 
 	}
 
@@ -354,20 +351,6 @@ class Flowplayer5_Admin {
 				break;
 
 		}
-
-	}
-
-	/**
-	 * Add mime support for webm and vtt.
-	 *
-	 * @since    1.0.0
-	 */
-	public function flowplayer_custom_mimes( $mimes ){
-
-		$mimes['webm'] = 'video/webm';
-		$mimes['vtt']  = 'text/vtt';
-
-		return $mimes;
 
 	}
 

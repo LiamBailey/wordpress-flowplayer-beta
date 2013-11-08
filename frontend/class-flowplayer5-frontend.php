@@ -39,6 +39,8 @@ class Flowplayer5_Frontend {
 	private function __construct() {
 
 		$plugin = Flowplayer5::get_instance();
+		// Call $plugin_version from public plugin class.
+		$this->plugin_version = $plugin->get_plugin_version();
 		// Call $player_version from public plugin class.
 		$this->player_version = $plugin->get_player_version();
 		// Call $plugin_slug from public plugin class.
