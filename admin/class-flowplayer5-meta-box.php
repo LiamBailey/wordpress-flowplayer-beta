@@ -1,8 +1,8 @@
 <?php
 /**
- * Meta boxes for custom post type
+ * Flowplayer 5 for WordPress
  *
- * @package   Flowplayer 5 for WordPress
+ * @package   Video_Meta_Box
  * @author    Ulrich Pogson <ulrich@pogson.ch>
  * @license   GPL-2.0+
  * @link      http://flowplayer.org/
@@ -17,7 +17,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Video Meta box class.
  *
- * @package Flowplayer5
+ * @package Video_Meta_Box
  * @author  Ulrich Pogson <ulrich@pogson.ch>
  */
 class Video_Meta_Box {
@@ -511,7 +511,6 @@ class Video_Meta_Box {
 		}
 
 	}
-
 
 	/**
 	 * Determines whether or not the current user has the ability to save meta data associated with this post.
