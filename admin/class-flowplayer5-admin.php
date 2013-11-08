@@ -105,7 +105,7 @@ class Flowplayer5_Admin {
 
 		$screen = get_current_screen();
 
-		wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( '/assets/css/admin.css', __FILE__ ), $this->version );
+		wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( '/assets/css/admin.css', __FILE__ ), $this->plugin_version );
 
 		// Only run in new post and edit screens
 		if ( $screen->base == 'post' ) {
