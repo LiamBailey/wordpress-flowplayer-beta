@@ -78,29 +78,27 @@ class Flowplayer5_Frontend {
 	 */
 	public function enqueue_styles() {
 
-		// set the options for the shortcode - pulled from the register-settings.php
+		global $post;
+
+		// Pull options
 		$options = get_option('fp5_settings_general');
 		$cdn     = isset( $options['cdn_option'] );
 
-		global $post;
+		if( $cdn ) {
+			$flowplayer5_directory = '//releases.flowplayer.org/' . $this->player_version . '/skin/';
+		} else {
+			$flowplayer5_directory = plugins_url( '/assets/flowplayer/skin/', __FILE__ );
+		}
 
-		// Register shortcode stylesheets and JavaScript
+		// Register stylesheets
 		if( function_exists( 'has_shortcode' ) ) {
 			if( has_shortcode( $post->post_content, 'flowplayer' ) ) {
-				if( $cdn ) {
-					wp_enqueue_style( $this->plugin_slug .'-skins' , '//releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
-				} else {
-					wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
-				}
-				wp_enqueue_style( $this->plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', __FILE__ ), $this->player_version );
+				wp_enqueue_style( $this->plugin_slug .'-skins' , trailingslashit( $flowplayer5_directory ) . 'all-skins.css', array(), $this->player_version );
+				wp_enqueue_style( $this->plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', __FILE__ ), array(), $this->plugin_version );
 			}
 		} else {
-			if( $cdn ) {
-				wp_enqueue_style( $this->plugin_slug .'-skins' , '//releases.flowplayer.org/' . $this->player_version . '/skin/all-skins.css' );
-			} else {
-				wp_enqueue_style( $this->plugin_slug .'-skins', plugins_url( '/assets/flowplayer/skin/all-skins.css', __FILE__ ), $this->player_version );
-			}
-			wp_enqueue_style( $this->plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', __FILE__ ), $this->player_version );
+			wp_enqueue_style( $this->plugin_slug .'-skins' , trailingslashit( $flowplayer5_directory ) . 'all-skins.css', array(), $this->player_version );
+			wp_enqueue_style( $this->plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', __FILE__ ), array(), $this->plugin_version );
 		}
 
 	}
@@ -112,32 +110,39 @@ class Flowplayer5_Frontend {
 	 */
 	public function enqueue_scripts() {
 
-		// set the options for the shortcode - pulled from the register-settings.php
+		global $post;
+
+		// Pull options
 		$options = get_option('fp5_settings_general');
 		$key     = ( ! empty ( $options['key'] ) ? $options['key'] : '' );
 		$cdn     = isset( $options['cdn_option'] );
 
-		global $post;
+		$flowplayer5_commercial = trailingslashit( WP_CONTENT_DIR ) . 'flowplayer-commercial/flowplayer.min.js';
 
-		// Register shortcode stylesheets and JavaScript
+		if( is_file( $flowplayer5_commercial ) && !$cdn && $key ) {
+			$flowplayer5_directory = trailingslashit( WP_CONTENT_URL ) . 'flowplayer-commercial';
+		} elseif ( !$cdn && !$key ) {
+			$flowplayer5_directory = plugins_url( '/assets/flowplayer', __FILE__  );
+		} else {
+			$flowplayer5_directory = '//releases.flowplayer.org/' . $this->player_version . '/'. ( $key ? 'commercial' : '' );
+		}
+
+		// Register JavaScript
 		if( function_exists( 'has_shortcode' ) ) {
 			if( has_shortcode( $post->post_content, 'flowplayer' ) ) {
-				if( $cdn ) {
-					wp_enqueue_script( $this->plugin_slug . '-script', '//releases.flowplayer.org/' . $this->player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
-				} else {
-					wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', __FILE__  ), array( 'jquery' ), $this->player_version, false );
-				}
+				wp_enqueue_script( $this->plugin_slug . '-script', trailingslashit( $flowplayer5_directory ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
 			}
 		} else {
-			if( $cdn ) {
-				wp_enqueue_script( $this->plugin_slug . '-script', '//releases.flowplayer.org/' . $this->player_version . '/'. ( $key != '' ? 'commercial/' : '' ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
-			} else {
-				wp_enqueue_script( $this->plugin_slug . '-script', plugins_url( '/assets/flowplayer/' . ( $key != '' ? "commercial/" : "" ) . 'flowplayer.min.js', __FILE__  ), array( 'jquery' ), $this->player_version, false );
-			}
+			wp_enqueue_script( $this->plugin_slug . '-script', trailingslashit( $flowplayer5_directory ) . 'flowplayer.min.js', array( 'jquery' ), $this->player_version, false );
 		}
 
 	}
 
+	/**
+	 * Flowplayer global JavaScript settings.
+	 *
+	 * @since    1.0.0
+	 */
 	public function global_config_script() {
 
 		// set the options for the shortcode - pulled from the display-settings.php
