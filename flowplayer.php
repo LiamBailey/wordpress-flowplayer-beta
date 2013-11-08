@@ -31,17 +31,17 @@ global $fp5_options;
 if ( ! defined( 'FP5_PLUGIN_FILE' ) )
 	define( 'FP5_PLUGIN_FILE', __FILE__ );
 
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-flowplayer5.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'admin/register-settings.php' );
 $fp5_options = fp5_get_settings();
 
 if( is_admin() ) {
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-flowplayer-admin.php' );
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-flowplayer-meta-box.php' );
+	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-flowplayer5-admin.php' );
+	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-flowplayer5-meta-box.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/insert-video-button.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-flowplayer-drive.php' );
 } else {
-	require_once( plugin_dir_path( __FILE__ ) . 'frontend/class-flowplayer-frontend.php' );
+	require_once( plugin_dir_path( __FILE__ ) . 'frontend/class-flowplayer5-frontend.php' );
 	require_once( plugin_dir_path( __FILE__ ) . 'frontend/shortcode.php' );
 }
 
