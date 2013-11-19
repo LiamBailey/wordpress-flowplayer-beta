@@ -1,369 +1,359 @@
+# Copyright (C) 2013 
+# This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Flowplayer5 for WordPress\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-05 10:25+0100\n"
-"PO-Revision-Date: 2013-11-05 10:25+0100\n"
-"Last-Translator: Ulrich Pogson <grapplerulrich@gmail.com>\n"
-"Language-Team: \n"
+"Project-Id-Version:  \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/flowplayer5\n"
+"POT-Creation-Date: 2013-11-08 23:56:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;esc_attr_e;esc_attr__\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.5.7\n"
-"X-Poedit-SearchPath-0: .\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: admin/class-flowplayer-admin.php:137
-msgid "Upload or choose a splash image"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:138
-msgid "Insert Splash Image"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:143
-msgid "Upload or choose a mp4 video file"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:144
-msgid "Insert mp4 Video"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:149
-msgid "Upload or choose a webm video file"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:150
-msgid "Insert webm Video"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:155
-msgid "Upload or choose a ogg video file"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:156
-msgid "Insert ogg Video"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:161
-msgid "Upload or choose a webvtt file"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:162
-msgid "Insert webvtt"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:167 admin/class-flowplayer-admin.php:182
-msgid "Upload or choose a logo"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:168 admin/class-flowplayer-admin.php:183
-msgid "Insert Logo"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:207
-msgid "Flowplayer Settings"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:208 admin/class-flowplayer-admin.php:236
-msgid "Settings"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:252
-msgid "Videos"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:253 admin/class-flowplayer-admin.php:254
-#: admin/class-flowplayer-admin.php:268
-msgid "Video"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:255
-msgid "Parent Video"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:256
-msgid "All Videos"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:257
-msgid "View Video"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:258
-msgid "Add New Video"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:259
-msgid "New Video"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:260
-msgid "Edit Video"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:261
-msgid "Update Video"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:262
-msgid "Search videos"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:263
-msgid "No videos found"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:264
-msgid "No videos found in Trash"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:269
-msgid "Flowplayer videos"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:305 admin/class-flowplayer-admin.php:308
-msgid "Video updated."
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:305 admin/class-flowplayer-admin.php:308
-#: admin/class-flowplayer-admin.php:310 admin/class-flowplayer-admin.php:311
-#: admin/class-flowplayer-admin.php:312
-#, php-format
-msgid "Shortcode: %1$s"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:306
-msgid "Custom field updated."
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:307
-msgid "Custom field deleted."
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:309
-#, php-format
-msgid " restored to revision from %s"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:310
-msgid "Video published."
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:311
-msgid "Video saved."
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:312
-msgid "Video submitted."
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:313
-#, php-format
-msgid "Video scheduled for: %1$s"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:313
-msgid "M j, Y @ G:i"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:314
-msgid "Video draft updated."
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:332
-msgid "Title"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:333
-msgid "Author"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:334 admin/class-flowplayer-meta-box.php:91
-msgid "Shortcode"
-msgstr ""
-
-#: admin/class-flowplayer-admin.php:335
-msgid "Date"
-msgstr ""
-
-#: admin/class-flowplayer-drive.php:102
+#: admin/class-flowplayer-drive.php:107
 msgid "Unable to connect to the Flowplayer Authentication Seed API."
 msgstr ""
 
-#: admin/class-flowplayer-drive.php:124
-#, php-format
-msgid ""
-"Please <a href=\"%1$s\">login</a> with your <a href=\"%2$s\">Flowplayer.org</"
-"a> username and password."
+#: admin/class-flowplayer-drive.php:129
+msgid "Please <a href=\"%1$s\">login</a> with your <a href=\"%2$s\">Flowplayer.org</a> username and password."
 msgstr ""
 
-#: admin/class-flowplayer-drive.php:162
-#, php-format
-msgid ""
-"You have enter a incorrect username and/or password. Please check your "
-"username and password in the <a href=\"%1$s\">settings</a>."
+#: admin/class-flowplayer-drive.php:167
+msgid "You have enter a incorrect username and/or password. Please check your username and password in the <a href=\"%1$s\">settings</a>."
 msgstr ""
 
-#: admin/class-flowplayer-drive.php:173
+#: admin/class-flowplayer-drive.php:178
 msgid "Unable to connect to the Flowplayer Authentication API."
 msgstr ""
 
-#: admin/class-flowplayer-drive.php:212
+#: admin/class-flowplayer-drive.php:219
+msgid "You have not uploaded any videos yet. You can upload the video in <a href=\"%1$s\">Flowplayer Designer</a>."
+msgstr ""
+
+#: admin/class-flowplayer-drive.php:228
 msgid "Unable to connect to the Flowplayer Video API."
 msgstr ""
 
-#: admin/class-flowplayer-drive.php:278
+#: admin/class-flowplayer-drive.php:294
 msgid "Upload Videos"
 msgstr ""
 
-#: admin/class-flowplayer-drive.php:278
+#: admin/class-flowplayer-drive.php:294
 msgid "Flowplayer Drive"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:108
+#: admin/class-flowplayer5-admin.php:134
+msgid "Upload or choose a splash image"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:135
+msgid "Insert Splash Image"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:140
+msgid "Upload or choose a mp4 video file"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:141
+msgid "Insert mp4 Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:146
+msgid "Upload or choose a webm video file"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:147
+msgid "Insert webm Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:152
+msgid "Upload or choose a ogg video file"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:153
+msgid "Insert ogg Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:158
+msgid "Upload or choose a webvtt file"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:159
+msgid "Insert webvtt"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:164 admin/class-flowplayer5-admin.php:179
+msgid "Upload or choose a logo"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:165 admin/class-flowplayer5-admin.php:180
+msgid "Insert Logo"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:204
+msgid "Flowplayer Settings"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:205 admin/class-flowplayer5-admin.php:233
+msgid "Settings"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:249
+msgctxt "Post Type General Name"
+msgid "Videos"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:250
+msgctxt "Post Type Singular Name"
+msgid "Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:251 admin/class-flowplayer5-admin.php:265
+msgid "Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:252
+msgid "Parent Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:253
+msgid "All Videos"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:254
+msgid "View Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:255
+msgid "Add New Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:256
+msgid "New Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:257
+msgid "Edit Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:258
+msgid "Update Video"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:259
+msgid "Search videos"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:260
+msgid "No videos found"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:261
+msgid "No videos found in Trash"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:266
+msgid "Flowplayer videos"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:302 admin/class-flowplayer5-admin.php:305
+msgid "Video updated."
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:302 admin/class-flowplayer5-admin.php:305
+#: admin/class-flowplayer5-admin.php:307 admin/class-flowplayer5-admin.php:308
+#: admin/class-flowplayer5-admin.php:309
+msgid "Shortcode: %1$s"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:303
+msgid "Custom field updated."
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:304
+msgid "Custom field deleted."
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:307
+msgid "Video published."
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:308
+msgid "Video saved."
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:309
+msgid "Video submitted."
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:310
+msgid "Video scheduled for: %1$s"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:310
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:311
+msgid "Video draft updated."
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:329
+msgid "Title"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:330
+msgid "Author"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:331
+#: admin/class-flowplayer5-meta-box.php:91
+msgid "Shortcode"
+msgstr ""
+
+#: admin/class-flowplayer5-admin.php:332
+msgid "Date"
+msgstr ""
+
+#: admin/class-flowplayer5-meta-box.php:108
 msgid "Copy this shortcode to a post, page or widget to show the video."
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:123
+#: admin/class-flowplayer5-meta-box.php:123
 msgid "Flowplayer Video"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:147
+#: admin/class-flowplayer5-meta-box.php:147
 msgid "Media files"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:148
-msgid ""
-"It is recommended to add at least two video formats so that the video plays "
-"on as many browsers as possible. To be able to calculate the dimensions of "
-"the video the video format added needs to be compatible with the browser."
+#: admin/class-flowplayer5-meta-box.php:148
+msgid "It is recommended to add at least two video formats so that the video plays on as many browsers as possible. To be able to calculate the dimensions of the video the video format added needs to be compatible with the browser."
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:148
+#: admin/class-flowplayer5-meta-box.php:148
 msgid "About video formats."
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:153 admin/register-settings.php:56
+#: admin/class-flowplayer5-meta-box.php:153 admin/register-settings.php:56
 msgid "Flowplayer Designer"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:155
+#: admin/class-flowplayer5-meta-box.php:155
 msgid "Add from Flowplayer Designer"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:160
+#: admin/class-flowplayer5-meta-box.php:160
 msgid "Splash Image"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:163
+#: admin/class-flowplayer5-meta-box.php:163
 msgid "Add splash image"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:168
-msgid "mp4 Video"
+#: admin/class-flowplayer5-meta-box.php:168
+msgid "MP4 Video"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:171
-msgid "Add mp4 Video"
+#: admin/class-flowplayer5-meta-box.php:171
+msgid "Add MP4 Video"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:176
-msgid "webm Video"
+#: admin/class-flowplayer5-meta-box.php:176
+msgid "WEBM Video"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:179
-msgid "Add webm Video"
+#: admin/class-flowplayer5-meta-box.php:179
+msgid "Add WEBM Video"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:184
-msgid "ogg Video"
+#: admin/class-flowplayer5-meta-box.php:184
+msgid "OGG Video"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:187
-msgid "Add ogg Video"
+#: admin/class-flowplayer5-meta-box.php:187
+msgid "Add OGG Video"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:192
-msgid "vtt file (Subtitles)"
+#: admin/class-flowplayer5-meta-box.php:192
+msgid "VVT file (Subtitles)"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:195
-msgid "Add vtt file"
+#: admin/class-flowplayer5-meta-box.php:195
+msgid "Add VVT file"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:204
+#: admin/class-flowplayer5-meta-box.php:204
 msgid "Select skin"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:222
+#: admin/class-flowplayer5-meta-box.php:222
 msgid "Video attributes"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:226
+#: admin/class-flowplayer5-meta-box.php:226
 msgid "Autoplay"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:231
+#: admin/class-flowplayer5-meta-box.php:231
 msgid "Loop"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:235
+#: admin/class-flowplayer5-meta-box.php:235
 msgid "Preload"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:246
+#: admin/class-flowplayer5-meta-box.php:246
 msgid "Flowplayer options"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:250
+#: admin/class-flowplayer5-meta-box.php:250
 msgid "Fixed Controls"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:254
+#: admin/class-flowplayer5-meta-box.php:254
 msgid "Coloring"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:256
+#: admin/class-flowplayer5-meta-box.php:256
 msgid "Default"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:257
+#: admin/class-flowplayer5-meta-box.php:257
 msgid "Black & White"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:258
+#: admin/class-flowplayer5-meta-box.php:258
 msgid "Red"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:259
+#: admin/class-flowplayer5-meta-box.php:259
 msgid "Light"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:272
+#: admin/class-flowplayer5-meta-box.php:272
 msgid "Size options"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:275
+#: admin/class-flowplayer5-meta-box.php:275
 msgid "Max Width"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:277
+#: admin/class-flowplayer5-meta-box.php:277
 msgid "Width"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:279
+#: admin/class-flowplayer5-meta-box.php:279
 msgid "Height"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:288
+#: admin/class-flowplayer5-meta-box.php:288
 msgid "Change video dimensions"
 msgstr ""
 
-#: admin/class-flowplayer-meta-box.php:293
+#: admin/class-flowplayer5-meta-box.php:293
 msgid "Use fixed player size"
 msgstr ""
 
@@ -388,9 +378,7 @@ msgid "Commercial Version"
 msgstr ""
 
 #: admin/register-settings.php:30
-msgid ""
-"The commercial version removes the Flowplayer logo and allows you to use "
-"your own logo image."
+msgid "The commercial version removes the Flowplayer logo and allows you to use your own logo image."
 msgstr ""
 
 #: admin/register-settings.php:30
@@ -414,14 +402,11 @@ msgid "Show Logo on this site"
 msgstr ""
 
 #: admin/register-settings.php:51
-msgid ""
-"Show logo on this site. Uncheck to show on only externally embedded videos."
+msgid "Show logo on this site. Uncheck to show on only externally embedded videos."
 msgstr ""
 
 #: admin/register-settings.php:57
-msgid ""
-"Flowplayer Designer is a new feature that will hosts your video in all of "
-"the formats that you need."
+msgid "Flowplayer Designer is a new feature that will hosts your video in all of the formats that you need."
 msgstr ""
 
 #: admin/register-settings.php:62
@@ -461,9 +446,7 @@ msgid "CDN Option"
 msgstr ""
 
 #: admin/register-settings.php:90
-msgid ""
-"By default the Flowplayer assets (JS, CSS and SWF) are served from this "
-"domain. Use this option to have the assets served from Flowplayer's CDN."
+msgid "By default the Flowplayer assets (JS, CSS and SWF) are served from this domain. Use this option to have the assets served from Flowplayer's CDN."
 msgstr ""
 
 #: admin/register-settings.php:95
@@ -479,10 +462,7 @@ msgid "Embed Options"
 msgstr ""
 
 #: admin/register-settings.php:102
-msgid ""
-"By default the embed feature loads the embed script and Flowplayer assets "
-"from our CDN. You can use the fields below to change the locations of these "
-"assets."
+msgid "By default the embed feature loads the embed script and Flowplayer assets from our CDN. You can use the fields below to change the locations of these assets."
 msgstr ""
 
 #: admin/register-settings.php:107
@@ -521,17 +501,19 @@ msgstr ""
 msgid "General Settings"
 msgstr ""
 
-#: admin/register-settings.php:259
+#: admin/register-settings.php:236
+msgid "Your passord is saved. For security reasons it will not be displayed here."
+msgstr ""
+
+#: admin/register-settings.php:264
 msgid "Add Logo"
 msgstr ""
 
-#: admin/register-settings.php:294
-#, php-format
-msgid ""
-"The callback function used for the <strong>%s</strong> setting is missing."
+#: admin/register-settings.php:299
+msgid "The callback function used for the <strong>%s</strong> setting is missing."
 msgstr ""
 
-#: admin/register-settings.php:311
+#: admin/register-settings.php:326
 msgid "Settings Updated"
 msgstr ""
 

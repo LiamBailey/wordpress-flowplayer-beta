@@ -29,7 +29,7 @@ class Flowplayer5 {
 	 *
 	 * @var     string
 	 */
-	protected $plugin_version = '1.2.0';
+	protected $plugin_version = '1.3.0';
 
 	/**
 	 * Player version, used for cache-busting of style and script file references.
@@ -190,18 +190,22 @@ class Flowplayer5 {
 			'not_found_in_trash'  => __( 'No Videos found in Trash', $this->plugin_slug ),
 		) );
 
-		$rewrite = array(
-			'slug'                => 'video',
-			'with_front'          => false,
+		$supports = apply_filters( 'fp5_post_type_supports', array(
+			'title',
+		) );
+
+		$rewrite = apply_filters( 'fp5_post_type_rewrite', array(
+			'slug'                => __( 'video', $this->plugin_slug ),
+			'with_front'          => true,
 			'pages'               => true,
 			'feeds'               => true,
-		);
+		) );
 
 		$args = apply_filters( 'fp5_post_type_args', array(
 			'label'               => __( 'flowplayer5', $this->plugin_slug ),
 			'description'         => __( 'Flowplayer Videos', $this->plugin_slug ),
 			'labels'              => $labels,
-			'supports'            => array( 'title', ),
+			'supports'            => $supports,
 			'hierarchical'        => false,
 			'public'              => false,
 			'show_ui'             => true,
@@ -215,6 +219,7 @@ class Flowplayer5 {
 			'exclude_from_search' => true,
 			'publicly_queryable'  => true,
 			'rewrite'             => $rewrite,
+			'query_var'           => 'video',
 			'capability_type'     => 'page',
 		) );
 
