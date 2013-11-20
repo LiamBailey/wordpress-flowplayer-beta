@@ -70,8 +70,7 @@ class Flowplayer5_Widget extends WP_Widget {
 		// processes widget options to be saved
 		$instance = $old_instance;
 
-		$instance['id']    = esc_attr( $new_instance['id'] );
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['flowplayer5_video_id']    = esc_attr( $new_instance['flowplayer5_video_id'] );
 
 	}
 
@@ -84,7 +83,7 @@ class Flowplayer5_Widget extends WP_Widget {
 		// outputs the content of the widget
 		extract( $args, EXTR_SKIP );
 		
-		$id    =
+		$id    = $instance['flowplayer5_video_id'];
 		$title = get_the_title( $id );
 		echo $before_widget;
 		Flowplayer5_Shortcode::create_fp5_video_output( $id );

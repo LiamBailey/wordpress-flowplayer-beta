@@ -1,6 +1,6 @@
 <p><?php echo __( 'Use the dropdown below to chose a video.', 'flowplayer5' ); ?></p>
 <div>
-	<select name="flowplayer5_videos" id="flowplayer5_videos">
+	<select name="flowplayer5_video_id" id="flowplayer5_video_id">
 		<?php
 		global $post;
 		$args = array( 
