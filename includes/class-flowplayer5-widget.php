@@ -72,6 +72,8 @@ class Flowplayer5_Widget extends WP_Widget {
 
 		$instance['flowplayer5_video_id']    = esc_attr( $new_instance['flowplayer5_video_id'] );
 
+		return $instance;
+
 	}
 
 	/**
