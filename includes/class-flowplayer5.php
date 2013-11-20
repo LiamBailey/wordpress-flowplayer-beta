@@ -19,6 +19,8 @@ if ( ! defined( 'WPINC' ) ) {
  *
  * @package Flowplayer5
  * @author  Ulrich Pogson <ulrich@pogson.ch>
+ *
+ * @since 1.0.0
  */
 class Flowplayer5 {
 
