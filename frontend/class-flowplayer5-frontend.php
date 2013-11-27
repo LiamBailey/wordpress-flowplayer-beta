@@ -86,7 +86,7 @@ class Flowplayer5_Frontend {
 		global $post;
 
 		// Pull options
-		$options = get_option('fp5_settings_general');
+		$options = get_option( 'fp5_settings_general' );
 		$cdn     = isset( $options['cdn_option'] );
 
 		if( $cdn ) {
@@ -99,7 +99,7 @@ class Flowplayer5_Frontend {
 		if( function_exists( 'has_shortcode' ) ) {
 			$post_content = isset( $post->post_content ) ? $post->post_content : '';
 			$has_shortcode = '';
-			if( has_shortcode( $post_content, 'flowplayer' ) || 'flowplayer5' == get_post_type() || apply_filters( 'fp5_filter_has_shortcode', $has_shortcode ) ) {
+			if( has_shortcode( $post_content, 'flowplayer' ) || 'flowplayer5' == get_post_type() || is_active_widget( false, false, 'flowplayer5-video-widget', true ) || apply_filters( 'fp5_filter_has_shortcode', $has_shortcode ) ) {
 				wp_enqueue_style( $this->plugin_slug .'-skins' , trailingslashit( $flowplayer5_directory ) . 'all-skins.css', array(), $this->player_version );
 				wp_enqueue_style( $this->plugin_slug .'-logo-origin', plugins_url( '/assets/css/public.css', __FILE__ ), array(), $this->plugin_version );
 			}
@@ -120,7 +120,7 @@ class Flowplayer5_Frontend {
 		global $post;
 
 		// Pull options
-		$options = get_option('fp5_settings_general');
+		$options = get_option( 'fp5_settings_general' );
 		$key     = ( ! empty ( $options['key'] ) ? $options['key'] : '' );
 		$cdn     = isset( $options['cdn_option'] );
 

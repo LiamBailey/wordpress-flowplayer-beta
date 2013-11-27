@@ -58,7 +58,7 @@ class Flowplayer5_Widget extends WP_Widget {
 		);
 		
 		// Display the admin form
-		include( plugin_dir_path( __FILE__ ) . '/views/admin.php' );
+		include_once( plugin_dir_path( __FILE__ ) . '/views/display-widget-form.php' );
 	}
 
 	/**
@@ -70,7 +70,7 @@ class Flowplayer5_Widget extends WP_Widget {
 		// processes widget options to be saved
 		$instance = $old_instance;
 
-		$instance['flowplayer5_video_id']    = esc_attr( $new_instance['flowplayer5_video_id'] );
+		$instance['flowplayer5_video_id'] = esc_attr( $new_instance['flowplayer5_video_id'] );
 
 		return $instance;
 
@@ -88,7 +88,9 @@ class Flowplayer5_Widget extends WP_Widget {
 		$id    = $instance['flowplayer5_video_id'];
 		$title = get_the_title( $id );
 		echo $before_widget;
-		Flowplayer5_Shortcode::create_fp5_video_output( $id );
+		echo '<h3 class="widget-title">' . $title . '</h3>';
+		echo $id;
+		echo Flowplayer5_Shortcode::create_fp5_video_output( $id );
 		echo $after_widget;
 	}
 

@@ -14,3 +14,17 @@
 		<?php endforeach; ?>
 	</select>
 </div>
+<?php
+// WP_Query arguments
+$args = array (
+	'post_type'              => 'flowplayer5',
+	'post_status'            => 'published',
+);
+
+// The Query
+$posts = new WP_Query( $args );
+echo $posts;
+foreach ( $posts as $post ) {
+	echo '<option value="' . $post->ID . '" id="' . $post->ID . '"', $select == $option ? ' selected="selected"' : '', '>' . $post->post_title . '</option>';
+}
+?>
