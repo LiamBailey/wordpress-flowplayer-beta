@@ -52,13 +52,32 @@ class Flowplayer5_Widget extends WP_Widget {
 	 * @since    1.4.0
 	 */
  	public function form( $instance ) {
+
 		// outputs the options form on admin
 		$instance = wp_parse_args(
 			( array ) $instance
 		);
-		
-		// Display the admin form
-		include_once( plugin_dir_path( __FILE__ ) . '/views/display-widget-form.php' );
+
+		$html = '<p>' __( 'Chose a video from the dropdown.', $this->plugin_slug ) '</p>';
+
+		// WP_Query arguments
+		$args = array (
+			'post_type'              => 'flowplayer5',
+			'post_status'            => 'publish',
+		);
+
+		// The Query
+		$query = new WP_Query( $args );
+		$posts = $query->posts;
+
+		$html .= '<select name="flowplayer5_video_id" id="flowplayer5_video_id">';
+		foreach ( $posts as $post ) {
+			$html .= '<option value="' . $post->ID . '" id="' . $post->ID . '"', $select == $option ? ' selected="selected"' : '', '>' . $post->post_title . '</option>';
+		}
+		$html .= '</select>';
+
+		echo $html;
+
 	}
 
 	/**
