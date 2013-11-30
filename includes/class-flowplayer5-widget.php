@@ -68,7 +68,6 @@ class Flowplayer5_Widget extends WP_Widget {
 		$title = get_the_title( $id );
 		echo $before_widget;
 		echo '<h3 class="widget-title">' . $title . '</h3>';
-		echo $id;
 		echo Flowplayer5_Shortcode::create_fp5_video_output( $id );
 		echo $after_widget;
 	}
@@ -113,9 +112,9 @@ class Flowplayer5_Widget extends WP_Widget {
 		$posts = $query->posts;
 
 		$html = '<p><label for="' . $this->get_field_id( 'id' ) . '">' . __( 'Chose a video from the dropdown.', $this->plugin_slug ) . '</label>';
-		$html .= '<select class="widefat" name="' . $this->get_field_id( 'id' ) . '" id="' . $this->get_field_name( 'id' ) . '">';
+		$html .= '<select class="widefat" name="' . $this->get_field_name( 'id' ) . '" id="' . $this->get_field_id( 'id' ) . '">';
 		foreach ( $posts as $post ) {
-			$html .= '<option value="' . $post->ID . '"' . selected( $post->ID, $id ) . '>' . $post->post_title . '</option>';
+			$html .= '<option value="' . $post->ID . '"' . selected( $post->ID, $id,false ) . '>' . $post->post_title . '</option>';
 		}
 		$html .= '</select></p>';
 
